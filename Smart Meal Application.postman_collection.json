@@ -1,0 +1,2513 @@
+{
+  "info": {
+    "_postman_id": "08dbb1b5-47a9-487d-bdd8-f9feffdcdf2e",
+    "name": "Smart Meal Application",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50868842",
+    "_collection_link": "https://go.postman.co/collection/50868842-08dbb1b5-47a9-487d-bdd8-f9feffdcdf2e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Sign Up",
+          "item": [
+            {
+              "name": "1. Create Account",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"User Five 5\",\r\n    \"email\": \"user5@gmail.com\",\r\n    \"password\": \"123456\"\r\n    // \"fcmToken\": \"123\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/signup",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "signup"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Create Account",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/signup",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "signup"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "88"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"58-mPQQnNw4tcIc4x2RPjK7X938m8k\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 03 Dec 2025 06:22:41 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"OTP sent successfully! Please check your email.\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "2. Verify Sign Up OPT",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"otp\": 673663\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/verify-signup-otp",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify-signup-otp"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "2. Verify Sign Up OPT",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"otp\": 601283\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/verify-signup-otp",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "verify-signup-otp"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Set-Cookie",
+                      "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDBlOTY2OWVjY2I3ZmRlZGE1YzhlMSIsImlhdCI6MTc2NTg2MTg0MiwiZXhwIjoxNzY4NDUzODQyfQ.aZudWnU7Dap8exfDXESI32IvTw_S6kT86wQmHuJeHI8; Max-Age=0; Path=/; Expires=Tue, 16 Dec 2025 05:10:42 GMT; HttpOnly; SameSite=Lax"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "444"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"1bc-2XUJMoSVTufbx/4pnCoMYIgX8OE\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Tue, 16 Dec 2025 05:10:42 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Successfully Sign Up account!\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDBlOTY2OWVjY2I3ZmRlZGE1YzhlMSIsImlhdCI6MTc2NTg2MTg0MiwiZXhwIjoxNzY1OTQ4MjQyfQ.gnKxuYeR8fjGpfJMBT_qUf9__izOCCqUxQl_lkHdR_E\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5NDBlOTY2OWVjY2I3ZmRlZGE1YzhlMSIsImlhdCI6MTc2NTg2MTg0MiwiZXhwIjoxNzY4NDUzODQyfQ.aZudWnU7Dap8exfDXESI32IvTw_S6kT86wQmHuJeHI8\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "3. Resend Sign Up OTP",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/send-signup-otp",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "send-signup-otp"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Send Sign Up OTP",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/resend-signup-otp",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "resend-signup-otp"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "88"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"58-mPQQnNw4tcIc4x2RPjK7X938m8k\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 03 Dec 2025 06:22:41 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"OTP sent successfully! Please check your email.\",\n    \"data\": null\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Forgot Password",
+          "item": [
+            {
+              "name": "1. Forgot Password",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/forgot-password",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "forgot-password"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "1. Forgot Password",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "",
+                        "value": "",
+                        "type": "text",
+                        "disabled": true
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/forgot-password",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "forgot-password"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "104"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"68-aGEafpxZMvyJ8qj17K2Oibdnr8E\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 03 Dec 2025 08:05:40 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"We have sent a 6-digit OTP to your email address, Please check!\",\n    \"data\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "2. Verify Reset OTP",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"otp\": 722613\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/verify-otp",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "verify-otp"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "2. Verify Reset OTP",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"otp\": 6480\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/verify-otp",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "verify-otp"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "153"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"99-Y1MK4iaAX0SGpVbeTjKpbAEesVo\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 03 Dec 2025 08:09:31 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [
+                    {
+                      "expires": "Invalid Date",
+                      "domain": "",
+                      "path": ""
+                    }
+                  ],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"OTP successfully verified\",\n    \"data\": {\n        \"isVerified\": true,\n        \"message\": \"OTP successfully verified\",\n        \"email\": \"modassernayem@gmail.com\"\n    }\n}"
+                }
+              ]
+            },
+            {
+              "name": "3. Reset Password",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"newPassword\": \"123456\"\r\n} ",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/reset-password",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "reset-password"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "3. Reset Password",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"newPassword\": \"111111\",\r\n    \"confirmPassword\": \"111111\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{BASE_URL}}/auth/reset-password",
+                      "host": [
+                        "{{BASE_URL}}"
+                      ],
+                      "path": [
+                        "auth",
+                        "reset-password"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "X-Powered-By",
+                      "value": "Express"
+                    },
+                    {
+                      "key": "Vary",
+                      "value": "Origin"
+                    },
+                    {
+                      "key": "Access-Control-Allow-Credentials",
+                      "value": "true"
+                    },
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json",
+                      "description": "",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Content-Length",
+                      "value": "69"
+                    },
+                    {
+                      "key": "ETag",
+                      "value": "W/\"45-w97Qz/9uveUotPwI5pbpARWocqY\""
+                    },
+                    {
+                      "key": "Date",
+                      "value": "Wed, 03 Dec 2025 08:09:55 GMT"
+                    },
+                    {
+                      "key": "Connection",
+                      "value": "keep-alive"
+                    },
+                    {
+                      "key": "Keep-Alive",
+                      "value": "timeout=5"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"success\": true,\n    \"message\": \"Password Successfully Reset!\",\n    \"data\": null\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Login User",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const result = pm.response.json();\r",
+                  "console.log(result);\r",
+                  "\r",
+                  "if(pm.response.code === 200) {\r",
+                  "    pm.collectionVariables.set(\"ACCESS_TOKEN\", result.data.accessToken);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "// // super admin\r\n// {\r\n//     \"email\": \"admin@gmail.com\",\r\n//     \"password\": \"123456\"\r\n// }\r\n\r\n// {\r\n//     \"email\": \"janina840g5@gmail.com\",\r\n//     \"password\": \"123456\",\r\n//     \"fcmToken\": \"\"\r\n// }\r\n\r\n{\r\n    \"email\": \"user1@gmail.com\",\r\n    \"password\": \"123456\"\r\n    // \"fcmToken\": \"123\"\r\n}\r\n",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Login",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "// // super admin\r\n// {\r\n//     \"email\": \"admin@gmail.com\",\r\n//     \"password\": \"123456\"\r\n// }\r\n\r\n{\r\n    \"email\": \"modassernayem@gmail.com\",\r\n    \"password\": \"111111\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/auth/login",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "auth",
+                    "login"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Set-Cookie",
+                  "value": "refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmZkODE2MjNmNzk2YTI2OTdjYjQ2MiIsImlhdCI6MTc2NDc0OTQ3NSwiZXhwIjoxNzY3MzQxNDc1fQ.AGKZbxCoihzcvBrJoWZqLYJPolLS8EYAQsSVYPzoPJ4; Max-Age=864000; Path=/; Expires=Sat, 13 Dec 2025 08:11:15 GMT; HttpOnly; SameSite=Lax"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "443"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1bb-Ra3hC6w4JiFpxM0fo67QhBTI2CA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Wed, 03 Dec 2025 08:11:15 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [
+                {
+                  "expires": "Invalid Date",
+                  "domain": "",
+                  "path": ""
+                }
+              ],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User logged in successfully!\",\n    \"data\": {\n        \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmZkODE2MjNmNzk2YTI2OTdjYjQ2MiIsImlhdCI6MTc2NDc0OTQ3NSwiZXhwIjoxNzY0ODM1ODc1fQ.OcRtEKZ8yjGPfifioZIcd9KkXWaXiInsqclM81pbAkQ\",\n        \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmZkODE2MjNmNzk2YTI2OTdjYjQ2MiIsImlhdCI6MTc2NDc0OTQ3NSwiZXhwIjoxNzY3MzQxNDc1fQ.AGKZbxCoihzcvBrJoWZqLYJPolLS8EYAQsSVYPzoPJ4\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Social Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"token\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6IjEzMGZkY2VmY2M4ZWQ3YmU2YmVkZmE2ZmM4Nzk3MjIwNDBjOTJiMzgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIzODE0OTA5OTE0NS1obWM1cTZzczJ0aTM5aG4ycWhjY3BrbTdvazBudDUzOC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsImF1ZCI6IjM4MTQ5MDk5MTQ1LWhtYzVxNnNzMnRpMzlobjJxaGNjcGttN29rMG50NTM4LmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTA4MzY3OTE0NzEwNzMzNDI2MzQ1IiwiZW1haWwiOiJyYWZpb3VsaGFzYW4yQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJuYmYiOjE3NjU1MDYzMDgsIm5hbWUiOiJSYWZpb3VsIEhhc2FuIFNvdXJvYiIsImdpdmVuX25hbWUiOiJSYWZpb3VsIiwiZmFtaWx5X25hbWUiOiJIYXNhbiBTb3Vyb2IiLCJpYXQiOjE3NjU1MDY2MDgsImV4cCI6MTc2NTUxMDIwOCwianRpIjoiM2EzMDI3YWQ0YjQ1ZGY4YWQ4MTcxZGZmY2IwYzVhMzgwNGRkYTA5YSJ9.TYihT0ygJlddBGe_CMENXxqCFrrxrQEUE4yOcw8wycngtUgG0A2yKS5dlkZVHDkVhYoCzOgagcn89zP0uel8bvcHarIPQkrVEKc6UhHyQxp6VOvTFCuIgDZk2AT5iXFQytzcmJXTemF1Wdm4nGPMHNrfXw3Vajc5eDcNYNnk0USqrFhywcaO-Z9HCN_JDrF6rah4SoZxVxbI36rMKO_2w5H2ev7UDFPTUUNk0l7I5kZju7lEMltySXvc1apdiXuIdGsp6nHhW9zXhwIw1TDzKAkvf9NLX5bRIZtj6VCrB6OsdvNFI7lHqUKicbau9msBgXF2teQM7Y5GS3zjliG4ew\",\r\n    \"provider\": \"GOOGLE\",\r\n    \"fcmToken\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/social-login",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "social-login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "change password",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"currentPassword\": \"111111\",\r\n    \"newPassword\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/auth/change-password",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "change-password"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/auth/refresh-token",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "auth",
+                "refresh-token"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get My Profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/users/profile",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "283"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"11b-EsvCl/P6XW1tg6DdFkP9H8AlER4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 07:01:39 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User profile retrieved successfully\",\n    \"data\": {\n        \"id\": \"6940e9669eccb7fdeda5c8e1\",\n        \"name\": \"Test User\",\n        \"email\": \"modassernayem@gmail.com\",\n        \"avatar\": null,\n        \"status\": \"UNBLOCK\",\n        \"role\": \"USER\",\n        \"createdAt\": \"2025-12-16T05:08:54.934Z\",\n        \"updatedAt\": \"2025-12-16T05:30:39.992Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"\",\r\n    \"email\": \"\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/users/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/users/profile",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "333"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"14d-b2XYLRuDswd1F3erqZS5C6PwfpY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 07:06:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Profile updated successfully!\",\n    \"data\": {\n        \"id\": \"6940e9669eccb7fdeda5c8e1\",\n        \"name\": \"Test User\",\n        \"email\": \"modassernayem@gmail.com\",\n        \"avatar\": null,\n        \"role\": \"USER\",\n        \"status\": \"UNBLOCK\",\n        \"tier\": \"FREE\",\n        \"provider\": \"EMAIL\",\n        \"isEmailVerified\": true,\n        \"createdAt\": \"2025-12-16T05:08:54.934Z\",\n        \"updatedAt\": \"2025-12-16T05:30:39.992Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile Avatar",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "/C:/Users/modas/Downloads/profile.jpg"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/users/profile/avatar",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                "profile",
+                "avatar"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Profile Avatar",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "file",
+                      "type": "file",
+                      "src": [
+                        "/C:/Users/modas/Downloads/profile.jpg"
+                      ]
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/users/profile/avatar",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users",
+                    "profile",
+                    "avatar"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "418"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1a2-QymkQPdxECsS6Wi/yYhs7CiE4z4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 07:10:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Profile Picture Saved!\",\n    \"data\": {\n        \"id\": \"6940e9669eccb7fdeda5c8e1\",\n        \"name\": \"Test User\",\n        \"email\": \"modassernayem@gmail.com\",\n        \"avatar\": \"https://res.cloudinary.com/ddogx3fld/image/upload/v1765869005/uploads/hfd6dvw4jyfecailmc7s.jpg\",\n        \"role\": \"USER\",\n        \"status\": \"UNBLOCK\",\n        \"tier\": \"FREE\",\n        \"provider\": \"EMAIL\",\n        \"isEmailVerified\": true,\n        \"createdAt\": \"2025-12-16T05:08:54.934Z\",\n        \"updatedAt\": \"2025-12-16T07:10:05.189Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete Own Account",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/profile",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                "profile"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "searchTerm",
+                  "value": "jani",
+                  "disabled": true
+                },
+                {
+                  "key": "role",
+                  "value": "ADMI",
+                  "disabled": true
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get All Users",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/users",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "key": "searchTerm",
+                      "value": "jani",
+                      "disabled": true
+                    },
+                    {
+                      "key": "role",
+                      "value": "ADMI",
+                      "disabled": true
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "533"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"215-kW21pzHjx1feTqR1XhVGYeWmbR4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 09:22:05 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Users retrieve successfully!\",\n    \"data\": [\n        {\n            \"id\": \"69411d05951c4822c7a7a9d7\",\n            \"name\": \"Test User\",\n            \"email\": \"modassernayem@gmail.com\",\n            \"avatar\": null,\n            \"status\": \"UNBLOCK\",\n            \"role\": \"USER\",\n            \"createdAt\": \"2025-12-16T08:49:09.745Z\",\n            \"updatedAt\": \"2025-12-16T08:49:37.752Z\"\n        },\n        {\n            \"id\": \"6940dc415c711e87e087b5ae\",\n            \"name\": \"Admin\",\n            \"email\": \"admin@gmail.com\",\n            \"avatar\": null,\n            \"status\": \"UNBLOCK\",\n            \"role\": \"ADMIN\",\n            \"createdAt\": \"2025-12-16T04:12:49.919Z\",\n            \"updatedAt\": \"2025-12-16T04:12:49.919Z\"\n        }\n    ],\n    \"meta\": {\n        \"page\": 1,\n        \"limit\": 10,\n        \"total\": 2,\n        \"totalPages\": 5\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single User",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/:userId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                ":userId"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "69411d05951c4822c7a7a9d7"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Single User",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/users/69411d05951c4822c7a7a9d7",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users",
+                    "69411d05951c4822c7a7a9d7"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "275"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"113-fOdWr/rGxIQBmIhMCsbUncW/PvY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 09:23:03 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"User retrieve successfully!\",\n    \"data\": {\n        \"id\": \"69411d05951c4822c7a7a9d7\",\n        \"name\": \"Test User\",\n        \"email\": \"modassernayem@gmail.com\",\n        \"avatar\": null,\n        \"role\": \"USER\",\n        \"status\": \"UNBLOCK\",\n        \"createdAt\": \"2025-12-16T08:49:09.745Z\",\n        \"updatedAt\": \"2025-12-16T08:49:37.752Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update User Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/users/:userId/status",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "users",
+                ":userId",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "userId",
+                  "value": "69411d05951c4822c7a7a9d7"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update User Status",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "url": {
+                  "raw": "{{BASE_URL}}/users/69411d05951c4822c7a7a9d7/status",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "users",
+                    "69411d05951c4822c7a7a9d7",
+                    "status"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json",
+                  "description": "",
+                  "type": "text"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "329"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"149-ijdt0ufIxwJjjc2SVeusCeLc8mA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 16 Dec 2025 09:24:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Successfully blocked user\",\n    \"data\": {\n        \"id\": \"69411d05951c4822c7a7a9d7\",\n        \"name\": \"Test User\",\n        \"email\": \"modassernayem@gmail.com\",\n        \"avatar\": null,\n        \"role\": \"USER\",\n        \"status\": \"BLOCKED\",\n        \"tier\": \"FREE\",\n        \"provider\": \"EMAIL\",\n        \"isEmailVerified\": true,\n        \"createdAt\": \"2025-12-16T08:49:09.745Z\",\n        \"updatedAt\": \"2025-12-16T09:24:02.665Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Group",
+      "item": [
+        {
+          "name": "Create New Group",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Match Two 2\",\r\n    \"description\": \"This match two is run by owner and it's a very cool area\", // optional\r\n    \"location\": \"Mirpur 2, Dhaka\" // optional\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create New Group",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"Mikova\",\r\n    \"description\": \"This match is run by owner and it's a very cool area\", // optional\r\n    \"location\": \"Banasre F Block, Dhaka\" // optional\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{BASE_URL}}/groups",
+                  "host": [
+                    "{{BASE_URL}}"
+                  ],
+                  "path": [
+                    "groups"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "327"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"147-SBah0yZ0VospHuZE3NY3Qq5ZOPQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Sun, 29 Mar 2026 03:10:56 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"message\": \"Successfully Create New Group\",\n    \"data\": {\n        \"id\": \"69c8983f6d58450a1288018c\",\n        \"name\": \"Mikova\",\n        \"code\": \"UOPDQT\",\n        \"description\": \"This match is run by owner and it's a very cool area\",\n        \"photo\": null,\n        \"location\": \"Banasre F Block, Dhaka\",\n        \"createdAt\": \"2026-03-29T03:10:55.749Z\",\n        \"updatedAt\": \"2026-03-29T03:10:55.749Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get My Groups",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/my",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Groups",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Get Single Group",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69aec3e4f6f071f08d35f079"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Group",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"\", // optional\r\n    \"location\": \"\" // optional\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Group Photo",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "uuid": "acd5024a-fc91-4067-a8b0-2584fe1a583e",
+                  "value": null
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/picture",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "picture"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c8983f6d58450a1288018c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Group",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Switch active group",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/activate",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "activate"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Group Member",
+      "item": [
+        {
+          "name": "Get Group Members",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/members",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "members"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c8983f6d58450a1288018c"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Group Member Role",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"role\": \"manager\" // owner | manger | member\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/members/:memberId/role",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "members",
+                ":memberId",
+                "role"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                },
+                {
+                  "key": "memberId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Member Status",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/members/:memberId/status",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "members",
+                ":memberId",
+                "status"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                },
+                {
+                  "key": "memberId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Group Member",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/members/:memberId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "members",
+                ":memberId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                },
+                {
+                  "key": "memberId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Group Invitation & Join",
+      "item": [
+        {
+          "name": "Invite New Member",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"inviteeId\": \"69c91ae680f5ba8a766e6ba0\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/invitations",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "invitations"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c91c6080f5ba8a766e6ba8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Group Invitations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/invitations",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "invitations"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c91c6080f5ba8a766e6ba8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Group Invitations",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/my-invitations",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "my-invitations"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Invitation Approval",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"accepted\" //  \"accepted\" | \"declined\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/invitations/:invitationId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "invitations",
+                ":invitationId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c91c6080f5ba8a766e6ba8"
+                },
+                {
+                  "key": "invitationId",
+                  "value": "69c91f6011df4798394eb3cc"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Group Invitation",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/invitations/:invitationId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "invitations",
+                ":invitationId"
+              ],
+              "variable": [
+                {
+                  "key": "invitationId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Send Join Request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"groupId\": \"69c91c6080f5ba8a766e6ba8\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/join-requests",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "join-requests"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get My Join Requests",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/join-requests/my",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "join-requests",
+                "my"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Group Join Requests",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/join-requests",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "join-requests"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c91c6080f5ba8a766e6ba8"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Join Request Approval (Manager or Owner)",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"status\": \"accepted\" // \"accepted\", \"rejected\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/join-requests/:requestId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "join-requests",
+                ":requestId"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": "69c91c6080f5ba8a766e6ba8"
+                },
+                {
+                  "key": "requestId",
+                  "value": "69c923ce85ca5c7332fb02c2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Join Request",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/join-requests/:requestId",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                "join-requests",
+                ":requestId"
+              ],
+              "variable": [
+                {
+                  "key": "requestId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Expense",
+      "item": [
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{BASE_URL}}/groups/:groupId/expenses",
+              "host": [
+                "{{BASE_URL}}"
+              ],
+              "path": [
+                "groups",
+                ":groupId",
+                "expenses"
+              ],
+              "variable": [
+                {
+                  "key": "groupId",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{BASE_URL}}/health",
+          "host": [
+            "{{BASE_URL}}"
+          ],
+          "path": [
+            "health"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "BASE_URL",
+      "value": "http://localhost:5018/api/v1"
+    },
+    {
+      "key": "BASE_URL",
+      "value": "http://206.162.244.131:5018/api/v1",
+      "disabled": true
+    },
+    {
+      "key": "ACCESS_TOKEN",
+      "value": ""
+    }
+  ]
+}
