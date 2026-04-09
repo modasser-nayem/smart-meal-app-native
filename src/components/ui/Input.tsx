@@ -1,4 +1,4 @@
-import { View, TextInput, TextInputProps, Text, TouchableOpacity } from "react-native";
+import { View, TextInput, TextInputProps, Text } from "react-native";
 import { cn } from "@/lib/utils";
 import React from "react";
 
@@ -29,15 +29,13 @@ export const Input = ({
          )}
          <View className="relative flex-row items-center">
             {leftIcon && (
-               <View className="absolute left-4 z-10">
-                  {leftIcon}
-               </View>
+               <View className="absolute left-4 z-10">{leftIcon}</View>
             )}
             <TextInput
                placeholderTextColor="#64748B"
                className={cn(
                   "h-14 w-full bg-surface-container-lowest border-none rounded-xl text-on-surface text-base transition-all",
-                  "border border-outline-variant/20 focus:border-primary/50",
+                  "border border-outline focus:border-primary/50",
                   leftIcon ? "pl-12" : "pl-4",
                   rightIcon ? "pr-12" : "pr-4",
                   error && "border-error",

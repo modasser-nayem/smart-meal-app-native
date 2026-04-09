@@ -26,7 +26,7 @@ export const Container = ({
       <Wrapper className="flex-1 bg-background">
          <StatusBar style={statusBarVariant} />
          <ContentWrapper
-            className={cn("flex-1", padding && "px-md py-sm", className)}
+            className={cn("flex-1", padding && "px-md pb-2", className)}
             {...props}
          >
             {children}

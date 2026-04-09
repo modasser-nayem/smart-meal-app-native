@@ -10,7 +10,6 @@ import {
 import { useRouter } from "expo-router";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { cn } from "@/lib/utils";
 
 const { width } = Dimensions.get("window");
 
@@ -18,13 +17,15 @@ const SLIDES = [
    {
       id: "1",
       title: "Track Daily Meals",
-      description: "See who ate what, every day. No more guessing or missed entries.",
+      description:
+         "See who ate what, every day. No more guessing or missed entries.",
       actionLabel: "Continue",
    },
    {
       id: "2",
       title: "Share Expenses Fairly",
-      description: "Automatic meal rate calculation. Everyone pays their fair share.",
+      description:
+         "Automatic meal rate calculation. Everyone pays their fair share.",
       actionLabel: "Continue",
    },
    {
@@ -40,21 +41,31 @@ const RenderArtwork = ({ id }: { id: string }) => {
       return (
          <View className="relative w-full aspect-square max-w-[320px] mb-6 items-center justify-center">
             <View className="absolute inset-0 bg-primary/10 rounded-full blur-3xl scale-125" />
-            <View className="w-full h-full rounded-[32px] overflow-hidden border border-outline-variant/20 shadow-2xl relative">
-               <Image 
-                  source={{ uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxqu09T6r-RPhBpmg41Xe_XbKtRGoP4uublq9ZnHvXppQa4QxpxEN5rxTHS6thmkmf_jQO4It-DqNOMNgjA3StBe6iACL-JwCFdVjxu-oII2vkuc85KPJFEW9u5-0X02AJyqvYPM6bh-t1veSDx5Bq8gQ7-zoEasxwMyeDJ_z6YC-2MROoqmE4MW1FahndqldtnWbzo_AyKOuj6UlrfM3QlaN4bEbswRRHkMRWu-m5kjv_9CMhyd5AWkc35lKTM1Cyur2QsBZxNdU" }} 
+            <View className="w-full h-full rounded-[32px] overflow-hidden border border-outline/20 shadow-2xl relative">
+               <Image
+                  source={{
+                     uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuDxqu09T6r-RPhBpmg41Xe_XbKtRGoP4uublq9ZnHvXppQa4QxpxEN5rxTHS6thmkmf_jQO4It-DqNOMNgjA3StBe6iACL-JwCFdVjxu-oII2vkuc85KPJFEW9u5-0X02AJyqvYPM6bh-t1veSDx5Bq8gQ7-zoEasxwMyeDJ_z6YC-2MROoqmE4MW1FahndqldtnWbzo_AyKOuj6UlrfM3QlaN4bEbswRRHkMRWu-m5kjv_9CMhyd5AWkc35lKTM1Cyur2QsBZxNdU",
+                  }}
                   className="w-full h-full"
                   resizeMode="cover"
                />
                <View className="absolute inset-0 bg-background/20" />
             </View>
-            <View className="absolute -bottom-4 -right-4 bg-surface-container-high/90 p-4 rounded-2xl border border-outline-variant/10 shadow-xl flex-row items-center gap-3">
+            <View className="absolute -bottom-4 -right-4 bg-surface/90 p-4 rounded-2xl border border-outline/10 shadow-xl flex-row items-center gap-3">
                <View className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
-                  <MaterialCommunityIcons name="silverware-fork-knife" size={16} color="#F59E0B" />
+                  <MaterialCommunityIcons
+                     name="silverware-fork-knife"
+                     size={16}
+                     color="#F59E0B"
+                  />
                </View>
                <View>
-                  <Typography className="text-[10px] text-secondary uppercase tracking-widest font-bold">Today</Typography>
-                  <Typography className="text-sm font-semibold text-white">4 Meals Logged</Typography>
+                  <Typography className="text-[10px] text-secondary uppercase tracking-widest font-bold">
+                     Today
+                  </Typography>
+                  <Typography className="text-sm font-semibold text-white">
+                     4 Meals Logged
+                  </Typography>
                </View>
             </View>
          </View>
@@ -65,25 +76,52 @@ const RenderArtwork = ({ id }: { id: string }) => {
       return (
          <View className="relative w-full aspect-square max-w-[320px] mb-6 items-center justify-center">
             <View className="absolute inset-0 bg-surface-container-low rounded-full scale-90 opacity-20 blur-3xl" />
-            <View className="relative w-64 h-64 bg-surface-container rounded-[40px] items-center justify-center shadow-2xl border border-outline-variant/10 z-10">
+            <View className="relative w-64 h-64 bg-surface-container rounded-[40px] items-center justify-center shadow-2xl border border-outline/10 z-10">
                <View className="flex-row gap-8 mb-12">
-                  <View className="w-16 h-16 rounded-full bg-surface-container-high items-center justify-center border border-primary/20">
-                     <MaterialCommunityIcons name="account" size={32} color="#F59E0B" />
+                  <View className="w-16 h-16 rounded-full bg-surface items-center justify-center border-2 border-primary/10">
+                     <MaterialCommunityIcons
+                        name="account"
+                        size={32}
+                        color="#F59E0B"
+                     />
                   </View>
-                  <View className="w-16 h-16 rounded-full bg-surface-container-high items-center justify-center border border-primary/20">
-                     <MaterialCommunityIcons name="account" size={32} color="#F59E0B" />
+                  <View className="w-16 h-16 rounded-full bg-surface items-center justify-center border-2 border-primary/10">
+                     <MaterialCommunityIcons
+                        name="account"
+                        size={32}
+                        color="#F59E0B"
+                     />
                   </View>
                </View>
-               <View className="absolute w-full top-1/2 flex-row justify-center gap-6" style={{ marginTop: -24 }}>
-                  <View className="w-12 h-12 rounded-full bg-primary shadow-lg items-center justify-center" style={{ transform: [{ translateX: -12 }] }}>
-                     <MaterialCommunityIcons name="cash-multiple" size={24} color="#0F172A" />
+               <View
+                  className="absolute w-full top-[53%] flex-row justify-center gap-6"
+                  style={{ marginTop: -24 }}
+               >
+                  <View
+                     className="w-12 h-12 rounded-full bg-primary shadow-lg items-center justify-center"
+                     style={{ transform: [{ translateX: -12 }] }}
+                  >
+                     <MaterialCommunityIcons
+                        name="cash-multiple"
+                        size={24}
+                        color="#0F172A"
+                     />
                   </View>
-                  <View className="w-12 h-12 rounded-full bg-primary shadow-lg items-center justify-center" style={{ transform: [{ translateX: 12 }] }}>
-                     <MaterialCommunityIcons name="cash-multiple" size={24} color="#0F172A" />
+                  <View
+                     className="w-12 h-12 rounded-full bg-primary shadow-lg items-center justify-center"
+                     style={{ transform: [{ translateX: 12 }] }}
+                  >
+                     <MaterialCommunityIcons
+                        name="cash-multiple"
+                        size={24}
+                        color="#0F172A"
+                     />
                   </View>
                </View>
-               <View className="mt-8 px-6 py-2 rounded-full bg-surface-container-highest border border-outline-variant/20">
-                  <Typography className="text-primary text-xs font-bold tracking-widest uppercase">Fair Share Calculated</Typography>
+               <View className="mt-8 px-6 py-2 rounded-full bg-surface border border-outline/20">
+                  <Typography className="text-primary text-xs font-bold tracking-widest uppercase">
+                     Fair Share Calculated
+                  </Typography>
                </View>
             </View>
             <View className="absolute -left-4 top-1/4 w-24 h-32 bg-surface-container-low rounded-2xl -rotate-6 opacity-40 z-0" />
@@ -96,26 +134,47 @@ const RenderArtwork = ({ id }: { id: string }) => {
       return (
          <View className="relative w-full aspect-square max-w-[320px] mb-6 items-center justify-center mt-6">
             <View className="absolute inset-0 bg-primary/10 blur-3xl rounded-full scale-75" />
-            <View className="relative z-10 w-full p-8 bg-surface-container-high rounded-[40px] shadow-xl border border-outline-variant/10">
+            <View className="relative z-10 w-full p-8 bg-surface-container rounded-[40px] shadow-xl border border-outline/10">
                <View className="flex-row items-end justify-center gap-4 mb-8">
                   <View className="items-center gap-2">
-                     <MaterialCommunityIcons name="silverware-fork-knife" size={48} color="#94A3B8" />
-                     <View className="w-16 h-2 bg-surface-container-highest rounded-full" />
+                     <MaterialCommunityIcons
+                        name="silverware-fork-knife"
+                        size={48}
+                        color="#94A3B8"
+                     />
+                     <View className="w-16 h-2 bg-surface rounded-full" />
                   </View>
-                  <MaterialCommunityIcons name="scale-balance" size={56} color="#F59E0B" className="mb-2" />
+                  <MaterialCommunityIcons
+                     name="scale-balance"
+                     size={56}
+                     color="#F59E0B"
+                     className="mb-2"
+                  />
                   <View className="items-center gap-2">
-                     <MaterialCommunityIcons name="cash-multiple" size={48} color="#22C55E" />
-                     <View className="w-16 h-2 bg-surface-container-highest rounded-full" />
+                     <MaterialCommunityIcons
+                        name="cash-multiple"
+                        size={48}
+                        color="#22C55E"
+                     />
+                     <View className="w-16 h-2 bg-surface rounded-full" />
                   </View>
                </View>
                <View className="flex-row gap-3 justify-center w-full">
-                  <View className="flex-1 bg-surface-container-low p-3 rounded-xl border-l-4 border-primary">
-                     <Typography className="text-[10px] uppercase tracking-widest text-outline-variant">You Owe</Typography>
-                     <Typography className="font-bold text-white text-base">৳124</Typography>
+                  <View className="flex-1 bg-surface p-3 rounded-xl border-l-4 border-error">
+                     <Typography className="text-[10px] uppercase tracking-widest font-bold text-primary">
+                        You Owe
+                     </Typography>
+                     <Typography className="font-bold text-white text-base">
+                        ৳124
+                     </Typography>
                   </View>
-                  <View className="flex-1 bg-surface-container-low p-3 rounded-xl border-l-4 border-tertiary">
-                     <Typography className="text-[10px] uppercase tracking-widest text-outline-variant">Owed</Typography>
-                     <Typography className="font-bold text-white text-base">৳450</Typography>
+                  <View className="flex-1 bg-surface p-3 rounded-xl border-l-4 border-success">
+                     <Typography className="text-[10px] uppercase tracking-widest font-bold text-primary">
+                        Owed
+                     </Typography>
+                     <Typography className="font-bold text-white text-base">
+                        ৳450
+                     </Typography>
                   </View>
                </View>
             </View>
@@ -197,7 +256,7 @@ export default function OnboardingScreen() {
                keyExtractor={(item) => item.id}
                onScroll={Animated.event(
                   [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                  { useNativeDriver: false }
+                  { useNativeDriver: false },
                )}
                onViewableItemsChanged={viewableItemsChanged}
                viewabilityConfig={viewConfig}
@@ -224,7 +283,7 @@ export default function OnboardingScreen() {
                         outputRange: ["#2D3449", "#F59E0B", "#2D3449"], // surface-container-highest vs primary
                         extrapolate: "clamp",
                      });
-                     
+
                      return (
                         <Animated.View
                            key={i}
@@ -236,16 +295,20 @@ export default function OnboardingScreen() {
                </View>
 
                {/* Primary Action Button */}
-               <TouchableOpacity 
+               <TouchableOpacity
                   onPress={scrollToNext}
                   className="w-full h-14 bg-primary rounded-2xl shadow-xl shadow-orange-500/20 active:scale-95 items-center justify-center flex-row gap-2"
                >
                   <Typography className="text-on-primary font-bold text-[16px] tracking-wide">
                      {SLIDES[currentIndex].actionLabel}
                   </Typography>
-                  <MaterialCommunityIcons 
-                     name={currentIndex === SLIDES.length - 1 ? 'check' : 'arrow-right'} 
-                     size={22} 
+                  <MaterialCommunityIcons
+                     name={
+                        currentIndex === SLIDES.length - 1
+                           ? "check"
+                           : "arrow-right"
+                     }
+                     size={22}
                      color="#0F172A"
                   />
                </TouchableOpacity>

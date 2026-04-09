@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, TouchableOpacity, Image } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "expo-router";
 import { Button } from "@/components/ui/Button";
@@ -24,8 +24,8 @@ export const LoginForm = () => {
       setError,
    } = useForm({
       defaultValues: {
-         email: "",
-         password: "",
+         email: "[EMAIL_ADDRESS]",
+         password: "[PASSWORD]",
       },
    });
 
@@ -164,7 +164,8 @@ export const LoginForm = () => {
                                        ? "eye-outline"
                                        : "eye-off-outline"
                                  }
-                                 className="text-xl text-outline/60 bg-none"
+                                 size={20}
+                                 color="#94A3B8"
                               />
                            </TouchableOpacity>
                         }
@@ -185,20 +186,19 @@ export const LoginForm = () => {
 
             {/* Divider */}
             <View className="relative flex-row items-center py-8">
-               <View className="flex-1 h-[1px] bg-outline/60" />
-               <Typography className="mx-4 text-[11px] uppercase tracking-widest text-outline/60 font-bold">
+               <View className="flex-1 h-[1px] bg-outline" />
+               <Typography className="mx-4 text-[11px] uppercase tracking-widest text-outline font-bold">
                   OR
                </Typography>
-               <View className="flex-1 h-[1px] bg-outline/60" />
+               <View className="flex-1 h-[1px] bg-outline" />
             </View>
 
             {/* Social Login */}
-            <TouchableOpacity className="w-full flex-row items-center justify-center space-x-3 bg-surface-container border border-outline-variant/20 h-14 rounded-xl active:opacity-80">
-               <Image
-                  source={{
-                     uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuCW5OJ5s0c2bCTWms36DThfoiQ2FtAZFJlQrF8tfbvqbpHyaGRUzyErrcdNhOk9RsDTPaYWQ5YKsiIwUfUqEP8ZLzyeL5DBZvUAlFg_vdnMKtncrZR4aIgruTosWgLijudF0WCR_nHg5aGULb3CEOXZtFBJn87S3PW6mRr1H29eriFMqeaowi9rqz1pI6touwQoudvlI7Gevca2j12mdppwSCB4hwo8w9GIB7Vh6CO0kIqowf-5MbJKI3oE935T5O-o9og3TFBH8dw",
-                  }}
-                  className="w-5 h-5 mr-3"
+            <TouchableOpacity className="w-full flex-row items-center justify-center gap-2 bg-surface-container border border-outline h-14 rounded-xl active:opacity-80">
+               <MaterialCommunityIcons
+                  name="google-plus"
+                  size={28}
+                  color="#94A3B8"
                />
                <Typography className="font-semibold text-on-surface">
                   Continue with Google
