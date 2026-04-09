@@ -25,7 +25,7 @@ const baseQueryWithReauth: BaseQueryFn<
 > = async (args, api, extra) => {
    let result = await baseQuery(args, api, extra);
 
-   console.log("API Result:", result);
+   // console.log("API Result:", result);
 
    if (result.error?.status === 401) {
       const refreshResult = await baseQuery("/auth/refresh", api, extra);

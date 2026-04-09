@@ -13,14 +13,15 @@ export default function TabsLayout() {
                   borderTopWidth: 0,
                   elevation: 0,
                   height: 60,
+                  paddingTop: 5,
                   paddingBottom: 10,
+                  marginBottom: 5,
                },
                tabBarActiveTintColor: "#F59E0B",
                tabBarInactiveTintColor: "#94A3B8",
                tabBarLabelStyle: {
                   fontSize: 10,
                   fontFamily: "Inter_500Medium",
-                  textTransform: "uppercase",
                },
             }}
          >

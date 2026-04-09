@@ -63,7 +63,7 @@ export const ActiveGroupCard = ({
                </Typography>
             </TouchableOpacity>
          </View>
-         <View className="flex-row items-center justify-between mt-6">
+         <View className="flex-row items-center justify-between">
             <View className="flex-row items-center gap-2 bg-surface/90 px-3 py-2 rounded-xl">
                <Typography className="text-xs font-mono text-on-surface">
                   Code: {inviteCode}

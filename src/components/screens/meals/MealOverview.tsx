@@ -1,9 +1,7 @@
-import React from "react";
 import { View, FlatList, ActivityIndicator } from "react-native";
 import { useGetMealsQuery } from "../../../api/mealApi";
 import { Card } from "@/components/ui/Card";
 import { Typography } from "@/components/ui/Typography";
-import { Container } from "@/components/ui/Container";
 
 export const MealOverview = () => {
    const { data: meals, isLoading, error } = useGetMealsQuery();
