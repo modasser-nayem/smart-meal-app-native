@@ -1,9 +1,10 @@
-import { View, TouchableOpacity } from "react-native";
+import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { useGetProfileQuery } from "@/api/userApi";
 import { format, isToday } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
-import MemberSummaryItem from "./MemberSummaryItem";
+import { MealBottomAction } from "./MealBottomAction";
+import MembersMealParticipation from "./MembersMealParticipation";
 
 export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
    const { data: profile } = useGetProfileQuery();
@@ -11,6 +12,7 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
    // MOCK DATA
    const memberData = [
       {
+         id: "1",
          name: "You",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=ali",
@@ -18,9 +20,11 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
+         snacks: 1,
          isMe: true,
       },
       {
+         id: "2",
          name: "Rahim",
          role: "Manager",
          avatar: "https://i.pravatar.cc/150?u=rahim",
@@ -28,8 +32,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 2,
          dinner: 1,
+         snacks: 1,
       },
       {
+         id: "3",
          name: "Ali",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=ali",
@@ -37,8 +43,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
+         snacks: 1,
       },
       {
+         id: "4",
          name: "Karim",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=karim",
@@ -46,8 +54,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 0,
+         snacks: 1,
       },
       {
+         id: "5",
          name: "Sara",
          role: "Guest",
          avatar: "https://i.pravatar.cc/150?u=sara",
@@ -55,8 +65,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 2,
          lunch: 2,
          dinner: 2,
+         snacks: 1,
       },
       {
+         id: "6",
          name: "Amina",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=amina",
@@ -64,8 +76,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 2,
          dinner: 1,
+         snacks: 1,
       },
       {
+         id: "7",
          name: "David",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=david",
@@ -73,8 +87,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 1,
          dinner: 0,
+         snacks: 1,
       },
       {
+         id: "8",
          name: "Lisa",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=lisa",
@@ -82,8 +98,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
+         snacks: 1,
       },
       {
+         id: "9",
          name: "Jake",
          role: "Member",
          avatar: "https://i.pravatar.cc/150?u=jake",
@@ -91,6 +109,7 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 1,
          dinner: 0,
+         snacks: 1,
       },
    ];
 
@@ -119,54 +138,10 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
             groupTotalMeals={groupTotal}
          />
 
-         {/* Meal Schedule Shortcut */}
-         {/* <TouchableOpacity
-            className="flex-row items-center justify-between bg-surface-container/90 px-6 py-4 rounded-[24px] border border-outline/5 active:bg-surface-container/50"
-            onPress={() => {}}
-         >
-            <View className="flex-row items-center gap-4">
-               <View className="w-10 h-10 rounded-xl bg-primary/10 items-center justify-center">
-                  <MaterialCommunityIcons
-                     name="calendar-clock"
-                     size={20}
-                     color="#F59E0B"
-                  />
-               </View>
-               <View>
-                  <Typography className="text-sm font-bold text-on-surface">
-                     Set Meal Schedule
-                  </Typography>
-                  <Typography className="text-[10px] text-on-surface opacity-60">
-                     Personalize your weekly routines
-                  </Typography>
-               </View>
-            </View>
-            <MaterialCommunityIcons
-               name="chevron-right"
-               size={20}
-               className="text-on-surface"
-            />
-         </TouchableOpacity> */}
-
          {/* Unified Member List */}
-         <View>
-            <View className="flex-row justify-between items-center mb-5 mt-4">
-               <Typography className="text-xs font-black uppercase tracking-[0.2em] text-primary">
-                  Member Participation
-               </Typography>
-               <Typography className="text-[10px] font-bold text-on-surface-variant/40 uppercase">
-                  Total: {memberData.length}
-               </Typography>
-            </View>
-            {[...memberData]
-               .sort((a, b) => (a.isMe === b.isMe ? 0 : a.isMe ? -1 : 1))
-               .map((member, idx) => (
-                  <MemberSummaryItem
-                     key={idx}
-                     {...member}
-                  />
-               ))}
-         </View>
+         <MembersMealParticipation members={memberData} />
+
+         <MealBottomAction />
       </View>
    );
 };

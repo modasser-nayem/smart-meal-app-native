@@ -1,43 +1,8 @@
-import { View, Image, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity, ScrollView } from "react-native";
 import { Typography } from "@/components/ui/Typography";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { cn } from "@/lib/utils";
 import { format, isValid } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
-
-const MemberParticipationRow = ({ name, meals, rank, avatar, isTop }: any) => (
-   <View
-      className={cn(
-         "flex-row items-center justify-between p-4 bg-surface-container rounded-[24px] border-l-4 mb-3 border border-outline/5",
-         isTop ? "border-primary" : "border-outline/20",
-      )}
-   >
-      <View className="flex-row items-center gap-3">
-         <Image
-            source={{ uri: avatar }}
-            className="w-10 h-10 rounded-full bg-surface-container-highest"
-         />
-         <View>
-            <Typography className="font-bold text-on-surface leading-tight text-sm">
-               {name}
-            </Typography>
-            <View className="flex-row items-center gap-2 mt-0.5">
-               <Typography className="text-[9px] text-on-surface-variant font-black uppercase tracking-tighter">
-                  Rank: #{rank}
-               </Typography>
-            </View>
-         </View>
-      </View>
-      <View className="items-end">
-         <Typography className="text-[9px] text-on-surface-variant block mb-0.5 uppercase font-bold tracking-tighter">
-            Total Meals
-         </Typography>
-         <Typography className={cn("text-xl font-black text-primary")}>
-            {meals}
-         </Typography>
-      </View>
-   </View>
-);
+import MembersMealParticipation from "./MembersMealParticipation";
 
 export const MonthlyAnalytics = ({
    selectedMonth,
@@ -51,49 +16,107 @@ export const MonthlyAnalytics = ({
    const myMonthlyTotal = 42;
    const groupMonthlyTotal = 412;
 
-   const members = [
+   // MOCK DATA
+   const memberData = [
       {
-         name: "Sara",
-         meals: 82,
-         rank: 1,
-         avatar: "https://i.pravatar.cc/150?u=sara",
-         isTop: true,
-      },
-      {
-         name: "Ali",
-         meals: 65,
-         rank: 2,
+         id: "1",
+         name: "You",
+         role: "Member",
          avatar: "https://i.pravatar.cc/150?u=ali",
+         total: 3,
+         breakfast: 1,
+         lunch: 1,
+         dinner: 1,
+         snacks: 1,
+         isMe: true,
       },
       {
-         name: "Hana",
-         meals: 58,
-         rank: 3,
-         avatar: "https://i.pravatar.cc/150?u=hana",
-      },
-      {
+         id: "2",
          name: "Rahim",
-         meals: 52,
-         rank: 4,
+         role: "Manager",
          avatar: "https://i.pravatar.cc/150?u=rahim",
+         total: 4,
+         breakfast: 1,
+         lunch: 2,
+         dinner: 1,
+         snacks: 1,
       },
       {
+         id: "3",
+         name: "Ali",
+         role: "Member",
+         avatar: "https://i.pravatar.cc/150?u=ali",
+         total: 3,
+         breakfast: 1,
+         lunch: 1,
+         dinner: 1,
+         snacks: 1,
+      },
+      {
+         id: "4",
          name: "Karim",
-         meals: 45,
-         rank: 5,
+         role: "Member",
          avatar: "https://i.pravatar.cc/150?u=karim",
+         total: 2,
+         breakfast: 1,
+         lunch: 1,
+         dinner: 0,
+         snacks: 1,
       },
       {
-         name: "Nayem",
-         meals: 38,
-         rank: 6,
-         avatar: "https://i.pravatar.cc/150?u=nayem",
+         id: "5",
+         name: "Sara",
+         role: "Guest",
+         avatar: "https://i.pravatar.cc/150?u=sara",
+         total: 6,
+         breakfast: 2,
+         lunch: 2,
+         dinner: 2,
+         snacks: 1,
       },
       {
-         name: "Zayn",
-         meals: 32,
-         rank: 7,
-         avatar: "https://i.pravatar.cc/150?u=zayn",
+         id: "6",
+         name: "Amina",
+         role: "Member",
+         avatar: "https://i.pravatar.cc/150?u=amina",
+         total: 3,
+         breakfast: 0,
+         lunch: 2,
+         dinner: 1,
+         snacks: 1,
+      },
+      {
+         id: "7",
+         name: "David",
+         role: "Member",
+         avatar: "https://i.pravatar.cc/150?u=david",
+         total: 1,
+         breakfast: 0,
+         lunch: 1,
+         dinner: 0,
+         snacks: 1,
+      },
+      {
+         id: "8",
+         name: "Lisa",
+         role: "Member",
+         avatar: "https://i.pravatar.cc/150?u=lisa",
+         total: 3,
+         breakfast: 1,
+         lunch: 1,
+         dinner: 1,
+         snacks: 1,
+      },
+      {
+         id: "9",
+         name: "Jake",
+         role: "Member",
+         avatar: "https://i.pravatar.cc/150?u=jake",
+         total: 1,
+         breakfast: 0,
+         lunch: 1,
+         dinner: 0,
+         snacks: 1,
       },
    ];
 
@@ -120,30 +143,14 @@ export const MonthlyAnalytics = ({
                </View>
             </View>
 
+            {/* Summary Hero Row */}
             <QuickMealsViewCard
                myTotalMeals={myMonthlyTotal}
                groupTotalMeals={groupMonthlyTotal}
             />
 
-            {/* Member Leaderboard */}
-            <View>
-               <View className="flex-row justify-between items-center mb-6">
-                  <View>
-                     <Typography className="text-xs font-black uppercase tracking-[0.2em] text-primary">
-                        Attendance Leaderboard
-                     </Typography>
-                     <Typography className="text-[10px] font-bold text-on-surface-variant uppercase mt-1">
-                        Ranked by monthly totals
-                     </Typography>
-                  </View>
-               </View>
-               {members.map((member, idx) => (
-                  <MemberParticipationRow
-                     key={idx}
-                     {...member}
-                  />
-               ))}
-            </View>
+            {/* Unified Member List */}
+            <MembersMealParticipation members={memberData} />
 
             {/* Finalize Month Actions */}
             <View className="pt-4 space-y-4">

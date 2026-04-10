@@ -12,6 +12,7 @@ import { DailyMeals } from "@/components/screens/meals/DailyMeals";
 import { MonthlyAnalytics } from "@/components/screens/meals/MonthlyAnalytics";
 import { MonthYearPicker } from "@/components/screens/meals/MonthYearPicker";
 import { MealFAB } from "@/components/screens/meals/MealFAB";
+import { Typography } from "@/components/ui/Typography";
 
 export default function MealsScreen() {
    const [viewType, setViewType] = useState<"daily" | "monthly">("daily");
