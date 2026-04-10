@@ -26,7 +26,6 @@ interface MembersMealParticipationProps {
       breakfast: number;
       lunch: number;
       dinner: number;
-      snacks: number;
       isMe?: boolean;
    }[];
 }
@@ -48,16 +47,7 @@ const MembersMealParticipation = ({
             .sort((a, b) => (a.isMe === b.isMe ? 0 : a.isMe ? -1 : 1))
             .map(
                (
-                  {
-                     name,
-                     avatar,
-                     breakfast,
-                     lunch,
-                     dinner,
-                     snacks,
-                     total,
-                     isMe,
-                  },
+                  { name, avatar, breakfast, lunch, dinner, total, isMe },
                   idx,
                ) => (
                   <View
@@ -110,11 +100,6 @@ const MembersMealParticipation = ({
                               <MealStatusDot
                                  icon="weather-night"
                                  count={dinner}
-                                 colorClass="#ADC6FF"
-                              />
-                              <MealStatusDot
-                                 icon="cupcake"
-                                 count={snacks}
                                  colorClass="#ADC6FF"
                               />
                            </View>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Container } from "@/components/ui/Container";
-import { format } from "date-fns";
+import { format, setMonth, isValid } from "date-fns";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // Modular Components
@@ -19,9 +19,19 @@ export default function MealsScreen() {
    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
    const [isPickerVisible, setIsPickerVisible] = useState(false);
 
+   const safeDate = isValid(selectedDate) ? selectedDate : new Date();
+
    const handleDateChange = (date: Date) => {
-      setSelectedDate(date);
+      const freshDate = new Date(date);
+      setSelectedDate(isValid(freshDate) ? freshDate : new Date());
       setIsPickerVisible(false);
+   };
+
+   const handleMonthChange = (monthIndex: number) => {
+      setSelectedDate(prev => {
+         const newDate = setMonth(new Date(prev), monthIndex);
+         return isValid(newDate) ? newDate : new Date();
+      });
    };
 
    return (
@@ -34,8 +44,8 @@ export default function MealsScreen() {
             <MealsHeader
                title={
                   viewType === "daily"
-                     ? format(selectedDate, "MMMM d, yyyy")
-                     : format(selectedDate, "MMMM yyyy")
+                     ? format(safeDate, "MMMM d, yyyy")
+                     : format(safeDate, "MMMM yyyy")
                }
                subtitle={
                   viewType === "daily"
@@ -63,7 +73,11 @@ export default function MealsScreen() {
                   </View>
                ) : (
                   <View className="flex-1">
-                     <MonthlyAnalytics selectedMonth={selectedDate} />
+                     <MonthlyAnalytics
+                        selectedMonth={selectedDate}
+                        onMonthChange={handleMonthChange}
+                        onYearPress={() => setIsPickerVisible(true)}
+                     />
                   </View>
                )}
             </View>

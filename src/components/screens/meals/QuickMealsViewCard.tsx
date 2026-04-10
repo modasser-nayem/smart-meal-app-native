@@ -95,7 +95,7 @@ const QuickMealsViewCard = ({
          <SummaryCard
             label="My Meals"
             value={myTotalMeals}
-            subLabel="Today"
+            subLabel="meals"
             icon="account-check"
             isPrimary
             isAddButton={true}
@@ -103,7 +103,7 @@ const QuickMealsViewCard = ({
          <SummaryCard
             label="Group Meals"
             value={groupTotalMeals}
-            subLabel="Logged"
+            subLabel="meals"
             icon="account-group"
             isAddButton={false}
          />

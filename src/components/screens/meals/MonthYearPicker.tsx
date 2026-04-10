@@ -66,7 +66,7 @@ export const MonthYearPicker = ({
                            <TouchableOpacity
                               key={month}
                               onPress={() =>
-                                 onSelect(setMonth(selectedDate, idx))
+                                 onSelect(setMonth(new Date(selectedDate), idx))
                               }
                               className={cn(
                                  "py-3 px-4 rounded-2xl mb-1",
@@ -100,7 +100,7 @@ export const MonthYearPicker = ({
                            <TouchableOpacity
                               key={year}
                               onPress={() =>
-                                 onSelect(setYear(selectedDate, year))
+                                 onSelect(setYear(new Date(selectedDate), year))
                               }
                               className={cn(
                                  "py-3 px-4 rounded-2xl mb-1 items-center",

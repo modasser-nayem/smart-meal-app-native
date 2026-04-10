@@ -3,11 +3,16 @@ import { Typography } from "@/components/ui/Typography";
 import { format, isValid } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
 import MembersMealParticipation from "./MembersMealParticipation";
+import { MonthStrip } from "./MonthStrip";
 
 export const MonthlyAnalytics = ({
    selectedMonth,
+   onMonthChange,
+   onYearPress,
 }: {
    selectedMonth: Date;
+   onMonthChange: (monthIndex: number) => void;
+   onYearPress: () => void;
 }) => {
    // Defensive check for date validity
    const dateObj = isValid(selectedMonth) ? selectedMonth : new Date();
@@ -27,7 +32,6 @@ export const MonthlyAnalytics = ({
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
          isMe: true,
       },
       {
@@ -39,7 +43,6 @@ export const MonthlyAnalytics = ({
          breakfast: 1,
          lunch: 2,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "3",
@@ -50,7 +53,6 @@ export const MonthlyAnalytics = ({
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "4",
@@ -61,7 +63,6 @@ export const MonthlyAnalytics = ({
          breakfast: 1,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
       {
          id: "5",
@@ -72,7 +73,6 @@ export const MonthlyAnalytics = ({
          breakfast: 2,
          lunch: 2,
          dinner: 2,
-         snacks: 1,
       },
       {
          id: "6",
@@ -83,7 +83,6 @@ export const MonthlyAnalytics = ({
          breakfast: 0,
          lunch: 2,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "7",
@@ -94,7 +93,6 @@ export const MonthlyAnalytics = ({
          breakfast: 0,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
       {
          id: "8",
@@ -105,7 +103,6 @@ export const MonthlyAnalytics = ({
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "9",
@@ -116,7 +113,6 @@ export const MonthlyAnalytics = ({
          breakfast: 0,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
    ];
 
@@ -125,43 +121,50 @@ export const MonthlyAnalytics = ({
          className="flex-1"
          showsVerticalScrollIndicator={false}
       >
-         <View className="px-6 space-y-8 pb-32 pt-4">
-            {/* Monthly Branding & Context */}
-            <View className="bg-surface-container p-4 rounded-3xl border border-primary/20 flex-row items-center justify-between">
-               <View>
-                  <Typography className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-1">
-                     Monthly Summary
-                  </Typography>
-                  <Typography className="text-xl font-black text-on-surface">
-                     {format(dateObj, "MMMM yyyy")}
-                  </Typography>
-               </View>
-               <View className="bg-primary/10 px-4 py-2 rounded-2xl border border-primary/20">
-                  <Typography className="text-primary text-[10px] font-black uppercase tracking-widest">
-                     Participation
-                  </Typography>
-               </View>
-            </View>
-
-            {/* Summary Hero Row */}
-            <QuickMealsViewCard
-               myTotalMeals={myMonthlyTotal}
-               groupTotalMeals={groupMonthlyTotal}
+         <View className="pb-32 pt-4">
+            <MonthStrip
+               selectedMonth={dateObj}
+               onMonthChange={onMonthChange}
+               onYearPress={onYearPress}
             />
+            <View className="px-6 space-y-8">
+               {/* Monthly Branding & Context */}
+               {/* <View className="bg-surface-container p-4 rounded-3xl border border-primary/20 flex-row items-center justify-between">
+                  <View>
+                     <Typography className="text-[10px] font-black uppercase tracking-[0.2em] text-primary mb-1">
+                        Monthly Summary
+                     </Typography>
+                     <Typography className="text-xl font-black text-on-surface">
+                        {format(dateObj, "MMMM yyyy")}
+                     </Typography>
+                  </View>
+                  <View className="bg-primary/10 px-4 py-2 rounded-2xl border border-primary/20">
+                     <Typography className="text-primary text-[10px] font-black uppercase tracking-widest">
+                        Participation
+                     </Typography>
+                  </View>
+               </View> */}
 
-            {/* Unified Member List */}
-            <MembersMealParticipation members={memberData} />
+               {/* Summary Hero Row */}
+               <QuickMealsViewCard
+                  myTotalMeals={myMonthlyTotal}
+                  groupTotalMeals={groupMonthlyTotal}
+               />
 
-            {/* Finalize Month Actions */}
-            <View className="pt-4 space-y-4">
-               <TouchableOpacity className="w-full h-14 rounded-[24px] bg-primary/10 border border-primary/20 items-center justify-center active:bg-primary/20">
-                  <Typography className="text-primary font-black uppercase tracking-widest text-xs">
-                     Generate Monthly Report
+               {/* Unified Member List */}
+               <MembersMealParticipation members={memberData} />
+
+               {/* Finalize Month Actions */}
+               <View className="pt-4 space-y-4">
+                  <TouchableOpacity className="w-full h-14 rounded-[24px] bg-primary/10 border border-primary/20 items-center justify-center active:bg-primary/20">
+                     <Typography className="text-primary font-black uppercase tracking-widest text-xs">
+                        Generate Monthly Report
+                     </Typography>
+                  </TouchableOpacity>
+                  <Typography className="text-[11px] text-on-surface text-center px-4 font-medium leading-tight opacity-50">
+                     Participation statistics for the selected period.
                   </Typography>
-               </TouchableOpacity>
-               <Typography className="text-[11px] text-on-surface text-center px-4 font-medium leading-tight opacity-50">
-                  Participation statistics for the selected period.
-               </Typography>
+               </View>
             </View>
          </View>
       </ScrollView>

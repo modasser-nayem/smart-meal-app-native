@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { useGetProfileQuery } from "@/api/userApi";
-import { format, isToday } from "date-fns";
+import { format, isToday, isValid } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
 import { MealBottomAction } from "./MealBottomAction";
 import MembersMealParticipation from "./MembersMealParticipation";
@@ -20,7 +20,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
          isMe: true,
       },
       {
@@ -32,7 +31,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 2,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "3",
@@ -43,7 +41,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "4",
@@ -54,7 +51,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
       {
          id: "5",
@@ -65,7 +61,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 2,
          lunch: 2,
          dinner: 2,
-         snacks: 1,
       },
       {
          id: "6",
@@ -76,7 +71,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 2,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "7",
@@ -87,7 +81,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
       {
          id: "8",
@@ -98,7 +91,6 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 1,
          lunch: 1,
          dinner: 1,
-         snacks: 1,
       },
       {
          id: "9",
@@ -109,16 +101,16 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
          breakfast: 0,
          lunch: 1,
          dinner: 0,
-         snacks: 1,
       },
    ];
 
    const myData = memberData.find((m) => m.isMe) || memberData[0];
    const groupTotal = memberData.reduce((acc, m) => acc + m.total, 0);
 
-   const sectionTitle = isToday(selectedDate)
+   const safeDate = isValid(selectedDate) ? selectedDate : new Date();
+   const sectionTitle = isToday(safeDate)
       ? "Today's Meals"
-      : `${format(selectedDate, "MMMM d")}, Meals`;
+      : `${format(safeDate, "MMMM d")}, Meals`;
 
    return (
       <View className="px-6 space-y-6 pb-32">

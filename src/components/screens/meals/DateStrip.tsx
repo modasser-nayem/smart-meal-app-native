@@ -24,11 +24,11 @@ export const DateStrip = ({
       <View className="mb-4 flex-row items-center px-6">
          <TouchableOpacity
             onPress={onCalendarPress}
-            className="w-14 h-[68px] rounded-2xl bg-surface-container border border-primary/20 items-center justify-center mr-3 active:scale-95"
+            className="w-[52px] h-[52px] rounded-2xl bg-surface-container border border-primary/20 items-center justify-center mr-3 active:scale-95"
          >
             <MaterialCommunityIcons
                name="calendar-month"
-               size={28}
+               size={22}
                color="#F59E0B"
             />
          </TouchableOpacity>
@@ -47,15 +47,15 @@ export const DateStrip = ({
                      key={index}
                      onPress={() => onDateChange(date)}
                      className={cn(
-                        "w-16 h-[68px] rounded-2xl items-center justify-center mr-3 border transition-all",
+                        "w-[52px] h-[52px] rounded-2xl items-center justify-center mr-3 border transition-all",
                         isSelected
-                           ? "bg-primary border-primary shadow-lg shadow-primary/20"
+                           ? "bg-primary border-primary shadow-sm shadow-primary/20"
                            : "bg-surface-container border-outline/5",
                      )}
                   >
                      <Typography
                         className={cn(
-                           "text-[10px] font-bold uppercase tracking-widest",
+                           "text-[8px] font-bold uppercase tracking-widest",
                            isSelected
                               ? "text-surface/80"
                               : "text-on-surface/60",
@@ -65,14 +65,14 @@ export const DateStrip = ({
                      </Typography>
                      <Typography
                         className={cn(
-                           "text-xl font-black mt-1",
+                           "text-lg font-black mt-0.5",
                            isSelected ? "text-on-primary" : "text-on-surface",
                         )}
                      >
                         {format(date, "d")}
                      </Typography>
                      {isToday && !isSelected && (
-                        <View className="w-1 h-1 bg-primary rounded-full mt-1" />
+                        <View className="absolute bottom-1 w-1 h-1 bg-primary rounded-full" />
                      )}
                   </TouchableOpacity>
                );
