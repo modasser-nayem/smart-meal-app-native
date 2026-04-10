@@ -86,9 +86,7 @@ const QtyText = ({
    );
 };
 
-export const MonthlyMealMatrix = ({
-   workbook,
-}: MonthlyMealMatrixProps) => {
+export const MonthlyMealMatrix = ({ workbook }: MonthlyMealMatrixProps) => {
    const { members, days, grandTotals } = workbook;
 
    const colWidth = 100; // Width for each person column
@@ -99,7 +97,7 @@ export const MonthlyMealMatrix = ({
       dateColWidth + mealColWidth + members.length * colWidth + totalColWidth;
 
    return (
-      <View className="bg-surface-container/30 rounded-[32px] border border-outline/5 overflow-hidden">
+      <View className="bg-surface-container/30 rounded-[16px] border border-outline/5 overflow-hidden">
          <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
@@ -200,7 +198,10 @@ export const MonthlyMealMatrix = ({
                                        className="items-center justify-center border-r border-outline/5"
                                     >
                                        <QtyText
-                                          value={dayRecord.participations[m.id]?.b ?? 0}
+                                          value={
+                                             dayRecord.participations[m.id]
+                                                ?.b ?? 0
+                                          }
                                        />
                                     </View>
                                  ))}
@@ -225,7 +226,10 @@ export const MonthlyMealMatrix = ({
                                        className="items-center justify-center border-r border-outline/5"
                                     >
                                        <QtyText
-                                          value={dayRecord.participations[m.id]?.l ?? 0}
+                                          value={
+                                             dayRecord.participations[m.id]
+                                                ?.l ?? 0
+                                          }
                                        />
                                     </View>
                                  ))}
@@ -255,7 +259,10 @@ export const MonthlyMealMatrix = ({
                                        className="items-center justify-center border-r border-outline/5"
                                     >
                                        <QtyText
-                                          value={dayRecord.participations[m.id]?.d ?? 0}
+                                          value={
+                                             dayRecord.participations[m.id]
+                                                ?.d ?? 0
+                                          }
                                        />
                                     </View>
                                  ))}
