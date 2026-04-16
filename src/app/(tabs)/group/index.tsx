@@ -1,113 +1,225 @@
-import React from "react";
-import { View, ScrollView, TouchableOpacity, Image } from "react-native";
+import React, { useState, useCallback } from "react";
+import { View, TouchableOpacity, Alert, Clipboard } from "react-native";
+import { router } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
-import { Card } from "@/components/ui/Card";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useGetGroupsQuery } from "@/api/groupApi";
-import { cn } from "@/lib/utils";
-   
+
+import { GroupInfoCard } from "@/components/screens/group/GroupInfoCard";
+import { GroupNoticeSection } from "@/components/screens/group/GroupNoticeSection";
+import { GroupMembersSection } from "@/components/screens/group/GroupMembersSection";
+import { GroupRequestsSection } from "@/components/screens/group/GroupRequestsSection";
+
+// ─── Mock data (replace with real API hooks) ──────────────────────────────────
+
+const MOCK_NOTICES = [
+   {
+      id: "n1",
+      title: "🛒 Grocery Day Reminder",
+      body: "Everyone please contribute ৳800 for groceries before 6 PM today. Karim will collect from each room.",
+      timeAgo: "2h ago",
+      pinColor: "amber",
+   },
+   {
+      id: "n2",
+      title: "📊 March Billing Closed",
+      body: "March billing is now finalized. Total: ৳42,560. Please settle any outstanding dues within 3 days.",
+      timeAgo: "Yesterday",
+      pinColor: "blue",
+   },
+];
+
+const MOCK_MEMBERS = [
+   {
+      id: "m1",
+      name: "Ali Modasser Nayem",
+      email: "ali.nayem@email.com",
+      role: "Owner" as const,
+      isActive: true,
+      initials: "AN",
+      avatarColor: "bg-amber-900",
+   },
+   {
+      id: "m2",
+      name: "Karim Hossain",
+      email: "karim@email.com",
+      role: "Manager" as const,
+      isActive: true,
+      initials: "KH",
+      avatarColor: "bg-blue-900",
+   },
+   {
+      id: "m3",
+      name: "Rahim Uddin",
+      email: "rahim@email.com",
+      role: "Member" as const,
+      isActive: false,
+      initials: "RU",
+      avatarColor: "bg-teal-900",
+   },
+];
+
+const MOCK_REQUESTS = [
+   {
+      id: "r1",
+      name: "Jalal Ahmed",
+      email: "jalal@email.com",
+      timeAgo: "2h ago",
+      type: "join_request" as const,
+      initials: "JA",
+      avatarColor: "bg-slate-800",
+      isActive: true,
+   },
+   {
+      id: "r2",
+      name: "Priya Das",
+      email: "priya@email.com",
+      timeAgo: "1 day ago",
+      type: "join_request" as const,
+      initials: "PD",
+      avatarColor: "bg-violet-900",
+      isActive: false,
+   },
+   {
+      id: "r3",
+      name: "Tanvir Rahman",
+      email: "tanvir@email.com",
+      timeAgo: "3h ago",
+      type: "invitation" as const,
+      initials: "TR",
+      avatarColor: "bg-cyan-900",
+   },
+];
+
+const IS_OWNER = true; // Replace with real auth/role check
+const TOTAL_MEMBERS = 12;
+const TOTAL_JOIN_REQUESTS = 3;
+const TOTAL_INVITATIONS = 2;
+const INVITE_CODE = "BCHH-4821";
+
+// ─── Screen ───────────────────────────────────────────────────────────────────
+
 export default function GroupScreen() {
-   const { data: groups, isLoading } = useGetGroupsQuery();
-   const activeGroup = groups?.[0]; // Default to first group for now
+   const [requests, setRequests] = useState(MOCK_REQUESTS);
+
+   /* ── handlers ── */
+   const handleCopyCode = useCallback(() => {
+      Clipboard.setString(INVITE_CODE);
+      Alert.alert("Copied!", "Invite code copied to clipboard.");
+   }, []);
+
+   const handleSwitchGroup = useCallback(() => {
+      // router.push("/(modal)/switch-group");
+      Alert.alert("Switch Group", "Opens the group-switching modal.");
+   }, []);
+
+   const handleEditGroup = useCallback(() => {
+      // router.push("/(modal)/edit-group");
+      Alert.alert("Edit Group", "Opens group edit form.");
+   }, []);
+
+   const handleAccept = useCallback((id: string) => {
+      setRequests((prev) => prev.filter((r) => r.id !== id));
+   }, []);
+
+   const handleReject = useCallback((id: string) => {
+      setRequests((prev) => prev.filter((r) => r.id !== id));
+   }, []);
+
+   const handleRevoke = useCallback((id: string) => {
+      setRequests((prev) => prev.filter((r) => r.id !== id));
+   }, []);
 
    return (
-      <Container scrollable className="bg-background pt-12 pb-32">
-         {/* TopAppBar */}
-         <View className="flex-row justify-between items-center px-4 h-16 w-full">
-            <View className="flex-row items-center gap-3">
-               <View className="w-10 h-10 rounded-2xl bg-primary/10 items-center justify-center">
-                  <MaterialCommunityIcons name="account-group" size={24} color="#F59E0B" />
-               </View>
-               <View>
-                  <Typography className="text-white text-lg font-bold">{activeGroup?.name || "Bachelor House"}</Typography>
-                  <Typography className="text-secondary text-[10px] uppercase font-bold tracking-widest">Active Group</Typography>
-               </View>
+      <Container
+         scrollable
+         withSafeArea
+         padding={false}
+         className="bg-background"
+      >
+         {/* ── Header bar ── */}
+         <View className="flex-row items-center justify-between px-5 pt-4 pb-3">
+            <View>
+               <Typography className="text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-0.5">
+                  Your Group
+               </Typography>
+               <Typography className="text-on-surface text-2xl font-extrabold tracking-tight">
+                  Group Hub
+               </Typography>
             </View>
-            <TouchableOpacity className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95">
-               <MaterialCommunityIcons name="cog-outline" size={24} color="#94A3B8" />
+            {/* Notification bell */}
+            <TouchableOpacity
+               activeOpacity={0.75}
+               className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
+            >
+               <MaterialCommunityIcons
+                  name="bell-outline"
+                  size={22}
+                  color="#dae2fd"
+               />
+               {/* Unread badge */}
+               <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
             </TouchableOpacity>
          </View>
 
-         <View className="px-6 mt-6 mb-8">
-            <Card className="bg-surface-container-high rounded-3xl p-6 border-l-4 border-primary">
-               <View className="flex-row justify-between items-center mb-6">
-                  <View>
-                     <Typography className="text-on-surface-variant text-[10px] uppercase font-bold tracking-widest mb-1">Invite Code</Typography>
-                     <View className="flex-row items-center gap-3 bg-background/50 px-4 py-2 rounded-xl">
-                        <Typography className="text-primary font-mono text-lg font-bold">BH-4290</Typography>
-                        <MaterialCommunityIcons name="content-copy" size={20} color="#F59E0B" />
-                     </View>
-                  </View>
-                  <TouchableOpacity className="bg-primary px-6 py-3 rounded-2xl shadow-lg shadow-orange-500/20 active:scale-95">
-                     <Typography className="text-on-primary font-bold">Invite</Typography>
-                  </TouchableOpacity>
-               </View>
-               
-               <View className="flex-row justify-between pt-6 border-t border-outline-variant/10">
-                  <View className="items-center">
-                     <Typography className="text-xl font-bold text-white">12</Typography>
-                     <Typography className="text-[10px] text-on-surface-variant uppercase font-bold tracking-tight">Members</Typography>
-                  </View>
-                  <View className="w-[1px] h-8 bg-outline-variant/20 self-center" />
-                  <View className="items-center">
-                     <Typography className="text-xl font-bold text-tertiary">9</Typography>
-                     <Typography className="text-[10px] text-on-surface-variant uppercase font-bold tracking-tight">Active</Typography>
-                  </View>
-                  <View className="w-[1px] h-8 bg-outline-variant/20 self-center" />
-                  <View className="items-center">
-                     <Typography className="text-xl font-bold text-orange-400">3</Typography>
-                     <Typography className="text-[10px] text-on-surface-variant uppercase font-bold tracking-tight">Pending</Typography>
-                  </View>
-               </View>
-            </Card>
-         </View>
+         {/* ── Sections ── */}
+         <View className="px-4 gap-6 pb-8">
+            {/* 1. Group Info */}
+            <GroupInfoCard
+               groupName="Bachelor House"
+               location="Dhaka, Bangladesh"
+               memberCount={TOTAL_MEMBERS}
+               activeCount={9}
+               pendingCount={TOTAL_JOIN_REQUESTS + TOTAL_INVITATIONS}
+               inviteCode={INVITE_CODE}
+               billingMonth="April 2026"
+               isOwner={IS_OWNER}
+               onSwitchGroup={handleSwitchGroup}
+               onEditGroup={handleEditGroup}
+               onCopyCode={handleCopyCode}
+            />
 
-         {/* Member List */}
-         <View className="px-6">
-            <View className="flex-row items-center justify-between mb-6">
-               <Typography variant="h2" className="text-xl font-bold text-white">Members</Typography>
-               <Typography className="text-primary text-xs font-bold uppercase tracking-widest">Manage</Typography>
-            </View>
+            {/* 2. Notices */}
+            <GroupNoticeSection
+               notices={MOCK_NOTICES}
+               isOwner={IS_OWNER}
+               onNoticePress={(id) => {
+                  // router.push(`/group/notice/${id}`);
+               }}
+               onSeeAll={() => {
+                  // router.push("/group/notices");
+               }}
+               onPostNotice={() => {
+                  // router.push("/group/notices/new");
+               }}
+            />
 
-            <View className="space-y-4">
-               {[
-                  { name: "Rahim Ahmed", role: "Owner", status: "Active", icon: "https://lh3.googleusercontent.com/aida-public/AB6AXuB5NJNLVaBEsRdfdndSTECeIiJyvpxb9o8JJLWLD6j65_ZqqGPuNPyHRlpzoA2peyOIwWuMQ-arUw-6ALc7HzN6PNGGHSkvYQPZH9DPJQYKsZBL45wau6GkK17mSScjEp_3IO_u-joF51SoapGo-eoTD0JMXtGMLpeOLCpEjFFFdw_k4WzocGx0_Utqs9MagYCubWzpvyVFWrqZL1KG1q1ZqiFMXtWrBGSRvsaIiVxGrqzA2GC5mgbnJqBbOqKG2bz6eZmDqeNH8Oo" },
-                  { name: "Karim Ullah", role: "Manager", status: "Active", icon: "https://lh3.googleusercontent.com/aida-public/AB6AXuAugdjCdQ-fMGmJ5g0Qc5CGhizfugdDwZdx80IiTz9mmfcPfBXA1dAr-MedMcABjlQk8MAJF1LvAVlqt9fhPtZktYhZI8ocBJPa_Edie1dLAfqb255oe2BMGrrisxGZ_2afnflzSV55r5tR_DsY8p_p0Rrg1BrQSbDuc_WkUtz4x6ws8loY-w9joT4kiXH6MuZYtDx_8J3ZOSWfK9JzbHbqdka4MpQvVhQZpO76eRxnXTXmtOwh_qvvurZeWIqmsI5oy69tU1qubq8" },
-                  { name: "Jabed Khan", role: "Member", status: "Inactive", icon: "https://lh3.googleusercontent.com/aida-public/AB6AXuBC2YQ4Y9Z2p9I-_M7wPzQZ9O_J7_-9P-h_VzU-L_Y_j_T-V_Z-X-Y-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-" },
-               ].map((member, i) => (
-                  <Card key={i} className="bg-surface-container rounded-2xl p-4 flex-row items-center gap-4 border border-white/5 active:bg-surface-container-high transition-all">
-                     <View className="relative">
-                        <Image source={{ uri: member.icon }} className="w-14 h-14 rounded-2xl" />
-                        <View className={cn("absolute -bottom-1 -right-1 w-4 h-4 rounded-full border-2 border-surface-container", member.status === "Active" ? "bg-tertiary" : "bg-outline-variant")} />
-                     </View>
-                     <View className="flex-1">
-                        <Typography className="text-white font-bold text-base">{member.name}</Typography>
-                        <View className="flex-row items-center gap-2 mt-1">
-                           <View className={cn("px-2 py-0.5 rounded-md", member.role === "Owner" ? "bg-primary/20" : "bg-secondary-container/20")}>
-                              <Typography className={cn("text-[8px] font-black uppercase tracking-tighter", member.role === "Owner" ? "text-primary" : "text-secondary")}>{member.role}</Typography>
-                           </View>
-                           <Typography className="text-on-surface-variant text-[10px] font-bold uppercase">• Active now</Typography>
-                        </View>
-                     </View>
-                     <TouchableOpacity className="w-10 h-10 items-center justify-center">
-                        <MaterialCommunityIcons name="dots-vertical" size={20} color="#94A3B8" />
-                     </TouchableOpacity>
-                  </Card>
-               ))}
-            </View>
-         </View>
+            {/* 3. Members */}
+            <GroupMembersSection
+               members={MOCK_MEMBERS}
+               totalCount={TOTAL_MEMBERS}
+               onMemberPress={(id) => {
+                  // router.push(`/group/member/${id}`);
+               }}
+               onSeeAll={() => {
+                  // router.push("/group/members");
+               }}
+            />
 
-         {/* Pending Invites */}
-         <View className="px-6 mt-12 pb-20">
-            <Typography variant="h2" className="text-xl font-bold text-white mb-6">Pending Invites</Typography>
-            <Card className="bg-surface-container-low/40 rounded-2xl p-6 border border-dashed border-outline-variant/30 items-center justify-center border-spacing-4">
-               <View className="w-16 h-16 rounded-3xl bg-surface-container items-center justify-center mb-4">
-                  <MaterialCommunityIcons name="email-open-outline" size={32} color="#94A3B8" className="opacity-40" />
-               </View>
-               <Typography className="text-on-surface-variant text-center font-medium">No pending invitations</Typography>
-               <Typography className="text-[10px] text-outline/60 text-center uppercase tracking-widest mt-1 font-bold">Invite members to collaborate</Typography>
-            </Card>
+            {/* 4. Requests & Invitations */}
+            <GroupRequestsSection
+               items={requests}
+               totalJoinRequests={TOTAL_JOIN_REQUESTS}
+               totalInvitations={TOTAL_INVITATIONS}
+               isOwner={IS_OWNER}
+               onAccept={handleAccept}
+               onReject={handleReject}
+               onRevoke={handleRevoke}
+               onSeeAll={() => {
+                  // router.push("/group/requests");
+               }}
+            />
          </View>
       </Container>
    );

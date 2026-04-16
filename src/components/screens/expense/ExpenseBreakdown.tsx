@@ -36,13 +36,13 @@ export const ExpenseBreakdown = () => {
                      <Typography className="text-sm font-medium text-on-surface/80">
                         Shared/Group Expense
                      </Typography>
-                     <Typography className="text-lg font-bold text-secondary">
+                     <Typography className="text-lg font-bold text-blue-300">
                         ৳815
                      </Typography>
                   </View>
                   <View className="h-2.5 w-full bg-surface-container rounded-full overflow-hidden">
                      <View
-                        className="h-full bg-secondary rounded-full"
+                        className="h-full bg-blue-400 rounded-full"
                         style={{ width: "15%" }}
                      />
                   </View>
@@ -55,7 +55,7 @@ export const ExpenseBreakdown = () => {
                   size={20}
                   color="rgba(216, 195, 173, 0.4)"
                />
-               <Typography className="text-[13px] text-on-surface-variant/60 flex-1">
+               <Typography className="text-[13px] text-on-surface/60 flex-1">
                   Shared Cost per Member:{" "}
                   <Typography className="text-on-surface font-semibold">
                      ৳101.88

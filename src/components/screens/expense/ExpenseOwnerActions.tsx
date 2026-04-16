@@ -11,7 +11,7 @@ export const ExpenseOwnerActions = () => {
             </Typography>
          </TouchableOpacity>
          <View className="items-center">
-            <Typography className="text-[11px] text-on-surface-variant/40 mb-1 text-center">
+            <Typography className="text-[11px] text-on-surface/40 mb-1 text-center">
                Closing will finalize all calculations and notify members.
             </Typography>
             <TouchableOpacity>

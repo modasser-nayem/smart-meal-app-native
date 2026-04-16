@@ -16,7 +16,7 @@ export const ExpenseMetrics = ({ metrics }: ExpenseMetricsProps) => {
    return (
       <View className="px-6 flex-row flex-wrap justify-between gap-y-4 mb-8">
          {/* Total Meals */}
-         <TouchableOpacity className="w-[48%] bg-surface-container rounded-2xl p-5 overflow-hidden active:bg-surface-container transition-all">
+         <TouchableOpacity className="w-[48%] bg-surface-container rounded-2xl border-l-4 border-primary p-5 overflow-hidden active:bg-surface-container transition-all">
             <View className="z-10 flex-col">
                <Typography className="text-[11px] font-semibold text-on-surface/60 uppercase tracking-widest mb-1">
                   Total Meals
@@ -24,13 +24,6 @@ export const ExpenseMetrics = ({ metrics }: ExpenseMetricsProps) => {
                <Typography className="text-3xl font-bold text-on-surface">
                   {metrics.totalMeals}
                </Typography>
-            </View>
-            <View className="absolute -right-2 -bottom-2 opacity-5">
-               <MaterialCommunityIcons
-                  name="silverware-fork-knife"
-                  size={60}
-                  color="#ffc174"
-               />
             </View>
          </TouchableOpacity>
 
@@ -49,17 +42,10 @@ export const ExpenseMetrics = ({ metrics }: ExpenseMetricsProps) => {
                   </Typography>
                </View>
             </View>
-            <View className="absolute -right-2 -bottom-2 opacity-5">
-               <MaterialCommunityIcons
-                  name="trending-up"
-                  size={60}
-                  color="#ffc174"
-               />
-            </View>
          </TouchableOpacity>
 
          {/* Total Expense */}
-         <TouchableOpacity className="w-[48%] bg-surface-container rounded-2xl p-5 border-l-4 border-primary overflow-hidden active:bg-surface-container transition-all">
+         <TouchableOpacity className="w-[48%] bg-surface-container rounded-2xl p-5 border-l-4 border-error overflow-hidden active:bg-surface-container transition-all">
             <View className="z-10 flex-col">
                <Typography className="text-[11px] font-semibold text-on-surface/60 uppercase tracking-widest mb-1">
                   Total Expense
@@ -67,13 +53,6 @@ export const ExpenseMetrics = ({ metrics }: ExpenseMetricsProps) => {
                <Typography className="text-3xl font-bold text-on-surface">
                   {metrics.totalExpense}
                </Typography>
-            </View>
-            <View className="absolute -right-2 -bottom-2 opacity-5">
-               <MaterialCommunityIcons
-                  name="cash"
-                  size={60}
-                  color="#ffc174"
-               />
             </View>
          </TouchableOpacity>
 
@@ -91,13 +70,6 @@ export const ExpenseMetrics = ({ metrics }: ExpenseMetricsProps) => {
                      Eligible
                   </Typography>
                </View>
-            </View>
-            <View className="absolute -right-2 -bottom-2 opacity-5">
-               <MaterialCommunityIcons
-                  name="account-group"
-                  size={60}
-                  color="#ffc174"
-               />
             </View>
          </TouchableOpacity>
       </View>

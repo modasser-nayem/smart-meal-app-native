@@ -1,4 +1,3 @@
-import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -37,7 +36,7 @@ export const RecentTransactions = ({ transactions }: RecentTransactionsProps) =>
             {transactions.map((item, i) => (
                <TouchableOpacity
                   key={i}
-                  className="bg-surface-container rounded-2xl p-4 flex-row items-center gap-4 border border-outline-variant/5 active:bg-surface-container-high transition-all mb-3"
+                  className="bg-surface-container rounded-2xl p-4 flex-row items-center gap-4 border border-outline/5 active:bg-surface-container-high transition-all mb-3"
                >
                   <View className={cn("w-14 h-14 rounded-2xl items-center justify-center", item.color)}>
                      <MaterialCommunityIcons name={item.icon as any} size={28} color={item.iconColor} />
@@ -45,15 +44,15 @@ export const RecentTransactions = ({ transactions }: RecentTransactionsProps) =>
                   <View className="flex-1">
                      <Typography className="text-on-surface font-bold text-base">{item.title}</Typography>
                      <View className="flex-row items-center gap-2 mt-1">
-                        <Typography className="text-on-surface-variant text-[10px] font-bold uppercase">{item.payer}</Typography>
-                        <Typography className="text-outline-variant">•</Typography>
-                        <Typography className="text-on-surface-variant text-[10px] uppercase font-medium">{item.date}</Typography>
+                        <Typography className="text-on-surface text-[10px] font-bold">{item.payer}</Typography>
+                        <Typography className="text-outline">•</Typography>
+                        <Typography className="text-on-surface text-[10px] font-medium">{item.date}</Typography>
                      </View>
                   </View>
                   <View className="items-end">
                      <Typography className="text-on-surface font-bold text-lg">{item.amount}</Typography>
-                     <View className="px-2 py-0.5 rounded-md bg-surface-container-highest mt-1">
-                        <Typography className="text-[8px] font-black uppercase text-outline tracking-tighter">{item.type}</Typography>
+                     <View className="px-2 py-0.5 rounded-md bg-surface-container mt-1">
+                        <Typography className="text-[8px] font-black uppercase text-primary tracking-tighter">{item.type}</Typography>
                      </View>
                   </View>
                </TouchableOpacity>
