@@ -44,11 +44,7 @@ export default function TabsLayout() {
                   title: "Meals",
                   tabBarIcon: ({ color, size, focused }) => (
                      <MaterialCommunityIcons
-                        name={
-                           focused
-                              ? "silverware-fork-knife"
-                              : "silverware-fork-knife"
-                        }
+                        name={focused ? "silverware-fork-knife" : "silverware-fork-knife"}
                         size={size}
                         color={color}
                      />
@@ -61,9 +57,7 @@ export default function TabsLayout() {
                   title: "Group",
                   tabBarIcon: ({ color, size, focused }) => (
                      <MaterialCommunityIcons
-                        name={
-                           focused ? "account-group" : "account-group-outline"
-                        }
+                        name={focused ? "account-group" : "account-group-outline"}
                         size={size}
                         color={color}
                      />

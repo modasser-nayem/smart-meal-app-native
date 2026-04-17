@@ -1,0 +1,7 @@
+{
+   "kiroAgent.configureMCP": "Disabled",
+   "prettier.endOfLine": "lf",
+   "editor.unfoldOnClickAfterEndOfLine": true,
+   "editor.formatOnSave": true,
+   "editor.defaultFormatter": "esbenp.prettier-vscode"
+}

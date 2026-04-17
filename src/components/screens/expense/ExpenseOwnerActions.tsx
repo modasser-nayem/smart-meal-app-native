@@ -1,24 +1,70 @@
-import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-export const ExpenseOwnerActions = () => {
+interface ExpenseOwnerActionsProps {
+   isOwner: boolean;
+   isMonthOpen: boolean;
+   onCloseMonth?: () => void;
+   onExport?: () => void;
+}
+
+export const ExpenseOwnerActions = ({
+   isOwner,
+   isMonthOpen,
+   onCloseMonth,
+   onExport,
+}: ExpenseOwnerActionsProps) => {
+   if (!isOwner) return null;
+
    return (
-      <View className="px-6 pb-4 items-center">
-         <TouchableOpacity className="w-full py-4 px-6 rounded-2xl border-2 border-error/30 bg-transparent active:bg-error/5 transition-all mb-4">
-            <Typography className="text-error font-bold uppercase tracking-widest text-xs text-center">
-               Close This Month
-            </Typography>
-         </TouchableOpacity>
-         <View className="items-center">
-            <Typography className="text-[11px] text-on-surface/40 mb-1 text-center">
-               Closing will finalize all calculations and notify members.
-            </Typography>
-            <TouchableOpacity>
-               <Typography className="text-[11px] text-primary/60 underline tracking-wide">
-                  Learn more about month finalization
-               </Typography>
+      <View className="px-5 mt-5">
+         <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-3 ml-1">
+            Owner Actions
+         </Typography>
+
+         <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline">
+            {/* Export */}
+            <TouchableOpacity
+               onPress={onExport}
+               activeOpacity={0.75}
+               className="flex-row items-center gap-3 px-4 py-4 border-b border-outline active:bg-surface"
+            >
+               <View className="w-10 h-10 rounded-xl bg-info/10 items-center justify-center">
+                  <MaterialCommunityIcons name="export-variant" size={20} color="#3B82F6" />
+               </View>
+               <View className="flex-1">
+                  <Typography className="text-on-surface font-semibold text-[15px]">
+                     Export Report
+                  </Typography>
+                  <Typography className="text-secondary-400 text-xs mt-0.5">
+                     Download this month as PDF or CSV
+                  </Typography>
+               </View>
+               <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
             </TouchableOpacity>
+
+            {/* Close month */}
+            {isMonthOpen && (
+               <TouchableOpacity
+                  onPress={onCloseMonth}
+                  activeOpacity={0.75}
+                  className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
+               >
+                  <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
+                     <MaterialCommunityIcons name="lock-outline" size={20} color="#EF4444" />
+                  </View>
+                  <View className="flex-1">
+                     <Typography className="text-error font-bold text-[15px]">
+                        Close This Month
+                     </Typography>
+                     <Typography className="text-secondary-400 text-xs mt-0.5">
+                        Finalizes calculations and notifies all members
+                     </Typography>
+                  </View>
+                  <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+               </TouchableOpacity>
+            )}
          </View>
       </View>
    );

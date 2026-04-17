@@ -1,74 +1,78 @@
-import React, { useState, useCallback } from "react";
-import { View, TouchableOpacity, Alert, Clipboard } from "react-native";
-import { router } from "expo-router";
+import { useState, useCallback } from "react";
+import { View, TouchableOpacity } from "react-native";
+import * as Clipboard from "expo-clipboard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
+import { CustomAlert } from "@/components/ui/CustomAlert";
 
 import { GroupInfoCard } from "@/components/screens/group/GroupInfoCard";
-import { GroupNoticeSection } from "@/components/screens/group/GroupNoticeSection";
-import { GroupMembersSection } from "@/components/screens/group/GroupMembersSection";
-import { GroupRequestsSection } from "@/components/screens/group/GroupRequestsSection";
+import { GroupQuickActions } from "@/components/screens/group/GroupQuickActions";
+import { GroupNoticeSection, Notice } from "@/components/screens/group/GroupNoticeSection";
+import { GroupMembersSection, Member } from "@/components/screens/group/GroupMembersSection";
+import { GroupRequestsSection, PendingItem } from "@/components/screens/group/GroupRequestsSection";
 
-// ─── Mock data (replace with real API hooks) ──────────────────────────────────
+// ─── Mock data ────────────────────────────────────────────────────────────────
 
-const MOCK_NOTICES = [
+const MOCK_NOTICES: Notice[] = [
    {
       id: "n1",
       title: "🛒 Grocery Day Reminder",
       body: "Everyone please contribute ৳800 for groceries before 6 PM today. Karim will collect from each room.",
       timeAgo: "2h ago",
-      pinColor: "amber",
+      pinColor: "primary",
    },
    {
       id: "n2",
       title: "📊 March Billing Closed",
       body: "March billing is now finalized. Total: ৳42,560. Please settle any outstanding dues within 3 days.",
       timeAgo: "Yesterday",
-      pinColor: "blue",
+      pinColor: "info",
    },
 ];
 
-const MOCK_MEMBERS = [
+const MOCK_MEMBERS: Member[] = [
    {
       id: "m1",
       name: "Ali Modasser Nayem",
       email: "ali.nayem@email.com",
-      role: "Owner" as const,
+      role: "Owner",
       isActive: true,
       initials: "AN",
-      avatarColor: "bg-amber-900",
+      avatar:
+         "https://lh3.googleusercontent.com/aida-public/AB6AXuBO3jdD-poSuSANiPR7VgxC9B5ccrozavF_CsDqU_hz9pgdLErGMIjcY7oU1_wM2iqXC14693hLM0pu_ieHOtK9G4pzPT1ZaDeK8N_5RdShmxU2AhBcJGr7VCQWqI-HLJYLTAl9hl6fUyLR8PcgLpOLisTYV4_i1TcX87m3yjXGNCMN7ZIT0jeSRA6JTpZpJCvC66y6yYX98Vwgc9-TQw_MePrtLN8p-c3Lf7WWIoq9Iv59PBV_AjExIUSMhn7VW29vPgNnRtNfxSA",
    },
    {
       id: "m2",
       name: "Karim Hossain",
       email: "karim@email.com",
-      role: "Manager" as const,
+      role: "Manager",
       isActive: true,
       initials: "KH",
-      avatarColor: "bg-blue-900",
+      avatar:
+         "https://lh3.googleusercontent.com/aida-public/AB6AXuCmnaGLcUymCqtbhNMsybCsB1NEtlNmcbPQbTSWPa5VIzEqJv3cb2qbQWxjcmiT5zlLm0Vnjg7lVem1dWwGqa7ltQ8QWGbdF07SND3u7oYE7flB8Y2SL2PE8OquFyPC242FBNEJLvf2oeBU1K4AWzVXhXiPCmfGct_X6Wy4avYaMIYTD5BWEjOiAIFhbnK8mlSLmQRk7UFyZ0Gxuq7jOUjHWYb5oPVsOrsDFFXJf32tWNLPDqaUEn7wyN5YEzk0kHUef5DMnw7zqqg",
    },
    {
       id: "m3",
       name: "Rahim Uddin",
       email: "rahim@email.com",
-      role: "Member" as const,
+      role: "Member",
       isActive: false,
       initials: "RU",
-      avatarColor: "bg-teal-900",
+      avatar:
+         "https://lh3.googleusercontent.com/aida-public/AB6AXuDl711jqMydNZDs9MR4r5IU6X6tIkdXRkpdJGhw9FW7wC5aaXCIz0htr_Z6xfeyFQPjgNPnVad97EMKT7l_jF_KUlroc0U7QixBHDYHKl8gfL15L1flf_DlC50nIhkofmARXCCgwJU1IQw5aIW6vFToIt95VxFoNGIYoRoKn1YGgqf6hOwqDnqxp1z3KXOLCw0FB_MXveGot-scuFK6-dpecNXscA2Kd0QfvV3auR2S-JOaYPLlcvbDmS1yAa6lUlv46QB23e0dfsw",
    },
 ];
 
-const MOCK_REQUESTS = [
+const MOCK_REQUESTS: PendingItem[] = [
    {
       id: "r1",
       name: "Jalal Ahmed",
       email: "jalal@email.com",
       timeAgo: "2h ago",
-      type: "join_request" as const,
+      type: "join_request",
       initials: "JA",
-      avatarColor: "bg-slate-800",
       isActive: true,
    },
    {
@@ -76,9 +80,8 @@ const MOCK_REQUESTS = [
       name: "Priya Das",
       email: "priya@email.com",
       timeAgo: "1 day ago",
-      type: "join_request" as const,
+      type: "join_request",
       initials: "PD",
-      avatarColor: "bg-violet-900",
       isActive: false,
    },
    {
@@ -86,141 +89,226 @@ const MOCK_REQUESTS = [
       name: "Tanvir Rahman",
       email: "tanvir@email.com",
       timeAgo: "3h ago",
-      type: "invitation" as const,
+      type: "invitation",
       initials: "TR",
-      avatarColor: "bg-cyan-900",
    },
 ];
 
-const IS_OWNER = true; // Replace with real auth/role check
+const IS_OWNER = true;
 const TOTAL_MEMBERS = 12;
-const TOTAL_JOIN_REQUESTS = 3;
-const TOTAL_INVITATIONS = 2;
-const INVITE_CODE = "BCHH-4821";
+const TOTAL_JOIN_REQUESTS = 2;
+const TOTAL_INVITATIONS = 1;
+const GROUP_CODE = "BCHH-4821";
+const GROUP_NAME = "Bachelor House";
+
+// ─── Alert state ──────────────────────────────────────────────────────────────
+
+type AlertConfig = {
+   visible: boolean;
+   icon: string;
+   iconVariant: "default" | "danger" | "success" | "warning";
+   title: string;
+   message: string;
+   actions: {
+      label: string;
+      onPress: () => void;
+      variant?: "default" | "danger" | "success" | "warning";
+   }[];
+};
+
+const ALERT_CLOSED: AlertConfig = {
+   visible: false,
+   icon: "information-outline",
+   iconVariant: "default",
+   title: "",
+   message: "",
+   actions: [],
+};
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function GroupScreen() {
-   const [requests, setRequests] = useState(MOCK_REQUESTS);
+   const [requests, setRequests] = useState<PendingItem[]>(MOCK_REQUESTS);
+   const [alert, setAlert] = useState<AlertConfig>(ALERT_CLOSED);
+   const closeAlert = () => setAlert(ALERT_CLOSED);
 
-   /* ── handlers ── */
-   const handleCopyCode = useCallback(() => {
-      Clipboard.setString(INVITE_CODE);
-      Alert.alert("Copied!", "Invite code copied to clipboard.");
+   const handleCopyCode = useCallback(async () => {
+      await Clipboard.setStringAsync(GROUP_CODE);
+      setAlert({
+         visible: true,
+         icon: "check-circle-outline",
+         iconVariant: "success",
+         title: "Code Copied!",
+         message: `Group code "${GROUP_CODE}" copied. Share it so others can find and join.`,
+         actions: [{ label: "Done", onPress: closeAlert }],
+      });
    }, []);
 
-   const handleSwitchGroup = useCallback(() => {
-      // router.push("/(modal)/switch-group");
-      Alert.alert("Switch Group", "Opens the group-switching modal.");
-   }, []);
-
-   const handleEditGroup = useCallback(() => {
-      // router.push("/(modal)/edit-group");
-      Alert.alert("Edit Group", "Opens group edit form.");
-   }, []);
-
-   const handleAccept = useCallback((id: string) => {
+   const handleAccept = useCallback((id: string, includeMonth: boolean) => {
       setRequests((prev) => prev.filter((r) => r.id !== id));
+      setAlert({
+         visible: true,
+         icon: "account-check-outline",
+         iconVariant: "success",
+         title: "Member Accepted",
+         message: includeMonth
+            ? "Member added and included in the current billing month."
+            : "Member added. Billing starts from next month.",
+         actions: [{ label: "Great", onPress: closeAlert }],
+      });
    }, []);
 
-   const handleReject = useCallback((id: string) => {
-      setRequests((prev) => prev.filter((r) => r.id !== id));
-   }, []);
+   const handleReject = useCallback(
+      (id: string) => {
+         const item = requests.find((r) => r.id === id);
+         setAlert({
+            visible: true,
+            icon: "account-remove-outline",
+            iconVariant: "danger",
+            title: "Reject Request",
+            message: `Reject join request from ${item?.name}?`,
+            actions: [
+               {
+                  label: "Reject",
+                  variant: "danger",
+                  onPress: () => {
+                     setRequests((prev) => prev.filter((r) => r.id !== id));
+                     closeAlert();
+                  },
+               },
+               { label: "Cancel", onPress: closeAlert },
+            ],
+         });
+      },
+      [requests],
+   );
 
-   const handleRevoke = useCallback((id: string) => {
-      setRequests((prev) => prev.filter((r) => r.id !== id));
-   }, []);
+   const handleRevoke = useCallback(
+      (id: string) => {
+         const item = requests.find((r) => r.id === id);
+         setAlert({
+            visible: true,
+            icon: "email-remove-outline",
+            iconVariant: "warning",
+            title: "Revoke Invitation",
+            message: `Revoke the invitation sent to ${item?.name}?`,
+            actions: [
+               {
+                  label: "Revoke",
+                  variant: "danger",
+                  onPress: () => {
+                     setRequests((prev) => prev.filter((r) => r.id !== id));
+                     closeAlert();
+                  },
+               },
+               { label: "Cancel", onPress: closeAlert },
+            ],
+         });
+      },
+      [requests],
+   );
 
    return (
-      <Container
-         scrollable
-         withSafeArea
-         padding={false}
-         className="bg-background"
-      >
-         {/* ── Header bar ── */}
-         <View className="flex-row items-center justify-between px-5 pt-4 pb-3">
-            <View>
-               <Typography className="text-primary text-[10px] font-bold uppercase tracking-[0.2em] mb-0.5">
-                  Your Group
-               </Typography>
-               <Typography className="text-on-surface text-2xl font-extrabold tracking-tight">
-                  Group Hub
-               </Typography>
+      <View className="flex-1 bg-background">
+         <Container scrollable withSafeArea padding={false} className="bg-background">
+            {/* ── Header ── */}
+            <View className="flex-row items-center justify-between px-5 pt-5 pb-4">
+               <View>
+                  <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest mb-0.5">
+                     Active Group
+                  </Typography>
+                  <Typography className="text-on-surface text-2xl font-extrabold tracking-tight">
+                     {GROUP_NAME}
+                  </Typography>
+               </View>
+               <TouchableOpacity
+                  activeOpacity={0.75}
+                  className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
+               >
+                  <MaterialCommunityIcons name="bell-outline" size={22} color="#F8FAFC" />
+                  <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
+               </TouchableOpacity>
             </View>
-            {/* Notification bell */}
-            <TouchableOpacity
-               activeOpacity={0.75}
-               className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
-            >
-               <MaterialCommunityIcons
-                  name="bell-outline"
-                  size={22}
-                  color="#dae2fd"
+
+            {/* ── Sections ── */}
+            <View className="px-5 gap-6 pb-10">
+               {/* 1. Group Info */}
+               <GroupInfoCard
+                  groupName={GROUP_NAME}
+                  location="Dhaka, Bangladesh"
+                  groupCode={GROUP_CODE}
+                  memberCount={TOTAL_MEMBERS}
+                  activeCount={9}
+                  pendingCount={TOTAL_JOIN_REQUESTS + TOTAL_INVITATIONS}
+                  billingMonth="April 2026"
+                  isOwner={IS_OWNER}
+                  isMonthOpen
+                  onEditGroup={() => {}}
+                  onCopyCode={handleCopyCode}
                />
-               {/* Unread badge */}
-               <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
-            </TouchableOpacity>
-         </View>
 
-         {/* ── Sections ── */}
-         <View className="px-4 gap-6 pb-8">
-            {/* 1. Group Info */}
-            <GroupInfoCard
-               groupName="Bachelor House"
-               location="Dhaka, Bangladesh"
-               memberCount={TOTAL_MEMBERS}
-               activeCount={9}
-               pendingCount={TOTAL_JOIN_REQUESTS + TOTAL_INVITATIONS}
-               inviteCode={INVITE_CODE}
-               billingMonth="April 2026"
-               isOwner={IS_OWNER}
-               onSwitchGroup={handleSwitchGroup}
-               onEditGroup={handleEditGroup}
-               onCopyCode={handleCopyCode}
-            />
+               {/* 2. Quick Actions */}
+               <GroupQuickActions
+                  isOwner={IS_OWNER}
+                  pendingRequests={TOTAL_JOIN_REQUESTS + TOTAL_INVITATIONS}
+                  onInviteMember={() => {}}
+                  onPostNotice={() => {}}
+                  onViewBilling={() => {}}
+                  onManageRequests={() => {}}
+               />
 
-            {/* 2. Notices */}
-            <GroupNoticeSection
-               notices={MOCK_NOTICES}
-               isOwner={IS_OWNER}
-               onNoticePress={(id) => {
-                  // router.push(`/group/notice/${id}`);
-               }}
-               onSeeAll={() => {
-                  // router.push("/group/notices");
-               }}
-               onPostNotice={() => {
-                  // router.push("/group/notices/new");
-               }}
-            />
+               {/* 3. Notices */}
+               <GroupNoticeSection
+                  notices={MOCK_NOTICES}
+                  isOwner={IS_OWNER}
+                  onNoticePress={() => {}}
+                  onSeeAll={() => {}}
+                  onPostNotice={() => {}}
+               />
 
-            {/* 3. Members */}
-            <GroupMembersSection
-               members={MOCK_MEMBERS}
-               totalCount={TOTAL_MEMBERS}
-               onMemberPress={(id) => {
-                  // router.push(`/group/member/${id}`);
-               }}
-               onSeeAll={() => {
-                  // router.push("/group/members");
-               }}
-            />
+               {/* 4. Members */}
+               <GroupMembersSection
+                  members={MOCK_MEMBERS}
+                  totalCount={TOTAL_MEMBERS}
+                  isOwner={IS_OWNER}
+                  onSeeAll={() => {}}
+                  onRemoveMember={(id) => {
+                     setAlert({
+                        visible: true,
+                        icon: "account-remove-outline",
+                        iconVariant: "danger",
+                        title: "Member Removed",
+                        message: "The member has been removed from the group.",
+                        actions: [{ label: "OK", onPress: closeAlert }],
+                     });
+                  }}
+                  onChangeRole={() => {}}
+               />
 
-            {/* 4. Requests & Invitations */}
-            <GroupRequestsSection
-               items={requests}
-               totalJoinRequests={TOTAL_JOIN_REQUESTS}
-               totalInvitations={TOTAL_INVITATIONS}
-               isOwner={IS_OWNER}
-               onAccept={handleAccept}
-               onReject={handleReject}
-               onRevoke={handleRevoke}
-               onSeeAll={() => {
-                  // router.push("/group/requests");
-               }}
-            />
-         </View>
-      </Container>
+               {/* 5. Requests & Invitations */}
+               <GroupRequestsSection
+                  items={requests}
+                  totalJoinRequests={TOTAL_JOIN_REQUESTS}
+                  totalInvitations={TOTAL_INVITATIONS}
+                  isOwner={IS_OWNER}
+                  onAccept={handleAccept}
+                  onReject={handleReject}
+                  onRevoke={handleRevoke}
+                  onSeeAll={() => {}}
+               />
+            </View>
+         </Container>
+
+         {/* Custom Alert */}
+         <CustomAlert
+            visible={alert.visible}
+            onClose={closeAlert}
+            icon={alert.icon}
+            iconVariant={alert.iconVariant}
+            title={alert.title}
+            message={alert.message}
+            actions={alert.actions}
+         />
+      </View>
    );
 }

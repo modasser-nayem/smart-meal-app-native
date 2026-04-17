@@ -1,62 +1,133 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { cn } from "@/lib/utils";
 
-interface Transaction {
+export type TransactionType = "meal" | "group";
+
+export interface Transaction {
+   id: string;
    title: string;
-   amount: string;
+   amount: number;
    payer: string;
    date: string;
-   type: string;
+   type: TransactionType;
    icon: string;
-   color: string;
-   iconColor: string;
 }
 
 interface RecentTransactionsProps {
    transactions: Transaction[];
+   onSeeAll?: () => void;
+   onPress?: (id: string) => void;
 }
 
-export const RecentTransactions = ({ transactions }: RecentTransactionsProps) => {
-   return (
-      <View className="px-6 mb-8">
-         <View className="flex-row justify-between items-center mb-4">
-            <Typography className="text-sm font-bold uppercase tracking-widest text-[#ffc174]">
-               Recent Transactions
+const TYPE_CONFIG: Record<
+   TransactionType,
+   { color: string; label: string; iconColor: string; border: string }
+> = {
+   meal: {
+      color: "bg-primary/10",
+      label: "Meal",
+      iconColor: "#F59E0B",
+      border: "border-l-primary",
+   },
+   group: {
+      color: "bg-info/10",
+      label: "Group",
+      iconColor: "#3B82F6",
+      border: "border-l-info",
+   },
+};
+
+export const RecentTransactions = ({
+   transactions,
+   onSeeAll,
+   onPress,
+}: RecentTransactionsProps) => {
+   if (transactions.length === 0) {
+      return (
+         <View className="px-5 mt-5">
+            <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-3 ml-1">
+               Transactions
             </Typography>
-            <TouchableOpacity>
-               <Typography className="text-[11px] font-bold text-primary uppercase tracking-widest">
+            <View className="bg-surface-container rounded-3xl px-5 py-10 items-center border border-outline">
+               <MaterialCommunityIcons name="receipt-text-outline" size={36} color="#334155" />
+               <Typography className="text-secondary-400 text-sm mt-3">
+                  No transactions yet
+               </Typography>
+            </View>
+         </View>
+      );
+   }
+
+   return (
+      <View className="px-5 mt-5">
+         <View className="flex-row items-center justify-between mb-3 ml-1">
+            <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
+               Transactions
+            </Typography>
+            <TouchableOpacity onPress={onSeeAll} activeOpacity={0.7}>
+               <Typography className="text-primary text-[11px] font-bold uppercase tracking-widest">
                   See All
                </Typography>
             </TouchableOpacity>
          </View>
 
-         <View className="space-y-3">
-            {transactions.map((item, i) => (
-               <TouchableOpacity
-                  key={i}
-                  className="bg-surface-container rounded-2xl p-4 flex-row items-center gap-4 border border-outline/5 active:bg-surface-container-high transition-all mb-3"
-               >
-                  <View className={cn("w-14 h-14 rounded-2xl items-center justify-center", item.color)}>
-                     <MaterialCommunityIcons name={item.icon as any} size={28} color={item.iconColor} />
-                  </View>
-                  <View className="flex-1">
-                     <Typography className="text-on-surface font-bold text-base">{item.title}</Typography>
-                     <View className="flex-row items-center gap-2 mt-1">
-                        <Typography className="text-on-surface text-[10px] font-bold">{item.payer}</Typography>
-                        <Typography className="text-outline">•</Typography>
-                        <Typography className="text-on-surface text-[10px] font-medium">{item.date}</Typography>
+         <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline">
+            {transactions.map((item, index) => {
+               const cfg = TYPE_CONFIG[item.type];
+               return (
+                  <TouchableOpacity
+                     key={item.id}
+                     onPress={() => onPress?.(item.id)}
+                     activeOpacity={0.75}
+                     className={`flex-row items-center gap-4 px-4 py-4 border-l-[3px] active:bg-surface ${
+                        cfg.border
+                     } ${index < transactions.length - 1 ? "border-b border-outline" : ""}`}
+                  >
+                     {/* Icon */}
+                     <View
+                        className={`w-12 h-12 rounded-2xl items-center justify-center ${cfg.color}`}
+                     >
+                        <MaterialCommunityIcons
+                           name={item.icon as any}
+                           size={24}
+                           color={cfg.iconColor}
+                        />
                      </View>
-                  </View>
-                  <View className="items-end">
-                     <Typography className="text-on-surface font-bold text-lg">{item.amount}</Typography>
-                     <View className="px-2 py-0.5 rounded-md bg-surface-container mt-1">
-                        <Typography className="text-[8px] font-black uppercase text-primary tracking-tighter">{item.type}</Typography>
+
+                     {/* Info */}
+                     <View className="flex-1">
+                        <Typography className="text-on-surface font-semibold text-[15px] leading-tight">
+                           {item.title}
+                        </Typography>
+                        <View className="flex-row items-center gap-2 mt-0.5">
+                           <Typography className="text-secondary-400 text-xs">
+                              {item.payer}
+                           </Typography>
+                           <View className="w-1 h-1 rounded-full bg-outline/40" />
+                           <Typography className="text-secondary-400 text-xs">
+                              {item.date}
+                           </Typography>
+                        </View>
                      </View>
-                  </View>
-               </TouchableOpacity>
-            ))}
+
+                     {/* Amount + type */}
+                     <View className="items-end">
+                        <Typography className="text-on-surface font-bold text-base">
+                           ৳{item.amount.toLocaleString()}
+                        </Typography>
+                        <View className={`px-2 py-0.5 rounded-md mt-1 ${cfg.color}`}>
+                           <Typography
+                              className="text-[9px] font-black uppercase tracking-widest"
+                              style={{ color: cfg.iconColor }}
+                           >
+                              {cfg.label}
+                           </Typography>
+                        </View>
+                     </View>
+                  </TouchableOpacity>
+               );
+            })}
          </View>
       </View>
    );

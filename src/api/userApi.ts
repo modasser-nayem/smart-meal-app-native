@@ -9,7 +9,6 @@ export interface User {
 
 export interface UpdateUserDto {
    username?: string;
-   photoUrl?: string;
 }
 
 export const userApi = api.injectEndpoints({
@@ -18,8 +17,13 @@ export const userApi = api.injectEndpoints({
          query: () => "/users/me",
          providesTags: ["User"],
       }),
-      updateProfile: builder.mutation<User, UpdateUserDto>({
-         query: (body) => ({ url: "/users/me", method: "PATCH", body }),
+      updateProfile: builder.mutation<User, FormData>({
+         query: (body) => ({
+            url: "/users/me",
+            method: "PATCH",
+            body,
+            formData: true,
+         }),
          invalidatesTags: ["User"],
       }),
    }),

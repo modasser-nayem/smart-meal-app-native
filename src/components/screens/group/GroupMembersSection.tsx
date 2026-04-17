@@ -1,157 +1,57 @@
-import React from "react";
-import { View, TouchableOpacity } from "react-native";
+import { useState } from "react";
+import { View, TouchableOpacity, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
-import { Card } from "@/components/ui/Card";
-import { cn } from "@/lib/utils";
+import { MemberInfoModal } from "./MemberInfoModal";
 
-interface Member {
+export type MemberRole = "Owner" | "Manager" | "Member";
+
+export interface Member {
    id: string;
    name: string;
    email: string;
-   role: "Owner" | "Manager" | "Member";
+   role: MemberRole;
    isActive: boolean;
    initials: string;
-   avatarColor: string; // tailwind bg class e.g. "bg-blue-900"
+   avatar?: string;
 }
 
 interface GroupMembersSectionProps {
    members: Member[];
    totalCount: number;
-   onMemberPress?: (id: string) => void;
+   isOwner: boolean;
    onSeeAll?: () => void;
+   onRemoveMember?: (id: string) => void;
+   onChangeRole?: (id: string) => void;
 }
 
-const ROLE_STYLE: Record<
-   Member["role"],
-   { badge: string; text: string; label: string }
-> = {
-   Owner: {
-      badge: "bg-primary/10 border border-primary/25",
-      text: "text-primary",
-      label: "Owner 👑",
-   },
-   Manager: {
-      badge: "bg-secondary-container/15 border border-secondary/20",
-      text: "text-secondary",
-      label: "Manager",
-   },
-   Member: {
-      badge: "bg-surface-container-highest border border-outline/10",
-      text: "text-on-surface-variant",
-      label: "Member",
-   },
-};
-
-const MemberRow = ({
-   member,
-   onPress,
-   isLast,
-}: {
-   member: Member;
-   onPress?: () => void;
-   isLast: boolean;
-}) => {
-   const role = ROLE_STYLE[member.role];
-   return (
-      <>
-         <TouchableOpacity
-            onPress={onPress}
-            activeOpacity={0.75}
-            className={cn(
-               "flex-row items-center gap-3 px-4 py-3.5 active:bg-surface-container-high",
-               // Owner row gets a subtle left accent
-               member.role === "Owner" && "border-l-2 border-primary"
-            )}
-         >
-            {/* Avatar */}
-            <View className="relative">
-               <View
-                  className={cn(
-                     "w-11 h-11 rounded-full items-center justify-center border border-outline/10",
-                     member.avatarColor
-                  )}
-               >
-                  <Typography className="text-white font-extrabold text-base">
-                     {member.initials}
-                  </Typography>
-               </View>
-               {/* Online dot */}
-               <View
-                  className={cn(
-                     "absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-surface-container",
-                     member.isActive ? "bg-tertiary" : "bg-outline"
-                  )}
-               />
-            </View>
-
-            {/* Name + email */}
-            <View className="flex-1 min-w-0">
-               <Typography
-                  className="text-on-surface text-sm font-bold leading-tight"
-                  numberOfLines={1}
-               >
-                  {member.name}
-               </Typography>
-               <Typography
-                  className="text-outline text-[11px] font-medium mt-0.5"
-                  numberOfLines={1}
-               >
-                  {member.email}
-               </Typography>
-            </View>
-
-            {/* Role badge */}
-            <View
-               className={cn(
-                  "px-2.5 py-1 rounded-full flex-shrink-0",
-                  role.badge
-               )}
-            >
-               <Typography
-                  className={cn(
-                     "text-[9px] font-black uppercase tracking-widest",
-                     role.text
-                  )}
-               >
-                  {role.label}
-               </Typography>
-            </View>
-
-            <MaterialCommunityIcons
-               name="chevron-right"
-               size={18}
-               color="#534434"
-            />
-         </TouchableOpacity>
-         {!isLast && <View className="h-px bg-outline-variant/10 mx-4" />}
-      </>
-   );
+const ROLE_CONFIG: Record<MemberRole, { bg: string; text: string; label: string }> = {
+   Owner: { bg: "bg-primary/10", text: "text-primary", label: "Owner 👑" },
+   Manager: { bg: "bg-info/10", text: "text-info", label: "Manager" },
+   Member: { bg: "bg-surface", text: "text-secondary-300", label: "Member" },
 };
 
 export const GroupMembersSection = ({
    members,
    totalCount,
-   onMemberPress,
+   isOwner,
    onSeeAll,
+   onRemoveMember,
+   onChangeRole,
 }: GroupMembersSectionProps) => {
+   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
    const remaining = totalCount - members.length;
 
    return (
-      <View className="gap-3">
+      <View>
          {/* Section header */}
-         <View className="flex-row items-center justify-between px-1">
+         <View className="flex-row items-center justify-between mb-3 ml-1">
             <View className="flex-row items-center gap-2">
-               <MaterialCommunityIcons
-                  name="account-group-outline"
-                  size={14}
-                  color="#a08e7a"
-               />
-               <Typography className="text-outline text-[11px] font-bold uppercase tracking-[0.18em]">
+               <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
                   Members
                </Typography>
-               <View className="bg-surface-container-high border border-outline/15 px-1.5 py-0.5 rounded-full">
-                  <Typography className="text-on-surface-variant text-[10px] font-bold">
+               <View className="bg-surface border border-outline/60 px-2 py-0.5 rounded-full">
+                  <Typography className="text-secondary-300 text-[10px] font-bold">
                      {totalCount}
                   </Typography>
                </View>
@@ -163,66 +63,108 @@ export const GroupMembersSection = ({
             </TouchableOpacity>
          </View>
 
-         <Card
-            padding="none"
-            className="bg-surface-container rounded-2xl overflow-hidden border border-outline/5"
-         >
-            {members.map((member, index) => (
-               <MemberRow
-                  key={member.id}
-                  member={member}
-                  onPress={() => onMemberPress?.(member.id)}
-                  isLast={index === members.length - 1}
-               />
-            ))}
+         <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
+            {members.map((member, index) => {
+               const roleStyle = ROLE_CONFIG[member.role];
+               return (
+                  <TouchableOpacity
+                     key={member.id}
+                     onPress={() => setSelectedMember(member)}
+                     activeOpacity={0.75}
+                     className={`flex-row items-center gap-3 px-4 py-4 active:bg-surface ${
+                        member.role === "Owner" ? "border-l-[3px] border-primary" : ""
+                     } ${index < members.length - 1 ? "border-b border-outline" : ""}`}
+                  >
+                     {/* Avatar */}
+                     <View className="relative">
+                        {member.avatar ? (
+                           <View className="w-12 h-12 rounded-full overflow-hidden border-2 border-outline">
+                              <Image
+                                 source={{ uri: member.avatar }}
+                                 className="w-full h-full"
+                                 resizeMode="cover"
+                              />
+                           </View>
+                        ) : (
+                           <View className="w-12 h-12 rounded-full bg-surface border-2 border-outline/20 items-center justify-center">
+                              <Typography className="text-on-surface font-extrabold text-base">
+                                 {member.initials}
+                              </Typography>
+                           </View>
+                        )}
+                        {/* Online dot */}
+                        <View
+                           className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-surface-container ${
+                              member.isActive ? "bg-success" : "bg-outline"
+                           }`}
+                        />
+                     </View>
 
-            {/* Remaining members footer */}
+                     {/* Info */}
+                     <View className="flex-1 min-w-0">
+                        <Typography
+                           className="text-on-surface text-[15px] font-bold leading-tight"
+                           numberOfLines={1}
+                        >
+                           {member.name}
+                        </Typography>
+                        <Typography className="text-secondary-400 text-xs mt-0.5" numberOfLines={1}>
+                           {member.email}
+                        </Typography>
+                     </View>
+
+                     {/* Role badge */}
+                     <View
+                        className={`px-2.5 py-1 rounded-full border border-outline/15 ${roleStyle.bg}`}
+                     >
+                        <Typography
+                           className={`text-[9px] font-black uppercase tracking-widest ${roleStyle.text}`}
+                        >
+                           {roleStyle.label}
+                        </Typography>
+                     </View>
+
+                     <MaterialCommunityIcons name="chevron-right" size={18} color="#64748B" />
+                  </TouchableOpacity>
+               );
+            })}
+
+            {/* See all footer */}
             {remaining > 0 && (
                <>
-                  <View className="h-px bg-outline-variant/10 mx-4" />
+                  <View className="h-px bg-outline/10 mx-4" />
                   <TouchableOpacity
                      onPress={onSeeAll}
                      activeOpacity={0.75}
-                     className="flex-row items-center justify-between px-4 py-3.5 active:bg-surface-container-high"
+                     className="flex-row items-center justify-between px-4 py-4 active:bg-surface"
                   >
-                     <View className="flex-row items-center gap-2">
-                        {/* Mini avatar stack */}
-                        <View className="flex-row">
-                           {["bg-yellow-900", "bg-cyan-900", "bg-rose-900"].map(
-                              (color, i) => (
-                                 <View
-                                    key={i}
-                                    className={cn(
-                                       "w-7 h-7 rounded-full border-2 border-surface-container items-center justify-center",
-                                       color,
-                                       i > 0 && "-ml-2"
-                                    )}
-                                 >
-                                    <Typography className="text-white text-[9px] font-black">
-                                       +
-                                    </Typography>
-                                 </View>
-                              )
-                           )}
-                        </View>
-                        <Typography className="text-on-surface-variant text-xs font-medium">
-                           {remaining} more member{remaining !== 1 ? "s" : ""}
-                        </Typography>
-                     </View>
+                     <Typography className="text-secondary-300 text-sm">
+                        {remaining} more member{remaining !== 1 ? "s" : ""}
+                     </Typography>
                      <View className="flex-row items-center gap-1">
-                        <Typography className="text-primary text-xs font-bold">
-                           See All Members
-                        </Typography>
-                        <MaterialCommunityIcons
-                           name="arrow-right"
-                           size={14}
-                           color="#F59E0B"
-                        />
+                        <Typography className="text-primary text-xs font-bold">See All</Typography>
+                        <MaterialCommunityIcons name="arrow-right" size={14} color="#F59E0B" />
                      </View>
                   </TouchableOpacity>
                </>
             )}
-         </Card>
+         </View>
+
+         {/* Member info modal */}
+         <MemberInfoModal
+            member={selectedMember}
+            visible={!!selectedMember}
+            onClose={() => setSelectedMember(null)}
+            isOwner={isOwner}
+            onRemoveMember={(id) => {
+               onRemoveMember?.(id);
+               setSelectedMember(null);
+            }}
+            onChangeRole={(id) => {
+               onChangeRole?.(id);
+               setSelectedMember(null);
+            }}
+         />
       </View>
    );
 };

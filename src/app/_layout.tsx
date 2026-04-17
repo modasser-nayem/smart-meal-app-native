@@ -31,6 +31,22 @@ export default function RootLayout() {
                <Stack.Screen name="(startup)" />
                <Stack.Screen name="(auth)" />
                <Stack.Screen name="(tabs)" />
+               <Stack.Screen
+                  name="modal/edit-profile"
+                  options={{ presentation: "modal", animation: "slide_from_bottom" }}
+               />
+               <Stack.Screen
+                  name="modal/security"
+                  options={{ presentation: "modal", animation: "slide_from_bottom" }}
+               />
+               <Stack.Screen
+                  name="modal/create-group"
+                  options={{ presentation: "modal", animation: "slide_from_bottom" }}
+               />
+               <Stack.Screen
+                  name="modal/join-group"
+                  options={{ presentation: "modal", animation: "slide_from_bottom" }}
+               />
             </Stack>
          </Provider>
          <ToastManager />
