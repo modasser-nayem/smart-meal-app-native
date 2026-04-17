@@ -6,17 +6,10 @@ import { cn } from "@/lib/utils";
 interface QuickMealsViewCardProps {
    myTotalMeals: number;
    groupTotalMeals: number;
+   onAddMeal?: () => void;
 }
 
-const SummaryCard = ({
-   label,
-   value,
-   subLabel,
-   icon,
-   isPrimary,
-   onPress,
-   isAddButton,
-}: any) => (
+const SummaryCard = ({ label, value, subLabel, icon, isPrimary, onPress, isAddButton }: any) => (
    <View
       className={cn(
          "flex-1 p-5 rounded-[32px]",
@@ -29,7 +22,7 @@ const SummaryCard = ({
          <View
             className={cn(
                "w-8 h-8 rounded-xl items-center justify-center",
-               isPrimary ? "bg-primary/20" : "bg-surface/50",
+               isPrimary ? "bg-primary/20" : "bg-surface",
             )}
          >
             <MaterialCommunityIcons
@@ -38,57 +31,40 @@ const SummaryCard = ({
                color={isPrimary ? "#F59E0B" : "#94A3B8"}
             />
          </View>
-         <Typography className="text-[10px] font-bold uppercase tracking-widest text-on-surface/60">
+         <Typography className="text-[10px] font-bold uppercase tracking-widest text-secondary-400">
             {label}
          </Typography>
       </View>
 
-      {!isAddButton ? (
+      <View className="flex-row items-center justify-between">
          <View className="flex-row items-baseline gap-1">
             <Typography
-               className={cn(
-                  "text-3xl font-black",
-                  isPrimary ? "text-primary" : "text-white",
-               )}
+               className={cn("text-3xl font-black", isPrimary ? "text-primary" : "text-on-surface")}
             >
                {value}
             </Typography>
-            <Typography className="text-[11px] text-on-surface/40 font-bold uppercase tracking-tighter">
+            <Typography className="text-[11px] text-secondary-400 font-bold uppercase tracking-tighter">
                {subLabel}
             </Typography>
          </View>
-      ) : (
-         <View className="flex-row items-center justify-between">
-            <View className="flex-row items-baseline gap-1">
-               <Typography
-                  className={cn(
-                     "text-3xl font-black",
-                     isPrimary ? "text-primary" : "text-white",
-                  )}
-               >
-                  {value}
-               </Typography>
-               <Typography className="text-[11px] text-on-surface/40 font-bold uppercase tracking-tighter">
-                  {subLabel}
-               </Typography>
-            </View>
 
-            {/* plus button for add meal */}
-            <TouchableOpacity onPress={onPress}>
-               <MaterialCommunityIcons
-                  name="plus"
-                  size={24}
-                  color={isPrimary ? "#F59E0B" : "#94A3B8"}
-               />
+         {isAddButton && (
+            <TouchableOpacity
+               onPress={onPress}
+               activeOpacity={0.75}
+               className="w-9 h-9 rounded-xl bg-primary/20 items-center justify-center active:scale-90"
+            >
+               <MaterialCommunityIcons name="plus" size={20} color="#F59E0B" />
             </TouchableOpacity>
-         </View>
-      )}
+         )}
+      </View>
    </View>
 );
 
 const QuickMealsViewCard = ({
    myTotalMeals,
    groupTotalMeals,
+   onAddMeal,
 }: QuickMealsViewCardProps) => {
    return (
       <View className="flex-row gap-4 mb-4">
@@ -98,7 +74,8 @@ const QuickMealsViewCard = ({
             subLabel="meals"
             icon="account-check"
             isPrimary
-            isAddButton={true}
+            isAddButton
+            onPress={onAddMeal}
          />
          <SummaryCard
             label="Group Meals"

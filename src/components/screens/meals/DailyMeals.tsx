@@ -1,12 +1,15 @@
 import { View } from "react-native";
-import { Typography } from "@/components/ui/Typography";
 import { useGetProfileQuery } from "@/api/userApi";
-import { format, isToday, isValid } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
-import { MealBottomAction } from "./MealBottomAction";
 import MembersMealParticipation from "./MembersMealParticipation";
 
-export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
+export const DailyMeals = ({
+   selectedDate,
+   onLogMeal,
+}: {
+   selectedDate: Date;
+   onLogMeal?: () => void;
+}) => {
    const { data: profile } = useGetProfileQuery();
 
    // MOCK DATA
@@ -107,33 +110,14 @@ export const DailyMeals = ({ selectedDate }: { selectedDate: Date }) => {
    const myData = memberData.find((m) => m.isMe) || memberData[0];
    const groupTotal = memberData.reduce((acc, m) => acc + m.total, 0);
 
-   const safeDate = isValid(selectedDate) ? selectedDate : new Date();
-   const sectionTitle = isToday(safeDate)
-      ? "Today's Meals"
-      : `${format(safeDate, "MMMM d")}, Meals`;
-
    return (
-      <View className="px-6 space-y-6 pb-32">
-         {/* Dynamic Section Header */}
-         <View className="mb-2">
-            {/* <Typography className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-1">
-               Overview
-            </Typography> */}
-            <Typography className="text-lg font-black text-on-surface">
-               {sectionTitle}
-            </Typography>
-         </View>
-
-         {/* Summary Hero Row */}
+      <View className="px-6 pb-32 gap-5">
          <QuickMealsViewCard
             myTotalMeals={myData.total}
             groupTotalMeals={groupTotal}
+            onAddMeal={onLogMeal}
          />
-
-         {/* Unified Member List */}
          <MembersMealParticipation members={memberData} />
-
-         <MealBottomAction />
       </View>
    );
 };

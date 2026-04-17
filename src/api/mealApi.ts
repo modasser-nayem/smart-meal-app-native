@@ -9,6 +9,17 @@ export interface MealRecord {
    note?: string;
 }
 
+export interface LogMealDto {
+   date: string;
+   mealTypeId: string; // "breakfast" | "lunch" | "dinner"
+   quantity: number;
+   note?: string;
+}
+
+export interface AdminLogMealDto extends LogMealDto {
+   targetUserId: string; // manager/owner logging for a specific member
+}
+
 export const mealApi = api.injectEndpoints({
    endpoints: (builder) => ({
       getMeals: builder.query<MealRecord[], { startDate?: string; endDate?: string } | void>({
@@ -18,9 +29,17 @@ export const mealApi = api.injectEndpoints({
          }),
          providesTags: ["Meals"],
       }),
-      addMeal: builder.mutation<MealRecord, Partial<MealRecord>>({
+      addMeal: builder.mutation<MealRecord, LogMealDto>({
          query: (body) => ({
             url: "/meals",
+            method: "POST",
+            body,
+         }),
+         invalidatesTags: ["Meals"],
+      }),
+      adminLogMeal: builder.mutation<MealRecord, AdminLogMealDto>({
+         query: (body) => ({
+            url: "/meals/admin",
             method: "POST",
             body,
          }),
@@ -29,4 +48,4 @@ export const mealApi = api.injectEndpoints({
    }),
 });
 
-export const { useGetMealsQuery, useAddMealMutation } = mealApi;
+export const { useGetMealsQuery, useAddMealMutation, useAdminLogMealMutation } = mealApi;

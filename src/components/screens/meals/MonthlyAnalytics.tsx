@@ -1,13 +1,11 @@
-import { View, TouchableOpacity, ScrollView } from "react-native";
+import { View, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import { Typography } from "@/components/ui/Typography";
 import { format, isValid } from "date-fns";
 import QuickMealsViewCard from "./QuickMealsViewCard";
 import MembersMealParticipation from "./MembersMealParticipation";
 import { MonthStrip } from "./MonthStrip";
-import { MonthlyMealLedger } from "./MonthlyMealCalendar";
 import { MonthlyMealMatrix } from "./MonthlyMealMatrix";
-import { cn } from "@/lib/utils";
 
 export const MonthlyAnalytics = ({
    selectedMonth,
@@ -18,9 +16,7 @@ export const MonthlyAnalytics = ({
    onMonthChange: (monthIndex: number) => void;
    onYearPress: () => void;
 }) => {
-   const [viewMode, setViewMode] = useState<"summary" | "matrix">(
-      "summary",
-   );
+   const [viewMode, setViewMode] = useState<"summary" | "matrix">("summary");
    // Defensive check for date validity
    const dateObj = isValid(selectedMonth) ? selectedMonth : new Date();
 
@@ -60,7 +56,13 @@ export const MonthlyAnalytics = ({
    // 1. GENERATE THE SUPER WORKBOOK
    const workbook: LedgerWorkbook = (function generateWorkbook() {
       const members: Member[] = [
-         { id: "1", name: "You", role: "Member", avatar: "https://i.pravatar.cc/150?u=me", isMe: true },
+         {
+            id: "1",
+            name: "You",
+            role: "Member",
+            avatar: "https://i.pravatar.cc/150?u=me",
+            isMe: true,
+         },
          { id: "2", name: "Rahim", role: "Manager", avatar: "https://i.pravatar.cc/150?u=rahim" },
          { id: "3", name: "Ali", role: "Member", avatar: "https://i.pravatar.cc/150?u=ali" },
          { id: "4", name: "Karim", role: "Member", avatar: "https://i.pravatar.cc/150?u=karim" },
@@ -141,96 +143,61 @@ export const MonthlyAnalytics = ({
    });
 
    return (
-      <ScrollView
-         className="flex-1"
-         showsVerticalScrollIndicator={false}
-      >
-         <View className="pb-32 pt-4">
-            <MonthStrip
-               selectedMonth={dateObj}
-               onMonthChange={onMonthChange}
-               onYearPress={onYearPress}
-            />
-            <View className="px-6 space-y-8">
-               {/* Summary Hero Row */}
-               <QuickMealsViewCard
-                  myTotalMeals={myMonthlyTotal}
-                  groupTotalMeals={groupMonthlyTotal}
-               />
+      <View className="pb-32 pt-4">
+         <MonthStrip
+            selectedMonth={dateObj}
+            onMonthChange={onMonthChange}
+            onYearPress={onYearPress}
+         />
+         <View className="px-6 gap-6">
+            <QuickMealsViewCard myTotalMeals={myMonthlyTotal} groupTotalMeals={groupMonthlyTotal} />
 
-               {/* View Switcher: Summary, Matrix */}
-               <View className="flex-row items-center justify-between mb-2">
-                  <View className="flex-row bg-surface-container rounded-2xl p-1 border border-outline/5 space-x-1">
-                     <TouchableOpacity
-                        onPress={() => setViewMode("summary")}
-                        className={cn(
-                           "px-4 py-2 rounded-xl items-center justify-center",
-                           viewMode === "summary"
-                              ? "bg-primary"
-                              : "bg-transparent",
-                        )}
+            {/* Inner view switcher */}
+            <View className="flex-row items-center justify-between">
+               <View className="flex-row bg-surface-container rounded-2xl p-1 border border-outline/10">
+                  <TouchableOpacity
+                     onPress={() => setViewMode("summary")}
+                     className={`px-4 py-2 rounded-xl items-center justify-center ${
+                        viewMode === "summary" ? "bg-primary" : "bg-transparent"
+                     }`}
+                  >
+                     <Typography
+                        className={`text-[10px] font-black uppercase tracking-widest ${
+                           viewMode === "summary" ? "text-background" : "text-secondary-400"
+                        }`}
                      >
-                        <Typography
-                           className={cn(
-                              "text-[8px] font-black uppercase tracking-widest",
-                              viewMode === "summary"
-                                 ? "text-surface"
-                                 : "text-on-surface/40",
-                           )}
-                        >
-                           Summary
-                        </Typography>
-                     </TouchableOpacity>
-                     <TouchableOpacity
-                        onPress={() => setViewMode("matrix")}
-                        className={cn(
-                           "px-4 py-2 rounded-xl items-center justify-center",
-                           viewMode === "matrix"
-                              ? "bg-primary"
-                              : "bg-transparent",
-                        )}
-                     >
-                        <Typography
-                           className={cn(
-                              "text-[8px] font-black uppercase tracking-widest",
-                              viewMode === "matrix"
-                                 ? "text-surface"
-                                 : "text-on-surface/40",
-                           )}
-                        >
-                           Matrix
-                        </Typography>
-                     </TouchableOpacity>
-                  </View>
-                  <Typography className="text-[10px] font-black text-primary uppercase tracking-[0.2em]">
-                     {viewMode === "summary"
-                        ? "Leaderboard"
-                        : "Full Sheets"}
-                  </Typography>
-               </View>
-
-                {viewMode === "summary" && (
-                  <MembersMealParticipation members={summaryMembers} />
-               )}
-               {viewMode === "matrix" && (
-                  <MonthlyMealMatrix
-                     workbook={workbook}
-                  />
-               )}
-
-               {/* Finalize Month Actions */}
-               <View className="pt-4 space-y-4">
-                  <TouchableOpacity className="w-full h-14 rounded-[24px] bg-primary/10 border border-primary/20 items-center justify-center active:bg-primary/20">
-                     <Typography className="text-primary font-black uppercase tracking-widest text-xs">
-                        Generate Monthly Report
+                        Summary
                      </Typography>
                   </TouchableOpacity>
-                  <Typography className="text-[11px] text-on-surface text-center px-4 font-medium leading-tight opacity-50">
-                     Participation statistics for the selected period.
-                  </Typography>
+                  <TouchableOpacity
+                     onPress={() => setViewMode("matrix")}
+                     className={`px-4 py-2 rounded-xl items-center justify-center ${
+                        viewMode === "matrix" ? "bg-primary" : "bg-transparent"
+                     }`}
+                  >
+                     <Typography
+                        className={`text-[10px] font-black uppercase tracking-widest ${
+                           viewMode === "matrix" ? "text-background" : "text-secondary-400"
+                        }`}
+                     >
+                        Full Matrix
+                     </Typography>
+                  </TouchableOpacity>
                </View>
+               <Typography className="text-[10px] font-black text-secondary-300 uppercase tracking-widest">
+                  {viewMode === "summary" ? "Leaderboard" : "Audit Sheet"}
+               </Typography>
             </View>
+
+            {viewMode === "summary" && <MembersMealParticipation members={summaryMembers} />}
+            {viewMode === "matrix" && <MonthlyMealMatrix workbook={workbook} />}
+
+            <TouchableOpacity className="w-full h-14 rounded-3xl bg-primary/10 border border-primary/20 items-center justify-center active:bg-primary/20">
+               <Typography className="text-primary font-black uppercase tracking-widest text-xs">
+                  Generate Monthly Report
+               </Typography>
+            </TouchableOpacity>
          </View>
-      </ScrollView>
+      </View>
    );
 };

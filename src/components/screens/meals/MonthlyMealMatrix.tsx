@@ -1,6 +1,5 @@
 import { View, ScrollView, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
-import { cn } from "@/lib/utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 interface Member {
@@ -21,294 +20,215 @@ interface DayRecord {
    date: string;
    dayNum: string;
    dayName: string;
-   participations: Record<string, MealCounts>; // memberId -> counts
+   participations: Record<string, MealCounts>;
    dailyTotal: number;
 }
 
 interface LedgerWorkbook {
    members: Member[];
    days: DayRecord[];
-   grandTotals: Record<string, number>; // memberId -> total
+   grandTotals: Record<string, number>;
    totalGroupMeals: number;
 }
 
-interface MonthlyMealMatrixProps {
-   workbook: LedgerWorkbook;
-}
+const MEAL_ROWS: { key: keyof MealCounts; icon: string; color: string }[] = [
+   { key: "b", icon: "weather-sunset", color: "#F59E0B" },
+   { key: "l", icon: "weather-sunny", color: "#22C55E" },
+   { key: "d", icon: "weather-night", color: "#3B82F6" },
+];
 
-const MealTypeLabel = ({
-   type,
+const Cell = ({
+   value,
+   isTotal = false,
+   width,
 }: {
-   type: "Breakfast" | "Lunch" | "Dinner";
+   value: number | string;
+   isTotal?: boolean;
+   width: number;
 }) => {
-   const icons: Record<string, keyof typeof MaterialCommunityIcons.glyphMap> = {
-      Breakfast: "weather-sunset",
-      Lunch: "weather-sunny",
-      Dinner: "weather-night",
-   };
-
+   const isMissed = value === 0 || value === "x";
    return (
-      <View className="flex-row items-center gap-1.5 px-2">
-         <MaterialCommunityIcons
-            name={icons[type]}
-            size={12}
-            color="#F59E0B"
-         />
-         <Typography className="text-[10px] font-black uppercase text-on-surface/40 tracking-tighter">
-            {type}
+      <View style={{ width }} className="items-center justify-center border-r border-outline/10">
+         <Typography
+            className={
+               isTotal
+                  ? "text-primary font-extrabold text-base"
+                  : isMissed
+                    ? "text-error text-sm font-bold"
+                    : "text-on-surface text-sm font-bold"
+            }
+         >
+            {isMissed && !isTotal ? "–" : value}
          </Typography>
       </View>
    );
 };
 
-const QtyText = ({
-   value,
-   isTotal = false,
-}: {
-   value: number | string;
-   isTotal?: boolean;
-}) => {
-   const isMissed = value === "x" || value === 0;
-
-   return (
-      <Typography
-         className={cn(
-            "text-base font-black",
-            isTotal
-               ? "text-primary"
-               : isMissed
-                 ? "text-red-500"
-                 : "text-on-surface",
-         )}
-      >
-         {value === 0 ? "x" : value}
-      </Typography>
-   );
-};
-
-export const MonthlyMealMatrix = ({ workbook }: MonthlyMealMatrixProps) => {
+export const MonthlyMealMatrix = ({ workbook }: { workbook: LedgerWorkbook }) => {
    const { members, days, grandTotals } = workbook;
 
-   const colWidth = 100; // Width for each person column
-   const dateColWidth = 80;
-   const mealColWidth = 90; // Slightly wider for icons
-   const totalColWidth = 80;
-   const totalTableWidth =
-      dateColWidth + mealColWidth + members.length * colWidth + totalColWidth;
+   const DATE_W = 72;
+   const MEAL_W = 80;
+   const COL_W = 88;
+   const TOTAL_W = 72;
+   const ROW_H = 40;
+   const totalWidth = DATE_W + MEAL_W + members.length * COL_W + TOTAL_W;
 
    return (
-      <View className="bg-surface-container/30 rounded-[16px] border border-outline/5 overflow-hidden">
-         <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-         >
-            <View style={{ width: totalTableWidth }}>
-               {/* Fixed Table Header */}
-               <View className="flex-row border-b border-outline/10 bg-surface-container-highest/20 h-16">
+      <View className="bg-surface-container rounded-3xl border border-outline/10 overflow-hidden">
+         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={{ width: totalWidth }}>
+               {/* ── Header ── */}
+               <View
+                  className="flex-row border-b border-outline/10 bg-surface"
+                  style={{ height: 56 }}
+               >
                   <View
-                     style={{ width: dateColWidth }}
-                     className="items-center justify-center border-r border-outline/5"
+                     style={{ width: DATE_W + MEAL_W }}
+                     className="items-center justify-center border-r border-outline/10"
                   >
-                     <Typography className="text-[10px] font-black uppercase text-on-surface/40">
+                     <Typography className="text-secondary-400 text-[10px] font-black uppercase tracking-widest">
                         Date
                      </Typography>
                   </View>
-                  <View
-                     style={{ width: mealColWidth }}
-                     className="items-center justify-center border-r border-outline/5"
-                  >
-                     <Typography className="text-[10px] font-black uppercase text-on-surface/40">
-                        Meals
-                     </Typography>
-                  </View>
-                  {members.map((member) => (
+                  {members.map((m) => (
                      <View
-                        key={member.id}
-                        style={{ width: colWidth }}
-                        className="items-center justify-center border-r border-outline/5 px-2"
+                        key={m.id}
+                        style={{ width: COL_W }}
+                        className="items-center justify-center border-r border-outline/10 px-2"
                      >
-                        <View className="items-center gap-1">
+                        <View className="w-7 h-7 rounded-full overflow-hidden bg-surface-container border border-outline/20 mb-1">
                            <Image
-                              source={{ uri: member.avatar }}
-                              className="w-6 h-6 rounded-full"
+                              source={{ uri: m.avatar }}
+                              className="w-full h-full"
+                              resizeMode="cover"
                            />
-                           <Typography
-                              className="text-[9px] font-black text-on-surface uppercase text-center"
-                              numberOfLines={1}
-                           >
-                              {member.name === "You"
-                                 ? "You"
-                                 : member.name.split(" ")[0]}
-                           </Typography>
                         </View>
+                        <Typography
+                           className="text-[9px] font-black text-on-surface uppercase text-center"
+                           numberOfLines={1}
+                        >
+                           {m.isMe ? "You" : m.name.split(" ")[0]}
+                        </Typography>
                      </View>
                   ))}
                   <View
-                     style={{ width: totalColWidth }}
-                     className="items-center justify-center bg-primary/5"
+                     style={{ width: TOTAL_W }}
+                     className="items-center justify-center bg-primary/10"
                   >
-                     <Typography className="text-[10px] font-black uppercase text-primary tracking-widest">
+                     <Typography className="text-primary text-[10px] font-black uppercase tracking-widest">
                         Total
                      </Typography>
                   </View>
                </View>
 
-               {/* Table Body (Daily Rows) - Now expands to show full month */}
-               <View>
-                  {days.map((dayRecord, dIdx) => {
-                     const isEven = dIdx % 2 === 0;
-
-                     return (
-                        <View
-                           key={dayRecord.date}
-                           className={cn(
-                              "flex-row border-b border-outline/10",
-                              isEven
-                                 ? "bg-surface-container/40"
-                                 : "bg-transparent",
-                           )}
-                        >
-                           {/* Date Block */}
-                           <View
-                              style={{ width: dateColWidth }}
-                              className="items-center justify-center border-r border-outline/5"
-                           >
-                              <Typography className="text-[10px] font-black uppercase text-on-surface/30">
-                                 {dayRecord.dayName}
-                              </Typography>
-                              <Typography className="text-2xl font-black text-on-surface mt-1">
-                                 {dayRecord.dayNum}
-                              </Typography>
-                           </View>
-
-                           {/* Meal Rows Container */}
-                           <View className="flex-1">
-                              {/* Breakfast Row */}
-                              <View className="flex-row border-b border-outline/5 h-14">
-                                 <View
-                                    style={{ width: mealColWidth }}
-                                    className="items-center justify-center border-r border-outline/5"
-                                 >
-                                    <MealTypeLabel type="Breakfast" />
-                                 </View>
-                                 {members.map((m) => (
-                                    <View
-                                       key={m.id}
-                                       style={{ width: colWidth }}
-                                       className="items-center justify-center border-r border-outline/5"
-                                    >
-                                       <QtyText
-                                          value={
-                                             dayRecord.participations[m.id]
-                                                ?.b ?? 0
-                                          }
-                                       />
-                                    </View>
-                                 ))}
-                                 <View
-                                    style={{ width: totalColWidth }}
-                                    className="items-center justify-center bg-primary/5"
-                                 />
-                              </View>
-
-                              {/* Lunch Row */}
-                              <View className="flex-row border-b border-outline/5 h-14">
-                                 <View
-                                    style={{ width: mealColWidth }}
-                                    className="items-center justify-center border-r border-outline/5"
-                                 >
-                                    <MealTypeLabel type="Lunch" />
-                                 </View>
-                                 {members.map((m) => (
-                                    <View
-                                       key={m.id}
-                                       style={{ width: colWidth }}
-                                       className="items-center justify-center border-r border-outline/5"
-                                    >
-                                       <QtyText
-                                          value={
-                                             dayRecord.participations[m.id]
-                                                ?.l ?? 0
-                                          }
-                                       />
-                                    </View>
-                                 ))}
-                                 <View
-                                    style={{ width: totalColWidth }}
-                                    className="items-center justify-center bg-primary/5"
-                                 >
-                                    <QtyText
-                                       value={dayRecord.dailyTotal}
-                                       isTotal
-                                    />
-                                 </View>
-                              </View>
-
-                              {/* Dinner Row */}
-                              <View className="flex-row h-14">
-                                 <View
-                                    style={{ width: mealColWidth }}
-                                    className="items-center justify-center border-r border-outline/5"
-                                 >
-                                    <MealTypeLabel type="Dinner" />
-                                 </View>
-                                 {members.map((m) => (
-                                    <View
-                                       key={m.id}
-                                       style={{ width: colWidth }}
-                                       className="items-center justify-center border-r border-outline/5"
-                                    >
-                                       <QtyText
-                                          value={
-                                             dayRecord.participations[m.id]
-                                                ?.d ?? 0
-                                          }
-                                       />
-                                    </View>
-                                 ))}
-                                 <View
-                                    style={{ width: totalColWidth }}
-                                    className="items-center justify-center bg-primary/5"
-                                 />
-                              </View>
-                           </View>
-                        </View>
-                     );
-                  })}
-               </View>
-
-               {/* Sticky Grand Total Footer (Outside Vertical Scroll) */}
-               <View className="flex-row bg-surface-container-highest/50 h-20 border-t-4 border-primary/20">
+               {/* ── Body ── */}
+               {days.map((day, dIdx) => (
                   <View
-                     style={{ width: dateColWidth + mealColWidth }}
-                     className="items-center justify-center border-r border-outline/10 px-4"
+                     key={day.date}
+                     className={`flex-row border-b border-outline/10 ${
+                        dIdx % 2 === 0 ? "bg-surface/40" : ""
+                     }`}
+                     style={{ height: ROW_H * 3 }}
                   >
-                     <Typography className="text-xs font-black uppercase text-primary text-center">
+                     {/* Date block — spans all 3 meal rows */}
+                     <View
+                        style={{ width: DATE_W, height: ROW_H * 3 }}
+                        className="items-center justify-center border-r border-outline/10"
+                     >
+                        <Typography className="text-secondary-400 text-[9px] font-black uppercase">
+                           {day.dayName}
+                        </Typography>
+                        <Typography className="text-on-surface text-xl font-extrabold mt-0.5">
+                           {day.dayNum}
+                        </Typography>
+                     </View>
+
+                     {/* Meal rows */}
+                     <View className="flex-1 flex-col">
+                        {MEAL_ROWS.map((meal, mIdx) => (
+                           <View
+                              key={meal.key}
+                              className={`flex-row ${
+                                 mIdx < MEAL_ROWS.length - 1 ? "border-b border-outline/10" : ""
+                              }`}
+                              style={{ height: ROW_H }}
+                           >
+                              {/* Meal type icon */}
+                              <View
+                                 style={{ width: MEAL_W }}
+                                 className="items-center justify-center border-r border-outline/10"
+                              >
+                                 <MaterialCommunityIcons
+                                    name={meal.icon as any}
+                                    size={14}
+                                    color={meal.color}
+                                 />
+                              </View>
+
+                              {/* Per-member values */}
+                              {members.map((m) => (
+                                 <Cell
+                                    key={m.id}
+                                    value={day.participations[m.id]?.[meal.key] ?? 0}
+                                    width={COL_W}
+                                 />
+                              ))}
+
+                              {/* Daily total — only on middle (lunch) row, spans visually */}
+                              <View
+                                 style={{ width: TOTAL_W, height: ROW_H }}
+                                 className={`items-center justify-center ${
+                                    mIdx === 1 ? "bg-primary/10" : "bg-primary/5"
+                                 }`}
+                              >
+                                 {mIdx === 1 && (
+                                    <Typography className="text-primary font-extrabold text-base">
+                                       {day.dailyTotal}
+                                    </Typography>
+                                 )}
+                              </View>
+                           </View>
+                        ))}
+                     </View>
+                  </View>
+               ))}
+
+               {/* ── Grand Total Footer ── */}
+               <View
+                  className="flex-row bg-surface border-t-2 border-primary/20"
+                  style={{ height: 64 }}
+               >
+                  <View
+                     style={{ width: DATE_W + MEAL_W }}
+                     className="items-center justify-center border-r border-outline/10"
+                  >
+                     <Typography className="text-primary text-xs font-black uppercase tracking-widest">
                         Monthly Total
                      </Typography>
                   </View>
                   {members.map((m) => (
                      <View
                         key={m.id}
-                        style={{ width: colWidth }}
-                        className="items-center justify-center border-r border-outline/5"
+                        style={{ width: COL_W }}
+                        className="items-center justify-center border-r border-outline/10"
                      >
-                        <Typography className="text-xl font-black text-primary">
+                        <Typography className="text-primary text-xl font-extrabold">
                            {grandTotals[m.id] || 0}
                         </Typography>
-                        <Typography className="text-[8px] font-bold text-on-surface/40 uppercase mt-1">
-                           Meals
+                        <Typography className="text-secondary-400 text-[8px] font-bold uppercase mt-0.5">
+                           meals
                         </Typography>
                      </View>
                   ))}
                   <View
-                     style={{ width: totalColWidth }}
+                     style={{ width: TOTAL_W }}
                      className="items-center justify-center bg-primary"
                   >
-                     <Typography className="text-[10px] font-black text-on-primary uppercase mb-1">
+                     <Typography className="text-background text-[9px] font-black uppercase mb-0.5">
                         Grand
                      </Typography>
-                     <Typography className="text-xl font-black text-on-primary">
+                     <Typography className="text-background text-xl font-extrabold">
                         {workbook.totalGroupMeals}
                      </Typography>
                   </View>
@@ -316,22 +236,28 @@ export const MonthlyMealMatrix = ({ workbook }: MonthlyMealMatrixProps) => {
             </View>
          </ScrollView>
 
-         {/* Legend / Info */}
-         <View className="flex-row items-center justify-between p-4 bg-background/20 border-t border-outline/5">
-            <Typography className="text-[9px] font-black text-on-surface/40 uppercase tracking-[0.1em]">
-               Comprehensive Audit Ledger
+         {/* Legend */}
+         <View className="flex-row items-center justify-between px-4 py-3 border-t border-outline/10">
+            <Typography className="text-secondary-400 text-[9px] font-black uppercase tracking-widest">
+               Meal Ledger
             </Typography>
             <View className="flex-row items-center gap-4">
-               <View className="flex-row items-center">
-                  <View className="w-2 h-2 rounded-full bg-red-500 mr-2" />
-                  <Typography className="text-[8px] font-bold text-on-surface/40 uppercase">
+               {[
+                  { color: "#F59E0B", label: "B" },
+                  { color: "#22C55E", label: "L" },
+                  { color: "#3B82F6", label: "D" },
+               ].map(({ color, label }) => (
+                  <View key={label} className="flex-row items-center gap-1">
+                     <View className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />
+                     <Typography className="text-secondary-400 text-[9px] font-bold uppercase">
+                        {label}
+                     </Typography>
+                  </View>
+               ))}
+               <View className="flex-row items-center gap-1">
+                  <Typography className="text-error text-[9px] font-bold">–</Typography>
+                  <Typography className="text-secondary-400 text-[9px] font-bold uppercase">
                      Missed
-                  </Typography>
-               </View>
-               <View className="flex-row items-center">
-                  <View className="w-2 h-2 rounded-full bg-primary/80 mr-2" />
-                  <Typography className="text-[8px] font-bold text-on-surface/40 uppercase">
-                     Sticky Totals
                   </Typography>
                </View>
             </View>

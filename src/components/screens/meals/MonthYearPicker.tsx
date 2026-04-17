@@ -1,10 +1,5 @@
-import {
-   View,
-   Modal,
-   TouchableOpacity,
-   ScrollView,
-   Pressable,
-} from "react-native";
+import { useState, useEffect } from "react";
+import { View, Modal, TouchableOpacity, ScrollView, Pressable } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format, setMonth, setYear, getYear, getMonth } from "date-fns";
@@ -17,9 +12,7 @@ interface MonthYearPickerProps {
    onSelect: (date: Date) => void;
 }
 
-const MONTHS = Array.from({ length: 12 }, (_, i) =>
-   format(setMonth(new Date(), i), "MMMM"),
-);
+const MONTHS = Array.from({ length: 12 }, (_, i) => format(setMonth(new Date(), i), "MMMM"));
 const YEARS = Array.from({ length: 10 }, (_, i) => getYear(new Date()) - 5 + i);
 
 export const MonthYearPicker = ({
@@ -28,35 +21,52 @@ export const MonthYearPicker = ({
    selectedDate,
    onSelect,
 }: MonthYearPickerProps) => {
-   const currentMonth = getMonth(selectedDate);
-   const currentYear = getYear(selectedDate);
+   // Local draft state — only committed on Apply
+   const [draftMonth, setDraftMonth] = useState(getMonth(selectedDate));
+   const [draftYear, setDraftYear] = useState(getYear(selectedDate));
+
+   // Sync draft when picker opens
+   useEffect(() => {
+      if (visible) {
+         setDraftMonth(getMonth(selectedDate));
+         setDraftYear(getYear(selectedDate));
+      }
+   }, [visible]);
+
+   const handleApply = () => {
+      const result = setYear(setMonth(new Date(selectedDate), draftMonth), draftYear);
+      onSelect(result);
+      onClose();
+   };
 
    return (
-      <Modal
-         visible={visible}
-         transparent
-         animationType="fade"
-      >
+      <Modal visible={visible} transparent animationType="fade">
          <Pressable
             onPress={onClose}
             className="flex-1 bg-black/60 items-center justify-center p-6"
          >
-            <Pressable className="bg-surface-container rounded-[40px] w-full max-w-sm overflow-hidden border border-outline/10 shadow-2xl">
-               <View className="p-6 border-b border-outline/10 flex-row justify-between items-center bg-surface-container-high">
-                  <Typography className="text-xl font-black text-on-surface">
-                     Select Period
-                  </Typography>
-                  <TouchableOpacity onPress={onClose}>
-                     <MaterialCommunityIcons
-                        name="close"
-                        size={24}
-                        color="#F59E0B"
-                     />
+            <Pressable className="bg-surface-container rounded-[32px] w-full max-w-sm overflow-hidden border border-outline/10">
+               {/* Header */}
+               <View className="px-6 py-4 border-b border-outline/10 flex-row justify-between items-center bg-surface">
+                  <View>
+                     <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
+                        Select Period
+                     </Typography>
+                     <Typography className="text-secondary-300 text-xs mt-0.5">
+                        {MONTHS[draftMonth]} {draftYear}
+                     </Typography>
+                  </View>
+                  <TouchableOpacity
+                     onPress={onClose}
+                     className="w-9 h-9 rounded-full bg-surface-container items-center justify-center active:scale-90"
+                  >
+                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
                   </TouchableOpacity>
                </View>
 
-               <View className="flex-row h-72">
-                  {/* Months Column */}
+               {/* Pickers */}
+               <View className="flex-row h-64">
+                  {/* Months */}
                   <ScrollView
                      className="flex-1 border-r border-outline/10"
                      showsVerticalScrollIndicator={false}
@@ -65,22 +75,16 @@ export const MonthYearPicker = ({
                         {MONTHS.map((month, idx) => (
                            <TouchableOpacity
                               key={month}
-                              onPress={() =>
-                                 onSelect(setMonth(new Date(selectedDate), idx))
-                              }
+                              onPress={() => setDraftMonth(idx)}
                               className={cn(
                                  "py-3 px-4 rounded-2xl mb-1",
-                                 currentMonth === idx
-                                    ? "bg-primary"
-                                    : "active:bg-primary/10",
+                                 draftMonth === idx ? "bg-primary" : "active:bg-surface",
                               )}
                            >
                               <Typography
                                  className={cn(
                                     "font-bold text-sm",
-                                    currentMonth === idx
-                                       ? "text-surface/80"
-                                       : "text-on-surface/60",
+                                    draftMonth === idx ? "text-background" : "text-secondary-300",
                                  )}
                               >
                                  {month}
@@ -90,31 +94,22 @@ export const MonthYearPicker = ({
                      </View>
                   </ScrollView>
 
-                  {/* Years Column */}
-                  <ScrollView
-                     className="flex-1"
-                     showsVerticalScrollIndicator={false}
-                  >
+                  {/* Years */}
+                  <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
                      <View className="p-2">
                         {YEARS.map((year) => (
                            <TouchableOpacity
                               key={year}
-                              onPress={() =>
-                                 onSelect(setYear(new Date(selectedDate), year))
-                              }
+                              onPress={() => setDraftYear(year)}
                               className={cn(
                                  "py-3 px-4 rounded-2xl mb-1 items-center",
-                                 currentYear === year
-                                    ? "bg-primary"
-                                    : "active:bg-surface-container",
+                                 draftYear === year ? "bg-primary" : "active:bg-surface",
                               )}
                            >
                               <Typography
                                  className={cn(
                                     "font-bold text-base",
-                                    currentYear === year
-                                       ? "text-surface/80"
-                                       : "text-on-surface/60",
+                                    draftYear === year ? "text-background" : "text-secondary-300",
                                  )}
                               >
                                  {year}
@@ -125,12 +120,15 @@ export const MonthYearPicker = ({
                   </ScrollView>
                </View>
 
+               {/* Apply button */}
                <TouchableOpacity
-                  onPress={onClose}
-                  className="m-4 h-12 bg-primary rounded-[24px] items-center justify-center shadow-lg shadow-primary/20"
+                  onPress={handleApply}
+                  activeOpacity={0.85}
+                  className="mx-4 mb-4 mt-2 h-13 bg-primary rounded-2xl items-center justify-center active:opacity-80"
+                  style={{ height: 52 }}
                >
-                  <Typography className="text-on-primary font-black uppercase tracking-widest text-xs">
-                     Apply Selection
+                  <Typography className="text-background font-bold text-sm uppercase tracking-widest">
+                     Apply — {MONTHS[draftMonth]} {draftYear}
                   </Typography>
                </TouchableOpacity>
             </Pressable>
