@@ -1,7 +1,7 @@
 import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 
 interface MealShotProps {
    label: string;
@@ -22,61 +22,46 @@ const MealShot = ({
    active,
    upcoming,
 }: MealShotProps) => {
+   const bgClass = active
+      ? "bg-primary"
+      : upcoming
+        ? "bg-surface-container border border-primary/20"
+        : "bg-surface-container";
+
+   const opacity = !active && !upcoming ? "opacity-50" : "";
+
    return (
       <View
-         className={cn(
-            "flex-shrink-0 flex-row items-center gap-3 px-5 py-3 rounded-2xl mr-4",
-            active
-               ? "bg-primary shadow-lg shadow-orange-500/20"
-               : upcoming
-                 ? "bg-surface-container border border-primary/20"
-                 : "bg-surface-container opacity-60",
-         )}
+         className={`flex-shrink-0 flex-row items-center gap-3 px-5 py-3.5 rounded-2xl mr-3 ${bgClass} ${opacity}`}
       >
          <Typography className="text-xl">{icon}</Typography>
-         <View className="flex flex-col">
+         <View>
             <Typography
-               className={cn(
-                  "font-bold text-sm",
-                  active
-                     ? "text-outline"
-                     : upcoming
-                       ? "text-primary"
-                       : "text-on-surface",
-               )}
+               className={`font-bold text-sm ${active ? "text-background" : upcoming ? "text-primary" : "text-on-surface"}`}
             >
                {label}
             </Typography>
-            <View className="flex-row items-center gap-1.5">
+            <View className="flex-row items-center gap-2 mt-0.5">
                {myMeals > 0 && (
                   <View
-                     className={cn(
-                        "px-1 rounded bg-white/20 flex-row items-center",
-                        active ? "bg-black/10" : "bg-primary/20",
-                     )}
+                     className={`flex-row items-center gap-0.5 px-1.5 py-0.5 rounded-md ${active ? "bg-background/15" : "bg-primary/15"}`}
                   >
                      <MaterialCommunityIcons
                         name="account-check"
                         size={10}
-                        color={active ? "#334155" : "#F59E0B"}
+                        color={active ? "#0F172A" : "#F59E0B"}
                      />
                      <Typography
-                        className={cn(
-                           "text-[9px] font-bold ml-0.5",
-                           active ? "text-outline" : "text-primary",
-                        )}
+                        className={`text-[9px] font-bold ${active ? "text-background" : "text-primary"}`}
                      >
-                        ME: {myMeals}
+                        You: {myMeals}
                      </Typography>
                   </View>
                )}
                <Typography
-                  className={cn(
-                     "text-[10px] font-medium",
-                     active ? "text-outline" : "text-on-surface",
-                  )}
+                  className={`text-[10px] font-medium ${active ? "text-background/70" : "text-secondary-300"}`}
                >
-                  GRP: {groupJoined}/{total}
+                  {groupJoined}/{total} joined
                </Typography>
             </View>
          </View>
@@ -84,139 +69,87 @@ const MealShot = ({
    );
 };
 
-const SummaryCard = ({ label, value, subLabel, icon, isPrimary }: any) => (
-   <View
-      className={cn(
-         "flex-1 p-5 rounded-[32px]",
-         isPrimary
-            ? "bg-primary/10 border border-primary/20"
-            : "bg-surface-container border border-outline/10",
-      )}
-   >
-      <View className="flex-row items-center gap-2 mb-3">
-         <View
-            className={cn(
-               "w-8 h-8 rounded-xl items-center justify-center",
-               isPrimary ? "bg-primary/20" : "bg-surface/50",
-            )}
-         >
-            <MaterialCommunityIcons
-               name={icon as any}
-               size={16}
-               color={isPrimary ? "#F59E0B" : "#94A3B8"}
-            />
-         </View>
-         <Typography className="text-[10px] font-bold uppercase tracking-widest text-on-surface/60">
-            {label}
-         </Typography>
-      </View>
-      <View className="flex-row items-baseline gap-1">
-         <Typography
-            className={cn(
-               "text-3xl font-black",
-               isPrimary ? "text-primary" : "text-white",
-            )}
-         >
-            {value}
-         </Typography>
-         <Typography className="text-[11px] text-on-surface/40 font-bold uppercase tracking-tighter">
-            {subLabel}
-         </Typography>
-      </View>
-   </View>
-);
+interface TodaySnapshotProps {
+   data?: MealShotProps[];
+   onViewDetails?: () => void;
+}
 
-export const TodaySnapshot = ({ data }: { data?: any }) => {
-   // Use mock data if no data provided
-   const meals = data || [
-      {
-         label: "Breakfast",
-         icon: "🌅",
-         myMeals: 1,
-         groupJoined: 8,
-         total: 12,
-         active: true,
-      },
-      {
-         label: "Lunch",
-         icon: "🍱",
-         myMeals: 1, // User also logged lunch in this scenario for testing prominence
-         groupJoined: 10,
-         total: 12,
-         upcoming: true,
-      },
-      {
-         label: "Dinner",
-         icon: "🍽️",
-         myMeals: 0,
-         groupJoined: 0,
-         total: 12,
-      },
+export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
+   const meals: MealShotProps[] = data || [
+      { label: "Breakfast", icon: "🌅", myMeals: 1, groupJoined: 8, total: 12, active: true },
+      { label: "Lunch", icon: "🍱", myMeals: 1, groupJoined: 10, total: 12, upcoming: true },
+      { label: "Dinner", icon: "🍽️", myMeals: 0, groupJoined: 0, total: 12 },
    ];
 
-   const totalMyMeals = meals.reduce(
-      (sum: number, meal: any) => sum + meal.myMeals,
-      0,
-   );
-   const totalGroupJoined = meals.reduce(
-      (sum: number, meal: any) => sum + meal.groupJoined,
-      0,
-   );
+   const totalMyMeals = meals.reduce((sum, m) => sum + m.myMeals, 0);
+   const totalGroupJoined = meals.reduce((sum, m) => sum + m.groupJoined, 0);
+   const todayLabel = format(new Date(), "MMMM d");
 
    return (
-      <View className="my-6">
-         <View className="flex-row items-center justify-between mb-6">
+      <View>
+         {/* Section header */}
+         <View className="flex-row items-center justify-between mb-4">
             <View>
-               <Typography className="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-1">
+               <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-0.5">
                   Daily Pulse
                </Typography>
-               <Typography
-                  variant="h3"
-                  className="font-bold text-on-surface text-xl"
-               >
-                  Today · April 5
+               <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
+                  Today · {todayLabel}
                </Typography>
             </View>
-            <TouchableOpacity className="w-10 h-10 bg-surface-container rounded-full items-center justify-center border border-outline/10">
-               <MaterialCommunityIcons
-                  name="chevron-right"
-                  size={24}
-                  color="#dae2fd"
-               />
+            <TouchableOpacity
+               onPress={onViewDetails}
+               activeOpacity={0.75}
+               className="w-9 h-9 bg-surface-container rounded-full items-center justify-center border border-outline/10 active:scale-95"
+            >
+               <MaterialCommunityIcons name="chevron-right" size={20} color="#F8FAFC" />
             </TouchableOpacity>
          </View>
 
-         {/* Summary Hero Row */}
-         <View className="flex-row gap-4 mb-8">
-            <SummaryCard
-               label="Group Meals"
-               value={totalGroupJoined}
-               subLabel="Logged"
-               icon="account-group"
-            />
-            <SummaryCard
-               label="My Meals"
-               value={totalMyMeals}
-               subLabel="Today"
-               icon="account-check"
-               isPrimary
-            />
+         {/* Summary strip */}
+         <View className="flex-row gap-3 mb-4">
+            <View className="flex-1 bg-surface-container rounded-2xl p-4 border border-outline/10">
+               <View className="flex-row items-center gap-2 mb-2">
+                  <View className="w-7 h-7 rounded-lg bg-surface items-center justify-center">
+                     <MaterialCommunityIcons name="account-group" size={14} color="#94A3B8" />
+                  </View>
+                  <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
+                     Group
+                  </Typography>
+               </View>
+               <Typography className="text-on-surface text-2xl font-extrabold">
+                  {totalGroupJoined}
+               </Typography>
+               <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
+                  meals logged
+               </Typography>
+            </View>
+
+            <View className="flex-1 bg-primary/10 rounded-2xl p-4 border border-primary/20">
+               <View className="flex-row items-center gap-2 mb-2">
+                  <View className="w-7 h-7 rounded-lg bg-primary/20 items-center justify-center">
+                     <MaterialCommunityIcons name="account-check" size={14} color="#F59E0B" />
+                  </View>
+                  <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
+                     Mine
+                  </Typography>
+               </View>
+               <Typography className="text-primary text-2xl font-extrabold">
+                  {totalMyMeals}
+               </Typography>
+               <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
+                  meals today
+               </Typography>
+            </View>
          </View>
 
-         <Typography className="text-[10px] font-bold uppercase tracking-widest text-on-surface/40 mb-4 ml-1">
+         {/* Meal breakdown strip */}
+         <Typography className="text-[10px] text-secondary-400 uppercase font-bold tracking-widest mb-3 ml-1">
             Breakdown
          </Typography>
-
-         <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            className="flex-row"
-         >
-            {meals.map((meal: any, index: number) => (
-               <MealShot
-                  key={index}
-                  {...meal}
-               />
+         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {meals.map((meal, index) => (
+               <MealShot key={index} {...meal} />
             ))}
          </ScrollView>
       </View>

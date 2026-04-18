@@ -10,6 +10,7 @@ import { CustomAlert } from "@/components/ui/CustomAlert";
 import { GroupInfoCard } from "@/components/screens/group/GroupInfoCard";
 import { GroupQuickActions } from "@/components/screens/group/GroupQuickActions";
 import { GroupNoticeSection, Notice } from "@/components/screens/group/GroupNoticeSection";
+import { PostNoticeSheet, NewNotice } from "@/components/screens/group/PostNoticeSheet";
 import { GroupMembersSection, Member } from "@/components/screens/group/GroupMembersSection";
 import { GroupRequestsSection, PendingItem } from "@/components/screens/group/GroupRequestsSection";
 
@@ -21,7 +22,9 @@ const MOCK_NOTICES: Notice[] = [
       title: "🛒 Grocery Day Reminder",
       body: "Everyone please contribute ৳800 for groceries before 6 PM today. Karim will collect from each room.",
       timeAgo: "2h ago",
-      pinColor: "primary",
+      pinColor: "warning",
+      postedBy: "Ali Nayem",
+      isPinned: true,
    },
    {
       id: "n2",
@@ -29,6 +32,15 @@ const MOCK_NOTICES: Notice[] = [
       body: "March billing is now finalized. Total: ৳42,560. Please settle any outstanding dues within 3 days.",
       timeAgo: "Yesterday",
       pinColor: "info",
+      postedBy: "Ali Nayem",
+   },
+   {
+      id: "n3",
+      title: "✅ Internet Bill Paid",
+      body: "This month's internet bill of ৳1,000 has been paid. It will be included in the shared expenses.",
+      timeAgo: "2 days ago",
+      pinColor: "success",
+      postedBy: "Karim Hossain",
    },
 ];
 
@@ -129,6 +141,8 @@ const ALERT_CLOSED: AlertConfig = {
 
 export default function GroupScreen() {
    const [requests, setRequests] = useState<PendingItem[]>(MOCK_REQUESTS);
+   const [notices, setNotices] = useState<Notice[]>(MOCK_NOTICES);
+   const [postNoticeVisible, setPostNoticeVisible] = useState(false);
    const [alert, setAlert] = useState<AlertConfig>(ALERT_CLOSED);
    const closeAlert = () => setAlert(ALERT_CLOSED);
 
@@ -208,6 +222,22 @@ export default function GroupScreen() {
       [requests],
    );
 
+   const handlePostNotice = useCallback((notice: NewNotice) => {
+      const newNotice: Notice = {
+         id: `n${Date.now()}`,
+         title: notice.title,
+         body: notice.body,
+         pinColor: notice.pinColor,
+         timeAgo: "Just now",
+         postedBy: "You",
+      };
+      setNotices((prev) => [newNotice, ...prev]);
+   }, []);
+
+   const handleDeleteNotice = useCallback((id: string) => {
+      setNotices((prev) => prev.filter((n) => n.id !== id));
+   }, []);
+
    return (
       <View className="flex-1 bg-background">
          <Container scrollable withSafeArea padding={false} className="bg-background">
@@ -252,18 +282,19 @@ export default function GroupScreen() {
                   isOwner={IS_OWNER}
                   pendingRequests={TOTAL_JOIN_REQUESTS + TOTAL_INVITATIONS}
                   onInviteMember={() => {}}
-                  onPostNotice={() => {}}
+                  onPostNotice={() => setPostNoticeVisible(true)}
                   onViewBilling={() => {}}
                   onManageRequests={() => {}}
                />
 
                {/* 3. Notices */}
                <GroupNoticeSection
-                  notices={MOCK_NOTICES}
+                  notices={notices}
                   isOwner={IS_OWNER}
                   onNoticePress={() => {}}
                   onSeeAll={() => {}}
-                  onPostNotice={() => {}}
+                  onPostNotice={handlePostNotice}
+                  onDeleteNotice={handleDeleteNotice}
                />
 
                {/* 4. Members */}
@@ -308,6 +339,16 @@ export default function GroupScreen() {
             title={alert.title}
             message={alert.message}
             actions={alert.actions}
+         />
+
+         {/* Post Notice Sheet — triggered from Quick Actions */}
+         <PostNoticeSheet
+            visible={postNoticeVisible}
+            onClose={() => setPostNoticeVisible(false)}
+            onSubmit={(notice) => {
+               handlePostNotice(notice);
+               setPostNoticeVisible(false);
+            }}
          />
       </View>
    );

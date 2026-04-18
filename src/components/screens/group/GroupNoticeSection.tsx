@@ -1,6 +1,9 @@
+import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
+import { NoticeDetailModal } from "./NoticeDetailModal";
+import { PostNoticeSheet, NewNotice } from "./PostNoticeSheet";
 
 export interface Notice {
    id: string;
@@ -8,6 +11,8 @@ export interface Notice {
    body: string;
    timeAgo: string;
    pinColor?: "primary" | "info" | "success" | "warning";
+   postedBy?: string;
+   isPinned?: boolean;
 }
 
 interface GroupNoticeSectionProps {
@@ -15,30 +20,74 @@ interface GroupNoticeSectionProps {
    isOwner: boolean;
    onNoticePress?: (id: string) => void;
    onSeeAll?: () => void;
-   onPostNotice?: () => void;
+   onPostNotice?: (notice: NewNotice) => void;
+   onDeleteNotice?: (id: string) => void;
 }
 
-const PIN_COLOR: Record<string, string> = {
+const TYPE_COLOR: Record<string, string> = {
    primary: "#F59E0B",
    info: "#3B82F6",
    success: "#22C55E",
-   warning: "#F59E0B",
+   warning: "#EF4444",
+};
+
+const TYPE_ICON: Record<string, string> = {
+   primary: "bullhorn-outline",
+   info: "information-outline",
+   success: "check-circle-outline",
+   warning: "alert-outline",
+};
+
+const TYPE_BG: Record<string, string> = {
+   primary: "bg-primary/10",
+   info: "bg-info/10",
+   success: "bg-success/10",
+   warning: "bg-error/10",
 };
 
 export const GroupNoticeSection = ({
    notices,
    isOwner,
-   onNoticePress,
    onSeeAll,
    onPostNotice,
+   onDeleteNotice,
 }: GroupNoticeSectionProps) => {
+   const [selectedNotice, setSelectedNotice] = useState<Notice | null>(null);
+   const [postSheetVisible, setPostSheetVisible] = useState(false);
+
+   const handlePost = (notice: NewNotice) => {
+      onPostNotice?.(notice);
+      setPostSheetVisible(false);
+   };
+
+   const handleDelete = (id: string) => {
+      onDeleteNotice?.(id);
+      setSelectedNotice(null);
+   };
+
+   // Pinned notices first, then by recency
+   const sorted = [...notices].sort((a, b) => {
+      if (a.isPinned && !b.isPinned) return -1;
+      if (!a.isPinned && b.isPinned) return 1;
+      return 0;
+   });
+
    return (
       <View>
          {/* Section header */}
          <View className="flex-row items-center justify-between mb-3 ml-1">
-            <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
-               Notices
-            </Typography>
+            <View className="flex-row items-center gap-2">
+               <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
+                  Noticeboard
+               </Typography>
+               {notices.length > 0 && (
+                  <View className="bg-surface border border-outline/20 px-2 py-0.5 rounded-full">
+                     <Typography className="text-secondary-300 text-[10px] font-bold">
+                        {notices.length}
+                     </Typography>
+                  </View>
+               )}
+            </View>
             <TouchableOpacity onPress={onSeeAll} activeOpacity={0.7}>
                <Typography className="text-primary text-[11px] font-bold uppercase tracking-widest">
                   See All
@@ -47,35 +96,62 @@ export const GroupNoticeSection = ({
          </View>
 
          <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
-            {notices.length === 0 ? (
+            {sorted.length === 0 ? (
                <View className="items-center py-10 gap-3">
                   <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
                      <MaterialCommunityIcons name="bullhorn-outline" size={24} color="#334155" />
                   </View>
                   <Typography className="text-secondary-400 text-sm">No notices yet</Typography>
+                  {isOwner && (
+                     <TouchableOpacity
+                        onPress={() => setPostSheetVisible(true)}
+                        activeOpacity={0.75}
+                        className="flex-row items-center gap-1.5 bg-primary/10 border border-primary/20 px-4 py-2 rounded-xl active:scale-95"
+                     >
+                        <MaterialCommunityIcons name="plus" size={14} color="#F59E0B" />
+                        <Typography className="text-primary text-xs font-bold">
+                           Post First Notice
+                        </Typography>
+                     </TouchableOpacity>
+                  )}
                </View>
             ) : (
-               notices.map((notice, index) => {
-                  const pinColor = PIN_COLOR[notice.pinColor ?? "primary"];
+               sorted.map((notice, index) => {
+                  const type = notice.pinColor ?? "primary";
+                  const color = TYPE_COLOR[type];
+                  const icon = TYPE_ICON[type];
+                  const bg = TYPE_BG[type];
+
                   return (
                      <TouchableOpacity
                         key={notice.id}
-                        onPress={() => onNoticePress?.(notice.id)}
+                        onPress={() => setSelectedNotice(notice)}
                         activeOpacity={0.75}
                         className={`flex-row items-start gap-3 px-4 py-4 active:bg-surface ${
-                           index < notices.length - 1 ? "border-b border-outline/10" : ""
+                           index < sorted.length - 1 ? "border-b border-outline/10" : ""
                         }`}
                      >
-                        {/* Color pin */}
+                        {/* Type icon badge */}
                         <View
-                           className="w-1 self-stretch rounded-full mt-0.5 flex-shrink-0"
-                           style={{ backgroundColor: pinColor }}
-                        />
-                        <View className="flex-1">
+                           className={`w-9 h-9 rounded-xl items-center justify-center flex-shrink-0 mt-0.5 ${bg}`}
+                        >
+                           <MaterialCommunityIcons name={icon as any} size={16} color={color} />
+                        </View>
+
+                        {/* Content */}
+                        <View className="flex-1 min-w-0">
                            <View className="flex-row items-start justify-between gap-2 mb-1">
-                              <Typography className="text-on-surface text-sm font-bold flex-1 leading-snug">
-                                 {notice.title}
-                              </Typography>
+                              <View className="flex-row items-center gap-1.5 flex-1 flex-wrap">
+                                 {notice.isPinned && (
+                                    <MaterialCommunityIcons name="pin" size={12} color="#F59E0B" />
+                                 )}
+                                 <Typography
+                                    className="text-on-surface text-sm font-bold leading-snug flex-1"
+                                    numberOfLines={1}
+                                 >
+                                    {notice.title}
+                                 </Typography>
+                              </View>
                               <Typography className="text-secondary-400 text-[10px] flex-shrink-0">
                                  {notice.timeAgo}
                               </Typography>
@@ -86,19 +162,32 @@ export const GroupNoticeSection = ({
                            >
                               {notice.body}
                            </Typography>
+                           {notice.postedBy && (
+                              <View className="flex-row items-center gap-1 mt-1.5">
+                                 <MaterialCommunityIcons
+                                    name="account-outline"
+                                    size={11}
+                                    color="#64748B"
+                                 />
+                                 <Typography className="text-secondary-400 text-[10px]">
+                                    {notice.postedBy}
+                                 </Typography>
+                              </View>
+                           )}
                         </View>
+
                         <MaterialCommunityIcons name="chevron-right" size={16} color="#334155" />
                      </TouchableOpacity>
                   );
                })
             )}
 
-            {/* Post notice CTA */}
-            {isOwner && (
+            {/* Post notice CTA — owner/manager */}
+            {isOwner && notices.length > 0 && (
                <>
                   <View className="h-px bg-outline/10 mx-4" />
                   <TouchableOpacity
-                     onPress={onPostNotice}
+                     onPress={() => setPostSheetVisible(true)}
                      activeOpacity={0.75}
                      className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
                   >
@@ -113,6 +202,22 @@ export const GroupNoticeSection = ({
                </>
             )}
          </View>
+
+         {/* Notice detail modal */}
+         <NoticeDetailModal
+            notice={selectedNotice}
+            visible={!!selectedNotice}
+            onClose={() => setSelectedNotice(null)}
+            isOwner={isOwner}
+            onDelete={handleDelete}
+         />
+
+         {/* Post notice sheet */}
+         <PostNoticeSheet
+            visible={postSheetVisible}
+            onClose={() => setPostSheetVisible(false)}
+            onSubmit={handlePost}
+         />
       </View>
    );
 };

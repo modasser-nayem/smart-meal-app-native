@@ -1,8 +1,7 @@
-import React from "react";
 import { View } from "react-native";
-import { Card } from "@/components/ui/Card";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { format } from "date-fns";
 
 interface BalanceCardProps {
    cost: string;
@@ -21,81 +20,87 @@ export const BalanceCard = ({
    mealCount,
    mealRate,
 }: BalanceCardProps) => {
+   const currentMonth = format(new Date(), "MMMM");
+
    return (
-      <Card
-         padding="lg"
-         className="bg-surface-container rounded-3xl space-y-6"
-      >
-         <View className="flex-row">
-            <View className="flex-1 space-y-1">
-               <Typography className="text-amber-400 text-[10px] uppercase font-bold tracking-widest">
-                  My Cost
-               </Typography>
-               <View className="flex-row items-baseline gap-1">
-                  <Typography className="text-2xl font-bold text-primary">
+      <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
+         {/* Accent line — green for surplus, red for deficit */}
+         <View
+            className="h-[3px] w-full"
+            style={{ backgroundColor: isSurplus ? "#22C55E" : "#EF4444" }}
+         />
+
+         <View className="px-5 py-5 gap-4">
+            {/* Section label */}
+            <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
+               My Balance · {currentMonth}
+            </Typography>
+
+            {/* Cost / Paid row */}
+            <View className="flex-row">
+               <View className="flex-1">
+                  <Typography className="text-primary text-[10px] uppercase font-bold tracking-widest mb-1">
+                     My Cost
+                  </Typography>
+                  <Typography className="text-on-surface text-2xl font-extrabold tracking-tight">
                      {cost}
                   </Typography>
-                  <Typography className="text-xs text-on-surface">
-                     for April
-                  </Typography>
                </View>
-            </View>
-            <View className="flex-1 space-y-1 items-end text-right">
-               <Typography className="text-amber-400 text-[10px] uppercase font-bold tracking-widest">
-                  I Paid
-               </Typography>
-               <View className="flex-row items-baseline gap-1">
-                  <Typography className="text-2xl text-success font-bold">
+               <View className="w-px bg-outline/15 mx-4" />
+               <View className="flex-1 items-end">
+                  <Typography className="text-primary text-[10px] uppercase font-bold tracking-widest mb-1">
+                     I Paid
+                  </Typography>
+                  <Typography className="text-success text-2xl font-extrabold tracking-tight">
                      {paid}
                   </Typography>
                </View>
             </View>
-         </View>
 
-         <View className="relative my-2 py-2 items-center justify-center border-y border-outline">
-            <View className="flex-row items-center gap-2">
-               <MaterialCommunityIcons
-                  name={isSurplus ? "trending-up" : "trending-down"}
-                  size={32}
-                  color={isSurplus ? "#51E77B" : "#EF4444"}
-               />
-               <Typography
-                  className={`text-4xl font-extrabold ${isSurplus ? "text-success" : "text-error"}`}
-               >
-                  {isSurplus ? "+" : "-"}৳{balance}
+            {/* Balance hero */}
+            <View className="items-center py-4 border-y border-outline/10">
+               <View className="flex-row items-center gap-2 mb-1">
+                  <MaterialCommunityIcons
+                     name={isSurplus ? "trending-up" : "trending-down"}
+                     size={28}
+                     color={isSurplus ? "#22C55E" : "#EF4444"}
+                  />
+                  <Typography
+                     className={`text-4xl font-extrabold tracking-tight ${
+                        isSurplus ? "text-success" : "text-error"
+                     }`}
+                  >
+                     {isSurplus ? "+" : "-"}৳{balance}
+                  </Typography>
+               </View>
+               <Typography className="text-secondary-300 text-xs font-medium">
+                  Current {isSurplus ? "surplus" : "deficit"} balance
                </Typography>
             </View>
-            <Typography className="text-[12px] text-on-surface mt-2 font-medium tracking-wide">
-               Current {isSurplus ? "Surplus" : "Deficit"} Balance
-            </Typography>
-         </View>
 
-         <View className="flex-row items-center justify-center gap-4">
-            <View className="flex-row items-center gap-1">
-               <MaterialCommunityIcons
-                  name="silverware-fork-knife"
-                  size={14}
-                  color="#94A3B8"
-               />
-               <Typography className="text-[11px] font-medium text-on-surface uppercase tracking-tight">
-                  <Typography className="text-[11px] text-primary">
-                     {mealCount}
-                  </Typography>{" "}
-                  meals
-               </Typography>
-            </View>
-            <View className="w-1 h-1 bg-outline-variant/30 rounded-full" />
-            <View className="flex-row items-center gap-1">
-               <MaterialCommunityIcons
-                  name="cash-multiple"
-                  size={14}
-                  color="#94A3B8"
-               />
-               <Typography className="text-[11px] font-medium text-on-surface uppercase tracking-tight">
-                  Rate: {mealRate}
-               </Typography>
+            {/* Meal stats footer */}
+            <View className="flex-row items-center justify-center gap-5">
+               <View className="flex-row items-center gap-1.5">
+                  <MaterialCommunityIcons name="silverware-fork-knife" size={13} color="#64748B" />
+                  <Typography className="text-secondary-300 text-xs font-medium">
+                     <Typography className="text-primary text-xs font-extrabold">
+                        {mealCount}
+                     </Typography>{" "}
+                     meals
+                  </Typography>
+               </View>
+               <View className="w-1 h-1 rounded-full bg-outline/30" />
+               <View className="flex-row items-center gap-1.5">
+                  <MaterialCommunityIcons name="cash-multiple" size={13} color="#64748B" />
+                  <Typography className="text-secondary-300 text-xs font-medium">
+                     Rate:{" "}
+                     <Typography className="text-on-surface text-xs font-bold">
+                        {mealRate}
+                     </Typography>
+                  </Typography>
+               </View>
             </View>
          </View>
-      </Card>
+      </View>
    );
 };
