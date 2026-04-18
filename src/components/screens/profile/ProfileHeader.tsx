@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ProfileHeaderProps {
    username: string;
@@ -44,7 +45,7 @@ export const ProfileHeader = ({
                activeOpacity={0.8}
                className="absolute bottom-0 right-0 w-9 h-9 bg-primary rounded-full items-center justify-center border-[3px] border-background active:scale-90"
             >
-               <MaterialCommunityIcons name="camera" size={15} color="#0F172A" />
+               <MaterialCommunityIcons name="camera" size={15} color={Colors.icon.onPrimary} />
             </TouchableOpacity>
          </View>
 
@@ -60,7 +61,7 @@ export const ProfileHeader = ({
             activeOpacity={0.75}
             className="mt-4 flex-row items-center gap-1.5 px-5 py-2 rounded-full border border-primary/30 active:bg-primary/10"
          >
-            <MaterialCommunityIcons name="pencil-outline" size={14} color="#F59E0B" />
+            <MaterialCommunityIcons name="pencil-outline" size={14} color={Colors.icon.primary} />
             <Typography className="text-primary font-bold text-xs uppercase tracking-widest">
                Edit Profile
             </Typography>

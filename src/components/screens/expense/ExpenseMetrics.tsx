@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ExpenseMetricsProps {
    totalMeals: number;
@@ -46,14 +47,14 @@ export const ExpenseMetrics = ({
                label="Total Meals"
                value={String(totalMeals)}
                icon="silverware-fork-knife"
-               iconColor="#F59E0B"
+               iconColor={Colors.icon.primary}
                accent
             />
             <MetricTile
                label="Meal Rate"
                value={`৳${mealRate.toFixed(0)}`}
                icon="trending-up"
-               iconColor="#3B82F6"
+               iconColor={Colors.icon.info}
             />
          </View>
          <View className="flex-row gap-3">
@@ -61,13 +62,13 @@ export const ExpenseMetrics = ({
                label="Total Expense"
                value={`৳${totalExpense.toLocaleString()}`}
                icon="wallet-outline"
-               iconColor="#EF4444"
+               iconColor={Colors.icon.error}
             />
             <MetricTile
                label="Members"
                value={`${eligibleMembers} eligible`}
                icon="account-group-outline"
-               iconColor="#22C55E"
+               iconColor={Colors.icon.success}
             />
          </View>
       </View>

@@ -2,6 +2,7 @@ import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
+import { Colors } from "@/constants/colors";
 
 interface BalanceCardProps {
    cost: string;
@@ -27,7 +28,7 @@ export const BalanceCard = ({
          {/* Accent line — green for surplus, red for deficit */}
          <View
             className="h-[3px] w-full"
-            style={{ backgroundColor: isSurplus ? "#22C55E" : "#EF4444" }}
+            style={{ backgroundColor: isSurplus ? Colors.icon.success : Colors.icon.error }}
          />
 
          <View className="px-5 py-5 gap-4">
@@ -81,7 +82,11 @@ export const BalanceCard = ({
             {/* Meal stats footer */}
             <View className="flex-row items-center justify-center gap-5">
                <View className="flex-row items-center gap-1.5">
-                  <MaterialCommunityIcons name="silverware-fork-knife" size={13} color="#64748B" />
+                  <MaterialCommunityIcons
+                     name="silverware-fork-knife"
+                     size={13}
+                     color={Colors.icon.dim}
+                  />
                   <Typography className="text-secondary-300 text-xs font-medium">
                      <Typography className="text-primary text-xs font-extrabold">
                         {mealCount}
@@ -91,7 +96,7 @@ export const BalanceCard = ({
                </View>
                <View className="w-1 h-1 rounded-full bg-outline/30" />
                <View className="flex-row items-center gap-1.5">
-                  <MaterialCommunityIcons name="cash-multiple" size={13} color="#64748B" />
+                  <MaterialCommunityIcons name="cash-multiple" size={13} color={Colors.icon.dim} />
                   <Typography className="text-secondary-300 text-xs font-medium">
                      Rate:{" "}
                      <Typography className="text-on-surface text-xs font-bold">

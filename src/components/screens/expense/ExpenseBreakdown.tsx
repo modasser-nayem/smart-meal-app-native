@@ -1,6 +1,7 @@
 import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ExpenseBreakdownProps {
    mealExpense: number;
@@ -64,7 +65,7 @@ export const ExpenseBreakdown = ({
 
             {/* Shared cost per member */}
             <View className="flex-row items-center gap-3 bg-surface rounded-2xl px-4 py-3 mt-1 border border-outline/10">
-               <MaterialCommunityIcons name="information-outline" size={18} color="#64748B" />
+               <MaterialCommunityIcons name="information-outline" size={18} color={Colors.icon.dim} />
                <Typography className="text-secondary-300 text-sm flex-1">
                   Shared cost per member:{" "}
                   <Typography className="text-on-surface font-bold">

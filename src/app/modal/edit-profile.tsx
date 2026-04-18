@@ -19,6 +19,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useGetProfileQuery, useUpdateProfileMutation } from "@/api/userApi";
 import { editProfileSchema, EditProfileFormData } from "@/schemas/profile.schema";
+import { Colors } from "@/constants/colors";
 
 const DEFAULT_AVATAR =
    "https://lh3.googleusercontent.com/aida-public/AB6AXuBO3jdD-poSuSANiPR7VgxC9B5ccrozavF_CsDqU_hz9pgdLErGMIjcY7oU1_wM2iqXC14693hLM0pu_ieHOtK9G4pzPT1ZaDeK8N_5RdShmxU2AhBcJGr7VCQWqI-HLJYLTAl9hl6fUyLR8PcgLpOLisTYV4_i1TcX87m3yjXGNCMN7ZIT0jeSRA6JTpZpJCvC66y6yYX98Vwgc9-TQw_MePrtLN8p-c3Lf7WWIoq9Iv59PBV_AjExIUSMhn7VW29vPgNnRtNfxSA";
@@ -108,7 +109,7 @@ export default function EditProfileModal() {
       >
          <ScrollView
             className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
+            contentContainerStyle={{ paddingBottom: 48 }}
             keyboardShouldPersistTaps="handled"
          >
             {/* Header */}
@@ -118,7 +119,7 @@ export default function EditProfileModal() {
                   activeOpacity={0.7}
                   className="w-10 h-10 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="arrow-left" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.icon.onDark} />
                </TouchableOpacity>
                <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
                   Edit Profile
@@ -139,7 +140,7 @@ export default function EditProfileModal() {
                      </View>
                      {pickedImage && (
                         <View className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-success items-center justify-center border-2 border-background">
-                           <MaterialCommunityIcons name="check" size={11} color="#0F172A" />
+                           <MaterialCommunityIcons name="check" size={11} color={Colors.icon.onPrimary} />
                         </View>
                      )}
                   </View>
@@ -151,7 +152,7 @@ export default function EditProfileModal() {
                         activeOpacity={0.8}
                         className="flex-row items-center gap-2 bg-surface-container border border-outline/20 px-4 py-2.5 rounded-xl active:scale-95"
                      >
-                        <MaterialCommunityIcons name="image-outline" size={18} color="#F59E0B" />
+                        <MaterialCommunityIcons name="image-outline" size={18} color={Colors.icon.primary} />
                         <Typography className="text-primary text-sm font-bold">Gallery</Typography>
                      </TouchableOpacity>
                      <TouchableOpacity
@@ -159,7 +160,7 @@ export default function EditProfileModal() {
                         activeOpacity={0.8}
                         className="flex-row items-center gap-2 bg-surface-container border border-outline/20 px-4 py-2.5 rounded-xl active:scale-95"
                      >
-                        <MaterialCommunityIcons name="camera-outline" size={18} color="#F59E0B" />
+                        <MaterialCommunityIcons name="camera-outline" size={18} color={Colors.icon.primary} />
                         <Typography className="text-primary text-sm font-bold">Camera</Typography>
                      </TouchableOpacity>
                   </View>
@@ -197,7 +198,7 @@ export default function EditProfileModal() {
                               <MaterialCommunityIcons
                                  name="account-outline"
                                  size={20}
-                                 color="#94A3B8"
+                                 color={Colors.icon.subtle}
                               />
                            }
                         />
@@ -211,10 +212,10 @@ export default function EditProfileModal() {
                      editable={false}
                      containerClassName="opacity-50"
                      leftIcon={
-                        <MaterialCommunityIcons name="email-outline" size={20} color="#94A3B8" />
+                        <MaterialCommunityIcons name="email-outline" size={20} color={Colors.icon.subtle} />
                      }
                      rightIcon={
-                        <MaterialCommunityIcons name="lock-outline" size={16} color="#94A3B8" />
+                        <MaterialCommunityIcons name="lock-outline" size={16} color={Colors.icon.subtle} />
                      }
                   />
                   <Typography className="text-secondary-400 text-xs -mt-3 mb-5 ml-1">

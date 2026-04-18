@@ -5,22 +5,42 @@ module.exports = {
    theme: {
       extend: {
          colors: {
+            // ─── Brand ────────────────────────────────────────────────────
+            // Change DEFAULT to rebrand the entire app.
             primary: {
-               DEFAULT: "#F59E0B",
-               50: "#FFF8E1",
-               100: "#FFECB3",
-               200: "#FFE082",
-               300: "#FFD54F",
-               400: "#FFCA28",
-               500: "#F59E0B", // main brand
-               600: "#F59C00",
-               700: "#F57C00",
-               800: "#F56F00",
-               900: "#F55A00",
+               DEFAULT: "#F59E0B", // amber — main brand
+               dark: "#D97706", // pressed state  →  active:bg-primary-dark
             },
+
+            // ─── Surfaces ─────────────────────────────────────────────────
+            // All card and page backgrounds.
+            background: "#0F172A",
+            surface: "#1E293B",
+            "surface-container": "#263348",
+            "surface-elevated": "#2E3F58", // modals, sheets
+
+            // ─── Text on dark backgrounds ──────────────────────────────────
+            "on-surface": "#F8FAFC", // primary text
+            "on-primary": "#0F172A", // text on primary-colored elements
+
+            // ─── Borders ──────────────────────────────────────────────────
+            outline: "#334155",
+
+            // ─── Semantic status ──────────────────────────────────────────
+            success: "#22C55E", // positive / financial surplus
+            error: "#EF4444", // negative / danger
+            warning: "#F97316", // caution / urgent  (orange, distinct from primary)
+            info: "#3B82F6", // informational / neutral
+
+            // ─── Accent ───────────────────────────────────────────────────
+            // Live / active / online states.
+            // Distinct from success (which means financial positive).
+            accent: "#06B6D4", // cyan
+
+            // ─── Secondary (slate grays) ──────────────────────────────────
+            // Text hierarchy: 300 = readable label, 400 = muted, 600 = border.
             secondary: {
-               DEFAULT: "#ADC6FF",
-               50: "#F8FAFC",
+               DEFAULT: "#94A3B8",
                100: "#E2E8F0",
                200: "#CBD5E1",
                300: "#94A3B8",
@@ -31,29 +51,22 @@ module.exports = {
                800: "#0F172A",
                900: "#030712",
             },
-            background: "#0F172A",
-            surface: "#1E293B",
-            "surface-container": "#263348",
-            "on-background": "#F8FAFC",
-            "on-surface": "#F8FAFC",
-            outline: "#334155",
-            error: "#EF4444",
-            success: "#22C55E",
-            warning: "#F59E0B",
-            info: "#3B82F6",
          },
+
          fontFamily: {
             regular: ["Inter_400Regular"],
             medium: ["Inter_500Medium"],
             bold: ["Inter_700Bold"],
          },
+
          borderRadius: {
             DEFAULT: "0.5rem",
-            sm: "0.375rem", // Tailwind default
+            sm: "0.375rem",
             md: "0.5rem",
             lg: "0.75rem",
             full: "9999px",
          },
+
          spacing: {
             px: "1px",
             0: "0px",

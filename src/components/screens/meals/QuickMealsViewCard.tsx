@@ -2,6 +2,7 @@ import { TouchableOpacity, View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { cn } from "@/lib/utils";
+import { Colors } from "@/constants/colors";
 
 interface QuickMealsViewCardProps {
    myTotalMeals: number;
@@ -54,7 +55,7 @@ const SummaryCard = ({ label, value, subLabel, icon, isPrimary, onPress, isAddBu
                activeOpacity={0.75}
                className="w-9 h-9 rounded-xl bg-primary/20 items-center justify-center active:scale-90"
             >
-               <MaterialCommunityIcons name="plus" size={20} color="#F59E0B" />
+               <MaterialCommunityIcons name="plus" size={20} color={Colors.icon.primary} />
             </TouchableOpacity>
          )}
       </View>

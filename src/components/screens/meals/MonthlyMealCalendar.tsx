@@ -10,6 +10,7 @@ import {
 } from "date-fns";
 import { cn } from "@/lib/utils";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface MonthlyMealLedgerProps {
    selectedMonth: Date;
@@ -18,7 +19,7 @@ interface MonthlyMealLedgerProps {
 const MealStatus = ({ type, active }: { type: 'B' | 'L' | 'D', active: boolean }) => (
    <View className={cn(
       "w-5 h-5 rounded-md items-center justify-center border",
-      active ? "bg-primary/20 border-primary/40" : "bg-surface-container-highest/20 border-outline/5"
+      active ? "bg-primary/20 border-primary/40" : "bg-surface-containerest/20 border-outline/5"
    )}>
       <Typography className={cn(
          "text-[8px] font-black",
@@ -88,7 +89,7 @@ export const MonthlyMealLedger = ({ selectedMonth }: MonthlyMealLedgerProps) => 
                      {participants.length > 0 ? (
                         <View className="flex-row items-center flex-wrap gap-3">
                            {participants.map((p, pIdx) => (
-                              <View key={pIdx} className="flex-row items-center bg-surface-container-highest/30 rounded-xl px-2 py-1.5 border border-outline/5 space-x-2">
+                              <View key={pIdx} className="flex-row items-center bg-surface-containerest/30 rounded-xl px-2 py-1.5 border border-outline/5 space-x-2">
                                  <Image source={{ uri: p.avatar }} className="w-5 h-5 rounded-lg" />
                                  <View className="flex-row space-x-0.5">
                                     <MealStatus type="B" active={p.meals.includes('B')} />
@@ -105,7 +106,7 @@ export const MonthlyMealLedger = ({ selectedMonth }: MonthlyMealLedgerProps) => 
                         </View>
                      ) : (
                         <View className="flex-row items-center space-x-2 opacity-30">
-                           <MaterialCommunityIcons name="calendar-blank" size={14} color="#94A3B8" />
+                           <MaterialCommunityIcons name="calendar-blank" size={14} color={Colors.icon.subtle} />
                            <Typography className="text-xs font-bold text-on-surface">No recordings</Typography>
                         </View>
                      )}

@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
+import { Colors } from "@/constants/colors";
 
 interface GroupInfoCardProps {
    groupName: string;
@@ -67,7 +68,7 @@ export const GroupInfoCard = ({
                            <MaterialCommunityIcons
                               name="pencil-outline"
                               size={13}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                            <Typography className="text-secondary-300 text-[11px] font-bold">
                               Edit
@@ -77,7 +78,7 @@ export const GroupInfoCard = ({
                   </View>
 
                   <View className="flex-row items-center gap-1 mt-1">
-                     <MaterialCommunityIcons name="map-marker-outline" size={12} color="#64748B" />
+                     <MaterialCommunityIcons name="map-marker-outline" size={12} color={Colors.icon.dim} />
                      <Typography className="text-secondary-400 text-xs">{location}</Typography>
                   </View>
 
@@ -85,7 +86,7 @@ export const GroupInfoCard = ({
                   <View className="flex-row items-center gap-2 mt-2 flex-wrap">
                      <View className="flex-row items-center gap-1">
                         <View className="w-1.5 h-1.5 rounded-full bg-success" />
-                        <Typography className="text-success text-[10px] font-bold uppercase tracking-widest">
+                        <Typography className="text-accent text-[10px] font-bold uppercase tracking-widest">
                            Active
                         </Typography>
                      </View>
@@ -157,7 +158,7 @@ export const GroupInfoCard = ({
                   activeOpacity={0.75}
                   className="flex-row items-center gap-1.5 bg-primary/10 border border-primary/20 px-3 py-2.5 rounded-xl active:scale-95"
                >
-                  <MaterialCommunityIcons name="content-copy" size={15} color="#F59E0B" />
+                  <MaterialCommunityIcons name="content-copy" size={15} color={Colors.icon.primary} />
                   <Typography className="text-primary text-xs font-bold">Copy</Typography>
                </TouchableOpacity>
             </View>

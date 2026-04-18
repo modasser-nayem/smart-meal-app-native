@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ActiveGroupCardProps {
    groupName: string;
@@ -42,7 +43,7 @@ export const ActiveGroupCard = ({
                   activeOpacity={0.75}
                   className="flex-row items-center gap-1 bg-surface border border-outline/20 px-3 py-1.5 rounded-xl active:scale-95"
                >
-                  <MaterialCommunityIcons name="swap-horizontal" size={14} color="#94A3B8" />
+                  <MaterialCommunityIcons name="swap-horizontal" size={14} color={Colors.icon.subtle} />
                   <Typography className="text-secondary-300 text-xs font-bold">Switch</Typography>
                </TouchableOpacity>
             </View>
@@ -50,14 +51,14 @@ export const ActiveGroupCard = ({
             {/* Info row */}
             <View className="flex-row items-center gap-4 mb-4">
                <View className="flex-row items-center gap-1.5">
-                  <MaterialCommunityIcons name="account-group-outline" size={14} color="#64748B" />
+                  <MaterialCommunityIcons name="account-group-outline" size={14} color={Colors.icon.dim} />
                   <Typography className="text-secondary-300 text-sm">
                      {memberCount} members
                   </Typography>
                </View>
                <View className="w-1 h-1 rounded-full bg-outline/40" />
                <View className="flex-row items-center gap-1.5">
-                  <MaterialCommunityIcons name="calendar-month-outline" size={14} color="#64748B" />
+                  <MaterialCommunityIcons name="calendar-month-outline" size={14} color={Colors.icon.dim} />
                   <Typography className="text-secondary-300 text-sm">{month}</Typography>
                </View>
                <View className="w-1 h-1 rounded-full bg-outline/40" />
@@ -95,7 +96,7 @@ export const ActiveGroupCard = ({
                   className="flex-row items-center gap-1.5 active:opacity-70"
                >
                   <Typography className="text-primary text-xs font-bold">Open Group</Typography>
-                  <MaterialCommunityIcons name="arrow-right" size={14} color="#F59E0B" />
+                  <MaterialCommunityIcons name="arrow-right" size={14} color={Colors.icon.primary} />
                </TouchableOpacity>
             </View>
          </View>

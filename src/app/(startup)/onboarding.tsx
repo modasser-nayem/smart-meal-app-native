@@ -10,6 +10,7 @@ import {
 import { useRouter } from "expo-router";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 const { width } = Dimensions.get("window");
 
@@ -56,14 +57,14 @@ const RenderArtwork = ({ id }: { id: string }) => {
                   <MaterialCommunityIcons
                      name="silverware-fork-knife"
                      size={16}
-                     color="#F59E0B"
+                     color={Colors.icon.primary}
                   />
                </View>
                <View>
                   <Typography className="text-[10px] text-secondary uppercase tracking-widest font-bold">
                      Today
                   </Typography>
-                  <Typography className="text-sm font-semibold text-white">
+                  <Typography className="text-sm font-semibold text-on-surface">
                      4 Meals Logged
                   </Typography>
                </View>
@@ -75,21 +76,21 @@ const RenderArtwork = ({ id }: { id: string }) => {
    if (id === "2") {
       return (
          <View className="relative w-full aspect-square max-w-[320px] mb-6 items-center justify-center">
-            <View className="absolute inset-0 bg-surface-container-low rounded-full scale-90 opacity-20 blur-3xl" />
+            <View className="absolute inset-0 bg-surface-container rounded-full scale-90 opacity-20 blur-3xl" />
             <View className="relative w-64 h-64 bg-surface-container rounded-[40px] items-center justify-center shadow-2xl border border-outline/10 z-10">
                <View className="flex-row gap-8 mb-12">
                   <View className="w-16 h-16 rounded-full bg-surface items-center justify-center border-2 border-primary/10">
                      <MaterialCommunityIcons
                         name="account"
                         size={32}
-                        color="#F59E0B"
+                        color={Colors.icon.primary}
                      />
                   </View>
                   <View className="w-16 h-16 rounded-full bg-surface items-center justify-center border-2 border-primary/10">
                      <MaterialCommunityIcons
                         name="account"
                         size={32}
-                        color="#F59E0B"
+                        color={Colors.icon.primary}
                      />
                   </View>
                </View>
@@ -104,7 +105,7 @@ const RenderArtwork = ({ id }: { id: string }) => {
                      <MaterialCommunityIcons
                         name="cash-multiple"
                         size={24}
-                        color="#0F172A"
+                        color={Colors.icon.onPrimary}
                      />
                   </View>
                   <View
@@ -114,7 +115,7 @@ const RenderArtwork = ({ id }: { id: string }) => {
                      <MaterialCommunityIcons
                         name="cash-multiple"
                         size={24}
-                        color="#0F172A"
+                        color={Colors.icon.onPrimary}
                      />
                   </View>
                </View>
@@ -124,8 +125,8 @@ const RenderArtwork = ({ id }: { id: string }) => {
                   </Typography>
                </View>
             </View>
-            <View className="absolute -left-4 top-1/4 w-24 h-32 bg-surface-container-low rounded-2xl -rotate-6 opacity-40 z-0" />
-            <View className="absolute -right-4 bottom-1/4 w-24 h-32 bg-surface-container-low rounded-2xl rotate-12 opacity-40 z-0" />
+            <View className="absolute -left-4 top-1/4 w-24 h-32 bg-surface-container rounded-2xl -rotate-6 opacity-40 z-0" />
+            <View className="absolute -right-4 bottom-1/4 w-24 h-32 bg-surface-container rounded-2xl rotate-12 opacity-40 z-0" />
          </View>
       );
    }
@@ -140,21 +141,21 @@ const RenderArtwork = ({ id }: { id: string }) => {
                      <MaterialCommunityIcons
                         name="silverware-fork-knife"
                         size={48}
-                        color="#94A3B8"
+                        color={Colors.icon.subtle}
                      />
                      <View className="w-16 h-2 bg-surface rounded-full" />
                   </View>
                   <MaterialCommunityIcons
                      name="scale-balance"
                      size={56}
-                     color="#F59E0B"
+                     color={Colors.icon.primary}
                      className="mb-2"
                   />
                   <View className="items-center gap-2">
                      <MaterialCommunityIcons
                         name="cash-multiple"
                         size={48}
-                        color="#22C55E"
+                        color={Colors.icon.success}
                      />
                      <View className="w-16 h-2 bg-surface rounded-full" />
                   </View>
@@ -164,7 +165,7 @@ const RenderArtwork = ({ id }: { id: string }) => {
                      <Typography className="text-[10px] uppercase tracking-widest font-bold text-primary">
                         You Owe
                      </Typography>
-                     <Typography className="font-bold text-white text-base">
+                     <Typography className="font-bold text-on-surface text-base">
                         ৳124
                      </Typography>
                   </View>
@@ -172,7 +173,7 @@ const RenderArtwork = ({ id }: { id: string }) => {
                      <Typography className="text-[10px] uppercase tracking-widest font-bold text-primary">
                         Owed
                      </Typography>
-                     <Typography className="font-bold text-white text-base">
+                     <Typography className="font-bold text-on-surface text-base">
                         ৳450
                      </Typography>
                   </View>
@@ -218,7 +219,7 @@ export default function OnboardingScreen() {
             <View className="w-full text-center items-center space-y-4 max-w-sm mt-8">
                <Typography
                   variant="h1"
-                  className="text-white text-4xl text-center font-extrabold tracking-tight leading-tight"
+                  className="text-on-surface text-4xl text-center font-extrabold tracking-tight leading-tight"
                >
                   {item.title}
                </Typography>
@@ -234,7 +235,7 @@ export default function OnboardingScreen() {
       <View className="flex-1 bg-background">
          {/* Background Decorators */}
          <View className="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px] pointer-events-none" />
-         <View className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-500/5 rounded-full blur-[120px] pointer-events-none" />
+         <View className="absolute bottom-[-10%] left-[-10%] w-[50%] h-[50%] bg-info/5 rounded-full blur-[120px] pointer-events-none" />
 
          {/* Header */}
          <View className="w-full z-50 px-8 py-10 flex-row justify-end absolute top-0">
@@ -280,7 +281,7 @@ export default function OnboardingScreen() {
                      });
                      const backgroundColor = scrollX.interpolate({
                         inputRange,
-                        outputRange: ["#2D3449", "#F59E0B", "#2D3449"], // surface-container-highest vs primary
+                        outputRange: ["#2D3449", "#F59E0B", "#2D3449"], // surface-containerest vs primary
                         extrapolate: "clamp",
                      });
 
@@ -309,7 +310,7 @@ export default function OnboardingScreen() {
                            : "arrow-right"
                      }
                      size={22}
-                     color="#0F172A"
+                     color={Colors.icon.onPrimary}
                   />
                </TouchableOpacity>
             </View>

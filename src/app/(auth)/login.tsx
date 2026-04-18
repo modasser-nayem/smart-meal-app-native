@@ -3,7 +3,7 @@ import { LoginForm } from "@/components/screens/auth/LoginForm";
 
 export default function LoginScreen() {
    return (
-      <Container className="justify-center">
+      <Container scrollable>
          <LoginForm />
       </Container>
    );

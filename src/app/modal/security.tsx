@@ -10,6 +10,7 @@ import { Typography } from "@/components/ui/Typography";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { changePasswordSchema, ChangePasswordFormData } from "@/schemas/profile.schema";
+import { Colors } from "@/constants/colors";
 
 // ─── Password strength helper ─────────────────────────────────────────────────
 
@@ -22,10 +23,10 @@ const getStrength = (password: string): { level: number; label: string; color: s
    if (/[0-9]/.test(password)) score++;
    if (/[^A-Za-z0-9]/.test(password)) score++;
 
-   if (score <= 2) return { level: score, label: "Weak", color: "#EF4444" };
-   if (score === 3) return { level: score, label: "Fair", color: "#F59E0B" };
-   if (score === 4) return { level: score, label: "Good", color: "#22C55E" };
-   return { level: score, label: "Strong", color: "#22C55E" };
+   if (score <= 2) return { level: score, label: "Weak", color: Colors.icon.error };
+   if (score === 3) return { level: score, label: "Fair", color: Colors.icon.warning };
+   if (score === 4) return { level: score, label: "Good", color: Colors.icon.success };
+   return { level: score, label: "Strong", color: Colors.icon.success };
 };
 
 // ─── Screen ───────────────────────────────────────────────────────────────────
@@ -73,7 +74,7 @@ export default function SecurityModal() {
          <MaterialCommunityIcons
             name={visible ? "eye-outline" : "eye-off-outline"}
             size={20}
-            color="#94A3B8"
+            color={Colors.icon.subtle}
          />
       </TouchableOpacity>
    );
@@ -85,7 +86,7 @@ export default function SecurityModal() {
       >
          <ScrollView
             className="flex-1"
-            contentContainerStyle={{ paddingBottom: 40 }}
+            contentContainerStyle={{ paddingBottom: 48 }}
             keyboardShouldPersistTaps="handled"
          >
             {/* Header */}
@@ -95,7 +96,7 @@ export default function SecurityModal() {
                   activeOpacity={0.7}
                   className="w-10 h-10 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="arrow-left" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.icon.onDark} />
                </TouchableOpacity>
                <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
                   Security & Password
@@ -106,7 +107,11 @@ export default function SecurityModal() {
             <View className="px-6 pt-8">
                {/* Info banner */}
                <View className="flex-row items-start gap-3 bg-info/10 border border-info/20 rounded-2xl px-4 py-4 mb-8">
-                  <MaterialCommunityIcons name="information-outline" size={20} color="#3B82F6" />
+                  <MaterialCommunityIcons
+                     name="information-outline"
+                     size={20}
+                     color={Colors.icon.info}
+                  />
                   <Typography className="text-secondary-100 text-sm flex-1 leading-relaxed">
                      Use a strong password with at least 8 characters, including uppercase letters,
                      numbers, and symbols.
@@ -127,7 +132,11 @@ export default function SecurityModal() {
                         value={value}
                         error={errors.currentPassword?.message}
                         leftIcon={
-                           <MaterialCommunityIcons name="lock-outline" size={20} color="#94A3B8" />
+                           <MaterialCommunityIcons
+                              name="lock-outline"
+                              size={20}
+                              color={Colors.icon.subtle}
+                           />
                         }
                         rightIcon={
                            <EyeToggle
@@ -165,7 +174,7 @@ export default function SecurityModal() {
                            <MaterialCommunityIcons
                               name="lock-plus-outline"
                               size={20}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                         }
                         rightIcon={
@@ -184,7 +193,8 @@ export default function SecurityModal() {
                               key={i}
                               className="flex-1 h-1 rounded-full"
                               style={{
-                                 backgroundColor: i <= strength.level ? strength.color : "#334155",
+                                 backgroundColor:
+                                    i <= strength.level ? strength.color : Colors.icon.muted,
                               }}
                            />
                         ))}
@@ -215,7 +225,7 @@ export default function SecurityModal() {
                            <MaterialCommunityIcons
                               name="lock-check-outline"
                               size={20}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                         }
                         rightIcon={
@@ -243,7 +253,7 @@ export default function SecurityModal() {
                         <MaterialCommunityIcons
                            name={met ? "check-circle" : "circle-outline"}
                            size={16}
-                           color={met ? "#22C55E" : "#334155"}
+                           color={met ? Colors.icon.success : "#334155"}
                         />
                         <Typography
                            className={`text-sm ${met ? "text-success" : "text-secondary-400"}`}

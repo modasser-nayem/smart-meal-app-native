@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { View, Animated, Image, StyleSheet, Dimensions } from "react-native";
+import { View, Animated, Image, Dimensions } from "react-native";
 import { useRouter } from "expo-router";
 import { Typography } from "@/components/ui/Typography";
 import { Icon } from "@/components/ui/Icon";
@@ -12,8 +12,8 @@ export default function SplashScreen() {
    const fadeAnim = useRef(new Animated.Value(0)).current;
 
    useEffect(() => {
-      // Background Pulse Animation
-      Animated.loop(
+      // Background Pulse Animation — stored so we can stop it on unmount
+      const pulseLoop = Animated.loop(
          Animated.sequence([
             Animated.timing(pulseAnim, {
                toValue: 1.1,
@@ -25,30 +25,42 @@ export default function SplashScreen() {
                duration: 1500,
                useNativeDriver: true,
             }),
-         ])
-      ).start();
+         ]),
+      );
+      pulseLoop.start();
 
-      // Fade In Content
-      Animated.sequence([
+      // Fade In Content then navigate
+      const fadeSeq = Animated.sequence([
          Animated.timing(fadeAnim, {
             toValue: 1,
             duration: 800,
             useNativeDriver: true,
          }),
          Animated.delay(1700),
-      ]).start(() => {
+      ]);
+      fadeSeq.start(() => {
          router.replace("/(startup)/onboarding");
       });
+
+      return () => {
+         pulseLoop.stop();
+         fadeSeq.stop();
+      };
    }, []);
 
    return (
       <View className="flex-1 bg-background relative overflow-hidden items-center justify-center px-6">
          {/* Atmospheric Background Element */}
-         <View className="absolute z-0 w-[600px] h-[600px] bg-primary/5 rounded-full" style={{ left: width / 2 - 300, top: height / 2 - 300 }} />
+         <View
+            className="absolute z-0 w-[600px] h-[600px] bg-primary/5 rounded-full"
+            style={{ left: width / 2 - 300, top: height / 2 - 300 }}
+         />
 
          {/* Background Textured Image */}
-         <Image 
-            source={{ uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuCftqLM7rGqY5Tfm68GlgO6rn56TgSdwMne9Q5ollgjAZbDpxjPHuc41V0GGQFwI5qE2wORW_tIl_YLL5WlyKqY02tyz82hj4ETM5LwwAnfYVBzMm1YJ_WfuEKwys9yBVlbsG6e3TKsWDBmZqLn61wqu0VrTlCQe2czaT0uHk_48pn_I_aGzS6FUm_Ktz41r3_TMxuyIZCvPLvRFixka62jg0CiGWiQlkvrqvw7jkcFxrD6JUNEU-4V-gxxVb4D5ss8yzUKW2RUHIk" }}
+         <Image
+            source={{
+               uri: "https://lh3.googleusercontent.com/aida-public/AB6AXuCftqLM7rGqY5Tfm68GlgO6rn56TgSdwMne9Q5ollgjAZbDpxjPHuc41V0GGQFwI5qE2wORW_tIl_YLL5WlyKqY02tyz82hj4ETM5LwwAnfYVBzMm1YJ_WfuEKwys9yBVlbsG6e3TKsWDBmZqLn61wqu0VrTlCQe2czaT0uHk_48pn_I_aGzS6FUm_Ktz41r3_TMxuyIZCvPLvRFixka62jg0CiGWiQlkvrqvw7jkcFxrD6JUNEU-4V-gxxVb4D5ss8yzUKW2RUHIk",
+            }}
             className="absolute inset-0 w-full h-full opacity-10"
             resizeMode="cover"
          />
@@ -57,20 +69,23 @@ export default function SplashScreen() {
          <Animated.View style={{ opacity: fadeAnim }} className="z-10 items-center w-full">
             {/* Animated Icon Container */}
             <View className="relative mb-8 items-center justify-center">
-               <Animated.View 
-                  style={{ transform: [{ scale: pulseAnim }] }} 
+               <Animated.View
+                  style={{ transform: [{ scale: pulseAnim }] }}
                   className="absolute w-36 h-36 bg-primary/10 rounded-full"
                />
-               <View className="w-24 h-24 rounded-full bg-surface-container-high border border-primary/20 shadow-xl shadow-orange-500/20 items-center justify-center">
+               <View className="w-24 h-24 rounded-full bg-surface-container border border-primary/20 items-center justify-center">
                   <Icon name="silverware-fork-knife" size={48} className="text-primary" />
                </View>
             </View>
 
             {/* Brand Identity */}
-            <Typography variant="h1" className="text-[28px] font-extrabold text-white tracking-tight mb-2">
+            <Typography
+               variant="h1"
+               className="text-[28px] font-extrabold text-on-surface tracking-tight mb-2"
+            >
                Smart Meal
             </Typography>
-            <Typography className="text-sm font-medium text-secondary tracking-wide opacity-80">
+            <Typography className="text-sm font-medium text-secondary-300 tracking-wide">
                Transparent Meals. Happy Groups.
             </Typography>
 

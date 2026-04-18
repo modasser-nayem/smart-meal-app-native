@@ -21,6 +21,7 @@ import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { useCreateGroupMutation } from "@/api/groupApi";
 import { createGroupSchema, CreateGroupFormData } from "@/schemas/group.schema";
+import { Colors } from "@/constants/colors";
 
 // ─── Markdown toolbar actions ─────────────────────────────────────────────────
 
@@ -209,7 +210,7 @@ export default function CreateGroupModal() {
                   activeOpacity={0.7}
                   className="w-10 h-10 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="arrow-left" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.icon.onDark} />
                </TouchableOpacity>
                <View className="items-center">
                   <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
@@ -240,7 +241,7 @@ export default function CreateGroupModal() {
                            <MaterialCommunityIcons
                               name="account-group-outline"
                               size={20}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                         }
                      />
@@ -264,7 +265,7 @@ export default function CreateGroupModal() {
                            <MaterialCommunityIcons
                               name="map-marker-outline"
                               size={20}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                         }
                      />
@@ -290,7 +291,7 @@ export default function CreateGroupModal() {
                               resizeMode="cover"
                            />
                         ) : (
-                           <MaterialCommunityIcons name="image-plus" size={28} color="#334155" />
+                           <MaterialCommunityIcons name="image-plus" size={28} color={Colors.icon.muted} />
                         )}
                      </View>
                      <View className="flex-1">
@@ -308,10 +309,10 @@ export default function CreateGroupModal() {
                            onPress={() => setGroupPhoto(null)}
                            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
                         >
-                           <MaterialCommunityIcons name="close-circle" size={20} color="#EF4444" />
+                           <MaterialCommunityIcons name="close-circle" size={20} color={Colors.icon.error} />
                         </TouchableOpacity>
                      ) : (
-                        <MaterialCommunityIcons name="chevron-right" size={20} color="#334155" />
+                        <MaterialCommunityIcons name="chevron-right" size={20} color={Colors.icon.muted} />
                      )}
                   </TouchableOpacity>
                </View>
@@ -370,7 +371,7 @@ export default function CreateGroupModal() {
                                  <MaterialCommunityIcons
                                     name={action.icon as any}
                                     size={18}
-                                    color="#94A3B8"
+                                    color={Colors.icon.subtle}
                                  />
                               </TouchableOpacity>
                            ))}
@@ -388,7 +389,7 @@ export default function CreateGroupModal() {
                                  onBlur={onBlur}
                                  onSelectionChange={(e) => setSelection(e.nativeEvent.selection)}
                                  placeholder="Describe your group... supports **bold**, _italic_, # headings, - lists"
-                                 placeholderTextColor="#334155"
+                                 placeholderTextColor={Colors.placeholder}
                                  multiline
                                  textAlignVertical="top"
                                  className="text-on-surface text-sm px-4 py-3 min-h-[140px] font-mono"
@@ -426,7 +427,7 @@ export default function CreateGroupModal() {
 
                {/* Info note */}
                <View className="flex-row items-start gap-3 bg-primary/5 border border-primary/15 rounded-2xl px-4 py-3 mb-6">
-                  <MaterialCommunityIcons name="information-outline" size={18} color="#F59E0B" />
+                  <MaterialCommunityIcons name="information-outline" size={18} color={Colors.icon.primary} />
                   <Typography className="text-secondary-200 text-xs flex-1 leading-relaxed">
                      An invite code will be auto-generated after creation. Share it with members to
                      let them join.

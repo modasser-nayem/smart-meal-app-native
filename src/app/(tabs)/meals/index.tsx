@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { View } from "react-native";
-import { Container } from "@/components/ui/Container";
+import { View, ScrollView } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { format, setMonth, isValid } from "date-fns";
 
 import { MealsHeader } from "@/components/screens/meals/MealsHeader";
@@ -19,7 +19,7 @@ const MOCK_MEMBERS: LogMealMember[] = [
    { id: "m3", name: "Rahim Uddin", initials: "RU", avatar: "https://i.pravatar.cc/150?u=rahim" },
    { id: "m4", name: "Sara Ahmed", initials: "SA", avatar: "https://i.pravatar.cc/150?u=sara" },
 ];
-const USER_ROLE: "Owner" | "Manager" | "Member" = "Owner"; // replace with real role from auth
+const USER_ROLE: "Owner" | "Manager" | "Member" = "Owner";
 
 export default function MealsScreen() {
    const [viewType, setViewType] = useState<"daily" | "monthly">("daily");
@@ -43,58 +43,57 @@ export default function MealsScreen() {
    };
 
    const handleLogMeal = (data: { date: string; meals: string[]; note?: string }) => {
-      // TODO: wire to useAddMealMutation
       console.log("Log meal:", data);
    };
 
    return (
-      <View className="flex-1 bg-background">
-         <Container scrollable className="flex-1">
-            {/* Header */}
-            <MealsHeader
-               title={
-                  viewType === "daily"
-                     ? format(safeDate, "MMMM d, yyyy")
-                     : format(safeDate, "MMMM yyyy")
-               }
-               subtitle={viewType === "daily" ? "Daily Participation" : "Monthly Group Ledger"}
-            />
+      <SafeAreaView className="flex-1 bg-background">
+         {/* ── Fixed top section — always visible ── */}
+         <MealsHeader
+            title={
+               viewType === "daily"
+                  ? format(safeDate, "MMMM d, yyyy")
+                  : format(safeDate, "MMMM yyyy")
+            }
+            subtitle={viewType === "daily" ? "Daily Participation" : "Monthly Group Ledger"}
+         />
 
-            {/* Daily / Monthly toggle */}
-            <ViewToggle activeTab={viewType} onTabChange={setViewType} />
+         {/* Daily / Monthly toggle — always visible */}
+         <ViewToggle activeTab={viewType} onTabChange={setViewType} />
 
-            {/* Content */}
-            <View className="flex-1">
-               {viewType === "daily" ? (
-                  <View className="flex-1">
-                     <DateStrip
-                        selectedDate={selectedDate}
-                        onDateChange={setSelectedDate}
-                        onCalendarPress={() => setIsPickerVisible(true)}
-                     />
-                     <DailyMeals
-                        selectedDate={selectedDate}
-                        onLogMeal={() => setIsLogSheetVisible(true)}
-                     />
-                  </View>
-               ) : (
-                  <View className="flex-1">
-                     <MonthlyAnalytics
-                        selectedMonth={selectedDate}
-                        onMonthChange={handleMonthChange}
-                        onYearPress={() => setIsPickerVisible(true)}
-                     />
-                  </View>
-               )}
-            </View>
+         {/* ── Scrollable content below the fixed header ── */}
+         <ScrollView
+            className="flex-1 bg-background"
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+         >
+            {viewType === "daily" ? (
+               <View>
+                  <DateStrip
+                     selectedDate={selectedDate}
+                     onDateChange={setSelectedDate}
+                     onCalendarPress={() => setIsPickerVisible(true)}
+                  />
+                  <DailyMeals
+                     selectedDate={selectedDate}
+                     onLogMeal={() => setIsLogSheetVisible(true)}
+                  />
+               </View>
+            ) : (
+               <MonthlyAnalytics
+                  selectedMonth={selectedDate}
+                  onMonthChange={handleMonthChange}
+                  onYearPress={() => setIsPickerVisible(true)}
+               />
+            )}
+         </ScrollView>
 
-            <MonthYearPicker
-               visible={isPickerVisible}
-               onClose={() => setIsPickerVisible(false)}
-               selectedDate={selectedDate}
-               onSelect={handleDateChange}
-            />
-         </Container>
+         <MonthYearPicker
+            visible={isPickerVisible}
+            onClose={() => setIsPickerVisible(false)}
+            selectedDate={selectedDate}
+            onSelect={handleDateChange}
+         />
 
          {/* FAB */}
          <MealFAB onPress={() => setIsLogSheetVisible(true)} />
@@ -106,12 +105,11 @@ export default function MealsScreen() {
             onClose={() => setIsLogSheetVisible(false)}
             onSubmit={handleLogMeal}
             onAdminSubmit={(data) => {
-               // TODO: wire to useAdminLogMealMutation
                console.log("Admin log meal:", data);
             }}
             members={MOCK_MEMBERS}
             userRole={USER_ROLE}
          />
-      </View>
+      </SafeAreaView>
    );
 }

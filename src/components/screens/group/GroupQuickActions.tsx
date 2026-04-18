@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
+import { Colors } from "@/constants/colors";
 
 interface QuickAction {
    icon: string;
@@ -33,28 +34,28 @@ export const GroupQuickActions = ({
          icon: "account-plus-outline",
          label: "Invite",
          onPress: onInviteMember,
-         color: "#F59E0B",
+         color: Colors.icon.primary,
          bg: "bg-primary/10",
       },
       {
          icon: "bullhorn-outline",
          label: "Notice",
          onPress: onPostNotice,
-         color: "#3B82F6",
+         color: Colors.icon.info,
          bg: "bg-info/10",
       },
       {
          icon: "wallet-outline",
          label: "Billing",
          onPress: onViewBilling,
-         color: "#22C55E",
-         bg: "bg-success/10",
+         color: Colors.icon.success,
+         bg: "bg-accent/10",
       },
       {
          icon: "account-clock-outline",
          label: "Requests",
          onPress: onManageRequests,
-         color: "#F59E0B",
+         color: Colors.icon.primary,
          bg: "bg-primary/10",
          badge: pendingRequests,
       },

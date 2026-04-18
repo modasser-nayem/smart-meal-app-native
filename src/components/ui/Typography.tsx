@@ -9,13 +9,13 @@ interface TypographyProps extends TextProps {
 }
 
 const variants: Record<Variant, string> = {
-   h1: "text-3xl font-bold text-white",
-   h2: "text-2xl font-semibold text-white",
-   h3: "text-xl font-medium text-white",
-   body: "text-base text-gray-200",
-   "body-sm": "text-sm text-gray-300",
-   caption: "text-xs text-muted",
-   error: "text-xs text-danger font-medium",
+   h1: "text-3xl font-bold text-on-surface",
+   h2: "text-2xl font-semibold text-on-surface",
+   h3: "text-xl font-medium text-on-surface",
+   body: "text-base text-on-surface",
+   "body-sm": "text-sm text-secondary-300",
+   caption: "text-xs text-secondary-400",
+   error: "text-xs text-error font-medium",
 };
 
 export const Typography = ({

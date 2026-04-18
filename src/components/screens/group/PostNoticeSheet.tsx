@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
+import { Colors } from "@/constants/colors";
 
 export type NoticeType = "primary" | "info" | "success" | "warning";
 
@@ -38,7 +39,7 @@ const NOTICE_TYPES: {
       key: "primary",
       label: "Announcement",
       icon: "bullhorn-outline",
-      color: "#F59E0B",
+      color: Colors.icon.primary,
       bg: "bg-primary/10",
       description: "General group update",
    },
@@ -46,7 +47,7 @@ const NOTICE_TYPES: {
       key: "info",
       label: "Info",
       icon: "information-outline",
-      color: "#3B82F6",
+      color: Colors.icon.info,
       bg: "bg-info/10",
       description: "Informational notice",
    },
@@ -54,15 +55,15 @@ const NOTICE_TYPES: {
       key: "success",
       label: "Update",
       icon: "check-circle-outline",
-      color: "#22C55E",
-      bg: "bg-success/10",
+      color: Colors.icon.success,
+      bg: "bg-accent/10",
       description: "Positive update or completion",
    },
    {
       key: "warning",
       label: "Urgent",
       icon: "alert-outline",
-      color: "#EF4444",
+      color: Colors.icon.error,
       bg: "bg-error/10",
       description: "Requires immediate attention",
    },
@@ -131,7 +132,7 @@ export const PostNoticeSheet = ({
                      onPress={handleClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -167,7 +168,7 @@ export const PostNoticeSheet = ({
                                     />
                                     <Typography
                                        className="text-xs font-bold"
-                                       style={{ color: isSelected ? t.color : "#94A3B8" }}
+                                       style={{ color: isSelected ? t.color : Colors.icon.subtle }}
                                     >
                                        {t.label}
                                     </Typography>
@@ -190,7 +191,7 @@ export const PostNoticeSheet = ({
                               value={title}
                               onChangeText={setTitle}
                               placeholder="e.g. Grocery Day Reminder"
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               maxLength={80}
                               className="text-on-surface text-base"
                            />
@@ -210,7 +211,7 @@ export const PostNoticeSheet = ({
                               value={body}
                               onChangeText={setBody}
                               placeholder="Write your notice here..."
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               multiline
                               numberOfLines={5}
                               textAlignVertical="top"

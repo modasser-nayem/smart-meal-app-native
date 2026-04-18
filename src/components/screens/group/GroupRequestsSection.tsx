@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { AcceptRequestModal } from "./AcceptRequestModal";
+import { Colors } from "@/constants/colors";
 
 export type RequestType = "join_request" | "invitation";
 
@@ -67,7 +68,7 @@ export const GroupRequestsSection = ({
          {/* Summary banner */}
          {totalPending > 0 && (
             <View className="flex-row items-center gap-3 bg-primary/5 border border-primary/15 rounded-2xl px-4 py-3 mb-3">
-               <MaterialCommunityIcons name="clock-alert-outline" size={18} color="#F59E0B" />
+               <MaterialCommunityIcons name="clock-alert-outline" size={18} color={Colors.icon.primary} />
                <View className="flex-1">
                   <Typography className="text-on-surface text-sm font-bold">
                      {totalPending} pending action{totalPending !== 1 ? "s" : ""}
@@ -85,7 +86,7 @@ export const GroupRequestsSection = ({
             {items.length === 0 ? (
                <View className="items-center py-10 gap-3">
                   <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
-                     <MaterialCommunityIcons name="email-check-outline" size={24} color="#334155" />
+                     <MaterialCommunityIcons name="email-check-outline" size={24} color={Colors.icon.muted} />
                   </View>
                   <Typography className="text-secondary-400 text-sm">
                      No pending requests
@@ -112,7 +113,7 @@ export const GroupRequestsSection = ({
                               {item.isActive !== undefined && (
                                  <View
                                     className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-surface-container ${
-                                       item.isActive ? "bg-success" : "bg-outline"
+                                       item.isActive ? "bg-accent" : "bg-outline"
                                     }`}
                                  />
                               )}
@@ -160,7 +161,7 @@ export const GroupRequestsSection = ({
                                  <MaterialCommunityIcons
                                     name="check-circle"
                                     size={15}
-                                    color="#0F172A"
+                                    color={Colors.icon.onPrimary}
                                  />
                                  <Typography className="text-background text-xs font-bold">
                                     Accept
@@ -174,7 +175,7 @@ export const GroupRequestsSection = ({
                                  <MaterialCommunityIcons
                                     name="close-circle-outline"
                                     size={15}
-                                    color="#EF4444"
+                                    color={Colors.icon.error}
                                  />
                                  <Typography className="text-error text-xs font-bold">
                                     Reject
@@ -190,7 +191,7 @@ export const GroupRequestsSection = ({
                                  <MaterialCommunityIcons
                                     name="clock-outline"
                                     size={13}
-                                    color="#64748B"
+                                    color={Colors.icon.dim}
                                  />
                                  <Typography className="text-secondary-400 text-xs">
                                     Awaiting response

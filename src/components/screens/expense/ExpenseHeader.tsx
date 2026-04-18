@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ExpenseHeaderProps {
    month: string;
@@ -37,7 +38,11 @@ export const ExpenseHeader = ({
                   activeOpacity={0.7}
                   className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="chevron-left" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons
+                     name="chevron-left"
+                     size={22}
+                     color={Colors.icon.onDark}
+                  />
                </TouchableOpacity>
                <View>
                   <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest">
@@ -53,7 +58,11 @@ export const ExpenseHeader = ({
                   disabled={!canGoNext}
                   className={`w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90 ${!canGoNext ? "opacity-30" : ""}`}
                >
-                  <MaterialCommunityIcons name="chevron-right" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons
+                     name="chevron-right"
+                     size={22}
+                     color={Colors.icon.onDark}
+                  />
                </TouchableOpacity>
             </View>
 
@@ -82,7 +91,7 @@ export const ExpenseHeader = ({
          <View className="bg-surface-container rounded-3xl border border-outline/10 overflow-hidden">
             <View
                className="h-[3px]"
-               style={{ backgroundColor: isSurplus ? "#22C55E" : "#EF4444" }}
+               style={{ backgroundColor: isSurplus ? Colors.icon.success : Colors.icon.error }}
             />
             <View className="px-5 pt-4 pb-5">
                <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest mb-4">
@@ -127,7 +136,7 @@ export const ExpenseHeader = ({
                            <MaterialCommunityIcons
                               name="silverware-fork-knife"
                               size={12}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <Typography className="text-secondary-400 text-xs">Meals</Typography>
                         </View>
@@ -141,7 +150,7 @@ export const ExpenseHeader = ({
                            <MaterialCommunityIcons
                               name="calculator-variant-outline"
                               size={12}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <Typography className="text-secondary-400 text-xs">Cost</Typography>
                         </View>
@@ -152,7 +161,11 @@ export const ExpenseHeader = ({
                      {/* Paid */}
                      <View className="flex-row items-center justify-between gap-6">
                         <View className="flex-row items-center gap-1.5">
-                           <MaterialCommunityIcons name="cash-check" size={12} color="#64748B" />
+                           <MaterialCommunityIcons
+                              name="cash-check"
+                              size={12}
+                              color={Colors.icon.dim}
+                           />
                            <Typography className="text-secondary-400 text-xs">Paid</Typography>
                         </View>
                         <Typography className="text-on-surface text-sm font-extrabold">

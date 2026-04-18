@@ -27,7 +27,7 @@ interface CustomAlertProps {
 const ICON_BG: Record<AlertVariant, string> = {
    default: "bg-primary/10",
    danger: "bg-error/10",
-   success: "bg-success/10",
+   success: "bg-accent/10",
    warning: "bg-warning/10",
 };
 
@@ -47,7 +47,7 @@ const BTN_STYLE: Record<AlertVariant, string> = {
 
 const BTN_TEXT: Record<AlertVariant, string> = {
    default: "text-background",
-   danger: "text-white",
+   danger: "text-on-surface",
    success: "text-background",
    warning: "text-background",
 };

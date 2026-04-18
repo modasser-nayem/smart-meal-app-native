@@ -6,6 +6,7 @@ import { Typography } from "@/components/ui/Typography";
 import { Input } from "@/components/ui/Input";
 import { Button } from "@/components/ui/Button";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 export default function RegisterScreen() {
    const router = useRouter();
@@ -18,11 +19,11 @@ export default function RegisterScreen() {
                onPress={() => router.back()}
                className="mb-8 w-10 h-10 items-center justify-center bg-surface-container rounded-full"
             >
-               <MaterialCommunityIcons name="arrow-left" size={24} color="#F8FAFC" />
+               <MaterialCommunityIcons name="arrow-left" size={24} color={Colors.icon.onDark} />
             </TouchableOpacity>
 
             <View className="mb-12">
-               <Typography variant="h1" className="text-[36px] font-bold text-white leading-tight">
+               <Typography variant="h1" className="text-[36px] font-bold text-on-surface leading-tight">
                   Create Your Account ✨
                </Typography>
                <Typography className="text-secondary text-base mt-2">
@@ -36,7 +37,7 @@ export default function RegisterScreen() {
                   label="Full Name"
                   placeholder="John Doe"
                   leftIcon={
-                     <MaterialCommunityIcons name="account-outline" size={20} color="#94A3B8" />
+                     <MaterialCommunityIcons name="account-outline" size={20} color={Colors.icon.subtle} />
                   }
                />
                <Input
@@ -44,7 +45,7 @@ export default function RegisterScreen() {
                   placeholder="name@example.com"
                   keyboardType="email-address"
                   leftIcon={
-                     <MaterialCommunityIcons name="email-outline" size={20} color="#94A3B8" />
+                     <MaterialCommunityIcons name="email-outline" size={20} color={Colors.icon.subtle} />
                   }
                />
                <Input
@@ -52,13 +53,13 @@ export default function RegisterScreen() {
                   placeholder="••••••••"
                   secureTextEntry
                   leftIcon={
-                     <MaterialCommunityIcons name="lock-outline" size={20} color="#94A3B8" />
+                     <MaterialCommunityIcons name="lock-outline" size={20} color={Colors.icon.subtle} />
                   }
                />
 
                <View className="flex-row items-center gap-3 mt-2">
                   <View className="w-5 h-5 border border-primary rounded-md items-center justify-center">
-                     <MaterialCommunityIcons name="check" size={14} color="#F59E0B" />
+                     <MaterialCommunityIcons name="check" size={14} color={Colors.icon.primary} />
                   </View>
                   <Typography className="text-on-surface text-xs">
                      I agree to the{" "}

@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ExpenseOwnerActionsProps {
    isOwner: boolean;
@@ -31,7 +32,7 @@ export const ExpenseOwnerActions = ({
                className="flex-row items-center gap-3 px-4 py-4 border-b border-outline active:bg-surface"
             >
                <View className="w-10 h-10 rounded-xl bg-info/10 items-center justify-center">
-                  <MaterialCommunityIcons name="export-variant" size={20} color="#3B82F6" />
+                  <MaterialCommunityIcons name="export-variant" size={20} color={Colors.icon.info} />
                </View>
                <View className="flex-1">
                   <Typography className="text-on-surface font-semibold text-[15px]">
@@ -41,7 +42,7 @@ export const ExpenseOwnerActions = ({
                      Download this month as PDF or CSV
                   </Typography>
                </View>
-               <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+               <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
             </TouchableOpacity>
 
             {/* Close month */}
@@ -52,7 +53,7 @@ export const ExpenseOwnerActions = ({
                   className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
                >
                   <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
-                     <MaterialCommunityIcons name="lock-outline" size={20} color="#EF4444" />
+                     <MaterialCommunityIcons name="lock-outline" size={20} color={Colors.icon.error} />
                   </View>
                   <View className="flex-1">
                      <Typography className="text-error font-bold text-[15px]">
@@ -62,7 +63,7 @@ export const ExpenseOwnerActions = ({
                         Finalizes calculations and notifies all members
                      </Typography>
                   </View>
-                  <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+                  <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
                </TouchableOpacity>
             )}
          </View>

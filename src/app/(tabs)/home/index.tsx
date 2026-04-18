@@ -69,7 +69,7 @@ export default function HomeScreen() {
             onNoticePress={() => setNoticesPanelVisible(true)}
          />
 
-         <Container scrollable padding={false} className="bg-background">
+         <Container scrollable withSafeArea={false} padding={false} className="bg-background">
             <View className="px-5 pt-4 pb-32 gap-6">
                {/* Active Group */}
                <ActiveGroupCard

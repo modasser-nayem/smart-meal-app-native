@@ -1,6 +1,7 @@
 import { View, TextInput, TextInputProps, Text } from "react-native";
 import { cn } from "@/lib/utils";
 import React from "react";
+import { Colors } from "@/constants/colors";
 
 interface InputProps extends TextInputProps {
    label?: string;
@@ -28,14 +29,12 @@ export const Input = ({
             </Text>
          )}
          <View className="relative flex-row items-center">
-            {leftIcon && (
-               <View className="absolute left-4 z-10">{leftIcon}</View>
-            )}
+            {leftIcon && <View className="absolute left-4 z-10">{leftIcon}</View>}
             <TextInput
-               placeholderTextColor="#64748B"
+               placeholderTextColor={Colors.placeholder}
                className={cn(
-                  "h-14 w-full bg-surface-container-lowest border-none rounded-xl text-on-surface text-base transition-all",
-                  "border border-outline focus:border-primary/50",
+                  "h-14 w-full bg-surface border rounded-xl text-on-surface text-base",
+                  "border border-outline",
                   leftIcon ? "pl-12" : "pl-4",
                   rightIcon ? "pr-12" : "pr-4",
                   error && "border-error",
@@ -43,17 +42,9 @@ export const Input = ({
                )}
                {...props}
             />
-            {rightIcon && (
-               <View className="bg-primary absolute right-4 z-10">
-                  {rightIcon}
-               </View>
-            )}
+            {rightIcon && <View className="absolute right-4 z-10">{rightIcon}</View>}
          </View>
-         {error && (
-            <Text className="text-error text-xs font-medium mt-1.5 ml-1">
-               {error}
-            </Text>
-         )}
+         {error && <Text className="text-error text-xs font-medium mt-1.5 ml-1">{error}</Text>}
       </View>
    );
 };

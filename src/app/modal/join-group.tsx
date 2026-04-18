@@ -16,6 +16,7 @@ import { Toast } from "toastify-react-native";
 import { Typography } from "@/components/ui/Typography";
 import { Button } from "@/components/ui/Button";
 import { Group, useSearchGroupsQuery, useSendJoinRequestMutation } from "@/api/groupApi";
+import { Colors } from "@/constants/colors";
 
 // ─── Mock search results (replace with real API) ──────────────────────────────
 
@@ -80,7 +81,7 @@ const GroupCard = ({ group, isSelected, isExpanded, onSelect, onToggleExpand }: 
                isSelected ? "border-primary bg-primary" : "border-outline"
             }`}
          >
-            {isSelected && <MaterialCommunityIcons name="check" size={12} color="#0F172A" />}
+            {isSelected && <MaterialCommunityIcons name="check" size={12} color={Colors.icon.onPrimary} />}
          </View>
 
          {/* Group icon */}
@@ -92,7 +93,7 @@ const GroupCard = ({ group, isSelected, isExpanded, onSelect, onToggleExpand }: 
             <MaterialCommunityIcons
                name="account-group"
                size={22}
-               color={isSelected ? "#F59E0B" : "#94A3B8"}
+               color={isSelected ? Colors.icon.primary : Colors.icon.subtle}
             />
          </View>
 
@@ -104,14 +105,14 @@ const GroupCard = ({ group, isSelected, isExpanded, onSelect, onToggleExpand }: 
             <View className="flex-row items-center gap-2 mt-0.5 flex-wrap">
                {group.location && (
                   <View className="flex-row items-center gap-1">
-                     <MaterialCommunityIcons name="map-marker-outline" size={11} color="#64748B" />
+                     <MaterialCommunityIcons name="map-marker-outline" size={11} color={Colors.icon.dim} />
                      <Typography className="text-secondary-400 text-xs">
                         {group.location}
                      </Typography>
                   </View>
                )}
                <View className="flex-row items-center gap-1">
-                  <MaterialCommunityIcons name="account-multiple" size={11} color="#64748B" />
+                  <MaterialCommunityIcons name="account-multiple" size={11} color={Colors.icon.dim} />
                   <Typography className="text-secondary-400 text-xs">
                      {group.membersCount} members
                   </Typography>
@@ -129,7 +130,7 @@ const GroupCard = ({ group, isSelected, isExpanded, onSelect, onToggleExpand }: 
             <MaterialCommunityIcons
                name={isExpanded ? "chevron-up" : "chevron-down"}
                size={18}
-               color="#64748B"
+               color={Colors.icon.dim}
             />
          </TouchableOpacity>
       </View>
@@ -157,7 +158,7 @@ const GroupCard = ({ group, isSelected, isExpanded, onSelect, onToggleExpand }: 
                         <MaterialCommunityIcons
                            name="account-circle-outline"
                            size={14}
-                           color="#94A3B8"
+                           color={Colors.icon.subtle}
                         />
                         <Typography className="text-on-surface text-sm font-medium">
                            {group.ownerName}
@@ -258,7 +259,7 @@ export default function JoinGroupModal() {
                   activeOpacity={0.7}
                   className="w-10 h-10 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="arrow-left" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons name="arrow-left" size={22} color={Colors.icon.onDark} />
                </TouchableOpacity>
                <View className="items-center">
                   <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
@@ -289,7 +290,7 @@ export default function JoinGroupModal() {
                      <MaterialCommunityIcons
                         name="magnify"
                         size={16}
-                        color={searchMode === "name" ? "#0F172A" : "#94A3B8"}
+                        color={searchMode === "name" ? "#0F172A" : Colors.icon.subtle}
                      />
                      <Typography
                         className={`text-sm font-bold ${searchMode === "name" ? "text-background" : "text-secondary-300"}`}
@@ -312,7 +313,7 @@ export default function JoinGroupModal() {
                      <MaterialCommunityIcons
                         name="pound"
                         size={16}
-                        color={searchMode === "code" ? "#0F172A" : "#94A3B8"}
+                        color={searchMode === "code" ? "#0F172A" : Colors.icon.subtle}
                      />
                      <Typography
                         className={`text-sm font-bold ${searchMode === "code" ? "text-background" : "text-secondary-300"}`}
@@ -326,12 +327,12 @@ export default function JoinGroupModal() {
                {searchMode === "name" ? (
                   <View className="flex-row items-center gap-3">
                      <View className="flex-1 flex-row items-center bg-surface-container border border-outline/20 rounded-2xl px-4 h-14 gap-3">
-                        <MaterialCommunityIcons name="magnify" size={20} color="#64748B" />
+                        <MaterialCommunityIcons name="magnify" size={20} color={Colors.icon.dim} />
                         <TextInput
                            value={query}
                            onChangeText={setQuery}
                            placeholder="Search group name..."
-                           placeholderTextColor="#334155"
+                           placeholderTextColor={Colors.placeholder}
                            returnKeyType="search"
                            onSubmitEditing={handleSearch}
                            className="flex-1 text-on-surface text-base"
@@ -347,7 +348,7 @@ export default function JoinGroupModal() {
                               <MaterialCommunityIcons
                                  name="close-circle"
                                  size={18}
-                                 color="#334155"
+                                 color={Colors.icon.muted}
                               />
                            </TouchableOpacity>
                         )}
@@ -361,7 +362,7 @@ export default function JoinGroupModal() {
                         }`}
                      >
                         {isSearching ? (
-                           <ActivityIndicator size="small" color="#0F172A" />
+                           <ActivityIndicator size="small" color={Colors.icon.onPrimary} />
                         ) : (
                            <MaterialCommunityIcons
                               name="arrow-right"
@@ -375,12 +376,12 @@ export default function JoinGroupModal() {
                   <View>
                      <View className="flex-row items-center gap-3">
                         <View className="flex-1 flex-row items-center bg-surface-container border border-outline/20 rounded-2xl px-4 h-14 gap-3">
-                           <MaterialCommunityIcons name="pound" size={20} color="#F59E0B" />
+                           <MaterialCommunityIcons name="pound" size={20} color={Colors.icon.primary} />
                            <TextInput
                               value={codeQuery}
                               onChangeText={(t) => setCodeQuery(t.toUpperCase())}
                               placeholder="e.g. BCHH-4821"
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               autoCapitalize="characters"
                               autoCorrect={false}
                               returnKeyType="search"
@@ -399,7 +400,7 @@ export default function JoinGroupModal() {
                                  <MaterialCommunityIcons
                                     name="close-circle"
                                     size={18}
-                                    color="#334155"
+                                    color={Colors.icon.muted}
                                  />
                               </TouchableOpacity>
                            )}
@@ -415,7 +416,7 @@ export default function JoinGroupModal() {
                            }`}
                         >
                            {isSearching ? (
-                              <ActivityIndicator size="small" color="#0F172A" />
+                              <ActivityIndicator size="small" color={Colors.icon.onPrimary} />
                            ) : (
                               <MaterialCommunityIcons
                                  name="arrow-right"
@@ -434,7 +435,7 @@ export default function JoinGroupModal() {
                {/* Results */}
                {isSearching ? (
                   <View className="items-center py-12 gap-3">
-                     <ActivityIndicator size="large" color="#F59E0B" />
+                     <ActivityIndicator size="large" color={Colors.icon.primary} />
                      <Typography className="text-secondary-400 text-sm">Searching...</Typography>
                   </View>
                ) : hasSearched && results.length === 0 ? (
@@ -443,7 +444,7 @@ export default function JoinGroupModal() {
                         <MaterialCommunityIcons
                            name="account-search-outline"
                            size={32}
-                           color="#334155"
+                           color={Colors.icon.muted}
                         />
                      </View>
                      <Typography className="text-on-surface font-bold text-base">
@@ -478,7 +479,7 @@ export default function JoinGroupModal() {
                      {/* Selected group summary */}
                      <View className="px-4 py-4 border-b border-outline/10 flex-row items-center gap-3">
                         <View className="w-10 h-10 rounded-xl bg-primary/10 items-center justify-center">
-                           <MaterialCommunityIcons name="account-group" size={20} color="#F59E0B" />
+                           <MaterialCommunityIcons name="account-group" size={20} color={Colors.icon.primary} />
                         </View>
                         <View className="flex-1">
                            <Typography className="text-on-surface font-bold text-[15px]">
@@ -489,7 +490,7 @@ export default function JoinGroupModal() {
                            </Typography>
                         </View>
                         <View className="w-6 h-6 rounded-full bg-primary items-center justify-center">
-                           <MaterialCommunityIcons name="check" size={14} color="#0F172A" />
+                           <MaterialCommunityIcons name="check" size={14} color={Colors.icon.onPrimary} />
                         </View>
                      </View>
 
@@ -508,8 +509,8 @@ export default function JoinGroupModal() {
                            <Switch
                               value={isIncludedJoinMonth}
                               onValueChange={setIsIncludedJoinMonth}
-                              trackColor={{ false: "#334155", true: "#F59E0B" }}
-                              thumbColor={isIncludedJoinMonth ? "#0F172A" : "#94A3B8"}
+                              trackColor={{ false: "#334155", true: Colors.icon.primary }}
+                              thumbColor={isIncludedJoinMonth ? "#0F172A" : Colors.icon.subtle}
                            />
                         </View>
 
@@ -524,7 +525,7 @@ export default function JoinGroupModal() {
                            <MaterialCommunityIcons
                               name="calendar-month-outline"
                               size={14}
-                              color={isIncludedJoinMonth ? "#F59E0B" : "#64748B"}
+                              color={isIncludedJoinMonth ? Colors.icon.primary : "#64748B"}
                            />
                            <Typography
                               className={`text-xs font-bold ${isIncludedJoinMonth ? "text-primary" : "text-secondary-400"}`}

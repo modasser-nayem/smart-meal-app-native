@@ -1,6 +1,8 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Colors } from "@/constants/colors";
 
 interface HomeHeaderProps {
    username: string;
@@ -28,8 +30,13 @@ export const HomeHeader = ({
    onNotificationPress,
    onNoticePress,
 }: HomeHeaderProps) => {
+   const insets = useSafeAreaInsets();
+
    return (
-      <View className="flex-row items-center justify-between px-6 pt-8 pb-2 bg-background">
+      <View
+         className="flex-row items-center justify-between px-6 pb-3 bg-background"
+         style={{ paddingTop: insets.top + 8 }}
+      >
          <View>
             <Typography className="text-secondary-300 text-[10px] uppercase font-bold tracking-widest mb-1">
                {getGreeting()}
@@ -46,7 +53,11 @@ export const HomeHeader = ({
                activeOpacity={0.75}
                className="relative w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
             >
-               <MaterialCommunityIcons name="bullhorn-outline" size={20} color="#F8FAFC" />
+               <MaterialCommunityIcons
+                  name="bullhorn-outline"
+                  size={20}
+                  color={Colors.icon.onDark}
+               />
                {noticeCount > 0 && (
                   <View className="absolute top-1 right-1 min-w-[16px] h-4 rounded-full bg-primary items-center justify-center px-1 border border-background">
                      <Typography className="text-background text-[9px] font-black">
@@ -62,7 +73,7 @@ export const HomeHeader = ({
                activeOpacity={0.75}
                className="relative w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
             >
-               <MaterialCommunityIcons name="bell-outline" size={20} color="#F8FAFC" />
+               <MaterialCommunityIcons name="bell-outline" size={20} color={Colors.icon.onDark} />
                {notificationCount > 0 && (
                   <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
                )}

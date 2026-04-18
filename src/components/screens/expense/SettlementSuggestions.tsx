@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 export interface Settlement {
    id: string;
@@ -83,7 +84,7 @@ export const SettlementSuggestions = ({
                      <View className="flex-1 items-center px-3">
                         <View className="flex-row items-center gap-1">
                            <View className="flex-1 h-px bg-outline/20" />
-                           <MaterialCommunityIcons name="arrow-right" size={18} color="#F59E0B" />
+                           <MaterialCommunityIcons name="arrow-right" size={18} color={Colors.icon.primary} />
                            <View className="flex-1 h-px bg-outline/20" />
                         </View>
                         <View className="bg-primary/10 border border-primary/20 px-3 py-1 rounded-full mt-2">
@@ -123,12 +124,12 @@ export const SettlementSuggestions = ({
                   <TouchableOpacity
                      onPress={() => onMarkSettled?.(s.id)}
                      activeOpacity={0.8}
-                     className="flex-row items-center justify-center gap-2 border border-success/30 bg-success/5 py-2.5 rounded-xl active:bg-success/10"
+                     className="flex-row items-center justify-center gap-2 border border-success/30 bg-success/5 py-2.5 rounded-xl active:bg-accent/10"
                   >
                      <MaterialCommunityIcons
                         name="check-circle-outline"
                         size={16}
-                        color="#22C55E"
+                        color={Colors.icon.success}
                      />
                      <Typography className="text-success text-sm font-bold">
                         Mark as Settled
@@ -151,7 +152,7 @@ export const SettlementSuggestions = ({
                            {s.senderInitials}
                         </Typography>
                      </View>
-                     <MaterialCommunityIcons name="arrow-right" size={14} color="#334155" />
+                     <MaterialCommunityIcons name="arrow-right" size={14} color={Colors.icon.muted} />
                      <View className="w-7 h-7 rounded-full bg-surface items-center justify-center">
                         <Typography className="text-secondary-400 text-[10px] font-bold">
                            {s.receiverInitials}
@@ -162,8 +163,8 @@ export const SettlementSuggestions = ({
                      </Typography>
                   </View>
                   <View className="flex-row items-center gap-1">
-                     <MaterialCommunityIcons name="check-circle" size={14} color="#22C55E" />
-                     <Typography className="text-success text-[10px] font-bold uppercase tracking-widest">
+                     <MaterialCommunityIcons name="check-circle" size={14} color={Colors.icon.success} />
+                     <Typography className="text-accent text-[10px] font-bold uppercase tracking-widest">
                         Settled
                      </Typography>
                   </View>

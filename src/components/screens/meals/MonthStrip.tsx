@@ -3,6 +3,7 @@ import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { cn } from "@/lib/utils";
 import { format, setMonth, getMonth, getYear } from "date-fns";
+import { Colors } from "@/constants/colors";
 
 interface MonthStripProps {
    selectedMonth: Date;
@@ -24,7 +25,7 @@ export const MonthStrip = ({ selectedMonth, onMonthChange, onYearPress }: MonthS
             onPress={onYearPress}
             className="h-11 px-3 rounded-2xl bg-surface-container border border-primary/20 items-center justify-center mr-3 active:scale-95 flex-row gap-1.5"
          >
-            <MaterialCommunityIcons name="calendar-edit" size={18} color="#F59E0B" />
+            <MaterialCommunityIcons name="calendar-edit" size={18} color={Colors.icon.primary} />
             <Typography className="text-xs font-black text-on-surface">{currentYear}</Typography>
          </TouchableOpacity>
 

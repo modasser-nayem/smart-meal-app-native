@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Modal, Image, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Member, MemberRole } from "./GroupMembersSection";
+import { Colors } from "@/constants/colors";
 
 interface MemberInfoModalProps {
    member: Member | null;
@@ -14,13 +15,13 @@ interface MemberInfoModalProps {
 
 const ROLE_CONFIG: Record<MemberRole, { bg: string; text: string; label: string; color: string }> =
    {
-      Owner: { bg: "bg-primary/10", text: "text-primary", label: "Owner 👑", color: "#F59E0B" },
-      Manager: { bg: "bg-info/10", text: "text-info", label: "Manager", color: "#3B82F6" },
+      Owner: { bg: "bg-primary/10", text: "text-primary", label: "Owner 👑", color: Colors.icon.primary },
+      Manager: { bg: "bg-info/10", text: "text-info", label: "Manager", color: Colors.icon.info },
       Member: {
          bg: "bg-surface",
          text: "text-secondary-300",
          label: "Member",
-         color: "#94A3B8",
+         color: Colors.icon.subtle,
       },
    };
 
@@ -75,7 +76,7 @@ export const MemberInfoModal = ({
                      onPress={onClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -101,7 +102,7 @@ export const MemberInfoModal = ({
                      {/* Online dot */}
                      <View
                         className={`absolute bottom-0.5 right-0.5 w-4 h-4 rounded-full border-2 border-surface-container ${
-                           member.isActive ? "bg-success" : "bg-outline"
+                           member.isActive ? "bg-accent" : "bg-outline"
                         }`}
                      />
                   </View>
@@ -126,12 +127,12 @@ export const MemberInfoModal = ({
                      </View>
                      <View
                         className={`flex-row items-center gap-1.5 px-3 py-1.5 rounded-full ${
-                           member.isActive ? "bg-success/10" : "bg-surface"
+                           member.isActive ? "bg-accent/10" : "bg-surface"
                         }`}
                      >
                         <View
                            className={`w-1.5 h-1.5 rounded-full ${
-                              member.isActive ? "bg-success" : "bg-outline"
+                              member.isActive ? "bg-accent" : "bg-outline"
                            }`}
                         />
                         <Typography
@@ -186,7 +187,7 @@ export const MemberInfoModal = ({
                      <MaterialCommunityIcons
                         name="calendar-account-outline"
                         size={18}
-                        color="#64748B"
+                        color={Colors.icon.dim}
                      />
                      <Typography className="text-secondary-300 text-sm">
                         Member since{" "}
@@ -212,7 +213,7 @@ export const MemberInfoModal = ({
                            <MaterialCommunityIcons
                               name="shield-account-outline"
                               size={20}
-                              color="#3B82F6"
+                              color={Colors.icon.info}
                            />
                         </View>
                         <View className="flex-1">
@@ -223,7 +224,7 @@ export const MemberInfoModal = ({
                               Promote to Manager or demote to Member
                            </Typography>
                         </View>
-                        <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+                        <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
                      </TouchableOpacity>
 
                      <TouchableOpacity
@@ -235,7 +236,7 @@ export const MemberInfoModal = ({
                            <MaterialCommunityIcons
                               name="account-remove-outline"
                               size={20}
-                              color="#EF4444"
+                              color={Colors.icon.error}
                            />
                         </View>
                         <View className="flex-1">

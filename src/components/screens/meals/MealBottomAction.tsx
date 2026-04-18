@@ -1,6 +1,7 @@
 import { TouchableOpacity, View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 export const MealBottomAction = () => {
    return (
@@ -15,7 +16,7 @@ export const MealBottomAction = () => {
                   <MaterialCommunityIcons
                      name="calendar-clock"
                      size={20}
-                     color="#F59E0B"
+                     color={Colors.icon.primary}
                   />
                </View>
                <View>

@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { NoticeDetailModal } from "./NoticeDetailModal";
 import { PostNoticeSheet, NewNotice } from "./PostNoticeSheet";
+import { Colors } from "@/constants/colors";
 
 export interface Notice {
    id: string;
@@ -41,7 +42,7 @@ const TYPE_ICON: Record<string, string> = {
 const TYPE_BG: Record<string, string> = {
    primary: "bg-primary/10",
    info: "bg-info/10",
-   success: "bg-success/10",
+   success: "bg-accent/10",
    warning: "bg-error/10",
 };
 
@@ -99,7 +100,7 @@ export const GroupNoticeSection = ({
             {sorted.length === 0 ? (
                <View className="items-center py-10 gap-3">
                   <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
-                     <MaterialCommunityIcons name="bullhorn-outline" size={24} color="#334155" />
+                     <MaterialCommunityIcons name="bullhorn-outline" size={24} color={Colors.icon.muted} />
                   </View>
                   <Typography className="text-secondary-400 text-sm">No notices yet</Typography>
                   {isOwner && (
@@ -108,7 +109,7 @@ export const GroupNoticeSection = ({
                         activeOpacity={0.75}
                         className="flex-row items-center gap-1.5 bg-primary/10 border border-primary/20 px-4 py-2 rounded-xl active:scale-95"
                      >
-                        <MaterialCommunityIcons name="plus" size={14} color="#F59E0B" />
+                        <MaterialCommunityIcons name="plus" size={14} color={Colors.icon.primary} />
                         <Typography className="text-primary text-xs font-bold">
                            Post First Notice
                         </Typography>
@@ -143,7 +144,7 @@ export const GroupNoticeSection = ({
                            <View className="flex-row items-start justify-between gap-2 mb-1">
                               <View className="flex-row items-center gap-1.5 flex-1 flex-wrap">
                                  {notice.isPinned && (
-                                    <MaterialCommunityIcons name="pin" size={12} color="#F59E0B" />
+                                    <MaterialCommunityIcons name="pin" size={12} color={Colors.icon.primary} />
                                  )}
                                  <Typography
                                     className="text-on-surface text-sm font-bold leading-snug flex-1"
@@ -167,7 +168,7 @@ export const GroupNoticeSection = ({
                                  <MaterialCommunityIcons
                                     name="account-outline"
                                     size={11}
-                                    color="#64748B"
+                                    color={Colors.icon.dim}
                                  />
                                  <Typography className="text-secondary-400 text-[10px]">
                                     {notice.postedBy}
@@ -176,7 +177,7 @@ export const GroupNoticeSection = ({
                            )}
                         </View>
 
-                        <MaterialCommunityIcons name="chevron-right" size={16} color="#334155" />
+                        <MaterialCommunityIcons name="chevron-right" size={16} color={Colors.icon.muted} />
                      </TouchableOpacity>
                   );
                })
@@ -192,12 +193,12 @@ export const GroupNoticeSection = ({
                      className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
                   >
                      <View className="w-9 h-9 rounded-xl bg-primary/10 items-center justify-center">
-                        <MaterialCommunityIcons name="plus" size={18} color="#F59E0B" />
+                        <MaterialCommunityIcons name="plus" size={18} color={Colors.icon.primary} />
                      </View>
                      <Typography className="text-primary text-sm font-bold flex-1">
                         Post New Notice
                      </Typography>
-                     <MaterialCommunityIcons name="arrow-right" size={16} color="#F59E0B" />
+                     <MaterialCommunityIcons name="arrow-right" size={16} color={Colors.icon.primary} />
                   </TouchableOpacity>
                </>
             )}

@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 type Role = "Owner" | "Manager" | "Member";
 
@@ -102,7 +103,7 @@ export const MyGroupsList = ({
                      </View>
                   ) : (
                      <View className="flex-row items-center gap-1">
-                        <MaterialCommunityIcons name="swap-horizontal" size={15} color="#334155" />
+                        <MaterialCommunityIcons name="swap-horizontal" size={15} color={Colors.icon.muted} />
                         <Typography className="text-secondary-400 text-[11px] font-bold">
                            Switch
                         </Typography>
@@ -121,7 +122,7 @@ export const MyGroupsList = ({
                className="flex-row items-center gap-3 px-4 py-4 active:bg-surface border-b border-outline/10"
             >
                <View className="w-11 h-11 rounded-2xl bg-primary/10 border border-primary/20 items-center justify-center">
-                  <MaterialCommunityIcons name="plus" size={20} color="#F59E0B" />
+                  <MaterialCommunityIcons name="plus" size={20} color={Colors.icon.primary} />
                </View>
                <Typography className="text-primary font-bold text-base">
                   Create New Group
@@ -135,7 +136,7 @@ export const MyGroupsList = ({
                className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
             >
                <View className="w-11 h-11 rounded-2xl bg-surface border border-outline/20 items-center justify-center">
-                  <MaterialCommunityIcons name="account-plus-outline" size={20} color="#94A3B8" />
+                  <MaterialCommunityIcons name="account-plus-outline" size={20} color={Colors.icon.subtle} />
                </View>
                <View className="flex-1">
                   <Typography className="text-on-surface font-semibold text-[15px]">
@@ -145,7 +146,7 @@ export const MyGroupsList = ({
                      Enter an invite code
                   </Typography>
                </View>
-               <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+               <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
             </TouchableOpacity>
          </View>
       </View>

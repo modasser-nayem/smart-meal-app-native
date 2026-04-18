@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Modal, ScrollView } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Notice } from "./GroupNoticeSection";
+import { Colors } from "@/constants/colors";
 
 interface NoticeDetailModalProps {
    notice: Notice | null;
@@ -21,7 +22,7 @@ const PIN_COLOR: Record<string, string> = {
 const PIN_BG: Record<string, string> = {
    primary: "bg-primary/10",
    info: "bg-info/10",
-   success: "bg-success/10",
+   success: "bg-accent/10",
    warning: "bg-error/10",
 };
 
@@ -94,14 +95,14 @@ export const NoticeDetailModal = ({
                         activeOpacity={0.75}
                         className="w-9 h-9 rounded-full bg-error/10 items-center justify-center active:scale-90"
                      >
-                        <MaterialCommunityIcons name="delete-outline" size={18} color="#EF4444" />
+                        <MaterialCommunityIcons name="delete-outline" size={18} color={Colors.icon.error} />
                      </TouchableOpacity>
                   )}
                   <TouchableOpacity
                      onPress={onClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
             </View>
@@ -118,7 +119,7 @@ export const NoticeDetailModal = ({
 
                   {/* Meta */}
                   <View className="flex-row items-center gap-2">
-                     <MaterialCommunityIcons name="clock-outline" size={13} color="#64748B" />
+                     <MaterialCommunityIcons name="clock-outline" size={13} color={Colors.icon.dim} />
                      <Typography className="text-secondary-400 text-xs">
                         {notice.timeAgo}
                      </Typography>
@@ -128,7 +129,7 @@ export const NoticeDetailModal = ({
                            <MaterialCommunityIcons
                               name="account-outline"
                               size={13}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <Typography className="text-secondary-400 text-xs">
                               {notice.postedBy}

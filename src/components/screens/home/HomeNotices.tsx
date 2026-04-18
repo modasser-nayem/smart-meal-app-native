@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Notice } from "@/components/screens/group/GroupNoticeSection";
 import { NoticeDetailModal } from "@/components/screens/group/NoticeDetailModal";
+import { Colors } from "@/constants/colors";
 
 interface HomeNoticesProps {
    notices: Notice[];
@@ -27,7 +28,7 @@ const TYPE_ICON: Record<string, string> = {
 const TYPE_BG: Record<string, string> = {
    primary: "bg-primary/10",
    info: "bg-info/10",
-   success: "bg-success/10",
+   success: "bg-accent/10",
    warning: "bg-error/10",
 };
 
@@ -92,7 +93,7 @@ export const HomeNotices = ({ notices, onSeeAll }: HomeNoticesProps) => {
                      <View className="flex-1 min-w-0">
                         <View className="flex-row items-center gap-1.5 mb-0.5">
                            {notice.isPinned && (
-                              <MaterialCommunityIcons name="pin" size={11} color="#F59E0B" />
+                              <MaterialCommunityIcons name="pin" size={11} color={Colors.icon.primary} />
                            )}
                            <Typography
                               className="text-on-surface text-sm font-bold flex-1"
@@ -114,7 +115,7 @@ export const HomeNotices = ({ notices, onSeeAll }: HomeNoticesProps) => {
                         <Typography className="text-secondary-400 text-[10px]">
                            {notice.timeAgo}
                         </Typography>
-                        <MaterialCommunityIcons name="chevron-right" size={14} color="#334155" />
+                        <MaterialCommunityIcons name="chevron-right" size={14} color={Colors.icon.muted} />
                      </View>
                   </TouchableOpacity>
                );

@@ -1,18 +1,8 @@
-import {
-   TouchableOpacity,
-   ActivityIndicator,
-   Text,
-   TouchableOpacityProps,
-} from "react-native";
+import { TouchableOpacity, ActivityIndicator, Text, TouchableOpacityProps } from "react-native";
 import { cn } from "@/lib/utils";
+import { Colors } from "@/constants/colors";
 
-type Variant =
-   | "primary"
-   | "secondary"
-   | "outline"
-   | "ghost"
-   | "danger"
-   | "success";
+type Variant = "primary" | "secondary" | "outline" | "ghost" | "danger" | "success";
 type Size = "sm" | "md" | "lg";
 
 interface ButtonProps extends TouchableOpacityProps {
@@ -25,29 +15,29 @@ interface ButtonProps extends TouchableOpacityProps {
 
 const variants: Record<Variant, string> = {
    primary: "bg-primary active:bg-primary-dark",
-   secondary: "bg-secondary active:bg-slate-700",
+   secondary: "bg-surface-container active:bg-surface-elevated",
    outline: "border border-primary bg-transparent active:bg-primary/10",
-   ghost: "bg-transparent active:bg-slate-800",
-   danger: "bg-danger active:bg-red-600",
-   success: "bg-success active:bg-emerald-600",
+   ghost: "bg-transparent active:bg-surface",
+   danger: "bg-error active:bg-error/80",
+   success: "bg-success active:bg-success/80",
 };
 
 const loaderColors: Record<Variant, string> = {
-   primary: "#0F172A",
-   secondary: "#FFFFFF",
-   outline: "#F59E0B",
-   ghost: "#94A3B8",
-   danger: "#FFFFFF",
-   success: "#FFFFFF",
+   primary: Colors.onPrimary,
+   secondary: Colors.onSurface,
+   outline: Colors.primary,
+   ghost: Colors.textSubtle,
+   danger: Colors.onSurface,
+   success: Colors.onPrimary,
 };
 
 const textVariants: Record<Variant, string> = {
-   primary: "text-background font-bold",
-   secondary: "text-white font-medium",
+   primary: "text-on-primary font-bold",
+   secondary: "text-on-surface font-medium",
    outline: "text-primary font-medium",
-   ghost: "text-muted font-medium",
-   danger: "text-white font-bold",
-   success: "text-white font-bold",
+   ghost: "text-secondary-300 font-medium",
+   danger: "text-on-surface font-bold",
+   success: "text-on-primary font-bold",
 };
 
 const sizes: Record<Size, string> = {
@@ -81,14 +71,9 @@ export const Button = ({
       {...props}
    >
       {loading ? (
-         <ActivityIndicator
-            color={loaderColors[variant]}
-            size="small"
-         />
+         <ActivityIndicator color={loaderColors[variant]} size="small" />
       ) : (
-         <Text className={cn("text-sm", textVariants[variant])}>
-            {children}
-         </Text>
+         <Text className={cn("text-sm", textVariants[variant])}>{children}</Text>
       )}
    </TouchableOpacity>
 );

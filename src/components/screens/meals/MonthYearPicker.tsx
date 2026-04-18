@@ -4,6 +4,7 @@ import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format, setMonth, setYear, getYear, getMonth } from "date-fns";
 import { cn } from "@/lib/utils";
+import { Colors } from "@/constants/colors";
 
 interface MonthYearPickerProps {
    visible: boolean;
@@ -31,7 +32,7 @@ export const MonthYearPicker = ({
          setDraftMonth(getMonth(selectedDate));
          setDraftYear(getYear(selectedDate));
       }
-   }, [visible]);
+   }, [visible, selectedDate]);
 
    const handleApply = () => {
       const result = setYear(setMonth(new Date(selectedDate), draftMonth), draftYear);
@@ -60,7 +61,7 @@ export const MonthYearPicker = ({
                      onPress={onClose}
                      className="w-9 h-9 rounded-full bg-surface-container items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 

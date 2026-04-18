@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 export interface MemberBalance {
    id: string;
@@ -79,7 +80,7 @@ export const MemberBalances = ({ balances }: MemberBalancesProps) => {
                         {/* Balance pill */}
                         <View
                            className={`px-3 py-1.5 rounded-xl ${
-                              isSurplus ? "bg-success/10" : "bg-error/10"
+                              isSurplus ? "bg-accent/10" : "bg-error/10"
                            }`}
                         >
                            <Typography
@@ -98,7 +99,7 @@ export const MemberBalances = ({ balances }: MemberBalancesProps) => {
                            <MaterialCommunityIcons
                               name="silverware-fork-knife"
                               size={11}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <Typography className="text-secondary-400 text-[11px]">
                               {member.meals}{" "}
@@ -111,7 +112,7 @@ export const MemberBalances = ({ balances }: MemberBalancesProps) => {
                            <MaterialCommunityIcons
                               name="calculator-variant-outline"
                               size={11}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <Typography className="text-secondary-400 text-[11px]">
                               Cost{" "}
@@ -121,7 +122,7 @@ export const MemberBalances = ({ balances }: MemberBalancesProps) => {
                            </Typography>
                         </View>
                         <View className="flex-row items-center gap-1 bg-surface px-2.5 py-1 rounded-lg">
-                           <MaterialCommunityIcons name="cash-check" size={11} color="#64748B" />
+                           <MaterialCommunityIcons name="cash-check" size={11} color={Colors.icon.dim} />
                            <Typography className="text-secondary-400 text-[11px]">
                               Paid{" "}
                               <Typography className="text-secondary-300 text-[11px] font-bold">

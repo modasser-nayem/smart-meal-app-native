@@ -16,6 +16,7 @@ import {
 } from "@/components/screens/expense/SettlementSuggestions";
 import { ExpenseOwnerActions } from "@/components/screens/expense/ExpenseOwnerActions";
 import { AddExpenseSheet } from "@/components/screens/expense/AddExpenseSheet";
+import { Colors } from "@/constants/colors";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
@@ -251,7 +252,7 @@ export default function ExpenseScreen() {
             className="absolute bottom-6 right-5 w-14 h-14 bg-primary rounded-2xl items-center justify-center"
             style={{ elevation: 8 }}
          >
-            <MaterialCommunityIcons name="plus" size={28} color="#0F172A" />
+            <MaterialCommunityIcons name="plus" size={28} color={Colors.icon.onPrimary} />
          </TouchableOpacity>
 
          {/* Add Expense Sheet */}

@@ -12,6 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { format, addDays, subDays } from "date-fns";
+import { Colors } from "@/constants/colors";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -63,7 +64,7 @@ const MEAL_OPTIONS: {
       label: "Breakfast",
       icon: "weather-sunset",
       time: "Morning",
-      color: "#F59E0B",
+      color: Colors.icon.primary,
       bg: "bg-primary/10",
    },
    {
@@ -71,15 +72,15 @@ const MEAL_OPTIONS: {
       label: "Lunch",
       icon: "weather-sunny",
       time: "Afternoon",
-      color: "#22C55E",
-      bg: "bg-success/10",
+      color: Colors.icon.success,
+      bg: "bg-accent/10",
    },
    {
       key: "dinner",
       label: "Dinner",
       icon: "weather-night",
       time: "Evening",
-      color: "#3B82F6",
+      color: Colors.icon.info,
       bg: "bg-info/10",
    },
 ];
@@ -101,12 +102,12 @@ const QuantityStepper = ({
          activeOpacity={0.75}
          className="w-8 h-8 rounded-full bg-surface border border-outline/20 items-center justify-center active:scale-90"
       >
-         <MaterialCommunityIcons name="minus" size={16} color="#94A3B8" />
+         <MaterialCommunityIcons name="minus" size={16} color={Colors.icon.subtle} />
       </TouchableOpacity>
       <View className="w-8 items-center">
          <Typography
             className="text-on-surface font-extrabold text-lg"
-            style={{ color: value > 0 ? color : "#64748B" }}
+            style={{ color: value > 0 ? color : Colors.icon.dim }}
          >
             {value}
          </Typography>
@@ -116,7 +117,7 @@ const QuantityStepper = ({
          activeOpacity={0.75}
          className="w-8 h-8 rounded-full bg-surface border border-outline/20 items-center justify-center active:scale-90"
       >
-         <MaterialCommunityIcons name="plus" size={16} color="#94A3B8" />
+         <MaterialCommunityIcons name="plus" size={16} color={Colors.icon.subtle} />
       </TouchableOpacity>
    </View>
 );
@@ -215,7 +216,7 @@ export const LogMealSheet = ({
                      onPress={handleClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -239,7 +240,7 @@ export const LogMealSheet = ({
                               <MaterialCommunityIcons
                                  name="chevron-left"
                                  size={20}
-                                 color="#94A3B8"
+                                 color={Colors.icon.subtle}
                               />
                            </TouchableOpacity>
                            <View className="flex-1 items-center">
@@ -258,7 +259,7 @@ export const LogMealSheet = ({
                               <MaterialCommunityIcons
                                  name="chevron-right"
                                  size={20}
-                                 color="#94A3B8"
+                                 color={Colors.icon.subtle}
                               />
                            </TouchableOpacity>
                         </View>
@@ -344,7 +345,7 @@ export const LogMealSheet = ({
                                                 <MaterialCommunityIcons
                                                    name="check"
                                                    size={10}
-                                                   color="#0F172A"
+                                                   color={Colors.icon.onPrimary}
                                                 />
                                              </View>
                                           )}
@@ -408,7 +409,7 @@ export const LogMealSheet = ({
                               <MaterialCommunityIcons
                                  name="silverware-fork-knife"
                                  size={14}
-                                 color="#F59E0B"
+                                 color={Colors.icon.primary}
                               />
                               <Typography className="text-secondary-300 text-xs">
                                  {activeMeals
@@ -429,7 +430,7 @@ export const LogMealSheet = ({
                               value={note}
                               onChangeText={setNote}
                               placeholder="Any note about this meal..."
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               multiline
                               numberOfLines={2}
                               textAlignVertical="top"

@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Modal, Switch } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { PendingItem } from "./GroupRequestsSection";
+import { Colors } from "@/constants/colors";
 
 interface AcceptRequestModalProps {
    item: PendingItem | null;
@@ -45,7 +46,7 @@ export const AcceptRequestModal = ({
          <TouchableOpacity className="flex-1 bg-black/60" activeOpacity={1} onPress={handleClose} />
 
          {/* Sheet */}
-         <View className="bg-surface-container rounded-t-[32px] px-6 pt-4 pb-10 border-t border-outline/10">
+         <View className="bg-surface-container rounded-t-[32px] px-6 pt-4 pb-12 border-t border-outline/10">
             {/* Handle */}
             <View className="w-10 h-1 rounded-full bg-outline/30 self-center mb-5" />
 
@@ -58,7 +59,7 @@ export const AcceptRequestModal = ({
                   onPress={handleClose}
                   className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                >
-                  <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                  <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                </TouchableOpacity>
             </View>
 
@@ -136,7 +137,7 @@ export const AcceptRequestModal = ({
                   activeOpacity={0.85}
                   className="h-14 bg-success rounded-2xl items-center justify-center flex-row gap-2 active:opacity-80"
                >
-                  <MaterialCommunityIcons name="check-circle" size={20} color="#0F172A" />
+                  <MaterialCommunityIcons name="check-circle" size={20} color={Colors.icon.onPrimary} />
                   <Typography className="text-background font-bold text-base">
                      Accept Member
                   </Typography>

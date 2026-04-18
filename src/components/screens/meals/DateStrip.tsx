@@ -3,6 +3,7 @@ import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { cn } from "@/lib/utils";
 import { format, addDays, subDays, isSameDay } from "date-fns";
+import { Colors } from "@/constants/colors";
 
 interface DateStripProps {
    selectedDate: Date;
@@ -33,7 +34,7 @@ export const DateStrip = ({ selectedDate, onDateChange, onCalendarPress }: DateS
                onPress={onCalendarPress}
                className="w-[52px] h-[52px] rounded-2xl bg-surface-container border border-primary/20 items-center justify-center mr-3 active:scale-95"
             >
-               <MaterialCommunityIcons name="calendar-month" size={22} color="#F59E0B" />
+               <MaterialCommunityIcons name="calendar-month" size={22} color={Colors.icon.primary} />
             </TouchableOpacity>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-row">

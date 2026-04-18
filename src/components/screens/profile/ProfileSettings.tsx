@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Switch } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -54,10 +55,10 @@ const SettingRow = ({
       ) : value !== undefined ? (
          <View className="flex-row items-center gap-1.5">
             <Typography className="text-secondary-300 text-sm font-medium">{value}</Typography>
-            <MaterialCommunityIcons name="chevron-right" size={16} color="#334155" />
+            <MaterialCommunityIcons name="chevron-right" size={16} color={Colors.icon.muted} />
          </View>
       ) : (
-         <MaterialCommunityIcons name="chevron-right" size={18} color="#334155" />
+         <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
       )}
    </TouchableOpacity>
 );
@@ -156,7 +157,7 @@ export const ProfileSettings = ({
                className="flex-row items-center gap-3 px-4 py-4 active:bg-surface border-b border-outline/10"
             >
                <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
-                  <MaterialCommunityIcons name="logout" size={20} color="#EF4444" />
+                  <MaterialCommunityIcons name="logout" size={20} color={Colors.icon.error} />
                </View>
                <Typography className="text-error font-bold text-base">Log Out</Typography>
             </TouchableOpacity>
@@ -167,7 +168,7 @@ export const ProfileSettings = ({
                className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
             >
                <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
-                  <MaterialCommunityIcons name="delete-forever-outline" size={20} color="#EF4444" />
+                  <MaterialCommunityIcons name="delete-forever-outline" size={20} color={Colors.icon.error} />
                </View>
                <View className="flex-1">
                   <Typography className="text-error font-bold text-base">Delete Account</Typography>

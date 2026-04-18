@@ -4,6 +4,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Notice } from "@/components/screens/group/GroupNoticeSection";
 import { NoticeDetailModal } from "@/components/screens/group/NoticeDetailModal";
+import { Colors } from "@/constants/colors";
 
 interface NoticesPanelSheetProps {
    visible: boolean;
@@ -13,10 +14,10 @@ interface NoticesPanelSheetProps {
 }
 
 const TYPE_COLOR: Record<string, string> = {
-   primary: "#F59E0B",
-   info: "#3B82F6",
-   success: "#22C55E",
-   warning: "#EF4444",
+   primary: Colors.icon.primary,
+   info: Colors.icon.info,
+   success: Colors.icon.success,
+   warning: Colors.icon.error,
 };
 
 const TYPE_ICON: Record<string, string> = {
@@ -29,7 +30,7 @@ const TYPE_ICON: Record<string, string> = {
 const TYPE_BG: Record<string, string> = {
    primary: "bg-primary/10",
    info: "bg-info/10",
-   success: "bg-success/10",
+   success: "bg-accent/10",
    warning: "bg-error/10",
 };
 
@@ -58,7 +59,7 @@ export const NoticesPanelSheet = ({
             <TouchableOpacity className="flex-1 bg-black/60" activeOpacity={1} onPress={onClose} />
 
             {/* Sheet */}
-            <View className="bg-surface-container rounded-t-[32px] border-t border-outline/10 max-h-[75%]">
+            <View className="bg-surface-container rounded-t-[32px] border-t border-outline/10 max-h-[75%] pb-safe">
                {/* Handle */}
                <View className="w-10 h-1 rounded-full bg-outline/30 self-center mt-3 mb-1" />
 
@@ -66,7 +67,7 @@ export const NoticesPanelSheet = ({
                <View className="flex-row items-center justify-between px-6 py-4 border-b border-outline/10">
                   <View className="flex-row items-center gap-3">
                      <View className="w-9 h-9 rounded-xl bg-primary/10 items-center justify-center">
-                        <MaterialCommunityIcons name="bullhorn-outline" size={18} color="#F59E0B" />
+                        <MaterialCommunityIcons name="bullhorn-outline" size={18} color={Colors.icon.primary} />
                      </View>
                      <View>
                         <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
@@ -81,7 +82,7 @@ export const NoticesPanelSheet = ({
                      onPress={onClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -89,7 +90,7 @@ export const NoticesPanelSheet = ({
                {sorted.length === 0 ? (
                   <View className="items-center py-16 gap-3">
                      <View className="w-14 h-14 rounded-2xl bg-surface items-center justify-center">
-                        <MaterialCommunityIcons name="bullhorn-outline" size={28} color="#334155" />
+                        <MaterialCommunityIcons name="bullhorn-outline" size={28} color={Colors.icon.muted} />
                      </View>
                      <Typography className="text-secondary-400 text-sm">
                         No notices from your group
@@ -132,7 +133,7 @@ export const NoticesPanelSheet = ({
                                           <MaterialCommunityIcons
                                              name="pin"
                                              size={11}
-                                             color="#F59E0B"
+                                             color={Colors.icon.primary}
                                           />
                                        )}
                                        <Typography
@@ -154,7 +155,7 @@ export const NoticesPanelSheet = ({
                                              <MaterialCommunityIcons
                                                 name="account-outline"
                                                 size={11}
-                                                color="#64748B"
+                                                color={Colors.icon.dim}
                                              />
                                              <Typography className="text-secondary-400 text-[10px]">
                                                 {notice.postedBy}
@@ -170,7 +171,7 @@ export const NoticesPanelSheet = ({
                                  <MaterialCommunityIcons
                                     name="chevron-right"
                                     size={16}
-                                    color="#334155"
+                                    color={Colors.icon.muted}
                                  />
                               </TouchableOpacity>
                            );
@@ -189,7 +190,7 @@ export const NoticesPanelSheet = ({
                         <Typography className="text-secondary-300 text-sm font-semibold">
                            Open Group Noticeboard
                         </Typography>
-                        <MaterialCommunityIcons name="arrow-right" size={16} color="#64748B" />
+                        <MaterialCommunityIcons name="arrow-right" size={16} color={Colors.icon.dim} />
                      </TouchableOpacity>
                   </ScrollView>
                )}

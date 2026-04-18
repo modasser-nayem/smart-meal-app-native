@@ -11,6 +11,7 @@ import {
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
+import { Colors } from "@/constants/colors";
 
 type ExpenseType = "meal" | "group";
 
@@ -94,7 +95,7 @@ export const AddExpenseSheet = ({
                      onPress={handleClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -110,7 +111,7 @@ export const AddExpenseSheet = ({
                            value={amount}
                            onChangeText={setAmount}
                            placeholder="0"
-                           placeholderTextColor="#334155"
+                           placeholderTextColor={Colors.placeholder}
                            keyboardType="decimal-pad"
                            className="text-on-surface text-6xl font-extrabold text-center min-w-[120px]"
                            style={{ includeFontPadding: false }}
@@ -160,13 +161,13 @@ export const AddExpenseSheet = ({
                            <MaterialCommunityIcons
                               name="shopping-outline"
                               size={20}
-                              color="#64748B"
+                              color={Colors.icon.dim}
                            />
                            <TextInput
                               value={title}
                               onChangeText={setTitle}
                               placeholder="e.g. Monthly Groceries"
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               className="flex-1 text-on-surface text-base"
                            />
                         </View>
@@ -181,7 +182,7 @@ export const AddExpenseSheet = ({
                            <MaterialCommunityIcons
                               name="calendar-outline"
                               size={20}
-                              color="#F59E0B"
+                              color={Colors.icon.primary}
                            />
                            <Typography className="text-on-surface text-base font-medium">
                               {today}
@@ -199,7 +200,7 @@ export const AddExpenseSheet = ({
                               value={description}
                               onChangeText={setDescription}
                               placeholder="Any notes about this expense..."
-                              placeholderTextColor="#334155"
+                              placeholderTextColor={Colors.placeholder}
                               multiline
                               numberOfLines={3}
                               textAlignVertical="top"

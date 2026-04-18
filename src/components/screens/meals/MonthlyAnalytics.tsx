@@ -7,6 +7,7 @@ import QuickMealsViewCard from "./QuickMealsViewCard";
 import MembersMealParticipation from "./MembersMealParticipation";
 import { MonthStrip } from "./MonthStrip";
 import { MonthlyMealMatrix } from "./MonthlyMealMatrix";
+import { Colors } from "@/constants/colors";
 
 export const MonthlyAnalytics = ({
    selectedMonth,
@@ -166,7 +167,7 @@ export const MonthlyAnalytics = ({
                className="w-full h-14 rounded-3xl bg-surface-container border border-outline/10 items-center justify-center flex-row gap-2.5 active:bg-surface"
             >
                <View className="w-8 h-8 rounded-xl bg-info/10 items-center justify-center">
-                  <MaterialCommunityIcons name="file-export-outline" size={18} color="#3B82F6" />
+                  <MaterialCommunityIcons name="file-export-outline" size={18} color={Colors.icon.info} />
                </View>
                <Typography className="text-on-surface font-bold text-sm">
                   Export Monthly Report

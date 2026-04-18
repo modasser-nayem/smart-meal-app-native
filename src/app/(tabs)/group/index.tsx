@@ -13,6 +13,7 @@ import { GroupNoticeSection, Notice } from "@/components/screens/group/GroupNoti
 import { PostNoticeSheet, NewNotice } from "@/components/screens/group/PostNoticeSheet";
 import { GroupMembersSection, Member } from "@/components/screens/group/GroupMembersSection";
 import { GroupRequestsSection, PendingItem } from "@/components/screens/group/GroupRequestsSection";
+import { Colors } from "@/constants/colors";
 
 // ─── Mock data ────────────────────────────────────────────────────────────────
 
@@ -255,7 +256,7 @@ export default function GroupScreen() {
                   activeOpacity={0.75}
                   className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
                >
-                  <MaterialCommunityIcons name="bell-outline" size={22} color="#F8FAFC" />
+                  <MaterialCommunityIcons name="bell-outline" size={22} color={Colors.icon.onDark} />
                   <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
                </TouchableOpacity>
             </View>

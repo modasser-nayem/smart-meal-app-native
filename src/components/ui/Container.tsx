@@ -14,23 +14,30 @@ export const Container = ({
    scrollable = false,
    withSafeArea = true,
    statusBarVariant = "light",
-   padding = true,
+   padding = false, // default OFF — screens manage their own padding
    className,
    children,
    ...props
 }: ContainerProps) => {
    const Wrapper = withSafeArea ? SafeAreaView : View;
-   const ContentWrapper = scrollable ? ScrollView : View;
 
    return (
       <Wrapper className="flex-1 bg-background">
          <StatusBar style={statusBarVariant} />
-         <ContentWrapper
-            className={cn("flex-1", padding && "px-md pb-2", className)}
-            {...props}
-         >
-            {children}
-         </ContentWrapper>
+         {scrollable ? (
+            <ScrollView
+               className={cn("flex-1", padding && "px-6", className)}
+               showsVerticalScrollIndicator={false}
+               keyboardShouldPersistTaps="handled"
+               {...(props as any)}
+            >
+               {children}
+            </ScrollView>
+         ) : (
+            <View className={cn("flex-1", padding && "px-6", className)} {...props}>
+               {children}
+            </View>
+         )}
       </Wrapper>
    );
 };

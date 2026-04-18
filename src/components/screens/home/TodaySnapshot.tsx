@@ -2,6 +2,7 @@ import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
+import { Colors } from "@/constants/colors";
 
 interface MealShotProps {
    label: string;
@@ -102,7 +103,7 @@ export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
                activeOpacity={0.75}
                className="w-9 h-9 bg-surface-container rounded-full items-center justify-center border border-outline/10 active:scale-95"
             >
-               <MaterialCommunityIcons name="chevron-right" size={20} color="#F8FAFC" />
+               <MaterialCommunityIcons name="chevron-right" size={20} color={Colors.icon.onDark} />
             </TouchableOpacity>
          </View>
 
@@ -111,7 +112,7 @@ export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
             <View className="flex-1 bg-surface-container rounded-2xl p-4 border border-outline/10">
                <View className="flex-row items-center gap-2 mb-2">
                   <View className="w-7 h-7 rounded-lg bg-surface items-center justify-center">
-                     <MaterialCommunityIcons name="account-group" size={14} color="#94A3B8" />
+                     <MaterialCommunityIcons name="account-group" size={14} color={Colors.icon.subtle} />
                   </View>
                   <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
                      Group
@@ -128,7 +129,7 @@ export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
             <View className="flex-1 bg-primary/10 rounded-2xl p-4 border border-primary/20">
                <View className="flex-row items-center gap-2 mb-2">
                   <View className="w-7 h-7 rounded-lg bg-primary/20 items-center justify-center">
-                     <MaterialCommunityIcons name="account-check" size={14} color="#F59E0B" />
+                     <MaterialCommunityIcons name="account-check" size={14} color={Colors.icon.primary} />
                   </View>
                   <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
                      Mine

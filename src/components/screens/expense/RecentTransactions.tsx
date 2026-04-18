@@ -1,7 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { Colors } from "@/constants/colors";
 export type TransactionType = "meal" | "group";
 
 export interface Transaction {
@@ -27,13 +27,13 @@ const TYPE_CONFIG: Record<
    meal: {
       color: "bg-primary/10",
       label: "Meal",
-      iconColor: "#F59E0B",
+      iconColor: Colors.icon.primary,
       border: "border-l-primary",
    },
    group: {
       color: "bg-info/10",
       label: "Group",
-      iconColor: "#3B82F6",
+      iconColor: Colors.icon.info,
       border: "border-l-info",
    },
 };
@@ -50,7 +50,11 @@ export const RecentTransactions = ({
                Transactions
             </Typography>
             <View className="bg-surface-container rounded-3xl px-5 py-10 items-center border border-outline">
-               <MaterialCommunityIcons name="receipt-text-outline" size={36} color="#334155" />
+               <MaterialCommunityIcons
+                  name="receipt-text-outline"
+                  size={36}
+                  color={Colors.icon.muted}
+               />
                <Typography className="text-secondary-400 text-sm mt-3">
                   No transactions yet
                </Typography>

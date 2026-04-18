@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface JoinGroupModalProps {
    visible: boolean;
@@ -68,7 +69,7 @@ export const JoinGroupModal = ({
                      onPress={handleClose}
                      className="w-9 h-9 rounded-full bg-surface items-center justify-center active:scale-90"
                   >
-                     <MaterialCommunityIcons name="close" size={18} color="#94A3B8" />
+                     <MaterialCommunityIcons name="close" size={18} color={Colors.icon.subtle} />
                   </TouchableOpacity>
                </View>
 
@@ -78,12 +79,12 @@ export const JoinGroupModal = ({
                      Invite Code
                   </Typography>
                   <View className="flex-row items-center bg-surface border border-outline/30 rounded-2xl px-4 h-16 gap-3">
-                     <MaterialCommunityIcons name="pound" size={20} color="#F59E0B" />
+                     <MaterialCommunityIcons name="pound" size={20} color={Colors.icon.primary} />
                      <TextInput
                         value={code}
                         onChangeText={(t) => setCode(t.toUpperCase())}
                         placeholder="e.g. BCHH-4821"
-                        placeholderTextColor="#334155"
+                        placeholderTextColor={Colors.placeholder}
                         autoCapitalize="characters"
                         autoCorrect={false}
                         maxLength={12}
@@ -91,7 +92,7 @@ export const JoinGroupModal = ({
                      />
                      {code.length > 0 && (
                         <TouchableOpacity onPress={() => setCode("")} activeOpacity={0.7}>
-                           <MaterialCommunityIcons name="close-circle" size={18} color="#334155" />
+                           <MaterialCommunityIcons name="close-circle" size={18} color={Colors.icon.muted} />
                         </TouchableOpacity>
                      )}
                   </View>

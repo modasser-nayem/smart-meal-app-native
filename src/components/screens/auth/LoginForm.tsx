@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { setCredentials } from "@/store/authSlice";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Toast } from "toastify-react-native";
+import { Colors } from "@/constants/colors";
 
 export const LoginForm = () => {
    const router = useRouter();
@@ -78,7 +79,7 @@ export const LoginForm = () => {
                <MaterialCommunityIcons
                   name="silverware-fork-knife"
                   size={36}
-                  color="#F59E0B"
+                  color={Colors.icon.primary}
                />
                <Typography className="text-xl font-bold tracking-tight text-primary">
                   Smart Meal
@@ -87,7 +88,7 @@ export const LoginForm = () => {
             <View className="items-center space-y-3">
                <Typography
                   variant="h1"
-                  className="text-[44px] font-bold leading-tight text-white text-center"
+                  className="text-[44px] font-bold leading-tight text-on-surface text-center"
                >
                   Welcome Back 👋
                </Typography>
@@ -117,7 +118,7 @@ export const LoginForm = () => {
                         <MaterialCommunityIcons
                            name="email-outline"
                            size={20}
-                           color="#94A3B8"
+                           color={Colors.icon.subtle}
                         />
                      }
                   />
@@ -151,7 +152,7 @@ export const LoginForm = () => {
                            <MaterialCommunityIcons
                               name="lock-outline"
                               size={20}
-                              color="#94A3B8"
+                              color={Colors.icon.subtle}
                            />
                         }
                         rightIcon={
@@ -165,7 +166,7 @@ export const LoginForm = () => {
                                        : "eye-off-outline"
                                  }
                                  size={20}
-                                 color="#94A3B8"
+                                 color={Colors.icon.subtle}
                               />
                            </TouchableOpacity>
                         }
@@ -198,7 +199,7 @@ export const LoginForm = () => {
                <MaterialCommunityIcons
                   name="google-plus"
                   size={28}
-                  color="#94A3B8"
+                  color={Colors.icon.subtle}
                />
                <Typography className="font-semibold text-on-surface">
                   Continue with Google

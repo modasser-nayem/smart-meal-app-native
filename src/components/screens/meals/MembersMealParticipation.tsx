@@ -1,11 +1,12 @@
 import { View, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 const MEAL_ICONS = {
-   breakfast: { icon: "weather-sunset", color: "#F59E0B" },
-   lunch: { icon: "weather-sunny", color: "#22C55E" },
-   dinner: { icon: "weather-night", color: "#3B82F6" },
+   breakfast: { icon: "weather-sunset", color: Colors.icon.primary },
+   lunch: { icon: "weather-sunny", color: Colors.icon.success },
+   dinner: { icon: "weather-night", color: Colors.icon.info },
 } as const;
 
 const MealDot = ({ icon, count, color }: { icon: string; count: number; color: string }) => (
@@ -64,7 +65,7 @@ const MembersMealParticipation = ({ members }: MembersMealParticipationProps) =>
                         </View>
                         {isMe && (
                            <View className="absolute -right-1 -top-1 bg-primary w-4 h-4 rounded-full items-center justify-center border-2 border-background">
-                              <MaterialCommunityIcons name="star" size={8} color="#0F172A" />
+                              <MaterialCommunityIcons name="star" size={8} color={Colors.icon.onPrimary} />
                            </View>
                         )}
                      </View>

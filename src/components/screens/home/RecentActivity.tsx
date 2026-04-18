@@ -1,6 +1,7 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ActivityItemProps {
    name: string;
@@ -31,14 +32,14 @@ const ActivityItem = ({ name, action, highlight, time, avatar, onPress }: Activi
             {time}
          </Typography>
       </View>
-      <MaterialCommunityIcons name="chevron-right" size={16} color="#334155" />
+      <MaterialCommunityIcons name="chevron-right" size={16} color={Colors.icon.muted} />
    </TouchableOpacity>
 );
 
 const EmptyActivity = () => (
    <View className="bg-surface-container rounded-2xl border border-outline/10 px-4 py-10 items-center gap-3">
       <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
-         <MaterialCommunityIcons name="timeline-outline" size={24} color="#334155" />
+         <MaterialCommunityIcons name="timeline-outline" size={24} color={Colors.icon.muted} />
       </View>
       <Typography className="text-secondary-400 text-sm text-center">
          No activity yet today

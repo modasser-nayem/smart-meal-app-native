@@ -1,6 +1,7 @@
 import { View, ScrollView, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface Member {
    id: string;
@@ -32,9 +33,9 @@ interface LedgerWorkbook {
 }
 
 const MEAL_ROWS: { key: keyof MealCounts; icon: string; color: string }[] = [
-   { key: "b", icon: "weather-sunset", color: "#F59E0B" },
-   { key: "l", icon: "weather-sunny", color: "#22C55E" },
-   { key: "d", icon: "weather-night", color: "#3B82F6" },
+   { key: "b", icon: "weather-sunset", color: Colors.icon.primary },
+   { key: "l", icon: "weather-sunny", color: Colors.icon.success },
+   { key: "d", icon: "weather-night", color: Colors.icon.info },
 ];
 
 const Cell = ({
@@ -243,9 +244,9 @@ export const MonthlyMealMatrix = ({ workbook }: { workbook: LedgerWorkbook }) =>
             </Typography>
             <View className="flex-row items-center gap-4">
                {[
-                  { color: "#F59E0B", label: "B" },
-                  { color: "#22C55E", label: "L" },
-                  { color: "#3B82F6", label: "D" },
+                  { color: Colors.icon.primary, label: "B" },
+                  { color: Colors.icon.success, label: "L" },
+                  { color: Colors.icon.info, label: "D" },
                ].map(({ color, label }) => (
                   <View key={label} className="flex-row items-center gap-1">
                      <View className="w-2 h-2 rounded-full" style={{ backgroundColor: color }} />

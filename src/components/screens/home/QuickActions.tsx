@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Colors } from "@/constants/colors";
 
 interface ActionItemProps {
    label: string;
@@ -49,7 +50,7 @@ export const QuickActions = ({
                description="Record today's meals"
                icon="silverware-fork-knife"
                iconBg="bg-primary/10"
-               iconColor="#F59E0B"
+               iconColor={Colors.icon.primary}
                onPress={onLogMeal}
             />
             <ActionItem
@@ -57,7 +58,7 @@ export const QuickActions = ({
                description="Record a group cost"
                icon="card-plus-outline"
                iconBg="bg-info/10"
-               iconColor="#3B82F6"
+               iconColor={Colors.icon.info}
                onPress={onAddExpense}
             />
             <ActionItem
@@ -65,7 +66,7 @@ export const QuickActions = ({
                description="View billing & balances"
                icon="wallet-outline"
                iconBg="bg-success/10"
-               iconColor="#22C55E"
+               iconColor={Colors.icon.success}
                onPress={onViewExpenses}
             />
             <ActionItem
@@ -73,7 +74,7 @@ export const QuickActions = ({
                description="Group & join requests"
                icon="account-group-outline"
                iconBg="bg-secondary-600/30"
-               iconColor="#94A3B8"
+               iconColor={Colors.icon.subtle}
                onPress={onMembers}
             />
          </View>

@@ -10,6 +10,7 @@ import {
 } from "@expo-google-fonts/inter";
 import { store } from "@/store";
 import ToastManager from "toastify-react-native";
+import { Colors } from "@/constants/colors";
 
 export default function RootLayout() {
    const [fontsLoaded] = useFonts({
@@ -25,7 +26,7 @@ export default function RootLayout() {
             <Stack
                screenOptions={{
                   headerShown: false,
-                  contentStyle: { backgroundColor: "#0F172A" },
+                  contentStyle: { backgroundColor: Colors.background },
                }}
             >
                <Stack.Screen name="(startup)" />

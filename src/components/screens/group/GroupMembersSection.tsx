@@ -3,6 +3,7 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { MemberInfoModal } from "./MemberInfoModal";
+import { Colors } from "@/constants/colors";
 
 export type MemberRole = "Owner" | "Manager" | "Member";
 
@@ -95,7 +96,7 @@ export const GroupMembersSection = ({
                         {/* Online dot */}
                         <View
                            className={`absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 rounded-full border-2 border-surface-container ${
-                              member.isActive ? "bg-success" : "bg-outline"
+                              member.isActive ? "bg-accent" : "bg-outline"
                            }`}
                         />
                      </View>
@@ -124,7 +125,7 @@ export const GroupMembersSection = ({
                         </Typography>
                      </View>
 
-                     <MaterialCommunityIcons name="chevron-right" size={18} color="#64748B" />
+                     <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.dim} />
                   </TouchableOpacity>
                );
             })}
@@ -143,7 +144,7 @@ export const GroupMembersSection = ({
                      </Typography>
                      <View className="flex-row items-center gap-1">
                         <Typography className="text-primary text-xs font-bold">See All</Typography>
-                        <MaterialCommunityIcons name="arrow-right" size={14} color="#F59E0B" />
+                        <MaterialCommunityIcons name="arrow-right" size={14} color={Colors.icon.primary} />
                      </View>
                   </TouchableOpacity>
                </>
