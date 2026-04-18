@@ -1,7 +1,8 @@
 import { View, TouchableOpacity } from "react-native";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Typography } from "@/components/ui/Typography";
 import { format, isValid } from "date-fns";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import QuickMealsViewCard from "./QuickMealsViewCard";
 import MembersMealParticipation from "./MembersMealParticipation";
 import { MonthStrip } from "./MonthStrip";
@@ -17,45 +18,14 @@ export const MonthlyAnalytics = ({
    onYearPress: () => void;
 }) => {
    const [viewMode, setViewMode] = useState<"summary" | "matrix">("summary");
-   // Defensive check for date validity
    const dateObj = isValid(selectedMonth) ? selectedMonth : new Date();
 
-   // MOCK DATA
    const myMonthlyTotal = 42;
    const groupMonthlyTotal = 412;
 
-   interface Member {
-      id: string;
-      name: string;
-      role: string;
-      avatar: string;
-      isMe?: boolean;
-   }
-
-   interface MealCounts {
-      b: number;
-      l: number;
-      d: number;
-   }
-
-   interface DayRecord {
-      date: string;
-      dayNum: string;
-      dayName: string;
-      participations: Record<string, MealCounts>; // memberId -> counts
-      dailyTotal: number;
-   }
-
-   interface LedgerWorkbook {
-      members: Member[];
-      days: DayRecord[];
-      grandTotals: Record<string, number>; // memberId -> total
-      totalGroupMeals: number;
-   }
-
-   // 1. GENERATE THE SUPER WORKBOOK
-   const workbook: LedgerWorkbook = (function generateWorkbook() {
-      const members: Member[] = [
+   // ── Workbook — only recomputes when selectedMonth changes ──────────────────
+   const workbook = useMemo(() => {
+      const members = [
          {
             id: "1",
             name: "You",
@@ -72,17 +42,25 @@ export const MonthlyAnalytics = ({
          { id: "8", name: "Lisa", role: "Member", avatar: "https://i.pravatar.cc/150?u=lisa" },
       ];
 
-      const days: DayRecord[] = [];
+      const days: {
+         date: string;
+         dayNum: string;
+         dayName: string;
+         participations: Record<string, { b: number; l: number; d: number }>;
+         dailyTotal: number;
+      }[] = [];
       const grandTotals: Record<string, number> = {};
       let totalGroupMeals = 0;
 
       members.forEach((m) => (grandTotals[m.id] = 0));
 
-      const monthDays = 31;
-      for (let i = 1; i <= monthDays; i++) {
-         const d = new Date(2026, 3, i); // April 2026
-         const dateKey = format(d, "yyyy-MM-dd");
-         const participations: Record<string, MealCounts> = {};
+      const year = dateObj.getFullYear();
+      const month = dateObj.getMonth();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      for (let i = 1; i <= daysInMonth; i++) {
+         const d = new Date(year, month, i);
+         const participations: Record<string, { b: number; l: number; d: number }> = {};
          let dailyTotal = 0;
 
          members.forEach((m) => {
@@ -100,8 +78,8 @@ export const MonthlyAnalytics = ({
          });
 
          days.push({
-            date: dateKey,
-            dayNum: i.toString(),
+            date: `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`,
+            dayNum: String(i),
             dayName: format(d, "EEE"),
             dailyTotal,
             participations,
@@ -109,38 +87,27 @@ export const MonthlyAnalytics = ({
       }
 
       return { members, days, grandTotals, totalGroupMeals };
-   })();
+   }, [dateObj.getFullYear(), dateObj.getMonth()]);
 
-   interface MatrixMember extends Member {
-      total: number;
-      breakfast: number;
-      lunch: number;
-      dinner: number;
-   }
-
-   // 2. DERIVE SUMMARY DATA FOR THE LEADERBOARD
-   const summaryMembers: MatrixMember[] = workbook.members.map((m) => {
-      let breakfast = 0;
-      let lunch = 0;
-      let dinner = 0;
-
-      workbook.days.forEach((day) => {
-         const p = day.participations[m.id];
-         if (p) {
-            breakfast += p.b;
-            lunch += p.l;
-            dinner += p.d;
-         }
-      });
-
-      return {
-         ...m,
-         total: workbook.grandTotals[m.id] || 0,
-         breakfast,
-         lunch,
-         dinner,
-      };
-   });
+   // ── Summary members — derived from workbook, also memoized ─────────────────
+   const summaryMembers = useMemo(
+      () =>
+         workbook.members.map((m) => {
+            let breakfast = 0;
+            let lunch = 0;
+            let dinner = 0;
+            workbook.days.forEach((day) => {
+               const p = day.participations[m.id];
+               if (p) {
+                  breakfast += p.b;
+                  lunch += p.l;
+                  dinner += p.d;
+               }
+            });
+            return { ...m, total: workbook.grandTotals[m.id] || 0, breakfast, lunch, dinner };
+         }),
+      [workbook],
+   );
 
    return (
       <View className="pb-32 pt-4">
@@ -192,10 +159,19 @@ export const MonthlyAnalytics = ({
             {viewMode === "summary" && <MembersMealParticipation members={summaryMembers} />}
             {viewMode === "matrix" && <MonthlyMealMatrix workbook={workbook} />}
 
-            <TouchableOpacity className="w-full h-14 rounded-3xl bg-primary/10 border border-primary/20 items-center justify-center active:bg-primary/20">
-               <Typography className="text-primary font-black uppercase tracking-widest text-xs">
-                  Generate Monthly Report
+            {/* Export Report */}
+            <TouchableOpacity
+               onPress={() => {}}
+               activeOpacity={0.8}
+               className="w-full h-14 rounded-3xl bg-surface-container border border-outline/10 items-center justify-center flex-row gap-2.5 active:bg-surface"
+            >
+               <View className="w-8 h-8 rounded-xl bg-info/10 items-center justify-center">
+                  <MaterialCommunityIcons name="file-export-outline" size={18} color="#3B82F6" />
+               </View>
+               <Typography className="text-on-surface font-bold text-sm">
+                  Export Monthly Report
                </Typography>
+               <Typography className="text-secondary-400 text-xs">· PDF / CSV</Typography>
             </TouchableOpacity>
          </View>
       </View>

@@ -9,13 +9,11 @@ export const MealFAB = ({ onPress }: MealFABProps) => {
    return (
       <TouchableOpacity
          onPress={onPress}
-         className="absolute bottom-[5%] right-6 w-16 h-16 rounded-full bg-primary shadow-2xl shadow-orange-500/40 items-center justify-center active:scale-95"
+         activeOpacity={0.85}
+         className="absolute bottom-6 right-5 w-14 h-14 rounded-2xl bg-primary items-center justify-center active:scale-95"
+         style={{ elevation: 8 }}
       >
-         <MaterialCommunityIcons
-            name="plus"
-            size={32}
-            color="#0F172A"
-         />
+         <MaterialCommunityIcons name="silverware-fork-knife" size={24} color="#0F172A" />
       </TouchableOpacity>
    );
 };

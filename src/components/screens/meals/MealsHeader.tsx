@@ -8,21 +8,14 @@ interface MealsHeaderProps {
 
 export const MealsHeader = ({ title, subtitle }: MealsHeaderProps) => {
    return (
-      <View className="mb-4">
-         {/* Simple Centered Header */}
-         <View className="items-center py-2">
-            <Typography className="text-on-surface text-[10px] uppercase font-black tracking-[0.25em] mb-1 opacity-60">
-               {subtitle}
-            </Typography>
-            <Typography className="text-on-surface text-2xl font-black tracking-tighter">
-               {title}
-            </Typography>
-         </View>
-
-         {/* Inspectpull Line - Subtle separator aligned with content */}
-         <View className="w-full items-center mt-2">
-            <View className="w-12 h-1 bg-primary/20 rounded-full" />
-         </View>
+      <View className="items-center pt-4 pb-3">
+         <Typography className="text-secondary-400 text-[10px] uppercase font-black tracking-[0.25em] mb-1">
+            {subtitle}
+         </Typography>
+         <Typography className="text-on-surface text-2xl font-black tracking-tight">
+            {title}
+         </Typography>
+         <View className="w-10 h-[3px] bg-primary/30 rounded-full mt-3" />
       </View>
    );
 };

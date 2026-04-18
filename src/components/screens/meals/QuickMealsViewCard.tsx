@@ -12,7 +12,7 @@ interface QuickMealsViewCardProps {
 const SummaryCard = ({ label, value, subLabel, icon, isPrimary, onPress, isAddButton }: any) => (
    <View
       className={cn(
-         "flex-1 p-5 rounded-[32px]",
+         "flex-1 p-5 rounded-3xl",
          isPrimary
             ? "bg-primary/10 border border-primary/20"
             : "bg-surface-container border border-outline/10",

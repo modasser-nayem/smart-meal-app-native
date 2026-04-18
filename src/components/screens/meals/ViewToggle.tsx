@@ -14,16 +14,14 @@ export const ViewToggle = ({ activeTab, onTabChange }: ViewToggleProps) => {
             <TouchableOpacity
                onPress={() => onTabChange("daily")}
                className={cn(
-                  "flex-1 py-2 rounded-xl items-center justify-center transition-all",
+                  "flex-1 py-2.5 rounded-xl items-center justify-center",
                   activeTab === "daily" ? "bg-primary" : "bg-transparent",
                )}
             >
                <Typography
                   className={cn(
                      "font-bold text-sm tracking-wide uppercase",
-                     activeTab === "daily"
-                        ? "text-surface/80"
-                        : "text-on-surface/60",
+                     activeTab === "daily" ? "text-background" : "text-secondary-300",
                   )}
                >
                   Daily View
@@ -33,16 +31,14 @@ export const ViewToggle = ({ activeTab, onTabChange }: ViewToggleProps) => {
             <TouchableOpacity
                onPress={() => onTabChange("monthly")}
                className={cn(
-                  "flex-1 py-2 rounded-xl items-center justify-center transition-all",
+                  "flex-1 py-2.5 rounded-xl items-center justify-center",
                   activeTab === "monthly" ? "bg-primary" : "bg-transparent",
                )}
             >
                <Typography
                   className={cn(
                      "font-bold text-sm tracking-wide uppercase",
-                     activeTab === "monthly"
-                        ? "text-surface/80"
-                        : "text-on-surface/60",
+                     activeTab === "monthly" ? "text-background" : "text-secondary-300",
                   )}
                >
                   Monthly View

@@ -118,7 +118,7 @@ const MembersMealParticipation = ({ members }: MembersMealParticipationProps) =>
                      </Typography>
                      <Typography
                         className={`text-[8px] font-black uppercase tracking-widest ${
-                           isMe ? "text-background/60" : "text-secondary-400"
+                           isMe ? "text-secondary-600" : "text-secondary-400"
                         }`}
                      >
                         meals
