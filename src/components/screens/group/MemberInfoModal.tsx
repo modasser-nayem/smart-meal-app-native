@@ -1,8 +1,10 @@
 import { View, TouchableOpacity, Modal, Image, ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Member, MemberRole } from "./GroupMembersSection";
 import { Colors } from "@/constants/colors";
+import { useCurrencyFormat } from "@/hooks/useCurrencyFormat";
 
 interface MemberInfoModalProps {
    member: Member | null;
@@ -15,7 +17,12 @@ interface MemberInfoModalProps {
 
 const ROLE_CONFIG: Record<MemberRole, { bg: string; text: string; label: string; color: string }> =
    {
-      Owner: { bg: "bg-primary/10", text: "text-primary", label: "Owner 👑", color: Colors.icon.primary },
+      Owner: {
+         bg: "bg-primary/10",
+         text: "text-primary",
+         label: "Owner 👑",
+         color: Colors.icon.primary,
+      },
       Manager: { bg: "bg-info/10", text: "text-info", label: "Manager", color: Colors.icon.info },
       Member: {
          bg: "bg-surface",
@@ -24,16 +31,6 @@ const ROLE_CONFIG: Record<MemberRole, { bg: string; text: string; label: string;
          color: Colors.icon.subtle,
       },
    };
-
-// Mock stats — replace with real API data
-const MOCK_STATS = {
-   totalMeals: 28,
-   thisMonthMeals: 14,
-   totalPaid: "৳4,200",
-   balance: "+৳144",
-   isSurplus: true,
-   joinedDate: "March 2025",
-};
 
 export const MemberInfoModal = ({
    member,
@@ -45,7 +42,19 @@ export const MemberInfoModal = ({
 }: MemberInfoModalProps) => {
    if (!member) return null;
 
+   const { t } = useTranslation("group");
+   const { format } = useCurrencyFormat();
    const roleStyle = ROLE_CONFIG[member.role];
+
+   // Mock stats — replace with real API data
+   const MOCK_STATS = {
+      totalMeals: 28,
+      thisMonthMeals: 14,
+      totalPaid: format(4200),
+      balance: `+${format(144)}`,
+      isSurplus: true,
+      joinedDate: "March 2025",
+   };
 
    return (
       <Modal
@@ -70,7 +79,7 @@ export const MemberInfoModal = ({
                {/* Header */}
                <View className="flex-row items-center justify-between px-6 py-4">
                   <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
-                     Member Info
+                     {t("members.info.title")}
                   </Typography>
                   <TouchableOpacity
                      onPress={onClose}
@@ -140,7 +149,7 @@ export const MemberInfoModal = ({
                               member.isActive ? "text-success" : "text-secondary-400"
                            }`}
                         >
-                           {member.isActive ? "Active" : "Inactive"}
+                           {member.isActive ? t("members.info.active") : t("members.info.inactive")}
                         </Typography>
                      </View>
                   </View>
@@ -149,7 +158,7 @@ export const MemberInfoModal = ({
                {/* Stats grid */}
                <View className="px-6 pt-5 pb-2">
                   <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-3">
-                     This Month
+                     {t("members.info.thisMonth")}
                   </Typography>
                   <View className="flex-row gap-3 mb-3">
                      <View className="flex-1 bg-surface rounded-2xl p-4 border border-outline/10">
@@ -157,7 +166,7 @@ export const MemberInfoModal = ({
                            {MOCK_STATS.thisMonthMeals}
                         </Typography>
                         <Typography className="text-secondary-400 text-[10px] uppercase font-bold tracking-widest mt-0.5">
-                           Meals
+                           {t("members.info.meals")}
                         </Typography>
                      </View>
                      <View className="flex-1 bg-surface rounded-2xl p-4 border border-outline/10">
@@ -165,7 +174,7 @@ export const MemberInfoModal = ({
                            {MOCK_STATS.totalPaid}
                         </Typography>
                         <Typography className="text-secondary-400 text-[10px] uppercase font-bold tracking-widest mt-0.5">
-                           Paid
+                           {t("members.info.paid")}
                         </Typography>
                      </View>
                      <View className="flex-1 bg-surface rounded-2xl p-4 border border-outline/10">
@@ -177,7 +186,7 @@ export const MemberInfoModal = ({
                            {MOCK_STATS.balance}
                         </Typography>
                         <Typography className="text-secondary-400 text-[10px] uppercase font-bold tracking-widest mt-0.5">
-                           Balance
+                           {t("members.info.balance")}
                         </Typography>
                      </View>
                   </View>
@@ -190,7 +199,7 @@ export const MemberInfoModal = ({
                         color={Colors.icon.dim}
                      />
                      <Typography className="text-secondary-300 text-sm">
-                        Member since{" "}
+                        {t("members.info.memberSince")}{" "}
                         <Typography className="text-on-surface font-bold text-sm">
                            {MOCK_STATS.joinedDate}
                         </Typography>
@@ -202,7 +211,7 @@ export const MemberInfoModal = ({
                {isOwner && member.role !== "Owner" && (
                   <View className="px-6 pt-4 gap-3">
                      <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-1">
-                        Actions
+                        {t("members.info.actions")}
                      </Typography>
                      <TouchableOpacity
                         onPress={() => onChangeRole?.(member.id)}
@@ -218,13 +227,17 @@ export const MemberInfoModal = ({
                         </View>
                         <View className="flex-1">
                            <Typography className="text-on-surface font-semibold text-[15px]">
-                              Change Role
+                              {t("members.info.changeRole")}
                            </Typography>
                            <Typography className="text-secondary-400 text-xs mt-0.5">
                               Promote to Manager or demote to Member
                            </Typography>
                         </View>
-                        <MaterialCommunityIcons name="chevron-right" size={18} color={Colors.icon.muted} />
+                        <MaterialCommunityIcons
+                           name="chevron-right"
+                           size={18}
+                           color={Colors.icon.muted}
+                        />
                      </TouchableOpacity>
 
                      <TouchableOpacity
@@ -241,7 +254,7 @@ export const MemberInfoModal = ({
                         </View>
                         <View className="flex-1">
                            <Typography className="text-error font-bold text-[15px]">
-                              Remove Member
+                              {t("members.info.removeMember")}
                            </Typography>
                            <Typography className="text-secondary-400 text-xs mt-0.5">
                               Remove from this group permanently

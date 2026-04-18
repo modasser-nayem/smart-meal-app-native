@@ -10,6 +10,7 @@ import {
    Image,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Typography } from "@/components/ui/Typography";
 import { format, addDays, subDays } from "date-fns";
 import { Colors } from "@/constants/colors";
@@ -51,35 +52,28 @@ interface LogMealSheetProps {
 
 // ─── Constants ────────────────────────────────────────────────────────────────
 
-const MEAL_OPTIONS: {
-   key: MealType;
-   label: string;
-   icon: string;
-   time: string;
-   color: string;
-   bg: string;
-}[] = [
+const getMealOptions = (t: any) => [
    {
-      key: "breakfast",
-      label: "Breakfast",
+      key: "breakfast" as MealType,
+      label: t("logMeal.breakfast", "Breakfast"),
       icon: "weather-sunset",
-      time: "Morning",
+      time: t("logMeal.morning", "Morning"),
       color: Colors.icon.primary,
       bg: "bg-primary/10",
    },
    {
-      key: "lunch",
-      label: "Lunch",
+      key: "lunch" as MealType,
+      label: t("logMeal.lunch", "Lunch"),
       icon: "weather-sunny",
-      time: "Afternoon",
+      time: t("logMeal.afternoon", "Afternoon"),
       color: Colors.icon.success,
       bg: "bg-accent/10",
    },
    {
-      key: "dinner",
-      label: "Dinner",
+      key: "dinner" as MealType,
+      label: t("logMeal.dinner", "Dinner"),
       icon: "weather-night",
-      time: "Evening",
+      time: t("logMeal.evening", "Evening"),
       color: Colors.icon.info,
       bg: "bg-info/10",
    },
@@ -134,6 +128,7 @@ export const LogMealSheet = ({
    members = [],
    userRole = "Member",
 }: LogMealSheetProps) => {
+   const { t } = useTranslation("meals");
    const isAdmin = userRole === "Owner" || userRole === "Manager";
 
    const [quantities, setQuantities] = useState<MealQuantities>({
@@ -146,6 +141,7 @@ export const LogMealSheet = ({
    const [selectedMemberId, setSelectedMemberId] = useState<string | null>(null);
    const [mode, setMode] = useState<"self" | "member">("self");
 
+   const MEAL_OPTIONS = getMealOptions(t);
    const totalMeals = quantities.breakfast + quantities.lunch + quantities.dinner;
    const activeMeals = MEAL_OPTIONS.filter((m) => quantities[m.key] > 0);
 
@@ -206,10 +202,10 @@ export const LogMealSheet = ({
                <View className="flex-row items-center justify-between px-6 py-4 border-b border-outline/10">
                   <View>
                      <Typography className="text-on-surface text-xl font-extrabold tracking-tight">
-                        Log Meal
+                        {t("logMeal.title")}
                      </Typography>
                      <Typography className="text-secondary-300 text-xs mt-0.5">
-                        Set quantities for each meal
+                        {t("logMeal.subtitle")}
                      </Typography>
                   </View>
                   <TouchableOpacity
@@ -229,7 +225,7 @@ export const LogMealSheet = ({
                      {/* ── Date picker row ── */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Date
+                           {t("logMeal.date")}
                         </Typography>
                         <View className="flex-row items-center gap-3 bg-surface rounded-2xl px-4 py-3 border border-outline/15">
                            <TouchableOpacity
@@ -269,7 +265,7 @@ export const LogMealSheet = ({
                      {isAdmin && members.length > 0 && (
                         <View>
                            <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                              Log For
+                              {t("logMeal.logFor")}
                            </Typography>
                            {/* Mode toggle */}
                            <View className="flex-row bg-surface rounded-2xl p-1 border border-outline/15 mb-3">
@@ -284,7 +280,7 @@ export const LogMealSheet = ({
                                  <Typography
                                     className={`text-sm font-bold ${mode === "self" ? "text-background" : "text-secondary-300"}`}
                                  >
-                                    Myself
+                                    {t("logMeal.myself")}
                                  </Typography>
                               </TouchableOpacity>
                               <TouchableOpacity
@@ -295,7 +291,7 @@ export const LogMealSheet = ({
                                  <Typography
                                     className={`text-sm font-bold ${mode === "member" ? "text-background" : "text-secondary-300"}`}
                                  >
-                                    A Member
+                                    {t("logMeal.aMember")}
                                  </Typography>
                               </TouchableOpacity>
                            </View>
@@ -360,7 +356,7 @@ export const LogMealSheet = ({
                      {/* ── Meal quantities ── */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-3 ml-1">
-                           Meal Quantities
+                           {t("logMeal.mealQuantities")}
                         </Typography>
                         <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
                            {MEAL_OPTIONS.map((meal, index) => (
@@ -423,13 +419,13 @@ export const LogMealSheet = ({
                      {/* ── Note ── */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Note (optional)
+                           {t("logMeal.note")}
                         </Typography>
                         <View className="bg-surface border border-outline/20 rounded-2xl px-4 py-3">
                            <TextInput
                               value={note}
                               onChangeText={setNote}
-                              placeholder="Any note about this meal..."
+                              placeholder={t("logMeal.notePlaceholder")}
                               placeholderTextColor={Colors.placeholder}
                               multiline
                               numberOfLines={2}
@@ -469,12 +465,19 @@ export const LogMealSheet = ({
                            }`}
                         >
                            {isLoading
-                              ? "Logging..."
+                              ? t("logMeal.logging")
                               : totalMeals === 0
-                                ? "Set quantities above"
+                                ? t("logMeal.selectAtLeastOne")
                                 : mode === "member" && !selectedMemberId
-                                  ? "Select a member"
-                                  : `Log ${totalMeals} Meal${totalMeals > 1 ? "s" : ""}${mode === "member" && selectedMemberId ? ` for ${members.find((m) => m.id === selectedMemberId)?.name.split(" ")[0]}` : ""}`}
+                                  ? t("logMeal.selectMember")
+                                  : mode === "member" && selectedMemberId
+                                    ? t("logMeal.submitFor", {
+                                         count: totalMeals,
+                                         name: members
+                                            .find((m) => m.id === selectedMemberId)
+                                            ?.name.split(" ")[0],
+                                      })
+                                    : t("logMeal.submit", { count: totalMeals })}
                         </Typography>
                      </TouchableOpacity>
                   </View>

@@ -1,0 +1,76 @@
+{
+   "header": {
+      "financials": "Financials",
+      "myBalance": "My Balance This Month",
+      "surplus": "Surplus",
+      "youOwe": "You Owe",
+      "inSurplus": "You are in surplus",
+      "oweAmount": "You owe this amount"
+   },
+   "stats": {
+      "meals": "Meals",
+      "cost": "Cost",
+      "paid": "Paid",
+      "totalMeals": "Total Meals",
+      "mealRate": "Meal Rate",
+      "totalExpense": "Total Expense",
+      "members": "Members",
+      "eligible": "eligible"
+   },
+   "filters": {
+      "all": "All",
+      "mine": "Mine",
+      "meal": "Meal",
+      "group": "Group"
+   },
+   "breakdown": {
+      "title": "Expense Breakdown",
+      "mealExpense": "Meal Expense",
+      "sharedExpense": "Shared / Group Expense",
+      "sharedCostPerMember": "Shared cost per member:"
+   },
+   "transactions": {
+      "title": "Transactions",
+      "noTransactions": "No transactions yet",
+      "meal": "Meal",
+      "group": "Group",
+      "seeAll": "See All"
+   },
+   "balances": {
+      "title": "Member Balances",
+      "members": "{{count}} members",
+      "surplus": "Surplus",
+      "owes": "Owes"
+   },
+   "settlements": {
+      "title": "Settlements",
+      "outstanding": "৳{{amount}} outstanding",
+      "sends": "Sends",
+      "receives": "Receives",
+      "markSettled": "Mark as Settled",
+      "settled": "Settled",
+      "awaitingResponse": "Awaiting response"
+   },
+   "addExpense": {
+      "title": "Add Expense",
+      "amount": "Enter Amount",
+      "expenseTitle": "Expense Title",
+      "titlePlaceholder": "e.g. Monthly Groceries",
+      "date": "Date",
+      "notes": "Notes (optional)",
+      "notesPlaceholder": "Any notes about this expense...",
+      "mealCost": "Meal Cost",
+      "groupCost": "Group Cost",
+      "submit": "Add Expense"
+   },
+   "ownerActions": {
+      "title": "Owner Actions",
+      "exportReport": "Export Report",
+      "exportDesc": "Download this month as PDF or CSV",
+      "closeMonth": "Close This Month",
+      "closeDesc": "Finalizes calculations and notifies all members",
+      "closeConfirmTitle": "Close This Month?",
+      "closeConfirmMessage": "This will finalize all calculations and notify all members. This action cannot be undone.",
+      "closeAction": "Close Month"
+   }
+}

@@ -2,6 +2,7 @@ import React from "react";
 import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
 
 interface ProfileHeaderProps {
@@ -25,6 +26,8 @@ export const ProfileHeader = ({
    onEditPhoto,
    onEditProfile,
 }: ProfileHeaderProps) => {
+   const { t } = useTranslation("profile");
+
    return (
       <View className="items-center px-6 pt-10 pb-6">
          {/* Avatar */}
@@ -63,7 +66,7 @@ export const ProfileHeader = ({
          >
             <MaterialCommunityIcons name="pencil-outline" size={14} color={Colors.icon.primary} />
             <Typography className="text-primary font-bold text-xs uppercase tracking-widest">
-               Edit Profile
+               {t("header.editProfile")}
             </Typography>
          </TouchableOpacity>
 
@@ -72,14 +75,14 @@ export const ProfileHeader = ({
             <View className="flex-1 items-center py-4 gap-0.5">
                <Typography className="text-primary font-extrabold text-xl">{groupCount}</Typography>
                <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest">
-                  Groups
+                  {t("header.groups")}
                </Typography>
             </View>
             <View className="w-px h-10 bg-outline/20" />
             <View className="flex-1 items-center py-4 gap-0.5">
                <Typography className="text-primary font-extrabold text-xl">{totalMeals}</Typography>
                <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest">
-                  Meals
+                  {t("header.meals")}
                </Typography>
             </View>
             <View className="w-px h-10 bg-outline/20" />
@@ -88,7 +91,7 @@ export const ProfileHeader = ({
                   {memberSince}
                </Typography>
                <Typography className="text-[10px] text-secondary-300 uppercase font-bold tracking-widest">
-                  Since
+                  {t("header.since")}
                </Typography>
             </View>
          </View>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { AcceptRequestModal } from "./AcceptRequestModal";
@@ -39,6 +40,7 @@ export const GroupRequestsSection = ({
    onRevoke,
    onSeeAll,
 }: GroupRequestsSectionProps) => {
+   const { t } = useTranslation("group");
    const [acceptTarget, setAcceptTarget] = useState<PendingItem | null>(null);
    const totalPending = totalJoinRequests + totalInvitations;
 
@@ -48,7 +50,7 @@ export const GroupRequestsSection = ({
          <View className="flex-row items-center justify-between mb-3 ml-1">
             <View className="flex-row items-center gap-2">
                <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
-                  Requests & Invitations
+                  {t("requests.title")}
                </Typography>
                {totalPending > 0 && (
                   <View className="bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-full">
@@ -60,7 +62,7 @@ export const GroupRequestsSection = ({
             </View>
             <TouchableOpacity onPress={onSeeAll} activeOpacity={0.7}>
                <Typography className="text-primary text-[11px] font-bold uppercase tracking-widest">
-                  See All
+                  {t("members.seeAll")}
                </Typography>
             </TouchableOpacity>
          </View>
@@ -68,14 +70,18 @@ export const GroupRequestsSection = ({
          {/* Summary banner */}
          {totalPending > 0 && (
             <View className="flex-row items-center gap-3 bg-primary/5 border border-primary/15 rounded-2xl px-4 py-3 mb-3">
-               <MaterialCommunityIcons name="clock-alert-outline" size={18} color={Colors.icon.primary} />
+               <MaterialCommunityIcons
+                  name="clock-alert-outline"
+                  size={18}
+                  color={Colors.icon.primary}
+               />
                <View className="flex-1">
                   <Typography className="text-on-surface text-sm font-bold">
-                     {totalPending} pending action{totalPending !== 1 ? "s" : ""}
+                     {t("requests.pendingActions", { count: totalPending })}
                   </Typography>
                   <Typography className="text-secondary-400 text-[11px]">
-                     {totalJoinRequests} join request{totalJoinRequests !== 1 ? "s" : ""} ·{" "}
-                     {totalInvitations} invitation{totalInvitations !== 1 ? "s" : ""} sent
+                     {t("requests.joinRequests", { count: totalJoinRequests })} ·{" "}
+                     {t("requests.invitationsSent", { count: totalInvitations })}
                   </Typography>
                </View>
                <View className="w-2 h-2 rounded-full bg-primary" />
@@ -86,10 +92,14 @@ export const GroupRequestsSection = ({
             {items.length === 0 ? (
                <View className="items-center py-10 gap-3">
                   <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
-                     <MaterialCommunityIcons name="email-check-outline" size={24} color={Colors.icon.muted} />
+                     <MaterialCommunityIcons
+                        name="email-check-outline"
+                        size={24}
+                        color={Colors.icon.muted}
+                     />
                   </View>
                   <Typography className="text-secondary-400 text-sm">
-                     No pending requests
+                     {t("requests.noPending")}
                   </Typography>
                </View>
             ) : (
@@ -137,7 +147,9 @@ export const GroupRequestsSection = ({
                                           isJoinReq ? "text-primary" : "text-info"
                                        }`}
                                     >
-                                       {isJoinReq ? "Join Request" : "Invited"}
+                                       {isJoinReq
+                                          ? t("requests.joinRequest")
+                                          : t("requests.invited")}
                                     </Typography>
                                  </View>
                               </View>
@@ -164,7 +176,7 @@ export const GroupRequestsSection = ({
                                     color={Colors.icon.onPrimary}
                                  />
                                  <Typography className="text-background text-xs font-bold">
-                                    Accept
+                                    {t("requests.accept")}
                                  </Typography>
                               </TouchableOpacity>
                               <TouchableOpacity
@@ -178,7 +190,7 @@ export const GroupRequestsSection = ({
                                     color={Colors.icon.error}
                                  />
                                  <Typography className="text-error text-xs font-bold">
-                                    Reject
+                                    {t("requests.reject")}
                                  </Typography>
                               </TouchableOpacity>
                            </View>
@@ -194,7 +206,7 @@ export const GroupRequestsSection = ({
                                     color={Colors.icon.dim}
                                  />
                                  <Typography className="text-secondary-400 text-xs">
-                                    Awaiting response
+                                    {t("requests.awaiting")}
                                  </Typography>
                               </View>
                               {isOwner && (
@@ -204,7 +216,7 @@ export const GroupRequestsSection = ({
                                     className="px-3 py-1.5 rounded-xl border border-error/25 active:bg-error/5"
                                  >
                                     <Typography className="text-error text-[11px] font-bold">
-                                       Revoke
+                                       {t("requests.revoke")}
                                     </Typography>
                                  </TouchableOpacity>
                               )}

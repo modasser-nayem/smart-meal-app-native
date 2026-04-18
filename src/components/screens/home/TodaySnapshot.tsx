@@ -2,6 +2,7 @@ import { View, ScrollView, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
 
 interface MealShotProps {
@@ -23,12 +24,12 @@ const MealShot = ({
    active,
    upcoming,
 }: MealShotProps) => {
+   const { t } = useTranslation("home");
    const bgClass = active
       ? "bg-primary"
       : upcoming
         ? "bg-surface-container border border-primary/20"
         : "bg-surface-container";
-
    const opacity = !active && !upcoming ? "opacity-50" : "";
 
    return (
@@ -50,19 +51,20 @@ const MealShot = ({
                      <MaterialCommunityIcons
                         name="account-check"
                         size={10}
-                        color={active ? "#0F172A" : "#F59E0B"}
+                        color={active ? Colors.icon.onPrimary : Colors.icon.primary}
                      />
                      <Typography
                         className={`text-[9px] font-bold ${active ? "text-background" : "text-primary"}`}
                      >
-                        You: {myMeals}
+                        {t("snapshot.joined", { joined: myMeals, total: 1 }).split("/")[0]}:
+                        {myMeals}
                      </Typography>
                   </View>
                )}
                <Typography
                   className={`text-[10px] font-medium ${active ? "text-background/70" : "text-secondary-300"}`}
                >
-                  {groupJoined}/{total} joined
+                  {t("snapshot.joined", { joined: groupJoined, total })}
                </Typography>
             </View>
          </View>
@@ -76,10 +78,26 @@ interface TodaySnapshotProps {
 }
 
 export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
+   const { t } = useTranslation(["home", "common"]);
+
    const meals: MealShotProps[] = data || [
-      { label: "Breakfast", icon: "🌅", myMeals: 1, groupJoined: 8, total: 12, active: true },
-      { label: "Lunch", icon: "🍱", myMeals: 1, groupJoined: 10, total: 12, upcoming: true },
-      { label: "Dinner", icon: "🍽️", myMeals: 0, groupJoined: 0, total: 12 },
+      {
+         label: t("common:meals.breakfast"),
+         icon: "🌅",
+         myMeals: 1,
+         groupJoined: 8,
+         total: 12,
+         active: true,
+      },
+      {
+         label: t("common:meals.lunch"),
+         icon: "🍱",
+         myMeals: 1,
+         groupJoined: 10,
+         total: 12,
+         upcoming: true,
+      },
+      { label: t("common:meals.dinner"), icon: "🍽️", myMeals: 0, groupJoined: 0, total: 12 },
    ];
 
    const totalMyMeals = meals.reduce((sum, m) => sum + m.myMeals, 0);
@@ -88,14 +106,13 @@ export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
 
    return (
       <View>
-         {/* Section header */}
          <View className="flex-row items-center justify-between mb-4">
             <View>
                <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-0.5">
-                  Daily Pulse
+                  {t("sections.dailyPulse")}
                </Typography>
                <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
-                  Today · {todayLabel}
+                  {t("common:time.today")} · {todayLabel}
                </Typography>
             </View>
             <TouchableOpacity
@@ -107,46 +124,52 @@ export const TodaySnapshot = ({ data, onViewDetails }: TodaySnapshotProps) => {
             </TouchableOpacity>
          </View>
 
-         {/* Summary strip */}
          <View className="flex-row gap-3 mb-4">
             <View className="flex-1 bg-surface-container rounded-2xl p-4 border border-outline/10">
                <View className="flex-row items-center gap-2 mb-2">
                   <View className="w-7 h-7 rounded-lg bg-surface items-center justify-center">
-                     <MaterialCommunityIcons name="account-group" size={14} color={Colors.icon.subtle} />
+                     <MaterialCommunityIcons
+                        name="account-group"
+                        size={14}
+                        color={Colors.icon.subtle}
+                     />
                   </View>
                   <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
-                     Group
+                     {t("snapshot.groupMeals")}
                   </Typography>
                </View>
                <Typography className="text-on-surface text-2xl font-extrabold">
                   {totalGroupJoined}
                </Typography>
                <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
-                  meals logged
+                  {t("snapshot.mealsLogged")}
                </Typography>
             </View>
 
             <View className="flex-1 bg-primary/10 rounded-2xl p-4 border border-primary/20">
                <View className="flex-row items-center gap-2 mb-2">
                   <View className="w-7 h-7 rounded-lg bg-primary/20 items-center justify-center">
-                     <MaterialCommunityIcons name="account-check" size={14} color={Colors.icon.primary} />
+                     <MaterialCommunityIcons
+                        name="account-check"
+                        size={14}
+                        color={Colors.icon.primary}
+                     />
                   </View>
                   <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest">
-                     Mine
+                     {t("snapshot.myMeals")}
                   </Typography>
                </View>
                <Typography className="text-primary text-2xl font-extrabold">
                   {totalMyMeals}
                </Typography>
                <Typography className="text-secondary-400 text-[10px] font-bold uppercase tracking-widest mt-0.5">
-                  meals today
+                  {t("snapshot.mealsToday")}
                </Typography>
             </View>
          </View>
 
-         {/* Meal breakdown strip */}
          <Typography className="text-[10px] text-secondary-400 uppercase font-bold tracking-widest mb-3 ml-1">
-            Breakdown
+            {t("snapshot.breakdown")}
          </Typography>
          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {meals.map((meal, index) => (

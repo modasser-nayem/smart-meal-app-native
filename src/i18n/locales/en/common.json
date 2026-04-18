@@ -1,0 +1,79 @@
+{
+   "app": {
+      "name": "Smart Meal",
+      "tagline": "Transparent Meals. Happy Groups."
+   },
+   "cancel": "Cancel",
+   "done": "Done",
+   "ok": "OK",
+   "great": "Great",
+   "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "delete": "Delete",
+      "edit": "Edit",
+      "add": "Add",
+      "remove": "Remove",
+      "submit": "Submit",
+      "apply": "Apply",
+      "done": "Done",
+      "back": "Back",
+      "close": "Close",
+      "seeAll": "See All",
+      "viewAll": "View All",
+      "copy": "Copy",
+      "share": "Share",
+      "export": "Export",
+      "search": "Search",
+      "loading": "Loading...",
+      "retry": "Retry",
+      "ok": "OK",
+      "great": "Great"
+   },
+   "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "open": "Open",
+      "closed": "Closed",
+      "pending": "Pending",
+      "settled": "Settled",
+      "surplus": "Surplus",
+      "deficit": "Deficit",
+      "online": "Online",
+      "offline": "Offline"
+   },
+   "roles": {
+      "owner": "Owner",
+      "manager": "Manager",
+      "member": "Member",
+      "guest": "Guest"
+   },
+   "errors": {
+      "generic": "Something went wrong",
+      "network": "Network error. Please try again.",
+      "required": "This field is required",
+      "invalidEmail": "Invalid email address",
+      "minLength": "Minimum {{count}} characters required",
+      "maxLength": "Maximum {{count}} characters allowed",
+      "passwordMismatch": "Passwords do not match"
+   },
+   "time": {
+      "justNow": "Just now",
+      "today": "Today",
+      "yesterday": "Yesterday",
+      "daysAgo": "{{count}} days ago",
+      "hoursAgo": "{{count}}h ago"
+   },
+   "meals": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "morning": "Morning",
+      "afternoon": "Afternoon",
+      "evening": "Evening"
+   },
+   "currency": {
+      "symbol": "৳"
+   }
+}

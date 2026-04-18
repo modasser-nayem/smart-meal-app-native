@@ -1,0 +1,73 @@
+{
+   "app": {
+      "name": "स्मार्ट मील",
+      "tagline": "पारदर्शी भोजन। खुश समूह।"
+   },
+   "actions": {
+      "save": "सहेजें",
+      "cancel": "रद्द करें",
+      "confirm": "पुष्टि करें",
+      "delete": "हटाएं",
+      "edit": "संपादित करें",
+      "add": "जोड़ें",
+      "remove": "हटाएं",
+      "submit": "जमा करें",
+      "apply": "लागू करें",
+      "done": "हो गया",
+      "back": "वापस",
+      "close": "बंद करें",
+      "seeAll": "सब देखें",
+      "viewAll": "सब देखें",
+      "copy": "कॉपी करें",
+      "share": "शेयर करें",
+      "export": "निर्यात",
+      "search": "खोजें",
+      "loading": "लोड हो रहा है...",
+      "retry": "पुनः प्रयास करें"
+   },
+   "status": {
+      "active": "सक्रिय",
+      "inactive": "निष्क्रिय",
+      "open": "खुला",
+      "closed": "बंद",
+      "pending": "लंबित",
+      "settled": "निपटाया गया",
+      "surplus": "अधिशेष",
+      "deficit": "घाटा",
+      "online": "ऑनलाइन",
+      "offline": "ऑफलाइन"
+   },
+   "roles": {
+      "owner": "मालिक",
+      "manager": "प्रबंधक",
+      "member": "सदस्य",
+      "guest": "अतिथि"
+   },
+   "errors": {
+      "generic": "कुछ गलत हो गया",
+      "network": "नेटवर्क त्रुटि। कृपया पुनः प्रयास करें।",
+      "required": "यह फ़ील्ड आवश्यक है",
+      "invalidEmail": "अमान्य ईमेल पता",
+      "minLength": "न्यूनतम {{count}} अक्षर आवश्यक",
+      "maxLength": "अधिकतम {{count}} अक्षर अनुमत",
+      "passwordMismatch": "पासवर्ड मेल नहीं खाते"
+   },
+   "time": {
+      "justNow": "अभी-अभी",
+      "today": "आज",
+      "yesterday": "कल",
+      "daysAgo": "{{count}} दिन पहले",
+      "hoursAgo": "{{count}} घंटे पहले"
+   },
+   "meals": {
+      "breakfast": "नाश्ता",
+      "lunch": "दोपहर का खाना",
+      "dinner": "रात का खाना",
+      "morning": "सुबह",
+      "afternoon": "दोपहर",
+      "evening": "शाम"
+   },
+   "currency": {
+      "symbol": "৳"
+   }
+}

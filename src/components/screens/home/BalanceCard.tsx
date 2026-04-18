@@ -2,12 +2,14 @@ import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format } from "date-fns";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
+import { useCurrencyFormat } from "@/hooks/useCurrencyFormat";
 
 interface BalanceCardProps {
    cost: string;
    paid: string;
-   balance: string;
+   balance: number;
    isSurplus: boolean;
    mealCount: number;
    mealRate: string;
@@ -21,27 +23,25 @@ export const BalanceCard = ({
    mealCount,
    mealRate,
 }: BalanceCardProps) => {
+   const { t } = useTranslation("home");
+   const { format } = useCurrencyFormat();
    const currentMonth = format(new Date(), "MMMM");
 
    return (
       <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
-         {/* Accent line — green for surplus, red for deficit */}
          <View
             className="h-[3px] w-full"
             style={{ backgroundColor: isSurplus ? Colors.icon.success : Colors.icon.error }}
          />
-
          <View className="px-5 py-5 gap-4">
-            {/* Section label */}
             <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
-               My Balance · {currentMonth}
+               {t("sections.myBalance")} · {currentMonth}
             </Typography>
 
-            {/* Cost / Paid row */}
             <View className="flex-row">
                <View className="flex-1">
                   <Typography className="text-primary text-[10px] uppercase font-bold tracking-widest mb-1">
-                     My Cost
+                     {t("balance.myCost")}
                   </Typography>
                   <Typography className="text-on-surface text-2xl font-extrabold tracking-tight">
                      {cost}
@@ -50,7 +50,7 @@ export const BalanceCard = ({
                <View className="w-px bg-outline/15 mx-4" />
                <View className="flex-1 items-end">
                   <Typography className="text-primary text-[10px] uppercase font-bold tracking-widest mb-1">
-                     I Paid
+                     {t("balance.iPaid")}
                   </Typography>
                   <Typography className="text-success text-2xl font-extrabold tracking-tight">
                      {paid}
@@ -58,28 +58,25 @@ export const BalanceCard = ({
                </View>
             </View>
 
-            {/* Balance hero */}
             <View className="items-center py-4 border-y border-outline/10">
                <View className="flex-row items-center gap-2 mb-1">
                   <MaterialCommunityIcons
                      name={isSurplus ? "trending-up" : "trending-down"}
                      size={28}
-                     color={isSurplus ? "#22C55E" : "#EF4444"}
+                     color={isSurplus ? Colors.icon.success : Colors.icon.error}
                   />
                   <Typography
-                     className={`text-4xl font-extrabold tracking-tight ${
-                        isSurplus ? "text-success" : "text-error"
-                     }`}
+                     className={`text-4xl font-extrabold tracking-tight ${isSurplus ? "text-success" : "text-error"}`}
                   >
-                     {isSurplus ? "+" : "-"}৳{balance}
+                     {isSurplus ? "+" : "-"}
+                     {format(balance)}
                   </Typography>
                </View>
                <Typography className="text-secondary-300 text-xs font-medium">
-                  Current {isSurplus ? "surplus" : "deficit"} balance
+                  {isSurplus ? t("balance.surplusBalance") : t("balance.deficitBalance")}
                </Typography>
             </View>
 
-            {/* Meal stats footer */}
             <View className="flex-row items-center justify-center gap-5">
                <View className="flex-row items-center gap-1.5">
                   <MaterialCommunityIcons

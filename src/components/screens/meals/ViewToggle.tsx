@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 interface ViewToggleProps {
    activeTab: "daily" | "monthly";
@@ -8,6 +9,8 @@ interface ViewToggleProps {
 }
 
 export const ViewToggle = ({ activeTab, onTabChange }: ViewToggleProps) => {
+   const { t } = useTranslation("meals");
+
    return (
       <View className="px-6 mb-4">
          <View className="flex-row bg-surface-container rounded-2xl p-1.5 border border-outline/10">
@@ -24,7 +27,7 @@ export const ViewToggle = ({ activeTab, onTabChange }: ViewToggleProps) => {
                      activeTab === "daily" ? "text-background" : "text-secondary-300",
                   )}
                >
-                  Daily View
+                  {t("toggle.daily")}
                </Typography>
             </TouchableOpacity>
 
@@ -41,7 +44,7 @@ export const ViewToggle = ({ activeTab, onTabChange }: ViewToggleProps) => {
                      activeTab === "monthly" ? "text-background" : "text-secondary-300",
                   )}
                >
-                  Monthly View
+                  {t("toggle.monthly")}
                </Typography>
             </TouchableOpacity>
          </View>

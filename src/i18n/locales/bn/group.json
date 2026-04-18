@@ -1,0 +1,134 @@
+{
+   "header": {
+      "activeGroup": "সক্রিয় গ্রুপ",
+      "groupHub": "গ্রুপ হাব"
+   },
+   "info": {
+      "groupCode": "গ্রুপ কোড",
+      "groupCodeHint": "অন্যরা খুঁজে পেতে ও যোগ দিতে এই কোড শেয়ার করুন",
+      "inviteCode": "আমন্ত্রণ কোড",
+      "billingMonth": "বিলিং মাস",
+      "location": "অবস্থান",
+      "members": "সদস্য",
+      "active": "সক্রিয়",
+      "pending": "অপেক্ষমাণ"
+   },
+   "quickActions": {
+      "invite": "আমন্ত্রণ",
+      "notice": "নোটিশ",
+      "billing": "বিলিং",
+      "requests": "অনুরোধ"
+   },
+   "notices": {
+      "title": "নোটিশ বোর্ড",
+      "noNotices": "এখনো কোনো নোটিশ নেই",
+      "postFirst": "প্রথম নোটিশ পোস্ট করুন",
+      "postNew": "নতুন নোটিশ পোস্ট করুন",
+      "types": {
+         "announcement": "ঘোষণা",
+         "info": "তথ্য",
+         "update": "আপডেট",
+         "urgent": "জরুরি"
+      },
+      "typeDescriptions": {
+         "announcement": "সাধারণ গ্রুপ আপডেট",
+         "info": "তথ্যমূলক নোটিশ",
+         "update": "ইতিবাচক আপডেট বা সম্পন্ন",
+         "urgent": "তাৎক্ষণিক মনোযোগ প্রয়োজন"
+      },
+      "post": {
+         "title": "নোটিশ পোস্ট করুন",
+         "subtitle": "সব গ্রুপ সদস্যরা দেখতে পাবেন",
+         "noticeType": "নোটিশের ধরন",
+         "noticeTitle": "শিরোনাম",
+         "message": "বার্তা",
+         "preview": "প্রিভিউ",
+         "submit": "নোটিশ পোস্ট করুন",
+         "posting": "পোস্ট হচ্ছে..."
+      },
+      "detail": {
+         "memberInfo": "সদস্যের তথ্য",
+         "postedBy": "পোস্ট করেছেন"
+      }
+   },
+   "members": {
+      "title": "সদস্যরা",
+      "moreMembers": "{{count}} জন আরো",
+      "moreMembers_plural": "{{count}} জন আরো",
+      "seeAll": "সব দেখুন",
+      "info": {
+         "title": "সদস্যের তথ্য",
+         "thisMonth": "এই মাসে",
+         "meals": "খাবার",
+         "paid": "পরিশোধ",
+         "balance": "ব্যালেন্স",
+         "memberSince": "সদস্য হয়েছেন",
+         "changeRole": "ভূমিকা পরিবর্তন",
+         "changeRoleDesc": "ম্যানেজারে পদোন্নতি বা সদস্যে পদাবনতি",
+         "removeMember": "সদস্য সরান",
+         "removeMemberDesc": "এই গ্রুপ থেকে স্থায়ীভাবে সরান"
+      }
+   },
+   "requests": {
+      "title": "অনুরোধ ও আমন্ত্রণ",
+      "pendingActions": "{{count}}টি অপেক্ষমাণ কার্যক্রম",
+      "pendingActions_plural": "{{count}}টি অপেক্ষমাণ কার্যক্রম",
+      "joinRequests": "{{count}}টি যোগদানের অনুরোধ",
+      "joinRequests_plural": "{{count}}টি যোগদানের অনুরোধ",
+      "invitationsSent": "{{count}}টি আমন্ত্রণ পাঠানো হয়েছে",
+      "invitationsSent_plural": "{{count}}টি আমন্ত্রণ পাঠানো হয়েছে",
+      "noPending": "কোনো অপেক্ষমাণ অনুরোধ নেই",
+      "joinRequest": "যোগদানের অনুরোধ",
+      "invited": "আমন্ত্রিত",
+      "accept": "গ্রহণ করুন",
+      "reject": "প্রত্যাখ্যান করুন",
+      "revoke": "বাতিল করুন",
+      "awaiting": "উত্তরের অপেক্ষায়",
+      "acceptModal": {
+         "title": "অনুরোধ গ্রহণ করুন",
+         "includeMonth": "বর্তমান মাস অন্তর্ভুক্ত করুন",
+         "includeMonthDesc": "এই মাস থেকে তাদের বিলিংয়ে খাবার গণনা করুন।",
+         "billingThisMonth": "বিলিং এই মাস থেকে শুরু ({{month}})",
+         "billingNextMonth": "বিলিং পরের মাস থেকে শুরু ({{month}})",
+         "acceptMember": "সদস্য গ্রহণ করুন"
+      }
+   },
+   "createGroup": {
+      "title": "গ্রুপ তৈরি করুন",
+      "subtitle": "নতুন খাবার গ্রুপ",
+      "name": "গ্রুপের নাম",
+      "namePlaceholder": "যেমন: ব্যাচেলর হাউস",
+      "location": "অবস্থান",
+      "locationPlaceholder": "যেমন: ঢাকা, বাংলাদেশ",
+      "photo": "গ্রুপের ছবি",
+      "photoHint": "গ্যালারি থেকে বেছে নিতে ট্যাপ করুন",
+      "photoSelected": "ছবি নির্বাচিত হয়েছে",
+      "description": "বিবরণ",
+      "descriptionPlaceholder": "আপনার গ্রুপ বর্ণনা করুন...",
+      "markdownSupported": "মার্কডাউন সমর্থিত",
+      "inviteCodeHint": "তৈরির পরে স্বয়ংক্রিয়ভাবে একটি আমন্ত্রণ কোড তৈরি হবে।",
+      "submit": "গ্রুপ তৈরি করুন",
+      "success": "গ্রুপ সফলভাবে তৈরি হয়েছে!"
+   },
+   "joinGroup": {
+      "title": "গ্রুপে যোগ দিন",
+      "subtitle": "খুঁজুন ও যোগদানের অনুরোধ করুন",
+      "searchByName": "নাম দিয়ে খুঁজুন",
+      "searchByCode": "কোড দিয়ে খুঁজুন",
+      "searchPlaceholder": "গ্রুপের নাম খুঁজুন...",
+      "codePlaceholder": "যেমন: BCHH-4821",
+      "codeHint": "গ্রুপ মালিকের শেয়ার করা সঠিক আমন্ত্রণ কোড লিখুন",
+      "searching": "খোঁজা হচ্ছে...",
+      "noResults": "কোনো গ্রুপ পাওয়া যায়নি",
+      "noResultsHint": "ভিন্ন নাম চেষ্টা করুন বা আমন্ত্রণ কোড যাচাই করুন",
+      "resultsFound": "{{count}}টি ফলাফল পাওয়া গেছে — নির্বাচন করতে ট্যাপ করুন",
+      "resultsFound_plural": "{{count}}টি ফলাফল পাওয়া গেছে — নির্বাচন করতে ট্যাপ করুন",
+      "selectedToJoin": "যোগ দিতে নির্বাচিত",
+      "includeMonth": "বর্তমান মাস অন্তর্ভুক্ত করুন",
+      "includeMonthDesc": "এই মাস থেকে আপনার বিলিংয়ে খাবার গণনা করুন।",
+      "billingThisMonth": "বিলিং এই মাস থেকে শুরু",
+      "billingNextMonth": "বিলিং পরের মাস থেকে শুরু",
+      "sendRequest": "যোগদানের অনুরোধ পাঠান",
+      "requestSent": "\"{{name}}\"-এ যোগদানের অনুরোধ পাঠানো হয়েছে!"
+   }
+}

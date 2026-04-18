@@ -2,6 +2,7 @@ import { View, TouchableOpacity, Image } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
 
 interface HomeHeaderProps {
@@ -14,13 +15,6 @@ interface HomeHeaderProps {
    onNoticePress?: () => void;
 }
 
-const getGreeting = () => {
-   const hour = new Date().getHours();
-   if (hour < 12) return "Good Morning ☀️";
-   if (hour < 17) return "Good Afternoon 🌤️";
-   return "Good Evening 🌙";
-};
-
 export const HomeHeader = ({
    username,
    photoUrl,
@@ -31,6 +25,15 @@ export const HomeHeader = ({
    onNoticePress,
 }: HomeHeaderProps) => {
    const insets = useSafeAreaInsets();
+   const { t } = useTranslation("home");
+
+   const hour = new Date().getHours();
+   const greeting =
+      hour < 12
+         ? t("greeting.morning")
+         : hour < 17
+           ? t("greeting.afternoon")
+           : t("greeting.evening");
 
    return (
       <View
@@ -39,7 +42,7 @@ export const HomeHeader = ({
       >
          <View>
             <Typography className="text-secondary-300 text-[10px] uppercase font-bold tracking-widest mb-1">
-               {getGreeting()}
+               {greeting}
             </Typography>
             <Typography className="text-on-surface text-xl font-extrabold tracking-tight">
                {username}
@@ -47,7 +50,6 @@ export const HomeHeader = ({
          </View>
 
          <View className="flex-row items-center gap-2.5">
-            {/* Group notices */}
             <TouchableOpacity
                onPress={onNoticePress}
                activeOpacity={0.75}
@@ -67,7 +69,6 @@ export const HomeHeader = ({
                )}
             </TouchableOpacity>
 
-            {/* App notifications */}
             <TouchableOpacity
                onPress={onNotificationPress}
                activeOpacity={0.75}
@@ -79,7 +80,6 @@ export const HomeHeader = ({
                )}
             </TouchableOpacity>
 
-            {/* Avatar */}
             <TouchableOpacity onPress={onProfilePress} activeOpacity={0.85}>
                <View className="w-11 h-11 rounded-full border-2 border-primary/40 overflow-hidden active:scale-95">
                   <Image

@@ -1,4 +1,5 @@
 import { View, Image } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Colors } from "@/constants/colors";
@@ -31,14 +32,15 @@ interface MembersMealParticipationProps {
 }
 
 const MembersMealParticipation = ({ members }: MembersMealParticipationProps) => {
+   const { t } = useTranslation("meals");
    return (
       <View>
          <View className="flex-row justify-between items-center mb-4 mt-2">
             <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
-               Member Participation
+               {t("summary.memberParticipation")}
             </Typography>
             <Typography className="text-[10px] font-bold text-secondary-400 uppercase tracking-widest">
-               {members.length} members
+               {t("summary.members", { count: members.length })}
             </Typography>
          </View>
 
@@ -65,7 +67,11 @@ const MembersMealParticipation = ({ members }: MembersMealParticipationProps) =>
                         </View>
                         {isMe && (
                            <View className="absolute -right-1 -top-1 bg-primary w-4 h-4 rounded-full items-center justify-center border-2 border-background">
-                              <MaterialCommunityIcons name="star" size={8} color={Colors.icon.onPrimary} />
+                              <MaterialCommunityIcons
+                                 name="star"
+                                 size={8}
+                                 color={Colors.icon.onPrimary}
+                              />
                            </View>
                         )}
                      </View>
@@ -76,12 +82,12 @@ const MembersMealParticipation = ({ members }: MembersMealParticipationProps) =>
                               className="text-on-surface font-bold text-sm"
                               numberOfLines={1}
                            >
-                              {isMe ? "You" : name}
+                              {isMe ? t("summary.me") : name}
                            </Typography>
                            {isMe && (
                               <View className="bg-primary/15 px-1.5 py-0.5 rounded-full">
                                  <Typography className="text-primary text-[8px] font-black uppercase">
-                                    Me
+                                    {t("summary.me")}
                                  </Typography>
                               </View>
                            )}
@@ -122,7 +128,7 @@ const MembersMealParticipation = ({ members }: MembersMealParticipationProps) =>
                            isMe ? "text-secondary-600" : "text-secondary-400"
                         }`}
                      >
-                        meals
+                        {t("summary.meals")}
                      </Typography>
                   </View>
                </View>

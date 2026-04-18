@@ -1,16 +1,8 @@
 import { View, TouchableOpacity } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
-
-interface QuickAction {
-   icon: string;
-   label: string;
-   onPress: () => void;
-   color: string;
-   bg: string;
-   badge?: number;
-}
 
 interface GroupQuickActionsProps {
    isOwner: boolean;
@@ -29,31 +21,33 @@ export const GroupQuickActions = ({
    onViewBilling,
    onManageRequests,
 }: GroupQuickActionsProps) => {
-   const actions: QuickAction[] = [
+   const { t } = useTranslation("group");
+
+   const actions = [
       {
          icon: "account-plus-outline",
-         label: "Invite",
+         label: t("quickActions.invite"),
          onPress: onInviteMember,
          color: Colors.icon.primary,
          bg: "bg-primary/10",
       },
       {
          icon: "bullhorn-outline",
-         label: "Notice",
+         label: t("quickActions.notice"),
          onPress: onPostNotice,
          color: Colors.icon.info,
          bg: "bg-info/10",
       },
       {
          icon: "wallet-outline",
-         label: "Billing",
+         label: t("quickActions.billing"),
          onPress: onViewBilling,
          color: Colors.icon.success,
          bg: "bg-accent/10",
       },
       {
          icon: "account-clock-outline",
-         label: "Requests",
+         label: t("quickActions.requests"),
          onPress: onManageRequests,
          color: Colors.icon.primary,
          bg: "bg-primary/10",
@@ -76,7 +70,6 @@ export const GroupQuickActions = ({
                      size={20}
                      color={action.color}
                   />
-                  {/* Badge */}
                   {action.badge !== undefined && action.badge > 0 && (
                      <View className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-primary items-center justify-center border border-surface-container">
                         <Typography className="text-background text-[9px] font-black">

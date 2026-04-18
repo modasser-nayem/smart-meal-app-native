@@ -1,11 +1,13 @@
 import { useState, useCallback } from "react";
 import { View, TouchableOpacity } from "react-native";
 import * as Clipboard from "expo-clipboard";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
 import { CustomAlert } from "@/components/ui/CustomAlert";
+import { useCurrencyFormat } from "@/hooks/useCurrencyFormat";
 
 import { GroupInfoCard } from "@/components/screens/group/GroupInfoCard";
 import { GroupQuickActions } from "@/components/screens/group/GroupQuickActions";
@@ -141,6 +143,7 @@ const ALERT_CLOSED: AlertConfig = {
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function GroupScreen() {
+   const { t } = useTranslation("group");
    const [requests, setRequests] = useState<PendingItem[]>(MOCK_REQUESTS);
    const [notices, setNotices] = useState<Notice[]>(MOCK_NOTICES);
    const [postNoticeVisible, setPostNoticeVisible] = useState(false);
@@ -153,25 +156,28 @@ export default function GroupScreen() {
          visible: true,
          icon: "check-circle-outline",
          iconVariant: "success",
-         title: "Code Copied!",
-         message: `Group code "${GROUP_CODE}" copied. Share it so others can find and join.`,
-         actions: [{ label: "Done", onPress: closeAlert }],
+         title: t("header.codeCopied"),
+         message: t("header.codeCopiedDesc", { code: GROUP_CODE }),
+         actions: [{ label: t("actions.done"), onPress: closeAlert }],
       });
-   }, []);
+   }, [t]);
 
-   const handleAccept = useCallback((id: string, includeMonth: boolean) => {
-      setRequests((prev) => prev.filter((r) => r.id !== id));
-      setAlert({
-         visible: true,
-         icon: "account-check-outline",
-         iconVariant: "success",
-         title: "Member Accepted",
-         message: includeMonth
-            ? "Member added and included in the current billing month."
-            : "Member added. Billing starts from next month.",
-         actions: [{ label: "Great", onPress: closeAlert }],
-      });
-   }, []);
+   const handleAccept = useCallback(
+      (id: string, includeMonth: boolean) => {
+         setRequests((prev) => prev.filter((r) => r.id !== id));
+         setAlert({
+            visible: true,
+            icon: "account-check-outline",
+            iconVariant: "success",
+            title: t("requests.memberAccepted"),
+            message: includeMonth
+               ? t("requests.memberAcceptedThisMonth")
+               : t("requests.memberAcceptedNextMonth"),
+            actions: [{ label: t("actions.great"), onPress: closeAlert }],
+         });
+      },
+      [t],
+   );
 
    const handleReject = useCallback(
       (id: string) => {
@@ -180,22 +186,22 @@ export default function GroupScreen() {
             visible: true,
             icon: "account-remove-outline",
             iconVariant: "danger",
-            title: "Reject Request",
-            message: `Reject join request from ${item?.name}?`,
+            title: t("requests.rejectRequest"),
+            message: t("requests.rejectRequestDesc", { name: item?.name }),
             actions: [
                {
-                  label: "Reject",
+                  label: t("requests.reject"),
                   variant: "danger",
                   onPress: () => {
                      setRequests((prev) => prev.filter((r) => r.id !== id));
                      closeAlert();
                   },
                },
-               { label: "Cancel", onPress: closeAlert },
+               { label: t("actions.cancel"), onPress: closeAlert },
             ],
          });
       },
-      [requests],
+      [requests, t],
    );
 
    const handleRevoke = useCallback(
@@ -205,22 +211,22 @@ export default function GroupScreen() {
             visible: true,
             icon: "email-remove-outline",
             iconVariant: "warning",
-            title: "Revoke Invitation",
-            message: `Revoke the invitation sent to ${item?.name}?`,
+            title: t("requests.revokeInvitation"),
+            message: t("requests.revokeInvitationDesc", { name: item?.name }),
             actions: [
                {
-                  label: "Revoke",
+                  label: t("requests.revoke"),
                   variant: "danger",
                   onPress: () => {
                      setRequests((prev) => prev.filter((r) => r.id !== id));
                      closeAlert();
                   },
                },
-               { label: "Cancel", onPress: closeAlert },
+               { label: t("actions.cancel"), onPress: closeAlert },
             ],
          });
       },
-      [requests],
+      [requests, t],
    );
 
    const handlePostNotice = useCallback((notice: NewNotice) => {
@@ -256,7 +262,11 @@ export default function GroupScreen() {
                   activeOpacity={0.75}
                   className="w-10 h-10 rounded-full bg-surface-container items-center justify-center active:scale-95"
                >
-                  <MaterialCommunityIcons name="bell-outline" size={22} color={Colors.icon.onDark} />
+                  <MaterialCommunityIcons
+                     name="bell-outline"
+                     size={22}
+                     color={Colors.icon.onDark}
+                  />
                   <View className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary border border-background" />
                </TouchableOpacity>
             </View>
@@ -309,9 +319,9 @@ export default function GroupScreen() {
                         visible: true,
                         icon: "account-remove-outline",
                         iconVariant: "danger",
-                        title: "Member Removed",
-                        message: "The member has been removed from the group.",
-                        actions: [{ label: "OK", onPress: closeAlert }],
+                        title: t("members.memberRemoved"),
+                        message: t("members.memberRemovedDesc"),
+                        actions: [{ label: t("actions.ok"), onPress: closeAlert }],
                      });
                   }}
                   onChangeRole={() => {}}

@@ -1,0 +1,98 @@
+{
+   "header": {
+      "groups": "Groups",
+      "meals": "Meals",
+      "since": "Since",
+      "editProfile": "Edit Profile"
+   },
+   "sections": {
+      "activeGroup": "Active Group",
+      "myGroups": "My Groups",
+      "account": "Account",
+      "appSettings": "App Settings",
+      "support": "Support",
+      "dangerZone": "Danger Zone"
+   },
+   "settings": {
+      "editProfile": "Edit Profile",
+      "securityPassword": "Security & Password",
+      "notifications": "Notifications",
+      "language": "Language",
+      "currency": "Currency",
+      "displayMode": "Display Mode",
+      "displayModeValue": "Dark",
+      "helpCenter": "Help Center",
+      "privacyPolicy": "Privacy Policy",
+      "logOut": "Log Out",
+      "deleteAccount": "Delete Account",
+      "deleteAccountDesc": "This action is permanent and cannot be undone"
+   },
+   "language": {
+      "title": "Language",
+      "subtitle": "Choose your preferred language",
+      "current": "Current Language",
+      "select": "Select Language",
+      "languages": {
+         "en": "English",
+         "bn": "বাংলা (Bengali)",
+         "hi": "हिन्दी (Hindi)"
+      },
+      "changed": "Language changed to {{language}}",
+      "restart": "Restart the app to apply all changes"
+   },
+   "editProfile": {
+      "title": "Edit Profile",
+      "username": "Username",
+      "usernamePlaceholder": "your_username",
+      "email": "Email Address",
+      "emailLocked": "Email cannot be changed",
+      "gallery": "Gallery",
+      "camera": "Camera",
+      "removePhoto": "Remove selected photo",
+      "avatarHint": "Tap to update your profile photo",
+      "saveChanges": "Save Changes",
+      "success": "Profile updated successfully"
+   },
+   "security": {
+      "title": "Security & Password",
+      "currentPassword": "Current Password",
+      "newPassword": "New Password",
+      "confirmPassword": "Confirm New Password",
+      "requirements": "Requirements",
+      "req8chars": "At least 8 characters",
+      "reqUppercase": "One uppercase letter",
+      "reqNumber": "One number",
+      "reqSpecial": "One special character",
+      "strength": {
+         "weak": "Weak",
+         "fair": "Fair",
+         "good": "Good",
+         "strong": "Strong"
+      },
+      "submit": "Update Password",
+      "success": "Password changed successfully"
+   },
+   "groups": {
+      "createNew": "Create New Group",
+      "joinGroup": "Join a Group",
+      "joinHint": "Enter an invite code",
+      "active": "Active",
+      "switch": "Switch",
+      "switchTitle": "Switch Group",
+      "switchMessage": "Switch to \"{{name}}\"? You'll be taken to the Group tab to see it.",
+      "switchAction": "Switch to {{emoji}} {{name}}"
+   },
+   "alerts": {
+      "logOut": {
+         "title": "Log Out",
+         "message": "Are you sure you want to log out of your account?",
+         "action": "Log Out"
+      },
+      "deleteAccount": {
+         "title": "Delete Account",
+         "message": "This will permanently delete your account and all data. This cannot be undone.",
+         "action": "Delete Permanently"
+      }
+   },
+   "version": "Smart Meal v{{version}} · Built with ❤️"
+}

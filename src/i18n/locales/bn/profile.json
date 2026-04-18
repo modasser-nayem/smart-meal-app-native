@@ -1,0 +1,97 @@
+{
+   "header": {
+      "groups": "গ্রুপ",
+      "meals": "খাবার",
+      "since": "থেকে",
+      "editProfile": "প্রোফাইল সম্পাদনা"
+   },
+   "sections": {
+      "activeGroup": "সক্রিয় গ্রুপ",
+      "myGroups": "আমার গ্রুপ",
+      "account": "অ্যাকাউন্ট",
+      "appSettings": "অ্যাপ সেটিংস",
+      "support": "সহায়তা",
+      "dangerZone": "বিপদ অঞ্চল"
+   },
+   "settings": {
+      "editProfile": "প্রোফাইল সম্পাদনা",
+      "securityPassword": "নিরাপত্তা ও পাসওয়ার্ড",
+      "notifications": "বিজ্ঞপ্তি",
+      "language": "ভাষা",
+      "displayMode": "ডিসপ্লে মোড",
+      "displayModeValue": "ডার্ক",
+      "helpCenter": "সহায়তা কেন্দ্র",
+      "privacyPolicy": "গোপনীয়তা নীতি",
+      "logOut": "লগ আউট",
+      "deleteAccount": "অ্যাকাউন্ট মুছুন",
+      "deleteAccountDesc": "এই কাজ স্থায়ী এবং পূর্বাবস্থায় ফেরানো যাবে না"
+   },
+   "language": {
+      "title": "ভাষা",
+      "subtitle": "আপনার পছন্দের ভাষা বেছে নিন",
+      "current": "বর্তমান ভাষা",
+      "select": "ভাষা নির্বাচন করুন",
+      "languages": {
+         "en": "English",
+         "bn": "বাংলা (Bengali)",
+         "hi": "हिन्दी (Hindi)"
+      },
+      "changed": "ভাষা {{language}}-এ পরিবর্তিত হয়েছে",
+      "restart": "সব পরিবর্তন প্রয়োগ করতে অ্যাপ পুনরায় চালু করুন"
+   },
+   "editProfile": {
+      "title": "প্রোফাইল সম্পাদনা",
+      "username": "ব্যবহারকারীর নাম",
+      "usernamePlaceholder": "আপনার_নাম",
+      "email": "ইমেইল ঠিকানা",
+      "emailLocked": "ইমেইল পরিবর্তন করা যাবে না",
+      "gallery": "গ্যালারি",
+      "camera": "ক্যামেরা",
+      "removePhoto": "নির্বাচিত ছবি সরান",
+      "avatarHint": "প্রোফাইল ছবি আপডেট করতে ট্যাপ করুন",
+      "saveChanges": "পরিবর্তন সংরক্ষণ করুন",
+      "success": "প্রোফাইল সফলভাবে আপডেট হয়েছে"
+   },
+   "security": {
+      "title": "নিরাপত্তা ও পাসওয়ার্ড",
+      "currentPassword": "বর্তমান পাসওয়ার্ড",
+      "newPassword": "নতুন পাসওয়ার্ড",
+      "confirmPassword": "নতুন পাসওয়ার্ড নিশ্চিত করুন",
+      "requirements": "প্রয়োজনীয়তা",
+      "req8chars": "কমপক্ষে ৮টি অক্ষর",
+      "reqUppercase": "একটি বড় হাতের অক্ষর",
+      "reqNumber": "একটি সংখ্যা",
+      "reqSpecial": "একটি বিশেষ অক্ষর",
+      "strength": {
+         "weak": "দুর্বল",
+         "fair": "মোটামুটি",
+         "good": "ভালো",
+         "strong": "শক্তিশালী"
+      },
+      "submit": "পাসওয়ার্ড আপডেট করুন",
+      "success": "পাসওয়ার্ড সফলভাবে পরিবর্তিত হয়েছে"
+   },
+   "groups": {
+      "createNew": "নতুন গ্রুপ তৈরি করুন",
+      "joinGroup": "গ্রুপে যোগ দিন",
+      "joinHint": "একটি আমন্ত্রণ কোড লিখুন",
+      "active": "সক্রিয়",
+      "switch": "পরিবর্তন",
+      "switchTitle": "গ্রুপ পরিবর্তন করুন",
+      "switchMessage": "\"{{name}}\"-এ পরিবর্তন করবেন? আপনাকে গ্রুপ ট্যাবে নিয়ে যাওয়া হবে।",
+      "switchAction": "{{emoji}} {{name}}-এ পরিবর্তন করুন"
+   },
+   "alerts": {
+      "logOut": {
+         "title": "লগ আউট",
+         "message": "আপনি কি সত্যিই আপনার অ্যাকাউন্ট থেকে লগ আউট করতে চান?",
+         "action": "লগ আউট"
+      },
+      "deleteAccount": {
+         "title": "অ্যাকাউন্ট মুছুন",
+         "message": "এটি আপনার অ্যাকাউন্ট এবং সব ডেটা স্থায়ীভাবে মুছে ফেলবে। এটি পূর্বাবস্থায় ফেরানো যাবে না।",
+         "action": "স্থায়ীভাবে মুছুন"
+      }
+   },
+   "version": "স্মার্ট মিল v{{version}} · ❤️ দিয়ে তৈরি"
+}

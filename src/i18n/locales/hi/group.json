@@ -1,0 +1,134 @@
+{
+   "header": {
+      "activeGroup": "सक्रिय समूह",
+      "groupHub": "समूह हब"
+   },
+   "info": {
+      "groupCode": "समूह कोड",
+      "groupCodeHint": "दूसरों को खोजने और शामिल होने के लिए यह कोड शेयर करें",
+      "inviteCode": "आमंत्रण कोड",
+      "billingMonth": "बिलिंग माह",
+      "location": "स्थान",
+      "members": "सदस्य",
+      "active": "सक्रिय",
+      "pending": "लंबित"
+   },
+   "quickActions": {
+      "invite": "आमंत्रित करें",
+      "notice": "सूचना",
+      "billing": "बिलिंग",
+      "requests": "अनुरोध"
+   },
+   "notices": {
+      "title": "सूचना पट्ट",
+      "noNotices": "अभी तक कोई सूचना नहीं",
+      "postFirst": "पहली सूचना पोस्ट करें",
+      "postNew": "नई सूचना पोस्ट करें",
+      "types": {
+         "announcement": "घोषणा",
+         "info": "जानकारी",
+         "update": "अपडेट",
+         "urgent": "जरूरी"
+      },
+      "typeDescriptions": {
+         "announcement": "सामान्य समूह अपडेट",
+         "info": "सूचनात्मक नोटिस",
+         "update": "सकारात्मक अपडेट या पूर्णता",
+         "urgent": "तत्काल ध्यान आवश्यक"
+      },
+      "post": {
+         "title": "सूचना पोस्ट करें",
+         "subtitle": "सभी समूह सदस्य देख सकेंगे",
+         "noticeType": "सूचना का प्रकार",
+         "noticeTitle": "शीर्षक",
+         "message": "संदेश",
+         "preview": "पूर्वावलोकन",
+         "submit": "सूचना पोस्ट करें",
+         "posting": "पोस्ट हो रहा है..."
+      },
+      "detail": {
+         "memberInfo": "सदस्य जानकारी",
+         "postedBy": "पोस्ट किया"
+      }
+   },
+   "members": {
+      "title": "सदस्य",
+      "moreMembers": "{{count}} और",
+      "moreMembers_plural": "{{count}} और",
+      "seeAll": "सब देखें",
+      "info": {
+         "title": "सदस्य जानकारी",
+         "thisMonth": "इस महीने",
+         "meals": "भोजन",
+         "paid": "भुगतान",
+         "balance": "बैलेंस",
+         "memberSince": "सदस्य बने",
+         "changeRole": "भूमिका बदलें",
+         "changeRoleDesc": "प्रबंधक में पदोन्नति या सदस्य में पदावनति",
+         "removeMember": "सदस्य हटाएं",
+         "removeMemberDesc": "इस समूह से स्थायी रूप से हटाएं"
+      }
+   },
+   "requests": {
+      "title": "अनुरोध और आमंत्रण",
+      "pendingActions": "{{count}} लंबित कार्य",
+      "pendingActions_plural": "{{count}} लंबित कार्य",
+      "joinRequests": "{{count}} शामिल होने का अनुरोध",
+      "joinRequests_plural": "{{count}} शामिल होने के अनुरोध",
+      "invitationsSent": "{{count}} आमंत्रण भेजा गया",
+      "invitationsSent_plural": "{{count}} आमंत्रण भेजे गए",
+      "noPending": "कोई लंबित अनुरोध नहीं",
+      "joinRequest": "शामिल होने का अनुरोध",
+      "invited": "आमंत्रित",
+      "accept": "स्वीकार करें",
+      "reject": "अस्वीकार करें",
+      "revoke": "रद्द करें",
+      "awaiting": "प्रतिक्रिया की प्रतीक्षा",
+      "acceptModal": {
+         "title": "अनुरोध स्वीकार करें",
+         "includeMonth": "वर्तमान माह शामिल करें",
+         "includeMonthDesc": "इस महीने से उनकी बिलिंग में भोजन गिनें।",
+         "billingThisMonth": "बिलिंग इस महीने से शुरू ({{month}})",
+         "billingNextMonth": "बिलिंग अगले महीने से शुरू ({{month}})",
+         "acceptMember": "सदस्य स्वीकार करें"
+      }
+   },
+   "createGroup": {
+      "title": "समूह बनाएं",
+      "subtitle": "नया भोजन समूह",
+      "name": "समूह का नाम",
+      "namePlaceholder": "जैसे: बैचलर हाउस",
+      "location": "स्थान",
+      "locationPlaceholder": "जैसे: ढाका, बांग्लादेश",
+      "photo": "समूह की फोटो",
+      "photoHint": "गैलरी से चुनने के लिए टैप करें",
+      "photoSelected": "फोटो चुनी गई",
+      "description": "विवरण",
+      "descriptionPlaceholder": "अपने समूह का वर्णन करें...",
+      "markdownSupported": "मार्कडाउन समर्थित",
+      "inviteCodeHint": "बनाने के बाद स्वचालित रूप से एक आमंत्रण कोड बनेगा।",
+      "submit": "समूह बनाएं",
+      "success": "समूह सफलतापूर्वक बनाया गया!"
+   },
+   "joinGroup": {
+      "title": "समूह में शामिल हों",
+      "subtitle": "खोजें और शामिल होने का अनुरोध करें",
+      "searchByName": "नाम से खोजें",
+      "searchByCode": "कोड से खोजें",
+      "searchPlaceholder": "समूह का नाम खोजें...",
+      "codePlaceholder": "जैसे: BCHH-4821",
+      "codeHint": "समूह मालिक द्वारा शेयर किया गया सटीक आमंत्रण कोड दर्ज करें",
+      "searching": "खोजा जा रहा है...",
+      "noResults": "कोई समूह नहीं मिला",
+      "noResultsHint": "अलग नाम आज़माएं या आमंत्रण कोड जांचें",
+      "resultsFound": "{{count}} परिणाम मिला — चुनने के लिए टैप करें",
+      "resultsFound_plural": "{{count}} परिणाम मिले — चुनने के लिए टैप करें",
+      "selectedToJoin": "शामिल होने के लिए चुना गया",
+      "includeMonth": "वर्तमान माह शामिल करें",
+      "includeMonthDesc": "इस महीने से अपनी बिलिंग में भोजन गिनें।",
+      "billingThisMonth": "बिलिंग इस महीने से शुरू",
+      "billingNextMonth": "बिलिंग अगले महीने से शुरू",
+      "sendRequest": "शामिल होने का अनुरोध भेजें",
+      "requestSent": "\"{{name}}\" में शामिल होने का अनुरोध भेजा गया!"
+   }
+}

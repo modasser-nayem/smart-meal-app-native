@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { View, Modal, TouchableOpacity, ScrollView, Pressable } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { format, setMonth, setYear, getYear, getMonth } from "date-fns";
@@ -22,6 +23,7 @@ export const MonthYearPicker = ({
    selectedDate,
    onSelect,
 }: MonthYearPickerProps) => {
+   const { t } = useTranslation("meals");
    // Local draft state — only committed on Apply
    const [draftMonth, setDraftMonth] = useState(getMonth(selectedDate));
    const [draftYear, setDraftYear] = useState(getYear(selectedDate));
@@ -51,7 +53,7 @@ export const MonthYearPicker = ({
                <View className="px-6 py-4 border-b border-outline/10 flex-row justify-between items-center bg-surface">
                   <View>
                      <Typography className="text-on-surface text-lg font-extrabold tracking-tight">
-                        Select Period
+                        {t("picker.selectPeriod")}
                      </Typography>
                      <Typography className="text-secondary-300 text-xs mt-0.5">
                         {MONTHS[draftMonth]} {draftYear}
@@ -129,7 +131,7 @@ export const MonthYearPicker = ({
                   style={{ height: 52 }}
                >
                   <Typography className="text-background font-bold text-sm uppercase tracking-widest">
-                     Apply — {MONTHS[draftMonth]} {draftYear}
+                     {t("picker.apply", { month: MONTHS[draftMonth], year: draftYear })}
                   </Typography>
                </TouchableOpacity>
             </Pressable>

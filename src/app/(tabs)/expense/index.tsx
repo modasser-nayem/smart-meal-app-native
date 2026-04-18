@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, TouchableOpacity } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Container } from "@/components/ui/Container";
 import { CustomAlert } from "@/components/ui/CustomAlert";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -149,6 +150,7 @@ const INITIAL_SETTLEMENTS: Settlement[] = [
 // ─── Screen ───────────────────────────────────────────────────────────────────
 
 export default function ExpenseScreen() {
+   const { t } = useTranslation("expense");
    const [monthIndex, setMonthIndex] = useState(2); // April 2026
    const [filter, setFilter] = useState<ExpenseFilter>("all");
    const [sheetVisible, setSheetVisible] = useState(false);
@@ -268,18 +270,18 @@ export default function ExpenseScreen() {
             onClose={() => setCloseMonthAlert(false)}
             icon="lock-outline"
             iconVariant="danger"
-            title="Close This Month?"
-            message="This will finalize all calculations and notify all members. This action cannot be undone."
+            title={t("ownerActions.closeConfirmTitle")}
+            message={t("ownerActions.closeConfirmMessage")}
             actions={[
                {
-                  label: "Close Month",
+                  label: t("ownerActions.closeAction"),
                   variant: "danger",
                   onPress: () => {
                      setIsMonthOpen(false);
                      setCloseMonthAlert(false);
                   },
                },
-               { label: "Cancel", onPress: () => setCloseMonthAlert(false) },
+               { label: t("common.cancel"), onPress: () => setCloseMonthAlert(false) },
             ]}
          />
       </View>

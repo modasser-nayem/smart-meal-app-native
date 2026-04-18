@@ -1,5 +1,6 @@
 import { View, TouchableOpacity } from "react-native";
 import { useState, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import { Typography } from "@/components/ui/Typography";
 import { format, isValid } from "date-fns";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -18,6 +19,7 @@ export const MonthlyAnalytics = ({
    onMonthChange: (monthIndex: number) => void;
    onYearPress: () => void;
 }) => {
+   const { t } = useTranslation("meals");
    const [viewMode, setViewMode] = useState<"summary" | "matrix">("summary");
    const dateObj = isValid(selectedMonth) ? selectedMonth : new Date();
 
@@ -134,7 +136,7 @@ export const MonthlyAnalytics = ({
                            viewMode === "summary" ? "text-background" : "text-secondary-400"
                         }`}
                      >
-                        Summary
+                        {t("monthly.summary")}
                      </Typography>
                   </TouchableOpacity>
                   <TouchableOpacity
@@ -148,12 +150,12 @@ export const MonthlyAnalytics = ({
                            viewMode === "matrix" ? "text-background" : "text-secondary-400"
                         }`}
                      >
-                        Full Matrix
+                        {t("monthly.fullMatrix")}
                      </Typography>
                   </TouchableOpacity>
                </View>
                <Typography className="text-[10px] font-black text-secondary-300 uppercase tracking-widest">
-                  {viewMode === "summary" ? "Leaderboard" : "Audit Sheet"}
+                  {viewMode === "summary" ? t("monthly.leaderboard") : t("monthly.auditSheet")}
                </Typography>
             </View>
 
@@ -167,12 +169,18 @@ export const MonthlyAnalytics = ({
                className="w-full h-14 rounded-3xl bg-surface-container border border-outline/10 items-center justify-center flex-row gap-2.5 active:bg-surface"
             >
                <View className="w-8 h-8 rounded-xl bg-info/10 items-center justify-center">
-                  <MaterialCommunityIcons name="file-export-outline" size={18} color={Colors.icon.info} />
+                  <MaterialCommunityIcons
+                     name="file-export-outline"
+                     size={18}
+                     color={Colors.icon.info}
+                  />
                </View>
                <Typography className="text-on-surface font-bold text-sm">
-                  Export Monthly Report
+                  {t("monthly.exportReport")}
                </Typography>
-               <Typography className="text-secondary-400 text-xs">· PDF / CSV</Typography>
+               <Typography className="text-secondary-400 text-xs">
+                  · {t("monthly.exportFormats")}
+               </Typography>
             </TouchableOpacity>
          </View>
       </View>

@@ -1,0 +1,53 @@
+{
+   "header": {
+      "dailyParticipation": "Daily Participation",
+      "monthlyLedger": "Monthly Group Ledger"
+   },
+   "toggle": {
+      "daily": "Daily View",
+      "monthly": "Monthly View"
+   },
+   "logMeal": {
+      "title": "Log Meal",
+      "subtitle": "Set quantities for each meal",
+      "selectMeals": "Select Meals",
+      "mealQuantities": "Meal Quantities",
+      "date": "Date",
+      "logFor": "Log For",
+      "myself": "Myself",
+      "aMember": "A Member",
+      "selectMember": "Select a member",
+      "note": "Note (optional)",
+      "notePlaceholder": "Any note about this meal...",
+      "submit": "Log {{count}} Meal",
+      "submit_plural": "Log {{count}} Meals",
+      "submitFor": "Log {{count}} Meal for {{name}}",
+      "submitFor_plural": "Log {{count}} Meals for {{name}}",
+      "selectAtLeastOne": "Set quantities above",
+      "logging": "Logging..."
+   },
+   "summary": {
+      "myMeals": "My Meals",
+      "groupMeals": "Group Meals",
+      "meals": "meals",
+      "memberParticipation": "Member Participation",
+      "members": "{{count}} members"
+   },
+   "monthly": {
+      "summary": "Summary",
+      "fullMatrix": "Full Matrix",
+      "leaderboard": "Leaderboard",
+      "auditSheet": "Audit Sheet",
+      "generateReport": "Generate Monthly Report",
+      "exportReport": "Export Monthly Report",
+      "exportFormats": "PDF / CSV",
+      "mealLedger": "Meal Ledger",
+      "scrollHint": "← Scroll to see all members",
+      "monthlyTotal": "Monthly Total",
+      "grandTotal": "Grand"
+   },
+   "picker": {
+      "selectPeriod": "Select Period",
+      "apply": "Apply — {{month}} {{year}}"
+   }
+}

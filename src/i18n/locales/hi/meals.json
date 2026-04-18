@@ -1,0 +1,53 @@
+{
+   "header": {
+      "dailyParticipation": "दैनिक भागीदारी",
+      "monthlyLedger": "मासिक समूह खाता"
+   },
+   "toggle": {
+      "daily": "दैनिक दृश्य",
+      "monthly": "मासिक दृश्य"
+   },
+   "logMeal": {
+      "title": "भोजन लॉग करें",
+      "subtitle": "प्रत्येक भोजन की मात्रा निर्धारित करें",
+      "selectMeals": "भोजन चुनें",
+      "mealQuantities": "भोजन की मात्रा",
+      "date": "तारीख",
+      "logFor": "किसके लिए लॉग करें",
+      "myself": "अपने लिए",
+      "aMember": "एक सदस्य के लिए",
+      "selectMember": "एक सदस्य चुनें",
+      "note": "नोट (वैकल्पिक)",
+      "notePlaceholder": "इस भोजन के बारे में कोई नोट...",
+      "submit": "{{count}} भोजन लॉग करें",
+      "submit_plural": "{{count}} भोजन लॉग करें",
+      "submitFor": "{{name}} के लिए {{count}} भोजन लॉग करें",
+      "submitFor_plural": "{{name}} के लिए {{count}} भोजन लॉग करें",
+      "selectAtLeastOne": "ऊपर मात्रा निर्धारित करें",
+      "logging": "लॉग हो रहा है..."
+   },
+   "summary": {
+      "myMeals": "मेरे भोजन",
+      "groupMeals": "समूह के भोजन",
+      "meals": "भोजन",
+      "memberParticipation": "सदस्यों की भागीदारी",
+      "members": "{{count}} सदस्य"
+   },
+   "monthly": {
+      "summary": "सारांश",
+      "fullMatrix": "पूर्ण मैट्रिक्स",
+      "leaderboard": "लीडरबोर्ड",
+      "auditSheet": "ऑडिट शीट",
+      "generateReport": "मासिक रिपोर्ट बनाएं",
+      "exportReport": "मासिक रिपोर्ट निर्यात करें",
+      "exportFormats": "PDF / CSV",
+      "mealLedger": "भोजन खाता",
+      "scrollHint": "← सभी सदस्य देखने के लिए स्क्रॉल करें",
+      "monthlyTotal": "मासिक कुल",
+      "grandTotal": "कुल योग"
+   },
+   "picker": {
+      "selectPeriod": "अवधि चुनें",
+      "apply": "लागू करें — {{month}} {{year}}"
+   }
+}

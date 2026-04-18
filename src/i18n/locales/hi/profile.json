@@ -1,0 +1,97 @@
+{
+   "header": {
+      "groups": "समूह",
+      "meals": "भोजन",
+      "since": "से",
+      "editProfile": "प्रोफ़ाइल संपादित करें"
+   },
+   "sections": {
+      "activeGroup": "सक्रिय समूह",
+      "myGroups": "मेरे समूह",
+      "account": "खाता",
+      "appSettings": "ऐप सेटिंग्स",
+      "support": "सहायता",
+      "dangerZone": "खतरा क्षेत्र"
+   },
+   "settings": {
+      "editProfile": "प्रोफ़ाइल संपादित करें",
+      "securityPassword": "सुरक्षा और पासवर्ड",
+      "notifications": "सूचनाएं",
+      "language": "भाषा",
+      "displayMode": "डिस्प्ले मोड",
+      "displayModeValue": "डार्क",
+      "helpCenter": "सहायता केंद्र",
+      "privacyPolicy": "गोपनीयता नीति",
+      "logOut": "लॉग आउट",
+      "deleteAccount": "खाता हटाएं",
+      "deleteAccountDesc": "यह क्रिया स्थायी है और पूर्ववत नहीं की जा सकती"
+   },
+   "language": {
+      "title": "भाषा",
+      "subtitle": "अपनी पसंदीदा भाषा चुनें",
+      "current": "वर्तमान भाषा",
+      "select": "भाषा चुनें",
+      "languages": {
+         "en": "English",
+         "bn": "বাংলা (Bengali)",
+         "hi": "हिन्दी (Hindi)"
+      },
+      "changed": "भाषा {{language}} में बदली गई",
+      "restart": "सभी परिवर्तन लागू करने के लिए ऐप पुनः प्रारंभ करें"
+   },
+   "editProfile": {
+      "title": "प्रोफ़ाइल संपादित करें",
+      "username": "उपयोगकर्ता नाम",
+      "usernamePlaceholder": "आपका_नाम",
+      "email": "ईमेल पता",
+      "emailLocked": "ईमेल बदला नहीं जा सकता",
+      "gallery": "गैलरी",
+      "camera": "कैमरा",
+      "removePhoto": "चुनी गई फोटो हटाएं",
+      "avatarHint": "प्रोफ़ाइल फोटो अपडेट करने के लिए टैप करें",
+      "saveChanges": "परिवर्तन सहेजें",
+      "success": "प्रोफ़ाइल सफलतापूर्वक अपडेट हुई"
+   },
+   "security": {
+      "title": "सुरक्षा और पासवर्ड",
+      "currentPassword": "वर्तमान पासवर्ड",
+      "newPassword": "नया पासवर्ड",
+      "confirmPassword": "नया पासवर्ड पुष्टि करें",
+      "requirements": "आवश्यकताएं",
+      "req8chars": "कम से कम 8 अक्षर",
+      "reqUppercase": "एक बड़ा अक्षर",
+      "reqNumber": "एक अंक",
+      "reqSpecial": "एक विशेष अक्षर",
+      "strength": {
+         "weak": "कमज़ोर",
+         "fair": "ठीक-ठाक",
+         "good": "अच्छा",
+         "strong": "मज़बूत"
+      },
+      "submit": "पासवर्ड अपडेट करें",
+      "success": "पासवर्ड सफलतापूर्वक बदला गया"
+   },
+   "groups": {
+      "createNew": "नया समूह बनाएं",
+      "joinGroup": "समूह में शामिल हों",
+      "joinHint": "एक आमंत्रण कोड दर्ज करें",
+      "active": "सक्रिय",
+      "switch": "बदलें",
+      "switchTitle": "समूह बदलें",
+      "switchMessage": "\"{{name}}\" पर जाएं? आपको समूह टैब पर ले जाया जाएगा।",
+      "switchAction": "{{emoji}} {{name}} पर जाएं"
+   },
+   "alerts": {
+      "logOut": {
+         "title": "लॉग आउट",
+         "message": "क्या आप वाकई अपने खाते से लॉग आउट करना चाहते हैं?",
+         "action": "लॉग आउट"
+      },
+      "deleteAccount": {
+         "title": "खाता हटाएं",
+         "message": "यह आपके खाते और सभी डेटा को स्थायी रूप से हटा देगा। यह पूर्ववत नहीं किया जा सकता।",
+         "action": "स्थायी रूप से हटाएं"
+      }
+   },
+   "version": "स्मार्ट मील v{{version}} · ❤️ के साथ बनाया"
+}

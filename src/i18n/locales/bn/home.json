@@ -1,0 +1,59 @@
+{
+   "greeting": {
+      "morning": "শুভ সকাল ☀️",
+      "afternoon": "শুভ দুপুর 🌤️",
+      "evening": "শুভ সন্ধ্যা 🌙"
+   },
+   "sections": {
+      "activeGroup": "সক্রিয় গ্রুপ",
+      "dailyPulse": "দৈনিক পালস",
+      "myBalance": "আমার ব্যালেন্স",
+      "quickActions": "দ্রুত কার্যক্রম",
+      "recentActivity": "সাম্প্রতিক কার্যক্রম",
+      "noticeboard": "নোটিশ বোর্ড"
+   },
+   "balance": {
+      "myCost": "আমার খরচ",
+      "iPaid": "আমি দিয়েছি",
+      "surplusBalance": "বর্তমান উদ্বৃত্ত ব্যালেন্স",
+      "deficitBalance": "বর্তমান ঘাটতি ব্যালেন্স",
+      "forMonth": "{{month}} মাসের জন্য"
+   },
+   "quickActions": {
+      "logMeal": "খাবার লগ করুন",
+      "logMealDesc": "আজকের খাবার রেকর্ড করুন",
+      "addExpense": "খরচ যোগ করুন",
+      "addExpenseDesc": "গ্রুপের খরচ রেকর্ড করুন",
+      "expenses": "খরচ",
+      "expensesDesc": "বিলিং ও ব্যালেন্স দেখুন",
+      "members": "সদস্যরা",
+      "membersDesc": "গ্রুপ ও যোগদানের অনুরোধ"
+   },
+   "activity": {
+      "noActivity": "আজ এখনো কোনো কার্যক্রম নেই",
+      "logged": "লগ করেছেন",
+      "addedExpense": "খরচ যোগ করেছেন"
+   },
+   "group": {
+      "openGroup": "গ্রুপ খুলুন",
+      "switchGroup": "পরিবর্তন",
+      "members": "{{count}} জন সদস্য",
+      "billingOpen": "খোলা",
+      "billingClosed": "বন্ধ"
+   },
+   "snapshot": {
+      "groupMeals": "গ্রুপ",
+      "myMeals": "আমার",
+      "mealsLogged": "খাবার লগ হয়েছে",
+      "mealsToday": "আজকের খাবার",
+      "breakdown": "বিস্তারিত",
+      "joined": "{{joined}}/{{total}} যোগ দিয়েছেন"
+   },
+   "notices": {
+      "noticesFromGroup": "আপনার গ্রুপ থেকে {{count}}টি নোটিশ",
+      "noticesFromGroup_plural": "আপনার গ্রুপ থেকে {{count}}টি নোটিশ",
+      "noNotices": "গ্রুপ থেকে কোনো নোটিশ নেই",
+      "openNoticeboard": "গ্রুপ নোটিশ বোর্ড খুলুন",
+      "moreNotices": "+{{count}}টি আরো"
+   }
+}

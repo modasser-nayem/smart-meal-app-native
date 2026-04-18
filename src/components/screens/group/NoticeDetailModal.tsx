@@ -1,4 +1,5 @@
 import { View, TouchableOpacity, Modal, ScrollView } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Notice } from "./GroupNoticeSection";
@@ -27,10 +28,10 @@ const PIN_BG: Record<string, string> = {
 };
 
 const PIN_LABEL: Record<string, string> = {
-   primary: "Announcement",
-   info: "Info",
-   success: "Update",
-   warning: "Urgent",
+   primary: "notices.types.announcement",
+   info: "notices.types.info",
+   success: "notices.types.update",
+   warning: "notices.types.urgent",
 };
 
 const PIN_ICON: Record<string, string> = {
@@ -49,10 +50,12 @@ export const NoticeDetailModal = ({
 }: NoticeDetailModalProps) => {
    if (!notice) return null;
 
+   const { t } = useTranslation("group");
    const type = notice.pinColor ?? "primary";
    const color = PIN_COLOR[type];
    const bg = PIN_BG[type];
-   const label = PIN_LABEL[type];
+   const labelKey = PIN_LABEL[type];
+   const label = t(labelKey as any);
    const icon = PIN_ICON[type];
 
    return (
@@ -95,7 +98,11 @@ export const NoticeDetailModal = ({
                         activeOpacity={0.75}
                         className="w-9 h-9 rounded-full bg-error/10 items-center justify-center active:scale-90"
                      >
-                        <MaterialCommunityIcons name="delete-outline" size={18} color={Colors.icon.error} />
+                        <MaterialCommunityIcons
+                           name="delete-outline"
+                           size={18}
+                           color={Colors.icon.error}
+                        />
                      </TouchableOpacity>
                   )}
                   <TouchableOpacity
@@ -119,7 +126,11 @@ export const NoticeDetailModal = ({
 
                   {/* Meta */}
                   <View className="flex-row items-center gap-2">
-                     <MaterialCommunityIcons name="clock-outline" size={13} color={Colors.icon.dim} />
+                     <MaterialCommunityIcons
+                        name="clock-outline"
+                        size={13}
+                        color={Colors.icon.dim}
+                     />
                      <Typography className="text-secondary-400 text-xs">
                         {notice.timeAgo}
                      </Typography>

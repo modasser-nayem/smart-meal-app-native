@@ -1,4 +1,5 @@
 import { View, TouchableOpacity, Image } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Colors } from "@/constants/colors";
@@ -32,6 +33,7 @@ export const GroupInfoCard = ({
    onEditGroup,
    onCopyCode,
 }: GroupInfoCardProps) => {
+   const { t } = useTranslation("group");
    return (
       <View className="bg-surface-container rounded-3xl overflow-hidden border border-outline/10">
          {/* Amber top accent */}
@@ -71,14 +73,18 @@ export const GroupInfoCard = ({
                               color={Colors.icon.subtle}
                            />
                            <Typography className="text-secondary-300 text-[11px] font-bold">
-                              Edit
+                              {t("info.edit")}
                            </Typography>
                         </TouchableOpacity>
                      )}
                   </View>
 
                   <View className="flex-row items-center gap-1 mt-1">
-                     <MaterialCommunityIcons name="map-marker-outline" size={12} color={Colors.icon.dim} />
+                     <MaterialCommunityIcons
+                        name="map-marker-outline"
+                        size={12}
+                        color={Colors.icon.dim}
+                     />
                      <Typography className="text-secondary-400 text-xs">{location}</Typography>
                   </View>
 
@@ -87,7 +93,7 @@ export const GroupInfoCard = ({
                      <View className="flex-row items-center gap-1">
                         <View className="w-1.5 h-1.5 rounded-full bg-success" />
                         <Typography className="text-accent text-[10px] font-bold uppercase tracking-widest">
-                           Active
+                           {t("info.active")}
                         </Typography>
                      </View>
                      <View className="w-px h-3 bg-outline/30" />
@@ -110,7 +116,7 @@ export const GroupInfoCard = ({
                               isMonthOpen ? "text-primary" : "text-secondary-400"
                            }`}
                         >
-                           {isMonthOpen ? "Open" : "Closed"}
+                           {isMonthOpen ? t("info.open") : t("info.closed")}
                         </Typography>
                      </View>
                   </View>
@@ -120,9 +126,9 @@ export const GroupInfoCard = ({
             {/* Stats strip */}
             <View className="flex-row bg-surface rounded-2xl overflow-hidden border border-outline/10">
                {[
-                  { value: memberCount, label: "Members", color: "text-on-surface" },
-                  { value: activeCount, label: "Active", color: "text-success" },
-                  { value: pendingCount, label: "Pending", color: "text-primary" },
+                  { value: memberCount, label: t("info.members"), color: "text-on-surface" },
+                  { value: activeCount, label: t("info.active"), color: "text-success" },
+                  { value: pendingCount, label: t("info.pending"), color: "text-primary" },
                ].map((stat, i) => (
                   <View
                      key={stat.label}
@@ -144,13 +150,13 @@ export const GroupInfoCard = ({
             <View className="flex-row items-center justify-between bg-surface rounded-2xl px-4 py-3.5 border border-outline/15">
                <View>
                   <Typography className="text-secondary-400 text-[9px] font-bold uppercase tracking-widest mb-0.5">
-                     Group Code
+                     {t("info.groupCode")}
                   </Typography>
                   <Typography className="text-on-surface font-mono text-lg font-extrabold tracking-widest">
                      {groupCode}
                   </Typography>
                   <Typography className="text-secondary-400 text-[10px] mt-0.5">
-                     Share this code so others can find & join
+                     {t("info.groupCodeHint")}
                   </Typography>
                </View>
                <TouchableOpacity
@@ -158,8 +164,14 @@ export const GroupInfoCard = ({
                   activeOpacity={0.75}
                   className="flex-row items-center gap-1.5 bg-primary/10 border border-primary/20 px-3 py-2.5 rounded-xl active:scale-95"
                >
-                  <MaterialCommunityIcons name="content-copy" size={15} color={Colors.icon.primary} />
-                  <Typography className="text-primary text-xs font-bold">Copy</Typography>
+                  <MaterialCommunityIcons
+                     name="content-copy"
+                     size={15}
+                     color={Colors.icon.primary}
+                  />
+                  <Typography className="text-primary text-xs font-bold">
+                     {t("actions.copy")}
+                  </Typography>
                </TouchableOpacity>
             </View>
          </View>

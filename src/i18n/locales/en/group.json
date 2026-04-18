@@ -1,0 +1,154 @@
+{
+   "header": {
+      "activeGroup": "Active Group",
+      "groupHub": "Group Hub",
+      "codeCopied": "Code Copied!",
+      "codeCopiedDesc": "Group code \"{{code}}\" copied. Share it so others can find and join."
+   },
+   "actions": {
+      "done": "Done",
+      "great": "Great",
+      "cancel": "Cancel",
+      "ok": "OK"
+   },
+   "info": {
+      "groupCode": "Group Code",
+      "groupCodeHint": "Share this code so others can find & join",
+      "inviteCode": "Invite Code",
+      "billingMonth": "Billing Month",
+      "location": "Location",
+      "members": "Members",
+      "active": "Active",
+      "pending": "Pending"
+   },
+   "quickActions": {
+      "invite": "Invite",
+      "notice": "Notice",
+      "billing": "Billing",
+      "requests": "Requests"
+   },
+   "notices": {
+      "title": "Noticeboard",
+      "noNotices": "No notices yet",
+      "postFirst": "Post First Notice",
+      "postNew": "Post New Notice",
+      "types": {
+         "announcement": "Announcement",
+         "info": "Info",
+         "update": "Update",
+         "urgent": "Urgent"
+      },
+      "typeDescriptions": {
+         "announcement": "General group update",
+         "info": "Informational notice",
+         "update": "Positive update or completion",
+         "urgent": "Requires immediate attention"
+      },
+      "post": {
+         "title": "Post Notice",
+         "subtitle": "Visible to all group members",
+         "noticeType": "Notice Type",
+         "noticeTitle": "Title",
+         "message": "Message",
+         "preview": "Preview",
+         "submit": "Post Notice",
+         "posting": "Posting..."
+      },
+      "detail": {
+         "memberInfo": "Member Info",
+         "postedBy": "Posted by"
+      }
+   },
+   "members": {
+      "title": "Members",
+      "moreMembers": "{{count}} more member",
+      "moreMembers_plural": "{{count}} more members",
+      "seeAll": "See All",
+      "memberRemoved": "Member Removed",
+      "memberRemovedDesc": "The member has been removed from the group.",
+      "info": {
+         "title": "Member Info",
+         "thisMonth": "This Month",
+         "meals": "Meals",
+         "paid": "Paid",
+         "balance": "Balance",
+         "memberSince": "Member since",
+         "changeRole": "Change Role",
+         "changeRoleDesc": "Promote to Manager or demote to Member",
+         "removeMember": "Remove Member",
+         "removeMemberDesc": "Remove from this group permanently",
+         "actions": "Actions",
+         "active": "Active",
+         "inactive": "Inactive"
+      }
+   },
+   "requests": {
+      "title": "Requests & Invitations",
+      "pendingActions": "{{count}} pending action",
+      "pendingActions_plural": "{{count}} pending actions",
+      "joinRequests": "{{count}} join request",
+      "joinRequests_plural": "{{count}} join requests",
+      "invitationsSent": "{{count}} invitation sent",
+      "invitationsSent_plural": "{{count}} invitations sent",
+      "noPending": "No pending requests",
+      "joinRequest": "Join Request",
+      "invited": "Invited",
+      "accept": "Accept",
+      "reject": "Reject",
+      "revoke": "Revoke",
+      "awaiting": "Awaiting response",
+      "memberAccepted": "Member Accepted",
+      "memberAcceptedThisMonth": "Member added and included in the current billing month.",
+      "memberAcceptedNextMonth": "Member added. Billing starts from next month.",
+      "rejectRequest": "Reject Request",
+      "rejectRequestDesc": "Reject join request from {{name}}?",
+      "revokeInvitation": "Revoke Invitation",
+      "revokeInvitationDesc": "Revoke the invitation sent to {{name}}?",
+      "acceptModal": {
+         "title": "Accept Request",
+         "includeMonth": "Include in current month",
+         "includeMonthDesc": "Count meals from this month in their billing. Turn off if they join from next month.",
+         "billingThisMonth": "Billing starts from this month ({{month}})",
+         "billingNextMonth": "Billing starts from next month ({{month}})",
+         "acceptMember": "Accept Member"
+      }
+   },
+   "createGroup": {
+      "title": "Create Group",
+      "subtitle": "New meal group",
+      "name": "Group Name",
+      "namePlaceholder": "e.g. Bachelor House",
+      "location": "Location",
+      "locationPlaceholder": "e.g. Dhaka, Bangladesh",
+      "photo": "Group Photo",
+      "photoHint": "Tap to pick from gallery",
+      "photoSelected": "Photo selected",
+      "description": "Description",
+      "descriptionPlaceholder": "Describe your group... supports **bold**, _italic_, # headings, - lists",
+      "markdownSupported": "Markdown supported",
+      "inviteCodeHint": "An invite code will be auto-generated after creation.",
+      "submit": "Create Group",
+      "success": "Group created successfully!"
+   },
+   "joinGroup": {
+      "title": "Join a Group",
+      "subtitle": "Find & request to join",
+      "searchByName": "Search by Name",
+      "searchByCode": "Search by Code",
+      "searchPlaceholder": "Search group name...",
+      "codePlaceholder": "e.g. BCHH-4821",
+      "codeHint": "Enter the exact invite code shared by the group owner",
+      "searching": "Searching...",
+      "noResults": "No groups found",
+      "noResultsHint": "Try a different name or check the invite code",
+      "resultsFound": "{{count}} result found — tap to select",
+      "resultsFound_plural": "{{count}} results found — tap to select",
+      "selectedToJoin": "Selected to join",
+      "includeMonth": "Include current month",
+      "includeMonthDesc": "Count meals from this month in your billing.",
+      "billingThisMonth": "Billing starts from this month",
+      "billingNextMonth": "Billing starts from next month",
+      "sendRequest": "Send Join Request",
+      "requestSent": "Join request sent to \"{{name}}\"!"
+   }
+}

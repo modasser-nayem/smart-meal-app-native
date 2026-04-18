@@ -1,0 +1,59 @@
+{
+   "greeting": {
+      "morning": "Good Morning ☀️",
+      "afternoon": "Good Afternoon 🌤️",
+      "evening": "Good Evening 🌙"
+   },
+   "sections": {
+      "activeGroup": "Active Group",
+      "dailyPulse": "Daily Pulse",
+      "myBalance": "My Balance",
+      "quickActions": "Quick Actions",
+      "recentActivity": "Recent Activity",
+      "noticeboard": "Noticeboard"
+   },
+   "balance": {
+      "myCost": "My Cost",
+      "iPaid": "I Paid",
+      "surplusBalance": "Current surplus balance",
+      "deficitBalance": "Current deficit balance",
+      "forMonth": "for {{month}}"
+   },
+   "quickActions": {
+      "logMeal": "Log Meal",
+      "logMealDesc": "Record today's meals",
+      "addExpense": "Add Expense",
+      "addExpenseDesc": "Record a group cost",
+      "expenses": "Expenses",
+      "expensesDesc": "View billing & balances",
+      "members": "Members",
+      "membersDesc": "Group & join requests"
+   },
+   "activity": {
+      "noActivity": "No activity yet today",
+      "logged": "logged",
+      "addedExpense": "added expense"
+   },
+   "group": {
+      "openGroup": "Open Group",
+      "switchGroup": "Switch",
+      "members": "{{count}} members",
+      "billingOpen": "Open",
+      "billingClosed": "Closed"
+   },
+   "snapshot": {
+      "groupMeals": "Group",
+      "myMeals": "Mine",
+      "mealsLogged": "meals logged",
+      "mealsToday": "meals today",
+      "breakdown": "Breakdown",
+      "joined": "{{joined}}/{{total}} joined"
+   },
+   "notices": {
+      "noticesFromGroup": "{{count}} notice from your group",
+      "noticesFromGroup_plural": "{{count}} notices from your group",
+      "noNotices": "No notices from your group",
+      "openNoticeboard": "Open Group Noticeboard",
+      "moreNotices": "+{{count}} more"
+   }
+}

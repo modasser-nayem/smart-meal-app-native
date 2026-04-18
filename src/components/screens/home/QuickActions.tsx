@@ -1,6 +1,7 @@
 import { View, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
 
 interface ActionItemProps {
@@ -39,39 +40,41 @@ export const QuickActions = ({
    onViewExpenses,
    onMembers,
 }: QuickActionsProps) => {
+   const { t } = useTranslation("home");
+
    return (
       <View>
          <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-3 ml-1">
-            Quick Actions
+            {t("sections.quickActions")}
          </Typography>
          <View className="flex-row flex-wrap justify-between gap-y-3">
             <ActionItem
-               label="Log Meal"
-               description="Record today's meals"
+               label={t("quickActions.logMeal")}
+               description={t("quickActions.logMealDesc")}
                icon="silverware-fork-knife"
                iconBg="bg-primary/10"
                iconColor={Colors.icon.primary}
                onPress={onLogMeal}
             />
             <ActionItem
-               label="Add Expense"
-               description="Record a group cost"
+               label={t("quickActions.addExpense")}
+               description={t("quickActions.addExpenseDesc")}
                icon="card-plus-outline"
                iconBg="bg-info/10"
                iconColor={Colors.icon.info}
                onPress={onAddExpense}
             />
             <ActionItem
-               label="Expenses"
-               description="View billing & balances"
+               label={t("quickActions.expenses")}
+               description={t("quickActions.expensesDesc")}
                icon="wallet-outline"
                iconBg="bg-success/10"
                iconColor={Colors.icon.success}
                onPress={onViewExpenses}
             />
             <ActionItem
-               label="Members"
-               description="Group & join requests"
+               label={t("quickActions.members")}
+               description={t("quickActions.membersDesc")}
                icon="account-group-outline"
                iconBg="bg-secondary-600/30"
                iconColor={Colors.icon.subtle}

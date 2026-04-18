@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { format, setMonth, isValid } from "date-fns";
+import { useTranslation } from "react-i18next";
 
 import { MealsHeader } from "@/components/screens/meals/MealsHeader";
 import { ViewToggle } from "@/components/screens/meals/ViewToggle";
@@ -26,6 +27,7 @@ export default function MealsScreen() {
    const [selectedDate, setSelectedDate] = useState<Date>(new Date());
    const [isPickerVisible, setIsPickerVisible] = useState(false);
    const [isLogSheetVisible, setIsLogSheetVisible] = useState(false);
+   const { t } = useTranslation("meals");
 
    const safeDate = isValid(selectedDate) ? selectedDate : new Date();
 
@@ -55,7 +57,9 @@ export default function MealsScreen() {
                   ? format(safeDate, "MMMM d, yyyy")
                   : format(safeDate, "MMMM yyyy")
             }
-            subtitle={viewType === "daily" ? "Daily Participation" : "Monthly Group Ledger"}
+            subtitle={
+               viewType === "daily" ? t("header.dailyParticipation") : t("header.monthlyLedger")
+            }
          />
 
          {/* Daily / Monthly toggle — always visible */}

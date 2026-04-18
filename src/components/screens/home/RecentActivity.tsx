@@ -1,7 +1,9 @@
 import { View, Image, TouchableOpacity } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
+import { useCurrencyFormat } from "@/hooks/useCurrencyFormat";
 
 interface ActivityItemProps {
    name: string;
@@ -36,14 +38,12 @@ const ActivityItem = ({ name, action, highlight, time, avatar, onPress }: Activi
    </TouchableOpacity>
 );
 
-const EmptyActivity = () => (
+const EmptyActivity = ({ label }: { label: string }) => (
    <View className="bg-surface-container rounded-2xl border border-outline/10 px-4 py-10 items-center gap-3">
       <View className="w-12 h-12 rounded-2xl bg-surface items-center justify-center">
          <MaterialCommunityIcons name="timeline-outline" size={24} color={Colors.icon.muted} />
       </View>
-      <Typography className="text-secondary-400 text-sm text-center">
-         No activity yet today
-      </Typography>
+      <Typography className="text-secondary-400 text-sm text-center">{label}</Typography>
    </View>
 );
 
@@ -53,10 +53,13 @@ interface RecentActivityProps {
 }
 
 export const RecentActivity = ({ activities, onViewAll }: RecentActivityProps) => {
+   const { t } = useTranslation("home");
+   const { format } = useCurrencyFormat();
+
    const items: ActivityItemProps[] = activities || [
       {
          name: "Rahim",
-         action: "logged",
+         action: t("activity.logged"),
          highlight: "Dinner",
          time: "2h ago",
          avatar:
@@ -64,8 +67,8 @@ export const RecentActivity = ({ activities, onViewAll }: RecentActivityProps) =
       },
       {
          name: "Karim",
-         action: "added expense",
-         highlight: "৳850",
+         action: t("activity.addedExpense"),
+         highlight: format(850),
          time: "Yesterday",
          avatar:
             "https://lh3.googleusercontent.com/aida-public/AB6AXuCmnaGLcUymCqtbhNMsybCsB1NEtlNmcbPQbTSWPa5VIzEqJv3cb2qbQWxjcmiT5zlLm0Vnjg7lVem1dWwGqa7ltQ8QWGbdF07SND3u7oYE7flB8Y2SL2PE8OquFyPC242FBNEJLvf2oeBU1K4AWzVXhXiPCmfGct_X6Wy4avYaMIYTD5BWEjOiAIFhbnK8mlSLmQRk7UFyZ0Gxuq7jOUjHWYb5oPVsOrsDFFXJf32tWNLPDqaUEn7wyN5YEzk0kHUef5DMnw7zqqg",
@@ -74,20 +77,19 @@ export const RecentActivity = ({ activities, onViewAll }: RecentActivityProps) =
 
    return (
       <View>
-         {/* Section header */}
          <View className="flex-row items-center justify-between mb-3 ml-1">
             <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest">
-               Recent Activity
+               {t("sections.recentActivity")}
             </Typography>
             <TouchableOpacity onPress={onViewAll} activeOpacity={0.7}>
                <Typography className="text-primary text-[11px] font-bold uppercase tracking-widest">
-                  View All
+                  {t("notices.openNoticeboard").split(" ")[0]}
                </Typography>
             </TouchableOpacity>
          </View>
 
          {items.length === 0 ? (
-            <EmptyActivity />
+            <EmptyActivity label={t("activity.noActivity")} />
          ) : (
             <View className="gap-2.5">
                {items.map((activity, index) => (

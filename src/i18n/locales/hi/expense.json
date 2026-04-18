@@ -1,0 +1,75 @@
+{
+   "header": {
+      "financials": "वित्तीय विवरण",
+      "myBalance": "इस महीने मेरा बैलेंस",
+      "surplus": "अधिशेष",
+      "youOwe": "आप पर बकाया",
+      "inSurplus": "आप अधिशेष में हैं",
+      "oweAmount": "आप यह राशि देते हैं"
+   },
+   "stats": {
+      "meals": "भोजन",
+      "cost": "लागत",
+      "paid": "भुगतान",
+      "totalMeals": "कुल भोजन",
+      "mealRate": "भोजन दर",
+      "totalExpense": "कुल खर्च",
+      "members": "सदस्य",
+      "eligible": "पात्र"
+   },
+   "filters": {
+      "all": "सभी",
+      "mine": "मेरा",
+      "meal": "भोजन",
+      "group": "समूह"
+   },
+   "breakdown": {
+      "title": "खर्च का विवरण",
+      "mealExpense": "भोजन खर्च",
+      "sharedExpense": "साझा / समूह खर्च",
+      "sharedCostPerMember": "प्रति सदस्य साझा लागत:"
+   },
+   "transactions": {
+      "title": "लेनदेन",
+      "noTransactions": "अभी तक कोई लेनदेन नहीं",
+      "meal": "भोजन",
+      "group": "समूह"
+   },
+   "balances": {
+      "title": "सदस्यों का बैलेंस",
+      "members": "{{count}} सदस्य",
+      "surplus": "अधिशेष",
+      "owes": "बकाया"
+   },
+   "settlements": {
+      "title": "निपटान",
+      "outstanding": "৳{{amount}} बकाया",
+      "sends": "भेजता है",
+      "receives": "प्राप्त करता है",
+      "markSettled": "निपटाया गया चिह्नित करें",
+      "settled": "निपटाया गया",
+      "awaitingResponse": "प्रतिक्रिया की प्रतीक्षा"
+   },
+   "addExpense": {
+      "title": "खर्च जोड़ें",
+      "amount": "राशि दर्ज करें",
+      "expenseTitle": "खर्च का शीर्षक",
+      "titlePlaceholder": "जैसे: मासिक किराना",
+      "date": "तारीख",
+      "notes": "नोट (वैकल्पिक)",
+      "notesPlaceholder": "इस खर्च के बारे में कोई नोट...",
+      "mealCost": "भोजन लागत",
+      "groupCost": "समूह लागत",
+      "submit": "खर्च जोड़ें"
+   },
+   "ownerActions": {
+      "title": "मालिक की क्रियाएं",
+      "exportReport": "रिपोर्ट निर्यात करें",
+      "exportDesc": "इस महीने को PDF या CSV के रूप में डाउनलोड करें",
+      "closeMonth": "इस महीने को बंद करें",
+      "closeDesc": "गणना अंतिम करता है और सभी सदस्यों को सूचित करता है",
+      "closeConfirmTitle": "इस महीने को बंद करें?",
+      "closeConfirmMessage": "यह सभी गणनाओं को अंतिम करेगा और सभी सदस्यों को सूचित करेगा। यह क्रिया पूर्ववत नहीं की जा सकती।",
+      "closeAction": "महीना बंद करें"
+   }
+}

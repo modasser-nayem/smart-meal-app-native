@@ -8,6 +8,7 @@ import {
    TextInput,
    ScrollView,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { Colors } from "@/constants/colors";
@@ -37,35 +38,35 @@ const NOTICE_TYPES: {
 }[] = [
    {
       key: "primary",
-      label: "Announcement",
+      label: "notices.types.announcement",
       icon: "bullhorn-outline",
       color: Colors.icon.primary,
       bg: "bg-primary/10",
-      description: "General group update",
+      description: "notices.typeDescriptions.announcement",
    },
    {
       key: "info",
-      label: "Info",
+      label: "notices.types.info",
       icon: "information-outline",
       color: Colors.icon.info,
       bg: "bg-info/10",
-      description: "Informational notice",
+      description: "notices.typeDescriptions.info",
    },
    {
       key: "success",
-      label: "Update",
+      label: "notices.types.update",
       icon: "check-circle-outline",
       color: Colors.icon.success,
       bg: "bg-accent/10",
-      description: "Positive update or completion",
+      description: "notices.typeDescriptions.update",
    },
    {
       key: "warning",
-      label: "Urgent",
+      label: "notices.types.urgent",
       icon: "alert-outline",
       color: Colors.icon.error,
       bg: "bg-error/10",
-      description: "Requires immediate attention",
+      description: "notices.typeDescriptions.urgent",
    },
 ];
 
@@ -75,6 +76,7 @@ export const PostNoticeSheet = ({
    onSubmit,
    isLoading = false,
 }: PostNoticeSheetProps) => {
+   const { t } = useTranslation("group");
    const [title, setTitle] = useState("");
    const [body, setBody] = useState("");
    const [type, setType] = useState<NoticeType>("primary");
@@ -122,10 +124,10 @@ export const PostNoticeSheet = ({
                <View className="flex-row items-center justify-between px-6 py-4 border-b border-outline/10">
                   <View>
                      <Typography className="text-on-surface text-xl font-extrabold tracking-tight">
-                        Post Notice
+                        {t("notices.post.title")}
                      </Typography>
                      <Typography className="text-secondary-300 text-xs mt-0.5">
-                        Visible to all group members
+                        {t("notices.post.subtitle")}
                      </Typography>
                   </View>
                   <TouchableOpacity
@@ -145,46 +147,48 @@ export const PostNoticeSheet = ({
                      {/* Notice type selector */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-3 ml-1">
-                           Notice Type
+                           {t("notices.post.noticeType")}
                         </Typography>
                         <View className="flex-row gap-2 flex-wrap">
-                           {NOTICE_TYPES.map((t) => {
-                              const isSelected = type === t.key;
+                           {NOTICE_TYPES.map((noticeType) => {
+                              const isSelected = type === noticeType.key;
                               return (
                                  <TouchableOpacity
-                                    key={t.key}
-                                    onPress={() => setType(t.key)}
+                                    key={noticeType.key}
+                                    onPress={() => setType(noticeType.key)}
                                     activeOpacity={0.8}
                                     className={`flex-row items-center gap-2 px-3 py-2.5 rounded-2xl border ${
                                        isSelected
                                           ? "border-outline/30"
                                           : "border-outline/10 bg-surface"
-                                    } ${isSelected ? t.bg : ""}`}
+                                    } ${isSelected ? noticeType.bg : ""}`}
                                  >
                                     <MaterialCommunityIcons
-                                       name={t.icon as any}
+                                       name={noticeType.icon as any}
                                        size={16}
-                                       color={isSelected ? t.color : "#64748B"}
+                                       color={isSelected ? noticeType.color : "#64748B"}
                                     />
                                     <Typography
                                        className="text-xs font-bold"
-                                       style={{ color: isSelected ? t.color : Colors.icon.subtle }}
+                                       style={{
+                                          color: isSelected ? noticeType.color : Colors.icon.subtle,
+                                       }}
                                     >
-                                       {t.label}
+                                       {t(noticeType.label)}
                                     </Typography>
                                  </TouchableOpacity>
                               );
                            })}
                         </View>
                         <Typography className="text-secondary-400 text-[10px] mt-2 ml-1">
-                           {selectedType.description}
+                           {t(selectedType.description)}
                         </Typography>
                      </View>
 
                      {/* Title */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Title
+                           {t("notices.post.noticeTitle")}
                         </Typography>
                         <View className="bg-surface border border-outline/20 rounded-2xl px-4 h-14 justify-center">
                            <TextInput
@@ -204,7 +208,7 @@ export const PostNoticeSheet = ({
                      {/* Body */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Message
+                           {t("notices.post.message")}
                         </Typography>
                         <View className="bg-surface border border-outline/20 rounded-2xl px-4 py-3">
                            <TextInput
@@ -228,7 +232,7 @@ export const PostNoticeSheet = ({
                      {isValid && (
                         <View>
                            <Typography className="text-[10px] text-secondary-300 uppercase font-black tracking-widest mb-2 ml-1">
-                              Preview
+                              {t("notices.post.preview")}
                            </Typography>
                            <View className="bg-surface rounded-2xl border border-outline/10 px-4 py-4 flex-row items-start gap-3">
                               <View
@@ -274,7 +278,7 @@ export const PostNoticeSheet = ({
                               isValid ? "text-background" : "text-secondary-400"
                            }`}
                         >
-                           {isLoading ? "Posting..." : "Post Notice"}
+                           {isLoading ? t("notices.post.posting") : t("notices.post.submit")}
                         </Typography>
                      </TouchableOpacity>
                   </View>

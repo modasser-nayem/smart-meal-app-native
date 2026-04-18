@@ -1,5 +1,6 @@
 import { View } from "react-native";
 import { Typography } from "@/components/ui/Typography";
+import { useTranslation } from "react-i18next";
 
 interface MealsHeaderProps {
    title: string;

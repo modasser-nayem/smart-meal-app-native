@@ -8,10 +8,12 @@ import {
    ScrollView,
    TextInput,
 } from "react-native";
+import { useTranslation } from "react-i18next";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Button } from "@/components/ui/Button";
 import { Colors } from "@/constants/colors";
+import { useCurrencyFormat } from "@/hooks/useCurrencyFormat";
 
 type ExpenseType = "meal" | "group";
 
@@ -34,6 +36,8 @@ export const AddExpenseSheet = ({
    onSubmit,
    isLoading = false,
 }: AddExpenseSheetProps) => {
+   const { t } = useTranslation("expense");
+   const { symbol } = useCurrencyFormat();
    const [amount, setAmount] = useState("");
    const [title, setTitle] = useState("");
    const [type, setType] = useState<ExpenseType>("meal");
@@ -89,7 +93,7 @@ export const AddExpenseSheet = ({
                {/* Header */}
                <View className="flex-row items-center justify-between px-6 py-4">
                   <Typography className="text-on-surface text-xl font-extrabold tracking-tight">
-                     Add Expense
+                     {t("addExpense.title")}
                   </Typography>
                   <TouchableOpacity
                      onPress={handleClose}
@@ -106,7 +110,9 @@ export const AddExpenseSheet = ({
                   {/* Amount input — big and prominent */}
                   <View className="items-center py-6 border-b border-outline/10">
                      <View className="flex-row items-baseline gap-2">
-                        <Typography className="text-primary text-4xl font-bold">৳</Typography>
+                        <Typography className="text-primary text-4xl font-bold">
+                           {symbol()}
+                        </Typography>
                         <TextInput
                            value={amount}
                            onChangeText={setAmount}
@@ -118,35 +124,39 @@ export const AddExpenseSheet = ({
                         />
                      </View>
                      <Typography className="text-secondary-400 text-[10px] uppercase font-bold tracking-widest mt-2">
-                        Enter Amount
+                        {t("addExpense.amount")}
                      </Typography>
                   </View>
 
                   <View className="px-6 pt-5 gap-5">
                      {/* Type toggle */}
                      <View className="flex-row bg-surface rounded-2xl p-1 border border-outline/15">
-                        {(["meal", "group"] as ExpenseType[]).map((t) => (
+                        {(["meal", "group"] as ExpenseType[]).map((expenseType) => (
                            <TouchableOpacity
-                              key={t}
-                              onPress={() => setType(t)}
+                              key={expenseType}
+                              onPress={() => setType(expenseType)}
                               activeOpacity={0.8}
                               className={`flex-1 flex-row items-center justify-center gap-2 py-3 rounded-xl ${
-                                 type === t ? "bg-primary" : ""
+                                 type === expenseType ? "bg-primary" : ""
                               }`}
                            >
                               <MaterialCommunityIcons
                                  name={
-                                    t === "meal" ? "silverware-fork-knife" : "account-group-outline"
+                                    expenseType === "meal"
+                                       ? "silverware-fork-knife"
+                                       : "account-group-outline"
                                  }
                                  size={16}
-                                 color={type === t ? "#0F172A" : "#94A3B8"}
+                                 color={type === expenseType ? "#0F172A" : "#94A3B8"}
                               />
                               <Typography
                                  className={`text-sm font-bold capitalize ${
-                                    type === t ? "text-background" : "text-secondary-300"
+                                    type === expenseType ? "text-background" : "text-secondary-300"
                                  }`}
                               >
-                                 {t === "meal" ? "Meal Cost" : "Group Cost"}
+                                 {expenseType === "meal"
+                                    ? t("addExpense.mealCost")
+                                    : t("addExpense.groupCost")}
                               </Typography>
                            </TouchableOpacity>
                         ))}
@@ -155,7 +165,7 @@ export const AddExpenseSheet = ({
                      {/* Title */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Expense Title
+                           {t("addExpense.expenseTitle")}
                         </Typography>
                         <View className="flex-row items-center bg-surface border border-outline/20 rounded-2xl px-4 h-14 gap-3">
                            <MaterialCommunityIcons
@@ -176,7 +186,7 @@ export const AddExpenseSheet = ({
                      {/* Date — read only for now */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Date
+                           {t("addExpense.date")}
                         </Typography>
                         <View className="flex-row items-center bg-surface border border-outline/20 rounded-2xl px-4 h-14 gap-3">
                            <MaterialCommunityIcons
@@ -193,7 +203,7 @@ export const AddExpenseSheet = ({
                      {/* Description */}
                      <View>
                         <Typography className="text-[10px] text-primary uppercase font-black tracking-widest mb-2 ml-1">
-                           Notes (optional)
+                           {t("addExpense.notes")}
                         </Typography>
                         <View className="bg-surface border border-outline/20 rounded-2xl px-4 py-3">
                            <TextInput
@@ -218,7 +228,7 @@ export const AddExpenseSheet = ({
                         size="lg"
                         className="rounded-2xl mt-2"
                      >
-                        Add Expense
+                        {t("addExpense.title")}
                      </Button>
                   </View>
                </ScrollView>

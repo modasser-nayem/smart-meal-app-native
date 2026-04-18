@@ -1,0 +1,59 @@
+{
+   "greeting": {
+      "morning": "शुभ प्रभात ☀️",
+      "afternoon": "शुभ दोपहर 🌤️",
+      "evening": "शुभ संध्या 🌙"
+   },
+   "sections": {
+      "activeGroup": "सक्रिय समूह",
+      "dailyPulse": "दैनिक पल्स",
+      "myBalance": "मेरा बैलेंस",
+      "quickActions": "त्वरित क्रियाएं",
+      "recentActivity": "हाल की गतिविधि",
+      "noticeboard": "सूचना पट्ट"
+   },
+   "balance": {
+      "myCost": "मेरी लागत",
+      "iPaid": "मैंने दिया",
+      "surplusBalance": "वर्तमान अधिशेष बैलेंस",
+      "deficitBalance": "वर्तमान घाटा बैलेंस",
+      "forMonth": "{{month}} के लिए"
+   },
+   "quickActions": {
+      "logMeal": "भोजन लॉग करें",
+      "logMealDesc": "आज का भोजन दर्ज करें",
+      "addExpense": "खर्च जोड़ें",
+      "addExpenseDesc": "समूह का खर्च दर्ज करें",
+      "expenses": "खर्च",
+      "expensesDesc": "बिलिंग और बैलेंस देखें",
+      "members": "सदस्य",
+      "membersDesc": "समूह और शामिल होने के अनुरोध"
+   },
+   "activity": {
+      "noActivity": "आज अभी तक कोई गतिविधि नहीं",
+      "logged": "लॉग किया",
+      "addedExpense": "खर्च जोड़ा"
+   },
+   "group": {
+      "openGroup": "समूह खोलें",
+      "switchGroup": "बदलें",
+      "members": "{{count}} सदस्य",
+      "billingOpen": "खुला",
+      "billingClosed": "बंद"
+   },
+   "snapshot": {
+      "groupMeals": "समूह",
+      "myMeals": "मेरा",
+      "mealsLogged": "भोजन लॉग हुए",
+      "mealsToday": "आज के भोजन",
+      "breakdown": "विवरण",
+      "joined": "{{joined}}/{{total}} शामिल हुए"
+   },
+   "notices": {
+      "noticesFromGroup": "आपके समूह से {{count}} सूचना",
+      "noticesFromGroup_plural": "आपके समूह से {{count}} सूचनाएं",
+      "noNotices": "समूह से कोई सूचना नहीं",
+      "openNoticeboard": "समूह सूचना पट्ट खोलें",
+      "moreNotices": "+{{count}} और"
+   }
+}

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { View, TouchableOpacity, Modal, Switch } from "react-native";
+import { useTranslation } from "react-i18next";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Typography } from "@/components/ui/Typography";
 import { PendingItem } from "./GroupRequestsSection";
@@ -34,6 +35,8 @@ export const AcceptRequestModal = ({
 
    if (!item) return null;
 
+   const { t } = useTranslation("group");
+
    return (
       <Modal
          visible={visible}
@@ -53,7 +56,7 @@ export const AcceptRequestModal = ({
             {/* Header */}
             <View className="flex-row items-center justify-between mb-6">
                <Typography className="text-on-surface text-xl font-extrabold tracking-tight">
-                  Accept Request
+                  {t("requests.acceptModal.title")}
                </Typography>
                <TouchableOpacity
                   onPress={handleClose}
@@ -80,7 +83,7 @@ export const AcceptRequestModal = ({
                </View>
                <View className="bg-primary/10 border border-primary/20 px-2.5 py-1 rounded-full">
                   <Typography className="text-primary text-[9px] font-black uppercase tracking-widest">
-                     Join Request
+                     {t("requests.joinRequest")}
                   </Typography>
                </View>
             </View>
@@ -90,11 +93,10 @@ export const AcceptRequestModal = ({
                <View className="flex-row items-center justify-between px-4 py-4">
                   <View className="flex-1 pr-4">
                      <Typography className="text-on-surface font-semibold text-[15px]">
-                        Include in current month
+                        {t("requests.acceptModal.includeMonth")}
                      </Typography>
                      <Typography className="text-secondary-400 text-xs mt-0.5 leading-relaxed">
-                        Count meals from this month in their billing. Turn off if they join from
-                        next month.
+                        {t("requests.acceptModal.includeMonthDesc")}
                      </Typography>
                   </View>
                   <Switch
@@ -124,8 +126,8 @@ export const AcceptRequestModal = ({
                      }`}
                   >
                      {includeMonth
-                        ? "Billing starts from this month (April 2026)"
-                        : "Billing starts from next month (May 2026)"}
+                        ? t("requests.acceptModal.billingThisMonth", { month: "April 2026" })
+                        : t("requests.acceptModal.billingNextMonth", { month: "May 2026" })}
                   </Typography>
                </View>
             </View>
@@ -137,9 +139,13 @@ export const AcceptRequestModal = ({
                   activeOpacity={0.85}
                   className="h-14 bg-success rounded-2xl items-center justify-center flex-row gap-2 active:opacity-80"
                >
-                  <MaterialCommunityIcons name="check-circle" size={20} color={Colors.icon.onPrimary} />
+                  <MaterialCommunityIcons
+                     name="check-circle"
+                     size={20}
+                     color={Colors.icon.onPrimary}
+                  />
                   <Typography className="text-background font-bold text-base">
-                     Accept Member
+                     {t("requests.acceptModal.acceptMember")}
                   </Typography>
                </TouchableOpacity>
                <TouchableOpacity
@@ -148,7 +154,7 @@ export const AcceptRequestModal = ({
                   className="h-12 items-center justify-center rounded-2xl border border-outline/20 active:bg-surface"
                >
                   <Typography className="text-secondary-300 font-semibold text-sm">
-                     Cancel
+                     {t("common.cancel")}
                   </Typography>
                </TouchableOpacity>
             </View>

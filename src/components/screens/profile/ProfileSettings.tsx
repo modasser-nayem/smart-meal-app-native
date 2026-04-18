@@ -1,10 +1,8 @@
-import React from "react";
 import { View, TouchableOpacity, Switch } from "react-native";
 import { Typography } from "@/components/ui/Typography";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Colors } from "@/constants/colors";
-
-// ─── Types ────────────────────────────────────────────────────────────────────
 
 interface SettingRowProps {
    icon: string;
@@ -18,11 +16,9 @@ interface SettingRowProps {
    isLast?: boolean;
 }
 
-// ─── Single Row ───────────────────────────────────────────────────────────────
-
 const SettingRow = ({
    icon,
-   iconColor = "#F59E0B",
+   iconColor = Colors.icon.primary,
    label,
    value,
    isToggle = false,
@@ -49,8 +45,8 @@ const SettingRow = ({
          <Switch
             value={toggleValue}
             onValueChange={onToggle}
-            trackColor={{ false: "#334155", true: "#F59E0B" }}
-            thumbColor={toggleValue ? "#0F172A" : "#94A3B8"}
+            trackColor={{ false: Colors.icon.muted, true: Colors.primary }}
+            thumbColor={toggleValue ? Colors.onPrimary : Colors.textSubtle}
          />
       ) : value !== undefined ? (
          <View className="flex-row items-center gap-1.5">
@@ -62,8 +58,6 @@ const SettingRow = ({
       )}
    </TouchableOpacity>
 );
-
-// ─── Section ──────────────────────────────────────────────────────────────────
 
 interface SettingsSectionProps {
    label: string;
@@ -88,18 +82,19 @@ const SettingsSection = ({
    </View>
 );
 
-// ─── Main Component ───────────────────────────────────────────────────────────
-
 interface ProfileSettingsProps {
    notificationsEnabled: boolean;
    onToggleNotifications: (val: boolean) => void;
    onEditProfile?: () => void;
    onChangePassword?: () => void;
    onLanguage?: () => void;
+   onCurrency?: () => void;
    onHelpCenter?: () => void;
    onPrivacyPolicy?: () => void;
    onLogout?: () => void;
    onDeleteAccount?: () => void;
+   languageLabel?: string;
+   currencyLabel?: string;
 }
 
 export const ProfileSettings = ({
@@ -108,24 +103,33 @@ export const ProfileSettings = ({
    onEditProfile,
    onChangePassword,
    onLanguage,
+   onCurrency,
    onHelpCenter,
    onPrivacyPolicy,
    onLogout,
    onDeleteAccount,
+   languageLabel,
+   currencyLabel,
 }: ProfileSettingsProps) => {
+   const { t } = useTranslation("profile");
+
    return (
       <View className="mx-6 gap-6">
          {/* Account */}
-         <SettingsSection label="Account">
-            <SettingRow icon="account-edit-outline" label="Edit Profile" onPress={onEditProfile} />
+         <SettingsSection label={t("sections.account")}>
+            <SettingRow
+               icon="account-edit-outline"
+               label={t("settings.editProfile")}
+               onPress={onEditProfile}
+            />
             <SettingRow
                icon="shield-lock-outline"
-               label="Security & Password"
+               label={t("settings.securityPassword")}
                onPress={onChangePassword}
             />
             <SettingRow
                icon="bell-outline"
-               label="Notifications"
+               label={t("settings.notifications")}
                isToggle
                toggleValue={notificationsEnabled}
                onToggle={onToggleNotifications}
@@ -133,24 +137,45 @@ export const ProfileSettings = ({
             />
          </SettingsSection>
 
-         {/* App */}
-         <SettingsSection label="App Settings">
-            <SettingRow icon="translate" label="Language" value="English" onPress={onLanguage} />
-            <SettingRow icon="theme-light-dark" label="Display Mode" value="Dark" isLast />
+         {/* App Settings */}
+         <SettingsSection label={t("sections.appSettings")}>
+            <SettingRow
+               icon="translate"
+               label={t("settings.language")}
+               value={languageLabel}
+               onPress={onLanguage}
+            />
+            <SettingRow
+               icon="currency-usd"
+               label={t("settings.currency")}
+               value={currencyLabel}
+               onPress={onCurrency}
+            />
+            <SettingRow
+               icon="theme-light-dark"
+               label={t("settings.displayMode")}
+               value={t("settings.displayModeValue")}
+               isLast
+            />
          </SettingsSection>
 
          {/* Support */}
-         <SettingsSection label="Support">
-            <SettingRow icon="help-circle-outline" label="Help Center" onPress={onHelpCenter} />
+         <SettingsSection label={t("sections.support")}>
+            <SettingRow
+               icon="help-circle-outline"
+               label={t("settings.helpCenter")}
+               onPress={onHelpCenter}
+            />
             <SettingRow
                icon="file-document-outline"
-               label="Privacy Policy"
+               label={t("settings.privacyPolicy")}
                onPress={onPrivacyPolicy}
                isLast
             />
          </SettingsSection>
 
-         <SettingsSection label="Danger Zone" labelColor="text-error">
+         {/* Danger Zone */}
+         <SettingsSection label={t("sections.dangerZone")} labelColor="text-error">
             <TouchableOpacity
                onPress={onLogout}
                activeOpacity={0.7}
@@ -159,7 +184,9 @@ export const ProfileSettings = ({
                <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
                   <MaterialCommunityIcons name="logout" size={20} color={Colors.icon.error} />
                </View>
-               <Typography className="text-error font-bold text-base">Log Out</Typography>
+               <Typography className="text-error font-bold text-base">
+                  {t("settings.logOut")}
+               </Typography>
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -168,12 +195,18 @@ export const ProfileSettings = ({
                className="flex-row items-center gap-3 px-4 py-4 active:bg-surface"
             >
                <View className="w-10 h-10 rounded-xl bg-error/10 items-center justify-center">
-                  <MaterialCommunityIcons name="delete-forever-outline" size={20} color={Colors.icon.error} />
+                  <MaterialCommunityIcons
+                     name="delete-forever-outline"
+                     size={20}
+                     color={Colors.icon.error}
+                  />
                </View>
                <View className="flex-1">
-                  <Typography className="text-error font-bold text-base">Delete Account</Typography>
+                  <Typography className="text-error font-bold text-base">
+                     {t("settings.deleteAccount")}
+                  </Typography>
                   <Typography className="text-secondary-300 text-xs mt-0.5">
-                     This action is permanent and cannot be undone
+                     {t("settings.deleteAccountDesc")}
                   </Typography>
                </View>
             </TouchableOpacity>

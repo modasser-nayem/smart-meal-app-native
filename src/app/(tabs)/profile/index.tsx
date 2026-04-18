@@ -2,6 +2,7 @@ import { useState } from "react";
 import { View } from "react-native";
 import { useRouter } from "expo-router";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 import { Container } from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
@@ -10,9 +11,14 @@ import { CustomAlert } from "@/components/ui/CustomAlert";
 import { ProfileHeader } from "@/components/screens/profile/ProfileHeader";
 import { MyGroupsList, GroupItem } from "@/components/screens/profile/MyGroupsList";
 import { ProfileSettings } from "@/components/screens/profile/ProfileSettings";
+import { LanguageSelector } from "@/components/screens/profile/LanguageSelector";
+import { CurrencySelector } from "@/components/screens/profile/CurrencySelector";
 
 import { useGetProfileQuery } from "@/api/userApi";
 import { logout } from "@/store/authSlice";
+import { SUPPORTED_LANGUAGES, SupportedLanguage } from "@/i18n";
+import { useCurrency } from "@/context/CurrencyContext";
+import { SUPPORTED_CURRENCIES } from "@/constants/currency";
 
 // ─── Mock data (replace with real API hooks) ──────────────────────────────────
 
@@ -65,12 +71,20 @@ export default function ProfileScreen() {
    const router = useRouter();
    const dispatch = useDispatch();
    const { data: profile } = useGetProfileQuery();
+   const { t, i18n } = useTranslation("profile");
 
    const [notificationsEnabled, setNotificationsEnabled] = useState(true);
    const [groups, setGroups] = useState<GroupItem[]>(MOCK_GROUPS);
    const [alert, setAlert] = useState<AlertConfig>(ALERT_CLOSED);
+   const [langSelectorVisible, setLangSelectorVisible] = useState(false);
+   const [currencySelectorVisible, setCurrencySelectorVisible] = useState(false);
 
    const closeAlert = () => setAlert(ALERT_CLOSED);
+   const currentLangLabel =
+      SUPPORTED_LANGUAGES[i18n.language as SupportedLanguage]?.nativeLabel ?? "English";
+
+   const { currency } = useCurrency();
+   const currentCurrencyLabel = SUPPORTED_CURRENCIES[currency].label;
 
    // ── Switch group ──────────────────────────────────────────────────────────
 
@@ -179,7 +193,10 @@ export default function ProfileScreen() {
                   onToggleNotifications={setNotificationsEnabled}
                   onEditProfile={() => router.push("/modal/edit-profile")}
                   onChangePassword={() => router.push("/modal/security")}
-                  onLanguage={() => {}}
+                  onLanguage={() => setLangSelectorVisible(true)}
+                  onCurrency={() => setCurrencySelectorVisible(true)}
+                  languageLabel={currentLangLabel}
+                  currencyLabel={currentCurrencyLabel}
                   onHelpCenter={() => {}}
                   onPrivacyPolicy={() => {}}
                   onLogout={handleLogout}
@@ -204,6 +221,18 @@ export default function ProfileScreen() {
             title={alert.title}
             message={alert.message}
             actions={alert.actions}
+         />
+
+         {/* Language Selector */}
+         <LanguageSelector
+            visible={langSelectorVisible}
+            onClose={() => setLangSelectorVisible(false)}
+         />
+
+         {/* Currency Selector */}
+         <CurrencySelector
+            visible={currencySelectorVisible}
+            onClose={() => setCurrencySelectorVisible(false)}
          />
       </View>
    );
