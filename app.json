@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Smart Meal App",
-    "slug": "smart-meal",
+    "slug": "smart-meal-manager",
     "scheme": "smart-meal",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.modassernayem.smartmealmanager"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +29,13 @@
     "plugins": [
       "expo-router",
       "expo-localization"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "eae75bad-481d-4b7d-91ce-992d0ae79383"
+      }
+    },
+    "owner": "modassernayem"
   }
 }
